@@ -3,10 +3,10 @@ import home_ico from '@shared/assets/footer_img/home_ico.svg'
 import tasks_ico from '@shared/assets/footer_img/tasks_ico.svg'
 import raiting_ico from '@shared/assets/footer_img/rating_ico.svg'
 import frens_ico from '@shared/assets/footer_img/frens_ico.svg'
-import home_active_ico from '@shared/assets/footer_img/home_ico_active.svg'
-import tasks_active_ico from '@shared/assets/footer_img/tasks_active_ico.svg'
-import raiting_active_ico from '@shared/assets/footer_img/rating_active_ico.svg'
-import frens_active_ico from '@shared/assets/footer_img/frens_active_ico.svg'
+// import home_active_ico from '@shared/assets/footer_img/home_ico_active.svg'
+// import tasks_active_ico from '@shared/assets/footer_img/tasks_active_ico.svg'
+// import raiting_active_ico from '@shared/assets/footer_img/rating_active_ico.svg'
+// import frens_active_ico from '@shared/assets/footer_img/frens_active_ico.svg'
 
 export const Footer=()=>{    
     return (
