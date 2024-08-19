@@ -1,7 +1,41 @@
 .wrapper{
+    position: absolute;
     width: 100%;
-}
-.inner_wrapper{
-    max-width: 375px;
-    width: 100%;
+    bottom: 0;
+    .inner_wrapper{
+        max-width: 375px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 0 ;
+        position: relative;
+        background-color:#000000;
+        border-radius:  20px;
+        border-bottom-left-radius: 44px;
+        border-bottom-right-radius: 44px;
+        .navigation{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            .nav_item{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .line_wrap{
+            width:100%;
+            padding: 8px 0;
+            position: absolute;
+            bottom: 0;
+            .line{
+                width: 135px;
+                height:5px;
+                margin: 0 auto;
+                background: #fff;
+                border-radius: 100px;
+                right: 50%;
+                z-index: 5;
+            }
+        }
+        
+    }
 }
