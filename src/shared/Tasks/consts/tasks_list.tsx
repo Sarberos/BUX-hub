@@ -1,5 +1,5 @@
 import { TTaskItemProps } from "../types/tasks";
-import fire_ico from '@shared/Tasks/assets/tasks_img/tasksFIre.svg'
+import fire_ico from '@shared/Tasks/assets/tasks_img/tasksFire.svg'
 import facebook_ico from '@shared/Tasks/assets/tasks_img/facebook_ico.svg'
 import inst_ico from '@shared/Tasks/assets/tasks_img/inst_ico.svg'
 
