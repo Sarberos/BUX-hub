@@ -5,5 +5,94 @@
         padding: 31px 16px 45px;
         width: 100%;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;  
+        position: relative;
+        .title_wrap{
+            width: 100%;
+            margin-bottom: 72px;
+            .title{
+                color: #fff;
+                font-size: 22px;
+                font-weight: 800;
+            }
+        } 
+        .language_wrap{
+            position:absolute;
+            top:31px;
+            right:16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            .language_select{
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 7px;
+                padding: 5px 8px;
+                 .language_txt{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap:5px;
+                    span{
+                        color: #fff;
+                        font-family: 'SFProText';
+                        font-size: 14px;
+                        font-weight: 800;
+                    }
+                    .select_ico_wrap{
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+                .day_counter{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center; 
+                    gap: 2px;
+                    color: #fff; 
+                    font-size: 15px;
+                    font-weight: 800;
+                }
+                .day_counter_img_wrap{
+                    display: flex;
+                    align-items: center; 
+                    img{
+                        width: 17px;
+                        height: 17px;
+                        object-fit: cover;
+                    }
+                }
+            }
+            .language_select.days{
+                padding: 5px 3px;
+            }
+           
+
+        }   
+        .koin_quantity{
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            margin: 0 auto 31px;
+            .koin_quantity_value{
+                color: #fff;
+                font-size: 22px;
+                font-weight: 800;
+            }
+        } 
+        .main_img_wrap{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+            .main_img{
+                width: 100%;
+                object-fit: contain;
+            }            
+        }
+        .farming_btn{
+            margin-bottom: 45px ;
+        } 
     } 
 }

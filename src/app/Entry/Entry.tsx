@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '@app/Entry/Entry.css'
+import '@app/Entry/Entry.scss'
 import { Home } from '@pages/Home/Home'
 
 declare global {  

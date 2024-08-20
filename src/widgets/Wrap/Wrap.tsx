@@ -8,11 +8,16 @@ export function Wrap({children}:TWrap) {
   return (
     <div style={{
       background:`url(${home_bg}) no-repeat center`,
-      borderBottomLeftRadius:'44px',
-      borderBottomRightRadius:'44px',
+      
       }} className={s.wrapper}>
-      {children}
-    <Footer />
+
+        <div className={s.inner_wrapper}>
+          {children}
+        </div>
+      <div className={s.footer}>
+        <Footer />
+      </div>
+      
     </div>
   )
 }
