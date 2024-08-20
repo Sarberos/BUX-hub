@@ -1,7 +1,14 @@
-.wrapper{
-    min-height: 100vh;
-    background-size: 375px 100vh ;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    overflow:'hidden';
+
+.wrap{
+    width: 100%;
+    .inner_wrap{
+        max-width: 750px;
+        width: 100%;
+        margin:  0 auto;
+        border: 1px solid red; 
+        .footer_wrap{
+            position: sticky;
+            bottom: 0;
+        }
+    }
 }

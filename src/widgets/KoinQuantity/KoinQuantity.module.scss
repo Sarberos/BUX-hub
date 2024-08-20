@@ -1,0 +1,11 @@
+.koin_quantity{
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            
+            .koin_quantity_value{
+                color: #fff;
+                font-size: 22px;
+                font-weight: 800;
+            }
+        } 

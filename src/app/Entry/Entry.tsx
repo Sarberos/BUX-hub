@@ -1,7 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '@app/Entry/Entry.scss'
-import { Home } from '@pages/Home/Home'
+import { Home } from '@pages/Home/Home';
+import { RouterProvider,createBrowserRouter} from 'react-router-dom';
+import { routes } from '@shared/Entry/routes/routes';
+
 
 declare global {  
   interface Window {  
@@ -21,8 +24,12 @@ declare global {
       };  
   }  
 } 
+ 
+const router = createBrowserRouter(routes);  
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Home />
+    <RouterProvider router={router} />
+      {/* <Home /> */}    
   </StrictMode>,
 )

@@ -1,16 +1,14 @@
 .wrapper{
-    position: fixed;
     width: 100%;
-    bottom: 0;
     .inner_wrapper{
-        max-width: 375px;
         width: 100%;
         margin: 0 auto;
         padding: 30px 0 ;
         position: relative;
         background-color:#000000;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+        border-radius: 20px;
+        // border-top-left-radius: 20px;
+        // border-top-right-radius: 20px;
         z-index: 10;
         .navigation{
             display: grid;

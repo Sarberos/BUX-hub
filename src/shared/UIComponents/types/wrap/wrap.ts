@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
 export type TWrap={
-    children: ReactNode,
+    children?: ReactNode,
   }
