@@ -1,8 +1,7 @@
 import { Frens } from '@pages/Frens/Frens';
-import { Home } from '@pages/Home/Home';
 import { Raiting } from '@pages/Raiting/Raiting';
 import { Tasks } from '@pages/Tasks/Tasks';
-import NotFoundPage from '@widgets/NotFoundPage/NotFoundPage';
+import NotFoundPage from '@widgets/UI/NotFoundPage/NotFoundPage';
 import { Wrap } from '@widgets/Wrap/Wrap';
 import { RouteObject } from 'react-router-dom';
 

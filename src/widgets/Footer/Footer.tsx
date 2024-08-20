@@ -1,6 +1,6 @@
 import { PAGESNAMES } from '@shared/Footer/consts/footer'
 import s from './Footer.module.scss'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { TFooterProps } from '@shared/Footer/types/footer/footer'
 
 export const Footer=({currenPageId,setCurrentPageId}:TFooterProps)=>{    

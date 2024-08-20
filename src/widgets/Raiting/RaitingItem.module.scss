@@ -1,0 +1,56 @@
+.raiting_item_wrap{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #fff;
+    .raiting_info{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        .place_number{
+            color:#5E5E5E ;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 135%;
+        }
+        .raiting_title_wrap{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap:1px;
+            color: #fff;
+            .raiting_title{
+                font-size:18px;
+                font-family:800;
+                line-height: 135%;
+            }
+            .raiting_subtitle{
+                font-size:16px;
+                font-family:600;
+                line-height: 135%;
+            }
+        }
+    }
+    .coin_quantity{
+        color: #fff;
+        font-size:14px;
+        font-family:600;
+        line-height: 135%;
+    }
+}
+.raiting_item_wrap.active{
+    background-color: #fff;
+    position: sticky;
+    bottom: 0;
+    p, .coin_quantity{
+         color:#000;
+         font-weight: 600;
+    }
+    .raiting_title{
+        font-weight: 800;
+    }
+}

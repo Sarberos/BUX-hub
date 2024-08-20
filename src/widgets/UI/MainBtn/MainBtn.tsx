@@ -1,5 +1,5 @@
-import { tMainBtn } from '@shared/types/main_btn/main_btn'
-import s from '@widgets/MainBtn/MainBtn.module.scss'
+import { tMainBtn } from '@shared/UIComponents/types/main_btn/main_btn'
+import s from './MainBtn.module.scss'
 
 export default function MainBtn({children}:tMainBtn){
     return(

@@ -1,4 +1,4 @@
-import s from '@widgets/Lang_DayCounter/Lang_DayCounter.module.scss'
+import s from './Lang_DayCounter.module.scss'
 import select_img from '@shared/Home/assets/home_img/select_img.svg'
 import fire_ico from '@shared/Home/assets/home_img/day_fire.svg'
 

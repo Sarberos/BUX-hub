@@ -1,9 +1,9 @@
 import s from '@pages/Home/Home.module.scss'
-import MainBtn from '@widgets/MainBtn/MainBtn';    
+import MainBtn from '@widgets/UI/MainBtn/MainBtn';    
 import main_img from '@shared/Home/assets/home_img/main_img.png'
-import { Lang_DayCounter } from '@widgets/Lang_DayCounter/Lang_DayCounter';
+import { Lang_DayCounter } from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
 // import {useState} from 'react'
-import KoinQuantity from '@widgets/KoinQuantity/KoinQuantity';
+import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
 
 export function Home(){
 //     const [isChangeLang, setLangStatus]=useState(false)
