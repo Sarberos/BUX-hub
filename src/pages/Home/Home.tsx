@@ -5,19 +5,19 @@ import select_img from '@shared/assets/home_img/select_img.svg'
 import fire_ico from '@shared/assets/home_img/day_fire.svg'
 import coin_ico from '@shared/assets/home_img/coin_ico.svg'
 import main_img from '@shared/assets/home_img/main_img.png'
-import {useState} from 'react'
+// import {useState} from 'react'
 
 export function Home(){
-    const [isChangeLang, setLangStatus]=useState(false)
-    const lang = [{ 
-        label: "RU",
-        value: "ru" 
-    },
-    {
-        label: "ENG",
-        value: "en" 
-    }
-];    
+//     const [isChangeLang, setLangStatus]=useState(false)
+//     const lang = [{ 
+//         label: "RU",
+//         value: "ru" 
+//     },
+//     {
+//         label: "ENG",
+//         value: "en" 
+//     }
+// ];    
 
     return (
       <Wrap>
