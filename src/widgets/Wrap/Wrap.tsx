@@ -15,13 +15,31 @@ export function Wrap() {
 
   return (
     <div className={s.wrap}>
-        <div style={{background:`url(${home_bg}) no-repeat`,backgroundSize:' 100% 100%'}} className={s.inner_wrap}>
-              {currenPageId===1? <Home/>:currenPageId===2?<Tasks />: currenPageId===3 ? <Raiting />:currenPageId===4?<Frens/>: <NotFoundPage/> }
-          <div className={s.footer_wrap}>
-              <Footer currenPageId={currenPageId} setCurrentPageId={setCurrentPageId}/>
-          </div>
+      <div
+        style={{
+          backgroundImage: `url(${home_bg})`,
+        }}
+        className={s.inner_wrap}
+      >
+        {currenPageId === 1 ? (
+          <Home />
+        ) : currenPageId === 2 ? (
+          <Tasks />
+        ) : currenPageId === 3 ? (
+          <Raiting />
+        ) : currenPageId === 4 ? (
+          <Frens />
+        ) : (
+          <NotFoundPage />
+        )}
+        <div className={s.footer_wrap}>
+          <Footer
+            currenPageId={currenPageId}
+            setCurrentPageId={setCurrentPageId}
+          />
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
