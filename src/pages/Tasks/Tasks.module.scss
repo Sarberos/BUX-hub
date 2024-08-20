@@ -2,7 +2,14 @@
     display: flex;
     flex-direction: column;
     gap:53px;
+    margin: auto 0;
     padding: 94px 16px 126px;
+    @media screen and (max-height: 680px){
+        padding-top: 70px;
+    }
+    @media screen and (max-height: 650px){
+        padding-top: 45px;
+    }
     .title_wrap{
         width: 100%;
         display: flex;
