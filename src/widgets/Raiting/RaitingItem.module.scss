@@ -42,6 +42,9 @@
         line-height: 135%;
     }
 }
+.raiting_item_wrap:last-child{
+    border: 0;
+}
 .raiting_item_wrap.active{
     background-color: #fff;
     position: sticky;
