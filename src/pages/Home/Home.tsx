@@ -4,8 +4,10 @@ import main_img from '@shared/Home/assets/home_img/main_img.png'
 import { Lang_DayCounter } from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
 // import {useState} from 'react'
 import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
+import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
+import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
 
-export function Home(){
+export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void}){
 //     const [isChangeLang, setLangStatus]=useState(false)
 //     const lang = [{ 
 //         label: "RU",
@@ -33,6 +35,11 @@ export function Home(){
             </div>
             <div className={s.farming_btn}>
               <MainBtn>Start farming</MainBtn>
+            </div>
+            <div className={dailyRewardSt ?`${s.daily_reward} ${s.active}`:`${s.daily_reward}`}>
+              <BottomPopUp onClose={()=>setDailyRewardSt(false)}>
+                <DailyRewards/>
+              </BottomPopUp>
             </div>
           </div>
     );

@@ -1,6 +1,6 @@
 .wrapper{
     width: 100%;
-    padding: 31px 16px 45px;
+    padding: 31px 0 45px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -61,8 +61,22 @@
     }
     .farming_btn{
         margin-bottom:45px;
+        padding: 0 16px;
         @media screen and (max-height: 630px){
             margin-bottom:45px;
         }
     } 
+    .daily_reward{
+        transform: rotateX(90deg);
+        transform-origin: 0% 100%;
+        transition: 0.5s;
+        width: 100%;
+        position: sticky;
+        bottom:0px;
+        z-index: 10;
+        &.active{
+            transform: rotateX(0);
+            transition: .5s;
+        }
+    }
 } 

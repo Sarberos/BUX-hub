@@ -1,4 +1,4 @@
-import { Frens } from '@pages/Frens/Frens';
+// import { Frens } from '@pages/Frens/Frens';
 import { Raiting } from '@pages/Raiting/Raiting';
 import { Tasks } from '@pages/Tasks/Tasks';
 import NotFoundPage from '@widgets/UI/NotFoundPage/NotFoundPage';
@@ -23,7 +23,7 @@ export const routes: RouteObject[] = [
     },  
     {  
       path: '/frens',  
-      element: <Frens />,  
+      // element: <Frens />,  
       errorElement:<NotFoundPage />  
     },  
   ]; 

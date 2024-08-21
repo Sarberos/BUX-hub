@@ -1,0 +1,31 @@
+.daily_reward_wrap{
+    display: flex;
+    flex-direction: column;
+    .reward_title{
+        color:#fff;
+        font-size:22px ;
+        font-weight:800;
+        text-align: center;
+    }
+    .box_slider{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap:4px;
+        width: 100%;
+        margin: 32px 0;
+        overflow: scroll;
+        scrollbar-width: none;
+    }
+    .rewar_subtitle{
+        color:#fff;
+        font-size:14px ;
+        font-weight:600;
+        line-height: 135%;
+        text-align: center; 
+    }
+    .claim_btn{
+        width: 100%;
+        margin: 32px 0 20px;
+    }
+}

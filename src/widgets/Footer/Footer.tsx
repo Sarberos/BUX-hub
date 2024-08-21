@@ -2,6 +2,7 @@ import { PAGESNAMES } from '@shared/Footer/consts/footer'
 import s from './Footer.module.scss'
 // import { Link } from 'react-router-dom'
 import { TFooterProps } from '@shared/Footer/types/footer/footer'
+import BottomLine from '@widgets/UI/BottomLine/BottomLine'
 
 export const Footer=({currenPageId,setCurrentPageId}:TFooterProps)=>{    
 
@@ -19,7 +20,7 @@ export const Footer=({currenPageId,setCurrentPageId}:TFooterProps)=>{
                     ))}
                 </nav>
                 <div className={s.line_wrap}>
-                    <div className={s.line}></div>
+                        <BottomLine/>
                 </div>
             </div>
         </div>

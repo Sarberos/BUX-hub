@@ -1,5 +1,5 @@
-
 .wrap{
+    position: relative;
     width: 100%;
     .inner_wrap{
         background-size: 100% 100%;
@@ -14,5 +14,7 @@
             position: sticky;
             bottom: 0;
         }
+        
     }
+    
 }

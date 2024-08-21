@@ -1,0 +1,45 @@
+.prize_box_wrap{
+    width: 97px;
+    min-width: 97px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    .reward_info_wrap{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+         padding-top: 33px;
+        gap: 18px;
+        background:#0E181E;
+        margin-bottom: 11px;
+        .prize_img_wrap{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .prize_img{
+                width:45px;
+                height: 30px;
+                object-fit: contain;
+            }
+        }
+        .reward_value{
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 22px;
+            text-align: center;
+        }
+    }
+    .day_counter{
+        text-align: center;
+        padding:3px 0 ;
+        color: #000;
+        font-size: 16px;
+        font-weight:800 ;
+        line-height: 21px;
+        background-color: #fff;
+    }
+}
