@@ -1,0 +1,84 @@
+.frens_wrap{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    position: relative;
+    .title_wrap{
+        width: 100%;
+        .title{
+            color: #fff;
+            font-size:28px;
+            font-weight:800;
+            line-height: 135%;
+            text-align: center;
+        }
+    }
+    .frens_coins_wrap{
+        margin: 9px 15px 15px;
+        padding: 18px 0;
+        align-items: center;
+        border-radius:20px ;
+        background-color: rgba(0, 0, 0, 0.56);
+        .frens_coins_wrap{
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            background: transparent;
+            .frens_coins_value{
+                color:#fff;
+                font-size:28px ;
+                font-weight:800;
+                text-align: center;
+            }
+            .frens_coin_claim_btn{
+                padding: 11px 15px;
+                border-radius: 200px;
+                color: #000;
+                background-color: #9B9B9B;
+            }
+        }
+    }
+    .subtitle_wrap{
+        width: 100%;
+        .subtitle{
+            color: #fff;
+            font-size:15px ;
+            font-weight: 600;
+            line-height: 135%;
+            text-align: center;
+        }
+    }
+    .frens_list_wrap{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 37px;
+        gap: 16px;
+        padding: 0 10px;
+        .frens_amount{
+            color: #fff;
+            font-size:20px ;
+            font-weight: 800;
+            line-height: 135%;
+        }
+        .frens_list{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.67);
+            border-top-left-radius: 20px ;
+            border-top-right-radius: 20px ;
+            max-height: 40vh;
+            height: 100%;
+            overflow: scroll;
+            scrollbar-width: none;
+        }
+    }
+    .invite_frens_btn{
+        width: 100%;
+        position: sticky;
+        bottom: 95px;
+        z-index: 5;
+        padding: 0 10px;
+    }
+}
