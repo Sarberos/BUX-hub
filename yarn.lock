@@ -911,6 +911,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/telegram-web-app@npm:^7.8.0":
+  version: 7.8.0
+  resolution: "@types/telegram-web-app@npm:7.8.0"
+  checksum: 10c0/5d77740c4c3f058c1572c62d03a3a756aa2ee91ecf7d8e24322fc4ae15e17235cef520a51718e43725d4a78f2555110391ddda8bdc1eb8cec4e9f622d43fb7f6
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/eslint-plugin@npm:8.1.0":
   version: 8.1.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.1.0"
@@ -3387,6 +3394,7 @@ __metadata:
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-transition-group": "npm:^4"
+    "@types/telegram-web-app": "npm:^7.8.0"
     "@vitejs/plugin-react": "npm:^4.3.1"
     eslint: "npm:^9.9.0"
     eslint-plugin-react-hooks: "npm:^5.1.0-rc.0"

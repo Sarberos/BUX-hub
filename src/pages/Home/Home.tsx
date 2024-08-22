@@ -5,10 +5,12 @@ import { Lang_DayCounter } from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
 import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
 import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
 import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
+import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi';
 // import { useState } from 'react';
 
 export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void}){
   const currentDay=1;
+  const {user}=useTelegramApi()
 //     const [isChangeLang, setLangStatus]=useState(false)
 //     const lang = [{ 
 //         label: "RU",
@@ -23,7 +25,7 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
     return (
           <div className={s.wrapper}>
             <div className={s.title_wrap}>
-              <p className={s.title}>Hello, User_Artem</p>
+              <p className={s.title}>{`Hello,${user?.username}`}</p>
             </div>
             <div className={s.lang_daycounter_wrap}>
               <Lang_DayCounter />

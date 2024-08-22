@@ -1,5 +1,4 @@
 import s from "./Wrap.module.scss";
-import { Footer } from "@widgets/Footer/Footer";
 import home_bg from "@shared/Wrap/assets/img/fix_home_background.png";
 import tasks_bg from "@shared/Wrap/assets/img/fix_tsks_background.png";
 import raiting_bg from "@shared/Wrap/assets/img/fix_raiting_background.png";
@@ -10,14 +9,27 @@ import { Tasks } from "@pages/Tasks/Tasks";
 import { Raiting } from "@pages/Raiting/Raiting";
 import { Frens } from "@pages/Frens/Frens";
 import NotFoundPage from "@widgets/UI/NotFoundPage/NotFoundPage";
+import { WhiteFooter } from "@widgets/UI/WhiteFooter/WhiteFooter";
+import { Footer } from "@widgets/UI/Footer/Footer";
 
 export function Wrap() {
+
+
   const [currenPageId, setCurrentPageId] = useState(1);
   const [currentBg, setCurrentBg] = useState("");
   const [inviteStat, setInvateStat]= useState(false)
   const [dailyRewardSt, setDailyRewardSt]= useState(true)
   const [miniTaskOpen, setMiniTasksOpen]= useState(false)
-  const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
+  const [miniTaskStyle, setminiTaskStyle]= useState<React.CSSProperties>()
+  // const [them, setThem]=useState(true)
+  const them = true;
+ 
+
+  useEffect(()=>{
+    miniTaskOpen ? setminiTaskStyle({zIndex:-1}) :setminiTaskStyle({})
+    !them ? setminiTaskStyle({backgroundColor: '#fff',}) :setminiTaskStyle({})
+
+  },[miniTaskOpen,them])
   
   useEffect(() => {
     switch (currenPageId) {
@@ -49,9 +61,15 @@ export function Wrap() {
         className={s.inner_wrap}
       >
         {currenPageId === 1 ? (
-          <Home dailyRewardSt={dailyRewardSt} setDailyRewardSt={setDailyRewardSt} />
+          <Home
+            dailyRewardSt={dailyRewardSt}
+            setDailyRewardSt={setDailyRewardSt}
+          />
         ) : currenPageId === 2 ? (
-          <Tasks setMiniTasksOpen={setMiniTasksOpen} miniTaskOpen={miniTaskOpen} />
+          <Tasks
+            setMiniTasksOpen={setMiniTasksOpen}
+            miniTaskOpen={miniTaskOpen}
+          />
         ) : currenPageId === 3 ? (
           <Raiting />
         ) : currenPageId === 4 ? (
@@ -59,21 +77,19 @@ export function Wrap() {
         ) : (
           <NotFoundPage />
         )}
-          <div style={miniTaskStyle} className={s.footer_wrap}>
-          <Footer
-            currenPageId={currenPageId}
-            setCurrentPageId={setCurrentPageId}
-          />
-          </div>
-          {/* <div className={ inviteStat?`${s.modal}${s.active}`: `${s.modal}`}> */}
-          {/* <ModalSample
-              inviteStat={inviteStat}
-              > */}
-          {/* <div className={ inviteStat?`${s.modal}${s.active}`: `${s.modal}`}> */}
-                
-          {/* </div> */}
-            {/* </ModalSample>  */}
-        {/* </div> */}
+        <div style={miniTaskStyle} className={s.footer_wrap}>
+          {them ? (
+            <Footer
+              currenPageId={currenPageId}
+              setCurrentPageId={setCurrentPageId}
+            />
+          ) : (
+            <WhiteFooter
+              currenPageId={currenPageId}
+              setCurrentPageId={setCurrentPageId}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
