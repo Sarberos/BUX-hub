@@ -1,10 +1,10 @@
 .frens_wrap{
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
     position: relative;
     .title_wrap{
         width: 100%;
+        margin-top: 20px;
         .title{
             color: #fff;
             font-size:28px;
@@ -19,6 +19,9 @@
         align-items: center;
         border-radius:20px ;
         background-color: rgba(0, 0, 0, 0.56);
+        @media screen and (max-height: 690px) {
+            padding: 5px 0;    
+        }
         .frens_coins_wrap{
             display: flex;
             flex-direction: column;
@@ -55,6 +58,9 @@
         margin-top: 37px;
         gap: 16px;
         padding: 0 10px;
+        @media screen and (max-height: 690px) {
+            margin-top: 15px;    
+        }
         .frens_amount{
             color: #fff;
             font-size:20px ;
@@ -84,14 +90,14 @@
     .invite_fren_pop_up{
         transform: rotateX(90deg);
         transform-origin: 0% 100%;
-        transition: 0.5s;
+        transition: 0.3s;
         width: 100%;
         position: sticky;
         bottom:0px;
         z-index: 10;
         &.active{
             transform: rotateX(0);
-            transition: .5s;
+            transition: .3s;
         }
     }
 }

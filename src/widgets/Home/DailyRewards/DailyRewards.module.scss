@@ -1,19 +1,23 @@
 .daily_reward_wrap{
     display: flex;
     flex-direction: column;
+    position: relative;
     .reward_title{
         color:#fff;
         font-size:22px ;
         font-weight:800;
         text-align: center;
+        margin-bottom: 214px;
     }
     .box_slider{
+        position: absolute;
+        top:62px;
+        left: 21px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         gap:4px;
         width: 100%;
-        margin: 32px 0;
         overflow: scroll;
         scrollbar-width: none;
     }

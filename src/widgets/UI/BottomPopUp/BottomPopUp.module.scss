@@ -1,63 +1,50 @@
-// .modal_wrapper{
-//     position:absolute;
-//     width: 100vh;
-//     height: 100vh;
-//     background: rgba(214, 16, 16, 0.7);
-//     .modal_inner_wrapper{
-//         max-width: 750px;
-//         width:100%;
-//         height: 100vh;
-//         position:relative;
-//         z-index:9;
-//         background: rgba(0, 0, 0, 0.5);
-//         .bottom_pop_up_wrap{
-//             width: 100%;
-//             position: absolute;
-//             bottom: 0;
-//         }
-//     }
-// }
-
-
-.bottom_pop_up_wrap{
-    position: relative;
-    bottom: 0;
-    background: linear-gradient(to bottom, #2A2A2A, #121212); 
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    margin: 0 auto;
-    .cross_wrap{
+.bottom_wrap{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    .bottom_pop_up__wrap{
         position: absolute;
-        top:11px;
-        right:15px;
-        .cross {  
-            position: relative;  
-            width: 24px;
-            height: 24px;
-        
-            span {  
-                position: absolute;  
-                background:#969696;   
-            }  
-        
-            .line1 {  
-                width: 100%;  
-                height: 2px; 
-                top: 50%; 
-                transform: translateY(-50%) rotate(45deg); 
-                border-radius: 2px;
-            }  
-        
-            .line2 {  
-                width: 100%;
-                height: 2px;
-                top: 50%; 
-                border-radius: 2px;
-                transform: translateY(-50%) rotate(-45deg); 
-            }  
+        width: 100%;
+        bottom:0;
+        .bottom_pop_up_inner_wrap{
+            position: relative;
+            background: linear-gradient(to bottom, #2A2A2A, #121212); 
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin: 0 auto;
+            .cross_wrap{
+                position: absolute;
+                top:11px;
+                right:15px;
+                .cross {  
+                    position: relative;  
+                    width: 24px;
+                    height: 24px;
+                
+                    span {  
+                        position: absolute;  
+                        background:#969696;   
+                    }  
+                
+                    .line1 {  
+                        width: 100%;  
+                        height: 2px; 
+                        top: 50%; 
+                        transform: translateY(-50%) rotate(45deg); 
+                        border-radius: 2px;
+                    }  
+                
+                    .line2 {  
+                        width: 100%;
+                        height: 2px;
+                        top: 50%; 
+                        border-radius: 2px;
+                        transform: translateY(-50%) rotate(-45deg); 
+                    }  
+                }
+            }
+            .child_wrap{
+                padding: 38px 17px 0;
+            }
         }
-    }
-    .child_wrap{
-        padding: 38px 17px 0;
     }
 }

@@ -8,7 +8,7 @@ import sixth from '@shared/Home/assets/home_img/6day_reward.svg'
 import seventh from '@shared/Home/assets/home_img/7day_reward.svg'
 
 
-export const DAYBOXLIST:TDayBoxProps[]=[
+export const DAYBOXLIST:&Omit<TDayBoxProps,'currentDay'>[]=[
     {
         boxImg:first,
         rewardDay:1,

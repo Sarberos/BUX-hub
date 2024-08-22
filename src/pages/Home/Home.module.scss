@@ -12,6 +12,7 @@
     .title_wrap{
         width: 100%;
         margin-bottom: 72px;
+        padding: 0 16px;
         .title{
             color: #fff;
             font-size: 22px;
@@ -69,14 +70,14 @@
     .daily_reward{
         transform: rotateX(90deg);
         transform-origin: 0% 100%;
-        transition: 0.5s;
+        transition: 0.3s;
         width: 100%;
         position: sticky;
         bottom:0px;
         z-index: 10;
         &.active{
             transform: rotateX(0);
-            transition: .5s;
+            transition: .3s;
         }
     }
 } 

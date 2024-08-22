@@ -1,45 +1,62 @@
 .prize_box_wrap{
     width: 97px;
     min-width: 97px;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    .reward_info_wrap{
+    position: relative;
+    .prize_box_inner_wrap{
         width:100%;
+        width: 97px;
+        min-width: 97px;
         display: flex;
         flex-direction: column;
-         padding-top: 33px;
-        gap: 18px;
-        background:#0E181E;
-        margin-bottom: 11px;
-        .prize_img_wrap{
-            width: 100%;
+        border: 2px solid #fff;
+        overflow: hidden;
+        border-radius: 10px;
+
+        .reward_info_wrap{
+            width:100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            .prize_img{
-                width:45px;
-                height: 30px;
-                object-fit: contain;
+            flex-direction: column;
+             padding-top: 33px;
+            gap: 18px;
+            background:#0E181E;
+            margin-bottom: 11px;
+            .prize_img_wrap{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .prize_img{
+                    width:45px;
+                    height: 30px;
+                    object-fit: contain;
+                }
+            }
+            .reward_value{
+                color: #fff;
+                font-size: 22px;
+                font-weight: 800;
+                line-height: 22px;
+                text-align: center;
             }
         }
-        .reward_value{
-            color: #fff;
-            font-size: 22px;
-            font-weight: 800;
-            line-height: 22px;
+        .day_counter{
             text-align: center;
+            padding:3px 0 ;
+            color: #000;
+            font-size: 16px;
+            font-weight:800 ;
+            line-height: 21px;
+            background-color: #fff;
         }
     }
-    .day_counter{
-        text-align: center;
-        padding:3px 0 ;
-        color: #000;
-        font-size: 16px;
-        font-weight:800 ;
-        line-height: 21px;
-        background-color: #fff;
+    .untouch_box{
+        position: absolute;
+        background:rgba(32, 64, 71, 0.5);
+        bottom:0;
+        top:0;
+        left:0;
+        right: 0;
+        z-index: 10;
+        border-radius: 10px;
     }
 }

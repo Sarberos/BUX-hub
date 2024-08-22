@@ -4,7 +4,8 @@ import { DAYBOXLIST } from '@shared/Home/consts/dayBoxList'
 import DayBox from '../DayBox/DayBox'
 import BottomLine from '@widgets/UI/BottomLine/BottomLine'
 
-export default function(){
+export default function({onClose,currentDay}:{currentDay:number,onClose:()=> void}){
+
     return(
         <div className={s.daily_reward_wrap}>
             <div className={s.reward_title}>
@@ -12,14 +13,14 @@ export default function(){
             </div>
             <div className={s.box_slider}>
                 {DAYBOXLIST.map((elem,index)=>(
-                    <DayBox {...elem} key={index} />
+                    <DayBox currentDay={currentDay} {...elem} key={index} />
                 ))}
             </div>
             <div className={s.rewar_subtitle}>
             Your total profit: 259К
             </div>
             <div className={s.claim_btn}>
-                <MainBtn>Claim</MainBtn>
+                <MainBtn event={onClose} >Claim</MainBtn>
             </div>
             <BottomLine/>
         </div>

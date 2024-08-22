@@ -4,7 +4,7 @@ import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 
 
 
-export default function({icoUrl,title,reward, minitasksAmount, isMiniTasks}:TTaskItemProps){
+export default function({icoUrl,title,reward, minitasksAmount, isMiniTasks,openMiniTasks}:TTaskItemProps&{openMiniTasks?:()=>void}){
     return (
         <div className={s.task_item_wrap}>
             <div className={s.info}>
@@ -16,7 +16,7 @@ export default function({icoUrl,title,reward, minitasksAmount, isMiniTasks}:TTas
                     <p className={s.item_subtitle}>{isMiniTasks ? `0/${minitasksAmount} tasks, +${reward} `:`+${reward}`}</p>
                 </div>
             </div>
-            <button className={s.status_btn}>{isMiniTasks ? 'Open' : 'Start'}</button>
+            <button onClick={isMiniTasks ? openMiniTasks:()=>{} } className={s.status_btn}>{isMiniTasks ? 'Open' : 'Start'}</button>
         </div>
     )
 }

@@ -29,8 +29,8 @@ export const Frens=({setInvateStat,inviteStat}:{inviteStat?:boolean,setInvateSta
                     ))}
                 </ul>
             </div>
-            <div onClick={()=>setInvateStat(true)} className={s.invite_frens_btn}>
-                <MainBtn>Invite a fren</MainBtn>
+            <div className={s.invite_frens_btn}>
+                <MainBtn event={()=>setInvateStat(true)} >Invite a fren</MainBtn>
             </div>
             <div className={inviteStat ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
                 <BottomPopUp onClose={()=>setInvateStat(false)}>

@@ -1,9 +1,9 @@
 import s from "./Wrap.module.scss";
 import { Footer } from "@widgets/Footer/Footer";
-import home_bg from "@shared/Wrap/assets/img/home_background.png";
-import tasks_bg from "@shared/Wrap/assets/img/tasks_background.png";
-import raiting_bg from "@shared/Wrap/assets/img/traiting_background.png";
-import frens_bg from "@shared/Wrap/assets/img/frens_background.png";
+import home_bg from "@shared/Wrap/assets/img/fix_home_background.png";
+import tasks_bg from "@shared/Wrap/assets/img/fix_tsks_background.png";
+import raiting_bg from "@shared/Wrap/assets/img/fix_raiting_background.png";
+import frens_bg from "@shared/Wrap/assets/img/fix_frens_background.png";
 import { Home } from "@pages/Home/Home";
 import { useEffect, useState } from "react";
 import { Tasks } from "@pages/Tasks/Tasks";
@@ -16,7 +16,8 @@ export function Wrap() {
   const [currentBg, setCurrentBg] = useState("");
   const [inviteStat, setInvateStat]= useState(false)
   const [dailyRewardSt, setDailyRewardSt]= useState(true)
-
+  const [miniTaskOpen, setMiniTasksOpen]= useState(false)
+  const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
   
   useEffect(() => {
     switch (currenPageId) {
@@ -50,7 +51,7 @@ export function Wrap() {
         {currenPageId === 1 ? (
           <Home dailyRewardSt={dailyRewardSt} setDailyRewardSt={setDailyRewardSt} />
         ) : currenPageId === 2 ? (
-          <Tasks />
+          <Tasks setMiniTasksOpen={setMiniTasksOpen} miniTaskOpen={miniTaskOpen} />
         ) : currenPageId === 3 ? (
           <Raiting />
         ) : currenPageId === 4 ? (
@@ -58,7 +59,7 @@ export function Wrap() {
         ) : (
           <NotFoundPage />
         )}
-          <div className={s.footer_wrap}>
+          <div style={miniTaskStyle} className={s.footer_wrap}>
           <Footer
             currenPageId={currenPageId}
             setCurrentPageId={setCurrentPageId}
