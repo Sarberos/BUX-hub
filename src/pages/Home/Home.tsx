@@ -43,8 +43,8 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
         </div>
         <div className={s.farming_btn}>
           <MainBtn>{farmStatus}</MainBtn>
-          <MainBtn>{farmStatus}</MainBtn>
-          <MainBtn>{farmStatus}</MainBtn>
+          {/* <MainBtn>{farmStatus}</MainBtn>
+          <MainBtn>{farmStatus}</MainBtn> */}
         </div>
         <div
           className={
