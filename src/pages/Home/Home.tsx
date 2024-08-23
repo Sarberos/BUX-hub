@@ -8,16 +8,14 @@ import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi';
 import { useTranslation } from 'react-i18next';
 import {useEffect} from 'react'
-// import Fetching from '@shared/utilits/axios/axiosRequests';
-// import { useStartFarm } from '@shared/Home/hooks/useStartFarm';
+import { useStartFarm } from '@shared/Home/hooks/useStartFarm';
 import { useGetFarmInfo } from '@shared/Home/hooks/useGetFarmInfo';
-// import { Preloader } from '@widgets/UI/Preloader/Preloader';
 
 export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void}){
   const currentDay=1;
   const {user}=useTelegramApi()
   const {t} = useTranslation()
-  // const {mutate:startFarm}=useStartFarm()
+  const {}=useStartFarm()
   const {data}=useGetFarmInfo()
   // const {farmStatus, setFarmStatus}=useState<EnumFarmStatus>(EnumFarmStatus.START)
 
