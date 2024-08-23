@@ -20,11 +20,9 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
   const {t} = useTranslation()
   // const {mutate:startFarm}=useStartFarm()
   const {data}=useGetFarmInfo()
-  // const {farmStatus, setfarmStatus}=useState(EnumFarmStatus.START)
+  // const {farmStatus, setFarmStatus}=useState<EnumFarm(EnumFarmStatus.START)
 
-  // const startFarming=()=>{
-  //   startFarm;
-  // }
+
   useEffect(()=>{
     console.log(data);
   },[data])
@@ -44,7 +42,7 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          <MainBtn>{"Start farming"}</MainBtn>
+          <MainBtn>{''}</MainBtn>
         </div>
         <div
           className={
