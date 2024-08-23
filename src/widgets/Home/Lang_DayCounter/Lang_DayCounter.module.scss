@@ -4,49 +4,27 @@
     gap: 12px;
     @media screen and (max-height: 630px){
         flex-direction: row;
-        
     }
-    .language_select{
+    .day_counter{
         background-color: rgba(0, 0, 0, 0.5);
         border-radius: 7px;
-        padding: 5px 8px;
-         .language_txt{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap:5px;
-            span{
-                color: #fff;
-                font-family: 'SFProText';
-                font-size: 14px;
-                font-weight: 800;
-            }
-            .select_ico_wrap{
-                display: flex;
-                align-items: center;
-            }
-        }
-        .day_counter{
-            display: flex;
-            flex-direction: row;
-            align-items: center; 
-            gap: 2px;
-            color: #fff; 
-            font-size: 15px;
-            font-weight: 800;
-        }
-        .day_counter_img_wrap{
-            display: flex;
-            align-items: center; 
-            img{
-                width: 17px;
-                height: 17px;
-                object-fit: cover;
-            }
-        }
-    }
-    .language_select.days{
+        width: 64px;
         padding: 5px 3px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start; 
+        justify-content: space-between;
+        color: #fff; 
+        font-size: 15px;
+        font-weight: 800;
     }
-}  
+    .day_counter_img_wrap{
+        display: flex;
+        align-items: center; 
+        img{
+            width: 17px;
+            height: 17px;
+            object-fit: cover;
+        }
+    }
+}

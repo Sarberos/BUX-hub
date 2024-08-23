@@ -11,19 +11,21 @@ import { Frens } from "@pages/Frens/Frens";
 import NotFoundPage from "@widgets/UI/NotFoundPage/NotFoundPage";
 import { WhiteFooter } from "@widgets/UI/WhiteFooter/WhiteFooter";
 import { Footer } from "@widgets/UI/Footer/Footer";
+import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 
 export function Wrap() {
-
-
+  const {tg}=useTelegramApi()
   const [currenPageId, setCurrentPageId] = useState(1);
   const [currentBg, setCurrentBg] = useState("");
   const [inviteStat, setInvateStat]= useState(false)
   const [dailyRewardSt, setDailyRewardSt]= useState(true)
   const [miniTaskOpen, setMiniTasksOpen]= useState(false)
   const [miniTaskStyle, setminiTaskStyle]= useState<React.CSSProperties>()
-  // const [them, setThem]=useState(true)
-  const them = true;
- 
+  const [them, setThem]=useState('dark')
+
+ useEffect(()=>{
+  setThem(tg?.colorScheme)
+ },[tg])
 
   useEffect(()=>{
     miniTaskOpen ? setminiTaskStyle({zIndex:-1}) :setminiTaskStyle({})
@@ -78,12 +80,13 @@ export function Wrap() {
           <NotFoundPage />
         )}
         <div style={miniTaskStyle} className={s.footer_wrap}>
-          {them ? (
+          {them ==='dark' && (
             <Footer
               currenPageId={currenPageId}
               setCurrentPageId={setCurrentPageId}
             />
-          ) : (
+          ) }
+          {them ==='light' &&(
             <WhiteFooter
               currenPageId={currenPageId}
               setCurrentPageId={setCurrentPageId}

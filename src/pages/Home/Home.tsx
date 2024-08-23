@@ -6,26 +6,22 @@ import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
 import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
 import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi';
-// import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import {useEffect} from 'react'
+import Fetching from '@shared/utilits/axios/axiosRequests';
 
 export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void}){
   const currentDay=1;
   const {user}=useTelegramApi()
-//     const [isChangeLang, setLangStatus]=useState(false)
-//     const lang = [{ 
-//         label: "RU",
-//         value: "ru" 
-//     },
-//     {
-//         label: "ENG",
-//         value: "en" 
-//     }
-// ];    
+  const {t} = useTranslation()
+  useEffect(()=>{
+    Fetching.farmStatus()
+  },[])
 
     return (
           <div className={s.wrapper}>
             <div className={s.title_wrap}>
-              <p className={s.title}>{`Hello,${user?.username}`}</p>
+              <p  className={s.title}>{t('hello',{name:user?.username})}</p>
             </div>
             <div className={s.lang_daycounter_wrap}>
               <Lang_DayCounter />

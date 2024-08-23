@@ -8,7 +8,7 @@ import raiting_active_ico from '@shared/Footer/assets/footer_img/rating_active_i
 import frens_active_ico from '@shared/Footer/assets/footer_img/frens_active_ico.svg'
 import home_white_ico from '@shared/Footer/assets/footer_img/home_iwh_co.svg'
 import tasks_white_ico from '@shared/Footer/assets/footer_img/tasks_wh_svg.svg'
-import raiting_white_ico from '@shared/Footer/assets/footer_img/raiting_wh_ico.svg'
+import raiting_white_ico from '@shared/Footer/assets/footer_img/grey_google_person.svg'
 import frens_white_ico from '@shared/Footer/assets/footer_img/frens_wh_ico.svg'
 import home_white_active_ico from '@shared/Footer/assets/footer_img/home_wh_act.svg'
 import tasks_white_active_ico from '@shared/Footer/assets/footer_img/tasks_white_act_svg.svg'
