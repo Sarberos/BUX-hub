@@ -12,6 +12,7 @@ import NotFoundPage from "@widgets/UI/NotFoundPage/NotFoundPage";
 import { WhiteFooter } from "@widgets/UI/WhiteFooter/WhiteFooter";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
+import { Preloader } from "@widgets/UI/Preloader/Preloader";
 
 export function Wrap() {
   const {tg}=useTelegramApi()
@@ -32,7 +33,7 @@ export function Wrap() {
     !them ? setminiTaskStyle({backgroundColor: '#fff',}) :setminiTaskStyle({})
 
   },[miniTaskOpen,them])
-  
+
   useEffect(() => {
     switch (currenPageId) {
       case 1:
@@ -54,6 +55,9 @@ export function Wrap() {
     }
   }, [currenPageId]);
 
+if(false){
+  <Preloader />
+}else 
   return (
     <div className={s.wrap}>
       <div
