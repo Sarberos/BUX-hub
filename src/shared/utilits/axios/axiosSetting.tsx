@@ -12,10 +12,10 @@ api.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${JSON.stringify(parsedData)}`;
   return config;
 });
-// api.interceptors.response.use(response=>response,error=>{
-//   return Promise.reject({
-//     ...error.response.data
-//   })
-// });
+api.interceptors.response.use(response=>response,error=>{
+  return Promise.reject({
+    ...error.response.data
+  })
+});
 
 export default api;

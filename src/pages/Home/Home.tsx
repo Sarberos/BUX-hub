@@ -11,21 +11,42 @@ import {useEffect,useState} from 'react'
 import { useStartFarm } from '@shared/Home/hooks/useStartFarm';
 import { useGetFarmInfo } from '@shared/Home/hooks/useGetFarmInfo';
 import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
+import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
+import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
+
+export type TFarmInfo={
+  coins: number,
+  start_time: null|string,
+  status:string
+}
+
 
 export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void}){
   const currentDay=1;
   const {user}=useTelegramApi()
   const {t} = useTranslation()
-  const {}=useStartFarm()
-  const {data}=useGetFarmInfo()
-  const [farmStatus, setFarmStatus]=useState(EnumFarmStatus.START)
 
+  const {mutate:startReq}=useStartFarm()
+  const {mutate:claimReq}=useClaimFarmCoins()
+  const {data:farmInfo}=useGetFarmInfo()
+
+  const [farmStatus, setFarmStatus]=useState<string>(EnumFarmStatus.START);
+  const [startTime, setStartTime]=useState<string|null>()
+  const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
   useEffect(()=>{
-    console.log(data);
-    setFarmStatus(EnumFarmStatus.CLAIM)
+    startReq();
+    claimReq();
+    console.log(startTime);
     
-  },[data])
+  },[])
+  useEffect(()=>{
+    if(farmInfo){
+      setClaimedCoins(farmInfo.coins);
+      setFarmStatus(farmInfo.status);
+      farmInfo.status===EnumFarmStatus.START && setStartTime(farmInfo.start_time)}
+    
+  },[farmInfo])
 
     return (
       <div className={s.wrapper}>
@@ -36,15 +57,34 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
           <Lang_DayCounter />
         </div>
         <div className={s.koin_wrap}>
-          <KoinQuantity />
+          <KoinQuantity coinValue={123123} />
         </div>
         <div className={s.main_img_wrap}>
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          <MainBtn>{farmStatus}</MainBtn>
-          {/* <MainBtn>{farmStatus}</MainBtn>
-          <MainBtn>{farmStatus}</MainBtn> */}
+          {farmStatus === EnumFarmStatus.START && (
+            <MainBtn event={startReq}>Start farming</MainBtn>
+          )}
+          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn coinValue={claimedCoins} />}
+          {farmStatus === EnumFarmStatus.CLAIM && (
+            <MainBtn event={claimReq}>
+              <div className={s.claim_home_btn}>
+                <div>Claim</div>
+                <div>
+                  <KoinQuantity
+                    coinValue={claimedCoins}
+                    style={{
+                      color: "#000",
+                      fontSize: "17px",
+                      fontWeight: "800",
+                    }}
+                    imgStyle={{ width: "16px", height: "16px" }}
+                  />
+                </div>
+              </div>
+            </MainBtn>
+          )}
         </div>
         <div
           className={

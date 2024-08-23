@@ -2,13 +2,16 @@ import api from "./axiosSetting";
 
 class Fetching {
   static async farmStatus() {
-    api.get('farm/status');
+    const resp= await api.get('farm/status');
+    return resp.data;
 }
   static async farmStart() {
-    api.post('farm/start');
+    const resp= await api.post('farm/start');
+    return resp.data;
 }
   static async farmClaim() {
-    api.post('farm/claim');
+    const resp= await api.post('farm/claim');
+    return resp.data;
 }
 }
 export default Fetching;

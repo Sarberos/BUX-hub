@@ -78,3 +78,14 @@
         }
     }
 } 
+.claim_home_btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    div{
+        font-size: 17px;
+        font-weight: 800;
+    }
+}

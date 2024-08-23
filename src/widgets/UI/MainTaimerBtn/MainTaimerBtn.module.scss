@@ -1,0 +1,29 @@
+.main_btn{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 7px ;
+    color: #000000;
+    background-color: #ffffff40;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 800;
+    .farmin_btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .farm_txt{
+        color: #000;
+        font-size:17px ;
+        font-weight: 800;
+    }
+    .koin_quantitiy_btn{
+        margin: 0 20px 0 25px;
+        @media screen and (max-width:350px ) {
+            margin: 0 7px 0 12px;
+            
+        }
+    }
+}
+}
