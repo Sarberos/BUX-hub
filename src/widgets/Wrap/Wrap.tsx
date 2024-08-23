@@ -61,7 +61,7 @@ if(false){
   return (
     <div className={s.wrap}>
       <div
-        style={{
+        style={currenPageId === 1 ? {backgroundImage: `url(${currentBg})`,backgroundPosition:'50% -200px'}:{
           backgroundImage: `url(${currentBg})`,
         }}
         className={s.inner_wrap}
