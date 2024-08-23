@@ -7,9 +7,10 @@ import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
 import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi';
 import { useTranslation } from 'react-i18next';
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 import { useStartFarm } from '@shared/Home/hooks/useStartFarm';
 import { useGetFarmInfo } from '@shared/Home/hooks/useGetFarmInfo';
+import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
 
 export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void}){
   const currentDay=1;
@@ -17,11 +18,13 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
   const {t} = useTranslation()
   const {}=useStartFarm()
   const {data}=useGetFarmInfo()
-  // const {farmStatus, setFarmStatus}=useState<EnumFarmStatus>(EnumFarmStatus.START)
+  const [farmStatus, setFarmStatus]=useState(EnumFarmStatus.START)
 
 
   useEffect(()=>{
     console.log(data);
+    setFarmStatus(EnumFarmStatus.CLAIM)
+    
   },[data])
 
     return (
@@ -39,7 +42,9 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          <MainBtn>{''}</MainBtn>
+          <MainBtn>{farmStatus}</MainBtn>
+          <MainBtn>{farmStatus}</MainBtn>
+          <MainBtn>{farmStatus}</MainBtn>
         </div>
         <div
           className={
