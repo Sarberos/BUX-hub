@@ -15,6 +15,7 @@ import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
 import { useQueryClient } from '@tanstack/react-query';
+import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 
 export type TFarmInfo={
   coins: number,
@@ -32,6 +33,7 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const {mutate:startReq,isPending:startLoading}=useStartFarm()
   const {mutate:claimReq,isPending:claimLoading}=useClaimFarmCoins()
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
+  const {data:bonusInfo ,isLoading:bonusStatusLoading}=useGetBonusStatus()
 
   const [coins,setCoins]=useState<number>(0)
   const [farmStatus, setFarmStatus]=useState<string>(EnumFarmStatus.START);
@@ -40,7 +42,7 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const [claimedCoins, setClaimedCoins]= useState<number>(0.021)
 
 
-  const handlingTaimer=(mins: number, hours: number)=>{
+const handlingTaimer=(mins: number, hours: number)=>{
 
     mins--;
     if(mins===0){
@@ -67,8 +69,7 @@ useEffect(()=>{
 },[timerValue])
 useEffect(()=>{
   setMainIsLoading(false);
-},[startLoading,claimLoading,statusLoading])
-
+},[startLoading,claimLoading,statusLoading,bonusStatusLoading])
 useEffect(()=>{
     if(farmInfo){
       setClaimedCoins(0.021)
@@ -78,7 +79,9 @@ useEffect(()=>{
      
     }    
   },[farmInfo])
-
+useEffect(()=>{
+  console.log(bonusInfo);
+},[bonusInfo])
     return (
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
@@ -94,10 +97,10 @@ useEffect(()=>{
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          {farmStatus === EnumFarmStatus.FARMING && (
+          {farmStatus === EnumFarmStatus.START && (
             <MainBtn event={startReq}>Start farming</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.START && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
+          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn event={claimReq}>
               <div className={s.claim_home_btn}>
