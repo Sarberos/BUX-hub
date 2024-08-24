@@ -52,8 +52,7 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
 useEffect(()=>{
   const intervalId = setInterval(() => {  
     if (timerValue) {  
-      handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  
-    }  
+      handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
   },5000);  
 
   return () => clearInterval(intervalId);  

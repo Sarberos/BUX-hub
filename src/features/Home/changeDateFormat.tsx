@@ -15,5 +15,5 @@ export const changeDateFormat=(date:string|null)=>{
 
 
 
-    return {formattedHours,formattedMinutes,minuts,hours}
+    return {formattedHours,formattedMinutes,currentMin,hours}
 }
