@@ -46,7 +46,7 @@ useEffect(()=>{
   
 },[startData,claimData])
 useEffect(()=>{
-  startLoading || claimLoading ||statusLoading ? setMainIsLoading(true) :setMainIsLoading(false)
+  // startLoading || claimLoading ||statusLoading ? setMainIsLoading(true) :setMainIsLoading(false)
 },[startLoading,claimLoading,statusLoading])
 
   useEffect(()=>{
