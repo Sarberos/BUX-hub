@@ -94,10 +94,10 @@ useEffect(()=>{
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          {farmStatus === EnumFarmStatus.FARMING && (
+          {farmStatus === EnumFarmStatus.START && (
             <MainBtn event={startReq}>Start farming</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.START && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
+          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn event={claimReq}>
               <div className={s.claim_home_btn}>
