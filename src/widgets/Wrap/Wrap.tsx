@@ -23,6 +23,7 @@ export function Wrap() {
   const [miniTaskOpen, setMiniTasksOpen]= useState(false)
   const [miniTaskStyle, setminiTaskStyle]= useState<React.CSSProperties>()
   const [them, setThem]=useState('dark')
+  const [mainIaLoading, setMainIsLoading]=useState(false)
 
  useEffect(()=>{
   setThem(tg?.colorScheme)
@@ -55,7 +56,7 @@ export function Wrap() {
     }
   }, [currenPageId]);
 
-if(false){
+if(mainIaLoading){
   <Preloader />
 }else 
   return (
@@ -70,6 +71,7 @@ if(false){
           <Home
             dailyRewardSt={dailyRewardSt}
             setDailyRewardSt={setDailyRewardSt}
+            setMainIsLoading={setMainIsLoading}
           />
         ) : currenPageId === 2 ? (
           <Tasks
