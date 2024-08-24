@@ -13,6 +13,7 @@ import { useGetFarmInfo } from '@shared/Home/hooks/useGetFarmInfo';
 import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
 import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
+import { changeDateFormat } from '@features/Home/changeDateFormat';
 
 export type TFarmInfo={
   coins: number,
@@ -26,30 +27,27 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
-  const {mutate:startReq,data:startData,isPending:startLoading}=useStartFarm()
-  const {mutate:claimReq,data:claimData,isPending:claimLoading}=useClaimFarmCoins()
+  const {mutate:startReq,isPending:startLoading}=useStartFarm()
+  const {mutate:claimReq,isPending:claimLoading}=useClaimFarmCoins()
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
 
   const [coins,setCoins]=useState<number>(0)
   const [farmStatus, setFarmStatus]=useState<string>(EnumFarmStatus.START);
-  const [startTime, setStartTime]=useState<string|null>()
+  const [timerValue, setTimerValue]=useState<{ formattedHours: string; formattedMinutes: string; } | null>()
   const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
-useEffect(()=>{
-  console.log('STARTDATA'+startData);
-  console.log('CLAIMDATA'+claimData);
-  
-},[startData,claimData])
 useEffect(()=>{
   setMainIsLoading(false);
 },[startLoading,claimLoading,statusLoading])
 
   useEffect(()=>{
     if(farmInfo){
-      setClaimedCoins(farmInfo.coins);
+      setClaimedCoins(0.001)
+      setCoins(farmInfo.coins);
       setFarmStatus(farmInfo.status);
-      farmInfo.status===EnumFarmStatus.START && setStartTime(farmInfo.start_time)
-      farmInfo.status===EnumFarmStatus.START && setCoins(farmInfo.coins)
+      // farmInfo.status===EnumFarmStatus.START && setCoins(farmInfo.coins)
+      farmInfo.status===EnumFarmStatus.FARMING &&  setTimerValue(changeDateFormat(farmInfo.start_time))
+     
     }    
   },[farmInfo])
 
@@ -71,7 +69,7 @@ useEffect(()=>{
           {farmStatus === EnumFarmStatus.START && (
             <MainBtn event={startReq}>Start farming</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={startTime} coinValue={claimedCoins}  />}
+          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn event={claimReq}>
               <div className={s.claim_home_btn}>
