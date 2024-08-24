@@ -35,11 +35,6 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const [startTime, setStartTime]=useState<string|null>()
   const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
-  const onStartFarming=()=>{
-  startReq
-}
-
-
 useEffect(()=>{
   console.log('STARTDATA'+startData);
   console.log('CLAIMDATA'+claimData);
@@ -74,7 +69,7 @@ useEffect(()=>{
         </div>
         <div className={s.farming_btn}>
           {farmStatus === EnumFarmStatus.START && (
-            <MainBtn event={onStartFarming}>Start farming</MainBtn>
+            <MainBtn event={startReq}>Start farming</MainBtn>
           )}
           {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={startTime} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
