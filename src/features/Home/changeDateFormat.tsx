@@ -5,12 +5,15 @@ export const changeDateFormat=(date:string|null)=>{
     const pastDate:Date = new Date(date);
     const now:Date= new Date();
 
-    const dateDifferce=now.getTime()-pastDate.getTime();
-    const minuts:number = Math.floor(dateDifferce/60000)
-    const hours:number = Math.floor(minuts/60)
+    const dateDifferce=(pastDate.getTime()+12*60*60*1000)-now.getTime();
+    const minuts:number = dateDifferce>=0? Math.floor(dateDifferce/60000) :0;
+    const hours:number =dateDifferce>=0? Math.floor(minuts/60):0;
+    const currentMin=minuts%60;
 
     const formattedHours = String(hours).padStart(2, '0');
-    const formattedMinutes = String(minuts).padStart(2, '0');
+    const formattedMinutes = String(currentMin).padStart(2, '0');
+
+
 
     return {formattedHours,formattedMinutes}
 }

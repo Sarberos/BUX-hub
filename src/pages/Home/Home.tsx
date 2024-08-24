@@ -36,16 +36,16 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const [timerValue, setTimerValue]=useState<{ formattedHours: string; formattedMinutes: string; } | null>()
   const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
+
 useEffect(()=>{
   setMainIsLoading(false);
 },[startLoading,claimLoading,statusLoading])
 
-  useEffect(()=>{
+useEffect(()=>{
     if(farmInfo){
       setClaimedCoins(0.001)
       setCoins(farmInfo.coins);
       setFarmStatus(farmInfo.status);
-      // farmInfo.status===EnumFarmStatus.START && setCoins(farmInfo.coins)
       farmInfo.status===EnumFarmStatus.FARMING &&  setTimerValue(changeDateFormat(farmInfo.start_time))
      
     }    
