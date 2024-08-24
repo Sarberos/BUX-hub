@@ -38,23 +38,23 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
 
-const handlingTaimer=(mins: number, hours: number)=>{
-  mins--;
-  if(mins===0){
-    hours--
-    mins=59
+  const handlingTaimer=(mins: number, hours: number)=>{
+    mins--;
+    if(mins===0){
+      hours--
+      mins=59
+    }
+    const formattedHours= String(hours).padStart(2, '0')
+    const formattedMinutes= String(mins).padStart(2, '0')
+    setTimerValue({formattedHours,formattedMinutes,hours,minuts:mins})
   }
-  const formattedHours= String(hours).padStart(2, '0')
-  const formattedMinutes= String(mins).padStart(2, '0')
-  setTimerValue({formattedHours,formattedMinutes,hours,minuts:mins})
-}
 
 useEffect(()=>{
   const intervalId = setInterval(() => {  
     if (timerValue) {  
       handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  
     }  
-  }, 60000);  
+  },5000);  
 
   return () => clearInterval(intervalId);  
 
