@@ -7,8 +7,7 @@ export default function MainTaimerBtn({coinValue,timerValue='05:22'}:{coinValue:
         <button  className={s.main_btn}>
             <div className={s.farmin_btn}>
               <div className={s.farm_txt}>
-                <p>Farm</p>
-                <p>ing</p>
+                <p>Farming</p>
             </div>
               <div className={s.koin_quantitiy_btn}>
                 <KoinQuantity coinValue={coinValue} style={{color:'#000',fontSize:'13px',fontWeight:'800',}} imgStyle={{width: '16px',height:'16px'}}/>

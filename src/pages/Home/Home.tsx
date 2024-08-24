@@ -14,6 +14,7 @@ import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
 import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
+import { useQueryClient } from '@tanstack/react-query';
 
 export type TFarmInfo={
   coins: number,
@@ -23,6 +24,7 @@ export type TFarmInfo={
 
 
 export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void,setMainIsLoading:(value:boolean)=>void}){
+  const queryClient =useQueryClient()
   const currentDay =1;
   const {user}=useTelegramApi()
   const {t} = useTranslation()
@@ -39,8 +41,13 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
 
 
   const handlingTaimer=(mins: number, hours: number)=>{
+
     mins--;
     if(mins===0){
+      if(hours===0)
+      {
+        queryClient.invalidateQueries({ queryKey: ['farm_info'] })
+      }
       hours--
       mins=59
     }
@@ -53,7 +60,7 @@ useEffect(()=>{
   const intervalId = setInterval(() => {  
     if (timerValue) {  
       handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
-  },5000);  
+  },60000);  
 
   return () => clearInterval(intervalId);  
 
@@ -87,10 +94,10 @@ useEffect(()=>{
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          {farmStatus === EnumFarmStatus.START && (
+          {farmStatus === EnumFarmStatus.FARMING && (
             <MainBtn event={startReq}>Start farming</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
+          {farmStatus === EnumFarmStatus.START && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn event={claimReq}>
               <div className={s.claim_home_btn}>
