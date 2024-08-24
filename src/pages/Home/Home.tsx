@@ -26,20 +26,25 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
-  const {mutate:startReq}=useStartFarm()
-  const {mutate:claimReq}=useClaimFarmCoins()
+  const {mutate:startReq,data:startData}=useStartFarm()
+  const {mutate:claimReq,data:claimData}=useClaimFarmCoins()
   const {data:farmInfo}=useGetFarmInfo()
 
   const [farmStatus, setFarmStatus]=useState<string>(EnumFarmStatus.START);
   const [startTime, setStartTime]=useState<string|null>()
   const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
-  useEffect(()=>{
-    startReq();
-    claimReq();
-    console.log(startTime);
-    
-  },[])
+  const onStartFarming=(farmStatus:EnumFarmStatus)=>{
+  farmStatus!==EnumFarmStatus.START && startReq
+}
+
+useEffect(()=>{
+
+  console.log('STARTDATA'+startData);
+  console.log('CLAIMDATA'+claimData);
+  
+},[startData,claimData])
+
   useEffect(()=>{
     if(farmInfo){
       setClaimedCoins(farmInfo.coins);
@@ -64,9 +69,9 @@ export function Home({dailyRewardSt,setDailyRewardSt}:{dailyRewardSt:boolean,set
         </div>
         <div className={s.farming_btn}>
           {farmStatus === EnumFarmStatus.START && (
-            <MainBtn event={startReq}>Start farming</MainBtn>
+            <MainBtn event={()=>onStartFarming(farmStatus)}>Start farming</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn coinValue={claimedCoins} />}
+          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={startTime} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn event={claimReq}>
               <div className={s.claim_home_btn}>
