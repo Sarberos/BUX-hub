@@ -37,7 +37,7 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const [farmStatus, setFarmStatus]=useState<string>(EnumFarmStatus.START);
   const [timerValue, setTimerValue]=useState<{ formattedHours:string; formattedMinutes: string;minuts: number;
     hours: number;  } | null>()
-  const [claimedCoins, setClaimedCoins]= useState<number>(0)
+  const [claimedCoins, setClaimedCoins]= useState<number>(0.021)
 
 
   const handlingTaimer=(mins: number, hours: number)=>{
@@ -71,7 +71,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     if(farmInfo){
-      setClaimedCoins(0.001)
+      setClaimedCoins(0.021)
       setCoins(farmInfo.coins);
       setFarmStatus(farmInfo.status);
       farmInfo.status===EnumFarmStatus.FARMING &&  setTimerValue(changeDateFormat(farmInfo.start_time))
@@ -94,10 +94,10 @@ useEffect(()=>{
           <img src={main_img} alt="" className={s.main_img} />
         </div>
         <div className={s.farming_btn}>
-          {farmStatus === EnumFarmStatus.START && (
+          {farmStatus === EnumFarmStatus.FARMING && (
             <MainBtn event={startReq}>Start farming</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
+          {farmStatus === EnumFarmStatus.START && <MainTaimerBtn timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn event={claimReq}>
               <div className={s.claim_home_btn}>
