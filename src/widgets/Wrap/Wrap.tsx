@@ -9,7 +9,6 @@ import { Tasks } from "@pages/Tasks/Tasks";
 import { Raiting } from "@pages/Raiting/Raiting";
 import { Frens } from "@pages/Frens/Frens";
 import NotFoundPage from "@widgets/UI/NotFoundPage/NotFoundPage";
-import { WhiteFooter } from "@widgets/UI/WhiteFooter/WhiteFooter";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
@@ -86,18 +85,18 @@ if(mainIaLoading){
           <NotFoundPage />
         )}
         <div style={miniTaskStyle} className={s.footer_wrap}>
-          {them ==='dark' && (
+          {true && (
             <Footer
               currenPageId={currenPageId}
               setCurrentPageId={setCurrentPageId}
             />
           ) }
-          {them ==='light' &&(
+          {/* {them ==='light' &&(
             <WhiteFooter
               currenPageId={currenPageId}
               setCurrentPageId={setCurrentPageId}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

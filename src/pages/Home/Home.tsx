@@ -35,7 +35,7 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
 
   const [coins,setCoins]=useState<number>(0)
   const [farmStatus, setFarmStatus]=useState<string>(EnumFarmStatus.START);
-  const [timerValue, setTimerValue]=useState<{ formattedHours: string; formattedMinutes: string;minuts: number;
+  const [timerValue, setTimerValue]=useState<{ formattedHours:string; formattedMinutes: string;minuts: number;
     hours: number;  } | null>()
   const [claimedCoins, setClaimedCoins]= useState<number>(0)
 
