@@ -1,13 +1,18 @@
 import Fetching from "@shared/utilits/axios/axiosRequests"
-import { useMutation } from "@tanstack/react-query"
+import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks"
+import { setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice"
+import { useMutation} from "@tanstack/react-query"
+import { EnumFarmStatus } from "../consts/farmStatus.enum"
 
 
 export const useClaimFarmCoins=()=>{
+    const dispatch=useAppDispatch()
+    const state=useAppSelector(state=>state.home)
     return useMutation({
-        mutationKey:['start farm'],
+        mutationKey:['claim_farm'],
         mutationFn: Fetching.farmClaim,
-        // onSuccess: () => {
-        //   queryClient.invalidateQueries({ queryKey: ['todos'] })
-        // },
+        onSuccess: () => {
+            state.farmStatus!==EnumFarmStatus.START && dispatch(setStoreFarmStatus(EnumFarmStatus.START))
+        },
     })
 }

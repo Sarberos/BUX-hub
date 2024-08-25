@@ -4,7 +4,7 @@ import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity'
 
 export default function MainTaimerBtn({coinValue,timerValue='05:22'}:{coinValue:number,timerValue:string|null|undefined}){
     return(
-        <button  className={s.main_btn}>
+        <button disabled={true}  className={s.main_btn}>
             <div className={s.farmin_btn}>
               <div className={s.farm_txt}>
                 <p>Farming</p>

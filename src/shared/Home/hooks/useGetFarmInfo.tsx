@@ -7,6 +7,6 @@ export const useGetFarmInfo=()=>{
     return useQuery<TFarmInfo>({
         queryKey:['farm_info'],
         queryFn: Fetching.farmStatus,
-        refetchOnMount: true,
+        // refetchOnMount: true,
     })
 }
