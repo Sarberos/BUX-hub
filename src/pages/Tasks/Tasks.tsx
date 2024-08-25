@@ -7,6 +7,7 @@ import MainBtn from '@widgets/UI/MainBtn/MainBtn';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import { useAppDispatch } from '@shared/utilits/redux/hooks';
 import { callIsLoading, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { Preloader } from '@widgets/UI/Preloader/Preloader';
 
 export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setMiniTasksOpen: (value:boolean)=> void })=>{
   const dispatch=useAppDispatch()
@@ -15,10 +16,8 @@ export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setM
   const [completeTasks,setcompliteTasks]=useState<TTaskItem[]>()
   
   useEffect(()=>{
-    debugger
     dispatch(callIsLoading(taskInfoLoading))
-    tasksList&&callIsLoading(false)
-  },[taskInfoLoading,tasksList])
+  },[taskInfoLoading])
   useEffect(()=>{   
       if(tasksList){
         const compliteTasks=tasksList.content.filter(item=>item.status==='claim')
@@ -34,7 +33,9 @@ const onClaim=()=>{
   dispatch(updateTotalCoins(coins))
 }
 const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
-  return (
+if(taskInfoLoading){
+  return <Preloader />
+}else return (
       <div className={s.task_wrapper}>
         <div style={miniTaskStyle}className={s.title_wrap} >
           <div className={s.title}>Tasks</div>
