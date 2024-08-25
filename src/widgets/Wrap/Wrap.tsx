@@ -27,9 +27,6 @@ export function Wrap() {
   const [them, setThem]=useState('dark')
   const [mainInLoading, setMainIsLoading]=useState(false)
 
-  useEffect(()=>{
-    setMainIsLoading(state.isLoading);
-  },[state.isLoading])
  useEffect(()=>{
   setThem(tg?.colorScheme)
  },[tg])
