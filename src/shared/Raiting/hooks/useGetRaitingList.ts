@@ -14,7 +14,7 @@ export type TRaitngItem={
         photo?:string,
         referrerId?: number|null,
         role?:string,
-        telegramId?:string,
+        telegramId:string,
         type?:string,
         updatedAt?:string,
         username?:string,

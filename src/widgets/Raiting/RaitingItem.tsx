@@ -9,16 +9,15 @@ export type TRaitingItemStyle={
 
 export default function ({active_usernames,coins,place,telegramId}:TRaitngItem&{place:number}){
     const{user}=useTelegramApi()
-    console.log('user?.id'+user?.id);
-    console.log('telegramId'+telegramId);
+    const isMy:boolean|undefined=user && user.id===parseInt(telegramId)
     
-    const meItemStyle: React.CSSProperties = user?.id ==telegramId
+    const meItemStyle: React.CSSProperties = isMy
       ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
       : {};  
 
-    const text_color:string =place===1? '#FFCC48':place===1?'#ACACAC':place===1?'#9E5228':'';
+    const text_color:string =place=== 1 ? '#FFCC48':place===2?'#ACACAC':place===3?'#9E5228':'';
     return(
-        <div style={meItemStyle} className={ false  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
+        <div style={meItemStyle} className={ isMy  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
             <div className={s.raiting_info}>
                 <p color={text_color} className={s.place_number}>{place}</p>
                 <div className={s.raiting_title_wrap}>
