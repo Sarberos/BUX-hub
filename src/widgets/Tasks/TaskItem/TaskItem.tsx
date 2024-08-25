@@ -2,18 +2,16 @@ import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
 import default_ico from '@shared/Tasks/assets/tasks_img/tasksFire.svg'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
-import { useNavigate } from 'react-router'
 
 
 
 
 export default function({title,sub_tasks,coins,id,link,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
-    const navigate=useNavigate()
     const {mutate:startTask,}=useStartTask()
 
     const handleStart=(id:number)=>{
         startTask(id);
-        navigate(link)
+        window.location.href = link
     }
     return (
         <div className={s.task_item_wrap}>

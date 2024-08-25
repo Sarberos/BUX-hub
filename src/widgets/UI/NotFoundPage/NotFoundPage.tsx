@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router"
 
 
 export default function(){
+    const navigate= useNavigate()
+
     return(
-        <strong>{'404 Page Not Found or it`s in production :)'}</strong>
+        <>
+        <div onClick={()=>{navigate('/')}}>Домой</div>
+        <strong>{'404 PAGE NOT FOUND or it`s in production :)'}</strong>
+        </>
     )
 }
