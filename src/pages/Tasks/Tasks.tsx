@@ -1,12 +1,34 @@
 import s from '@pages/Tasks/Tasks.module.scss'
-import { useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf';
+import {useState,useEffect} from 'react'
+import { TTaskItem, useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf';
 // import MiniTasks from '@widgets/Tasks/MiniTasks/MiniTasks';
 import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
+import MainBtn from '@widgets/UI/MainBtn/MainBtn';
 import PopUp from '@widgets/UI/PopUp/PopUp';
+import { useAppDispatch } from '@shared/utilits/redux/hooks';
+import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 
 export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setMiniTasksOpen: (value:boolean)=> void })=>{
-    const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
-    const {data:tasksList}=useGetTasksInf()
+  const dispatch=useAppDispatch()
+  const {data:tasksList}=useGetTasksInf()
+  
+  const [completeTasks,setcompliteTasks]=useState<TTaskItem[]>()
+  
+  useEffect(()=>{
+      if(tasksList){
+        const compliteTasks=tasksList.content.filter(item=>item.status==='claim')
+        setcompliteTasks(compliteTasks)
+      }
+    },[tasksList])
+
+const onClaim=()=>{
+  let coins:number=0;
+  completeTasks?.map(item=>{
+    coins+=item.coins
+  })
+  dispatch(updateTotalCoins(coins))
+}
+const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
   return (
       <div className={s.task_wrapper}>
         <div style={miniTaskStyle}className={s.title_wrap} >
@@ -23,6 +45,9 @@ export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setM
             />
           ))}
         </ul>
+        <div className={ completeTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
+          <MainBtn event={onClaim}>СLaim</MainBtn>
+        </div>
         <div className={miniTaskOpen ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
               <PopUp onClose={()=>setMiniTasksOpen(false)}>
                 {/* <MiniTasks /> */}
