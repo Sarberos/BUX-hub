@@ -1,6 +1,7 @@
 import RaitingFetching from '@shared/utilits/axios/RaitingRequest'
 import {useQuery} from '@tanstack/react-query'
 
+
 export type TRaitngItem={
     accent_color_id?: number,
         active_usernames?: string[],
@@ -23,6 +24,7 @@ export type TRaitngItem={
 export  type TRaitingList={
     raiting:TRaitngItem[],
     userPosition: number,
+    statusCode:number
 }
 export const useGetRaitingList=()=>{
     return useQuery<TRaitingList>({

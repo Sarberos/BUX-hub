@@ -26,4 +26,8 @@ export const routes: RouteObject[] = [
       // element: <Frens />,  
       errorElement:<NotFoundPage />  
     },  
+    {
+      path: '/not_found',  
+      element:<NotFoundPage />,  
+    }
   ]; 

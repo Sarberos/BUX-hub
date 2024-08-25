@@ -1,11 +1,14 @@
 import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
 import default_ico from '@shared/Tasks/assets/tasks_img/tasksFire.svg'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
+import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
 
 
 
 
-export default function({title,sub_tasks,coins,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
+export default function({title,sub_tasks,coins,id,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
+    const {mutate:startTask,}=useStartTask()
+
     return (
         <div className={s.task_item_wrap}>
             <div className={s.info}>
@@ -17,7 +20,7 @@ export default function({title,sub_tasks,coins,openMiniTasks}:TTaskItem&{openMin
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            <button onClick={sub_tasks &&  sub_tasks.length!==0  ? openMiniTasks:()=>{} } className={s.status_btn}>{sub_tasks && sub_tasks.length!==0  ? 'Open' : 'Start'}</button>
+            <button onClick={sub_tasks &&  sub_tasks.length!==0  ? openMiniTasks:()=>{startTask(id)} } className={s.status_btn}>{sub_tasks && sub_tasks.length!==0  ? 'Open' : 'Start'}</button>
         </div>
     )
 }

@@ -9,8 +9,8 @@ class TasksFetching {
     const resp= await api.get('task/:telegram_id/goToLink/:link/:task_id');
     return resp.data;
 }
-  static async startTask() {
-    const resp= await api.post('task/start-task/:id');
+  static async startTask(id:number) {
+    const resp= await api.post(`task/start-task/${id}`);
     return resp.data;
 }
   static async tgSubscribe() {
