@@ -21,7 +21,8 @@ export type TRaitngItem={
         birthdate?:{},
 }
 export  type TRaitingList={
-    raiting:TRaitngItem[]
+    raiting:TRaitngItem[],
+    userPosition: number,
 }
 export const useGetRaitingList=()=>{
     return useQuery<TRaitingList>({

@@ -9,7 +9,10 @@ export type TRaitingItemStyle={
 
 export default function ({active_usernames,coins,place,telegramId}:TRaitngItem&{place:number}){
     const{user}=useTelegramApi()
-    const meItemStyle: React.CSSProperties = user?.id ===telegramId
+    console.log('user?.id'+user?.id);
+    console.log('telegramId'+telegramId);
+    
+    const meItemStyle: React.CSSProperties = user?.id ==telegramId
       ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
       : {};  
 
