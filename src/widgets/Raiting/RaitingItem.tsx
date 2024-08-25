@@ -19,7 +19,7 @@ export default function ({active_usernames,coins}:TRaitngItem){
             <div className={s.raiting_info}>
                 <p className={s.place_number}>{1}</p>
                 <div className={s.raiting_title_wrap}>
-                    <p className={s.raiting_title}>{active_usernames && active_usernames[1]}</p>
+                    <p className={s.raiting_title}>{active_usernames && active_usernames[0]}</p>
                     <p className={s.raiting_subtitle}>{`${3} lvl`}</p>
                 </div>
             </div>
