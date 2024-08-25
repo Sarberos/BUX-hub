@@ -15,7 +15,7 @@ export default function ({active_usernames,coins,place,telegramId}:TRaitngItem&{
       ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
       : {};  
 
-    const text_color:string =place=== 1 ? '#FFCC48':place===2?'#ACACAC':place===3?'#9E5228':'';
+    const text_color:string =place=== 1 ? '#FFCC48':place===2?'#ACACAC':place===3?'#9E5228':'#5E5E5E';
     return(
         <div style={meItemStyle} className={ isMy  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
             <div className={s.raiting_info}>
