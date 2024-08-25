@@ -4,7 +4,7 @@ import s from './DayBox.module.scss'
 
 
 export default function ({currentDay,boxImg,rewardValue,rewardDay,}:TDayBoxProps){
-   const untouchStyle:React.CSSProperties=currentDay===rewardDay ? {display:'none'}:{}
+   const untouchStyle:React.CSSProperties=currentDay===rewardDay-1 ? {display:'none'}:{}
    
     return (
         <div className={s.prize_box_wrap}>

@@ -1,8 +1,11 @@
 import s from "@pages/Raiting/Raiting.module.scss";
 import { RAITINGLIST } from "@shared/Raiting/consts/raitingList";
+import { useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
 import RaitingItem from "@widgets/Raiting/RaitingItem";
 
 export const Raiting = () => {
+  const{}=useGetRaitingList()
+
   return (
     <div className={s.raiting_wrapper}>
       <div className={s.raiting_title_wrap}>

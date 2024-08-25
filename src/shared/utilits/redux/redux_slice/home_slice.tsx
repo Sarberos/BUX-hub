@@ -5,14 +5,14 @@ import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum'
 import { TTimerType } from '@pages/Home/Home';
 
 
-interface CounterState {
+interface HomeState {
     farmStatus: string;
     totalCoins:number;
     timer:TTimerType;
     bonusDay:number;
 }
 
-const initialState: CounterState = {
+const initialState: HomeState = {
   farmStatus: EnumFarmStatus.START,
   totalCoins:0,
   timer:{
