@@ -16,6 +16,15 @@
             font-size: 18px;
             font-weight: 800;
             line-height: 135%;
+            &.first{
+                color:#FFCC48
+            }
+            &.second{
+                color:#ACACAC
+            }
+            &.third{
+                color:#9E5228
+            }
         }
         .raiting_title_wrap{
             display: flex;

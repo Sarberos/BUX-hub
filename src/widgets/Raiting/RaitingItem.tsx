@@ -7,7 +7,7 @@ export type TRaitingItemStyle={
     backgroundColor: CSSProperties,
 }
 
-export default function ({active_usernames,coins,place,telegramId}:TRaitngItem&{place:number}){
+export default function ({active_usernames=['Anonim'],coins,place,telegramId}:TRaitngItem&{place:number}){
     const{user}=useTelegramApi()
     const isMy:boolean|undefined=user && user.id===parseInt(telegramId)
     
@@ -15,11 +15,11 @@ export default function ({active_usernames,coins,place,telegramId}:TRaitngItem&{
       ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
       : {};  
 
-    const text_color:string =place=== 1 ? '#FFCC48':place===2?'#ACACAC':place===3?'#9E5228':'#5E5E5E';
+    
     return(
         <div style={meItemStyle} className={ isMy  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
             <div className={s.raiting_info}>
-                <p color={text_color} className={s.place_number}>{place}</p>
+                <p  className={place===1 ? `${s.place_number} ${s.first}`:place===2 ? `${s.place_number} ${s.second}`:place===3 ? `${s.place_number} ${s.third}`:`${s.place_number}`}>{place}</p>
                 <div className={s.raiting_title_wrap}>
                     <p className={s.raiting_title}>{active_usernames && active_usernames[0]}</p>
                     <p className={s.raiting_subtitle}>{`${3} lvl`}</p>
