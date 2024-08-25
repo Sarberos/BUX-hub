@@ -25,10 +25,10 @@ export function Wrap() {
   const [miniTaskOpen, setMiniTasksOpen]= useState(false)
   const [miniTaskStyle, setminiTaskStyle]= useState<React.CSSProperties>()
   const [them, setThem]=useState('dark')
-  const [mainInLoading, setMainIsLoading]=useState(false)
+  const [mainInLoading, setMainIsLoading]=useState(state.isLoading)
 
   useEffect(()=>{
-    setMainIsLoading(state.isLoading)
+    setMainIsLoading(state.isLoading);
   },[state.isLoading])
  useEffect(()=>{
   setThem(tg?.colorScheme)

@@ -15,8 +15,10 @@ export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setM
   const [completeTasks,setcompliteTasks]=useState<TTaskItem[]>()
   
   useEffect(()=>{
+    debugger
     dispatch(callIsLoading(taskInfoLoading))
-  },[taskInfoLoading])
+    tasksList&&callIsLoading(false)
+  },[taskInfoLoading,tasksList])
   useEffect(()=>{   
       if(tasksList){
         const compliteTasks=tasksList.content.filter(item=>item.status==='claim')
@@ -49,7 +51,7 @@ const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
           ))}
         </ul>
         <div className={ completeTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
-          <MainBtn event={onClaim}>СLaim</MainBtn>
+          <MainBtn event={onClaim}>Сlaim</MainBtn>
         </div>
         <div className={miniTaskOpen ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
               <PopUp onClose={()=>setMiniTasksOpen(false)}>
