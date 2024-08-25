@@ -83,7 +83,7 @@ useEffect(()=>{
   const intervalId = setInterval(() => {  
     if (timerValue) {  
       handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
-  },10);  
+  },60000);  
 
   return () => clearInterval(intervalId);  
 
@@ -97,7 +97,6 @@ useEffect(()=>{
       setCoins(farmInfo.coins);
       dispatch(setStoreFarmStatus(farmInfo.status));
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
-     
     }    
   },[farmInfo])
 useEffect(()=>{
