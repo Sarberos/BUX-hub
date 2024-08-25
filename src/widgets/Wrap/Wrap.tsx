@@ -12,11 +12,10 @@ import NotFoundPage from "@widgets/UI/NotFoundPage/NotFoundPage";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
-import { useAppSelector } from "@shared/utilits/redux/hooks";
+// import { useAppSelector } from "@shared/utilits/redux/hooks";
 
 export function Wrap() {
-  const state=useAppSelector(state=>state.home)
-
+  // const state=useAppSelector(state=>state.home)
 
   const {tg}=useTelegramApi()
   const [currenPageId, setCurrentPageId] = useState(1);
