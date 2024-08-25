@@ -2,7 +2,7 @@ import api from "./axiosSetting";
 
 class TasksFetching {
   static async tasksList() {
-    const resp= await api.get('referral/my');
+    const resp= await api.get('task/all-tasks-with-user');
     return resp.data;
 }
   static async completeTask() {

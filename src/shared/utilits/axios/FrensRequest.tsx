@@ -2,7 +2,7 @@ import api from "./axiosSetting";
 
 class FrensFetching {
     static async myRefList() {
-        const resp= await api.get('referral/my');
+        const resp= await api.get('referal/my');
         return resp.data;
       }
     static async claimRefCoins() {
