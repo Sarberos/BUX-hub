@@ -1,15 +1,20 @@
 import s from "@pages/Raiting/Raiting.module.scss";
-// import { RAITINGLIST } from "@shared/Raiting/consts/raitingList";
-import { useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
+import { TRaitngItem, useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
 import RaitingItem from "@widgets/Raiting/RaitingItem";
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 
 export const Raiting = () => {
   const{data:raitingData}=useGetRaitingList()
+  const [sortesData, setSortedData]=useState<TRaitngItem[]>()
 
   useEffect(()=>{
     if (raitingData) {
-      
+      const sortArr=raitingData.raiting.sort(
+        (a,b)=>{
+          return (b.coins || 0) - (a.coins || 0);  
+        }
+      )
+      setSortedData(sortArr)
     }
   },[raitingData])
   return (
@@ -18,7 +23,7 @@ export const Raiting = () => {
         <p className={s.title}>World leaderboard</p>
       </div>
       <ul className={s.raiting_list}>
-        {raitingData?.raiting.map((elem,index)=>(
+        {sortesData?.map((elem,index)=>(
           <RaitingItem
           key={index}
           {...elem}
