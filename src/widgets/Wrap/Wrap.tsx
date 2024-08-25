@@ -18,7 +18,6 @@ export function Wrap() {
   const [currenPageId, setCurrentPageId] = useState(1);
   const [currentBg, setCurrentBg] = useState("");
   const [inviteStat, setInvateStat]= useState(false)
-  const [dailyRewardSt, setDailyRewardSt]= useState(true)
   const [miniTaskOpen, setMiniTasksOpen]= useState(false)
   const [miniTaskStyle, setminiTaskStyle]= useState<React.CSSProperties>()
   const [them, setThem]=useState('dark')
@@ -68,8 +67,6 @@ if(mainIaLoading){
       >
         {currenPageId === 1 ? (
           <Home
-            dailyRewardSt={dailyRewardSt}
-            setDailyRewardSt={setDailyRewardSt}
             setMainIsLoading={setMainIsLoading}
           />
         ) : currenPageId === 2 ? (

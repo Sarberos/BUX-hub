@@ -9,6 +9,7 @@ interface CounterState {
     farmStatus: string;
     totalCoins:number;
     timer:TTimerType;
+    bonusDay:number;
 }
 
 const initialState: CounterState = {
@@ -19,7 +20,8 @@ const initialState: CounterState = {
     formattedMinutes:'00',
     hours:0,
     minuts:0,
-}
+},
+bonusDay:0,
 
 }
 
@@ -36,11 +38,14 @@ export const homeSlice = createSlice({
     setFormattedTaimer:(state, action: PayloadAction<TTimerType>) => {
         state.timer = action.payload
     },
+    setBonusDay:(state, action: PayloadAction<number>) => {
+        state.bonusDay = action.payload
+    },
 
   },
 })
 
-export const { setStoreFarmStatus,updateTotalCoins,setFormattedTaimer} = homeSlice.actions
+export const { setStoreFarmStatus,updateTotalCoins,setFormattedTaimer,setBonusDay} = homeSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.home.farmStatus

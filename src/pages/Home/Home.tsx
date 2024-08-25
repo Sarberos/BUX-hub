@@ -16,7 +16,8 @@ import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
 import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-import { setFormattedTaimer, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { setBonusDay, setFormattedTaimer, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 
 export type TFarmInfo={
   coins: number,
@@ -31,8 +32,7 @@ export type TTimerType = {
 } | null; 
 
 
-export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRewardSt:boolean,setDailyRewardSt:(value:boolean)=>void,setMainIsLoading:(value:boolean)=>void}){
-  const currentDay =1;
+export function Home({setMainIsLoading}:{setMainIsLoading:(value:boolean)=>void}){
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
@@ -43,6 +43,8 @@ export function Home({dailyRewardSt,setDailyRewardSt,setMainIsLoading}:{dailyRew
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
   const {data:bonusInfo ,isLoading:bonusStatusLoading}=useGetBonusStatus()
 
+  const [dailyRewardSt, setDailyRewardSt]= useState(false)
+  const [dailyRewardTime, setDailyRewardTime]= useState('')
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
   const [timerValue, setTimerValue]=useState<TTimerType>(state.timer)
@@ -81,6 +83,15 @@ useEffect(()=>{
 },[state])
 useEffect(()=>{
   const intervalId = setInterval(() => {  
+    const nextDate:Date = new Date(dailyRewardTime);
+    const now:Date= new Date();
+    nextDate.getTime()===now.getTime() && setDailyRewardSt(true)
+  },1000);  
+
+  return () => clearInterval(intervalId);  
+})
+useEffect(()=>{
+  const intervalId = setInterval(() => {  
     if (timerValue) {  
       handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
   },60000);  
@@ -97,8 +108,13 @@ useEffect(()=>{
       setCoins(farmInfo.coins);
       dispatch(setStoreFarmStatus(farmInfo.status));
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
-    }    
-  },[farmInfo])
+    } 
+    if(bonusInfo){
+      bonusInfo.status=== EnumBonusStatus.CLAIM?setDailyRewardSt(true):setDailyRewardSt(false);
+      setDailyRewardTime(bonusInfo.next_bonus_time)
+      state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
+    }  
+  },[farmInfo,bonusInfo])
 useEffect(()=>{
   console.log(bonusInfo);
 },[bonusInfo])
@@ -149,7 +165,6 @@ useEffect(()=>{
         >
           <BottomPopUp onClose={() => setDailyRewardSt(false)}>
             <DailyRewards
-              currentDay={currentDay}
               onClose={() => setDailyRewardSt(false)}
             />
           </BottomPopUp>
