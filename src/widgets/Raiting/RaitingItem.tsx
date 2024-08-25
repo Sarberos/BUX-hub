@@ -7,7 +7,7 @@ export type TRaitingItemStyle={
     backgroundColor: CSSProperties,
 }
 
-export default function ({active_usernames,coins}:TRaitngItem){
+export default function ({active_usernames,coins,place}:TRaitngItem&{place:number}){
     const meItemStyle: React.CSSProperties = false
       ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
       : {};  
@@ -17,7 +17,7 @@ export default function ({active_usernames,coins}:TRaitngItem){
     return(
         <div style={meItemStyle} className={ false  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
             <div className={s.raiting_info}>
-                <p className={s.place_number}>{1}</p>
+                <p className={s.place_number}>{place}</p>
                 <div className={s.raiting_title_wrap}>
                     <p className={s.raiting_title}>{active_usernames && active_usernames[0]}</p>
                     <p className={s.raiting_subtitle}>{`${3} lvl`}</p>

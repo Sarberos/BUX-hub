@@ -26,6 +26,7 @@ export const Raiting = () => {
         {sortesData?.map((elem,index)=>(
           <RaitingItem
           key={index}
+          place={index+1}
           {...elem}
         />
         ))}
