@@ -10,6 +10,7 @@ interface HomeState {
     totalCoins:number;
     timer:TTimerType;
     bonusDay:number;
+    isLoading: boolean;
 }
 
 const initialState: HomeState = {
@@ -22,6 +23,7 @@ const initialState: HomeState = {
     minuts:0,
 },
 bonusDay:0,
+isLoading:false
 
 }
 
@@ -41,11 +43,14 @@ export const homeSlice = createSlice({
     setBonusDay:(state, action: PayloadAction<number>) => {
         state.bonusDay = action.payload
     },
+    callIsLoading:(state, action: PayloadAction<boolean>) => {
+        state.isLoading = action.payload
+    },
 
   },
 })
 
-export const { setStoreFarmStatus,updateTotalCoins,setFormattedTaimer,setBonusDay} = homeSlice.actions
+export const { setStoreFarmStatus,updateTotalCoins,setFormattedTaimer,setBonusDay,callIsLoading} = homeSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.home.farmStatus

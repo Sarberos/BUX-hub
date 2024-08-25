@@ -6,15 +6,18 @@ import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import { useAppDispatch } from '@shared/utilits/redux/hooks';
-import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { callIsLoading, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 
 export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setMiniTasksOpen: (value:boolean)=> void })=>{
   const dispatch=useAppDispatch()
-  const {data:tasksList}=useGetTasksInf()
+  const {data:tasksList,isLoading:taskInfoLoading}=useGetTasksInf()
   
   const [completeTasks,setcompliteTasks]=useState<TTaskItem[]>()
   
   useEffect(()=>{
+    dispatch(callIsLoading(taskInfoLoading))
+  },[taskInfoLoading])
+  useEffect(()=>{   
       if(tasksList){
         const compliteTasks=tasksList.content.filter(item=>item.status==='claim')
         setcompliteTasks(compliteTasks)

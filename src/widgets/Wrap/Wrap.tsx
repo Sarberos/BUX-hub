@@ -12,8 +12,12 @@ import NotFoundPage from "@widgets/UI/NotFoundPage/NotFoundPage";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
+import { useAppSelector } from "@shared/utilits/redux/hooks";
 
 export function Wrap() {
+  const state=useAppSelector(state=>state.home)
+
+
   const {tg}=useTelegramApi()
   const [currenPageId, setCurrentPageId] = useState(1);
   const [currentBg, setCurrentBg] = useState("");
@@ -21,8 +25,11 @@ export function Wrap() {
   const [miniTaskOpen, setMiniTasksOpen]= useState(false)
   const [miniTaskStyle, setminiTaskStyle]= useState<React.CSSProperties>()
   const [them, setThem]=useState('dark')
-  const [mainIaLoading, setMainIsLoading]=useState(false)
+  const [mainInLoading, setMainIsLoading]=useState(false)
 
+  useEffect(()=>{
+    setMainIsLoading(state.isLoading)
+  },[state.isLoading])
  useEffect(()=>{
   setThem(tg?.colorScheme)
  },[tg])
@@ -54,8 +61,8 @@ export function Wrap() {
     }
   }, [currenPageId]);
 
-if(mainIaLoading){
-  <Preloader />
+if(mainInLoading){
+  return <Preloader />
 }else 
   return (
     <div className={s.wrap}>

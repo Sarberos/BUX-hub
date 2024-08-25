@@ -1,5 +1,6 @@
 import s from './Preloader.module.scss'
-import preloder_img from '@shared/UIComponents/assets/preloader.gif'
+// import preloder_img from '@shared/UIComponents/assets/preloader.gif'
+import preloder_img from '@shared/UIComponents/assets/trasp_preloader.gif'
 
 export const Preloader=()=>{
     return(
