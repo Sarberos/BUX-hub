@@ -1,6 +1,6 @@
 import api from "./axiosSetting";
 
-class Fetching {
+class TasksFetching {
   static async tasksList() {
     const resp= await api.get('referral/my');
     return resp.data;
@@ -22,4 +22,4 @@ class Fetching {
     return resp.data;
 }
 }
-export default Fetching;
+export default TasksFetching;

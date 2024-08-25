@@ -1,27 +1,27 @@
-import { TRaitingItemProps } from '@shared/Raiting/types/raitingItem'
 import s from './RaitingItem.module.scss'
 import React, { CSSProperties } from 'react'
+import { TRaitngItem } from '@shared/Raiting/hooks/useGetRaitingList';
 
 export type TRaitingItemStyle={
     backgroundColor: CSSProperties,
 }
 
-export default function ({isMe,placeNumber,userName,userLvl,coinQuantity}:TRaitingItemProps){
-    const meItemStyle: React.CSSProperties = isMe
+export default function ({active_usernames,coins}:TRaitngItem){
+    const meItemStyle: React.CSSProperties = false
       ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
       : {};  
 
 
     return(
-        <div style={meItemStyle} className={ isMe  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
+        <div style={meItemStyle} className={ false  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
             <div className={s.raiting_info}>
-                <p className={s.place_number}>{placeNumber}</p>
+                <p className={s.place_number}>{1}</p>
                 <div className={s.raiting_title_wrap}>
-                    <p className={s.raiting_title}>{userName}</p>
-                    <p className={s.raiting_subtitle}>{`${userLvl} lvl`}</p>
+                    <p className={s.raiting_title}>{active_usernames[1]}</p>
+                    <p className={s.raiting_subtitle}>{`${3} lvl`}</p>
                 </div>
             </div>
-            <div className={s.coin_quantity}>{coinQuantity}</div>
+            <div className={s.coin_quantity}>{coins}</div>
         </div>
     )
 }

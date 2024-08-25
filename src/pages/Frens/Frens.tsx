@@ -4,8 +4,10 @@ import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp'
 import FrensItem from '@widgets/Frens/FrensItem/FrensItem'
 import InvitePopUp from '@widgets/Frens/InvitePopUp/InvitePopUp'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
+import { useGetFrensInfo } from '@shared/Frens/hooks/useGetFrensInfo'
 
 export const Frens=({setInvateStat,inviteStat}:{inviteStat?:boolean,setInvateStat: (value:boolean)=>void})=>{
+    const{}=useGetFrensInfo();
 
     return(
         <div className={s.frens_wrap}>
