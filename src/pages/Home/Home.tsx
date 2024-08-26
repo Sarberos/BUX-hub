@@ -18,6 +18,7 @@ import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
 import { setBonusDay, setFormattedTaimer, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
+import { Preloader } from '@widgets/UI/Preloader/Preloader';
 
 export type TFarmInfo={
   coins: number,
@@ -32,7 +33,7 @@ export type TTimerType = {
 } | null; 
 
 
-export function Home({setMainIsLoading}:{setMainIsLoading:(value:boolean)=>void}){
+export function Home(){
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
@@ -48,7 +49,7 @@ export function Home({setMainIsLoading}:{setMainIsLoading:(value:boolean)=>void}
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
   const [timerValue, setTimerValue]=useState<TTimerType>(state.timer)
-  const [claimedCoins, setClaimedCoins]= useState<number>(480)
+  const claimedCoins:number=480;
 
 const onStartFarming=()=>{
   startReq();
@@ -59,7 +60,6 @@ const onClaimFarming=()=>{
   claimReq();
   dispatch(setStoreFarmStatus(EnumFarmStatus.START))
   dispatch(updateTotalCoins(480))
-  setCoins(prevstate=>prevstate+=480)
 }
 const handlingTaimer=(mins: number, hours: number)=>{
    mins>0 && mins--;
@@ -75,37 +75,36 @@ const handlingTaimer=(mins: number, hours: number)=>{
     const formattedMinutes= String(mins).padStart(2, '0')
     dispatch(setFormattedTaimer({formattedHours,formattedMinutes,hours,minuts:mins}))
   }
+  useEffect(()=>{
+    const intervalId = setInterval(() => {  
+      const nextDate:Date = new Date(dailyRewardTime);
+      const now:Date= new Date();
+      nextDate.getTime()===now.getTime() && setDailyRewardSt(true)
+    },1000);  
+  
+    return () => clearInterval(intervalId);  
+  })
+  useEffect(()=>{
+    const intervalId = setInterval(() => {  
+      if (timerValue) {  
+        handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
+    },60000);  
+  
+    return () => clearInterval(intervalId);  
+  
+  },[timerValue])
 useEffect(()=>{
-  farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
   coins!==state.totalCoins && setCoins(state.totalCoins);
+  farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
   timerValue!==state.timer &&   setTimerValue(state.timer)
 
 },[state])
 useEffect(()=>{
-  const intervalId = setInterval(() => {  
-    const nextDate:Date = new Date(dailyRewardTime);
-    const now:Date= new Date();
-    nextDate.getTime()===now.getTime() && setDailyRewardSt(true)
-  },1000);  
 
-  return () => clearInterval(intervalId);  
-})
-useEffect(()=>{
-  const intervalId = setInterval(() => {  
-    if (timerValue) {  
-      handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
-  },60000);  
-
-  return () => clearInterval(intervalId);  
-
-},[timerValue])
-useEffect(()=>{
-  setMainIsLoading(false);
 },[startLoading,claimLoading,statusLoading,bonusStatusLoading])
 useEffect(()=>{
     if(farmInfo){
-      setClaimedCoins(480)
-      setCoins(farmInfo.coins);
+      dispatch(updateTotalCoins(farmInfo.coins))
       dispatch(setStoreFarmStatus(farmInfo.status));
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 
@@ -115,10 +114,10 @@ useEffect(()=>{
       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
     }  
   },[farmInfo,bonusInfo])
-useEffect(()=>{
-  console.log(bonusInfo);
-},[bonusInfo])
-    return (
+
+if(state.isLoading){
+  return <Preloader />
+}else return (
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
           <p className={s.title}>{t("hello", { name: user?.username })}</p>
