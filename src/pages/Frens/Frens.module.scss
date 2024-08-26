@@ -38,6 +38,11 @@
                 border-radius: 200px;
                 color: #000;
                 background-color: #9B9B9B;
+                font-size:14px ;
+                font-weight: 600;
+                &.active{
+                background-color: #fff;
+                }
             }
         }
     }

@@ -33,7 +33,7 @@ export type TTimerType = {
 } | null; 
 
 
-export function Home(){
+export function Home({timerValue,setTimerValue}:{timerValue:TTimerType,setTimerValue:(value:TTimerType)=>void}){
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
@@ -48,7 +48,6 @@ export function Home(){
   const [dailyRewardTime, setDailyRewardTime]= useState('')
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
-  const [timerValue, setTimerValue]=useState<TTimerType>(state.timer)
   const claimedCoins:number=480;
 
 const onStartFarming=()=>{
@@ -61,20 +60,7 @@ const onClaimFarming=()=>{
   dispatch(setStoreFarmStatus(EnumFarmStatus.START))
   dispatch(updateTotalCoins(480))
 }
-const handlingTaimer=(mins: number, hours: number)=>{
-   mins>0 && mins--;
-    if(mins===0){
-      if(hours===0)
-      {
-        dispatch(setStoreFarmStatus(EnumFarmStatus.CLAIM))
-      }
-      hours--
-      mins=59
-    }
-    const formattedHours= String(hours).padStart(2, '0')
-    const formattedMinutes= String(mins).padStart(2, '0')
-    dispatch(setFormattedTaimer({formattedHours,formattedMinutes,hours,minuts:mins}))
-  }
+
   useEffect(()=>{
     const intervalId = setInterval(() => {  
       const nextDate:Date = new Date(dailyRewardTime);
@@ -84,21 +70,14 @@ const handlingTaimer=(mins: number, hours: number)=>{
   
     return () => clearInterval(intervalId);  
   })
-  useEffect(()=>{
-    const intervalId = setInterval(() => {  
-      if (timerValue) {  
-        handlingTaimer(timerValue.minuts || 0, timerValue.hours || 0);  }  
-    },60000);  
-  
-    return () => clearInterval(intervalId);  
-  
-  },[timerValue])
+
 useEffect(()=>{
+  debugger
   coins!==state.totalCoins && setCoins(state.totalCoins);
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
-  timerValue!==state.timer &&   setTimerValue(state.timer)
-
+  timerValue!==state.timer &&   setTimerValue(state.timer)  
 },[state])
+
 useEffect(()=>{
 
 },[startLoading,claimLoading,statusLoading,bonusStatusLoading])
@@ -115,9 +94,10 @@ useEffect(()=>{
     }  
   },[farmInfo,bonusInfo])
 
-if(state.isLoading){
+if(false){
   return <Preloader />
-}else return (
+}else
+ return (
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
           <p className={s.title}>{t("hello", { name: user?.username })}</p>
@@ -138,7 +118,7 @@ if(state.isLoading){
           {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn  timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn  event={()=>onClaimFarming()}>
-              <div className={s.claim_home_btn}>
+              <div className={s.claim_home_btn}>  
                 <div>Claim</div>
                 <div>
                   <KoinQuantity

@@ -5,9 +5,43 @@ import FrensItem from '@widgets/Frens/FrensItem/FrensItem'
 import InvitePopUp from '@widgets/Frens/InvitePopUp/InvitePopUp'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import { useGetFrensInfo } from '@shared/Frens/hooks/useGetFrensInfo'
+import { TTimerType } from '@pages/Home/Home'
+import { useClaimFrensCoins } from '@shared/Frens/hooks/useClaimFrensCoins'
+import {useState,useEffect} from 'react'
+import { EnumFrensFarmStatus } from '@shared/Frens/consts/frensFarmStatus.enum'
+import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
+// import { changeDateFormat } from '@features/Home/changeDateFormat'
+import { setFrensFarmStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
+import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 
-export const Frens=({setInvateStat,inviteStat}:{inviteStat?:boolean,setInvateStat: (value:boolean)=>void})=>{
-    const{}=useGetFrensInfo();
+export type TFrensProps = {
+  timerValue: TTimerType;
+  setTimerValue?: (value: TTimerType) => void;
+  inviteStat?:boolean;
+  setInvateStat: (value:boolean)=>void
+};
+
+export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
+    const dispatch =useAppDispatch()
+    const frensState=useAppSelector(state=>state.frens)
+    const{data:frensData}=useGetFrensInfo();
+    const {mutate:claimCoins}=useClaimFrensCoins()
+
+    const [refCoins,setRefCoins]=useState<number>(0)
+
+    const onClaimFrensCoins=()=>{
+        claimCoins;
+        dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))
+        dispatch(updateTotalCoins(refCoins))
+        dispatch(setTaimerValue({formattedHours:'12',formattedMinutes:'00',hours:12,minuts:0}))
+    }
+    useEffect(()=>{
+        if (frensData) {
+            refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
+            // frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeDateFormat(frensData.start_time)))
+        }
+    },[frensData])
+
 
     return(
         <div className={s.frens_wrap}>
@@ -16,8 +50,13 @@ export const Frens=({setInvateStat,inviteStat}:{inviteStat?:boolean,setInvateSta
             </div>
             <div className={s.frens_coins_wrap}>
                 <div className={s.frens_coins_wrap}>
-                    <p className={s.frens_coins_value}>0</p>
-                    <button className={s.frens_coin_claim_btn}>Claim 05h 41m</button>
+                    <p className={s.frens_coins_value}>{refCoins}</p>
+                    {frensState.farmStatus===EnumFrensFarmStatus.FARMING ? (
+                        <button disabled={true} className={s.frens_coin_claim_btn}>{`Claim ${timerValue?.formattedHours}h ${timerValue?.formattedMinutes}m`}</button>
+                    ):(
+                        <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>Claim</button>
+                    )}
+                    
                 </div>
             </div>
             <div className={s.subtitle_wrap}>
