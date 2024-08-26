@@ -40,10 +40,9 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
             frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeEndDateFormat(frensData.next_revenues_time)))
             new Date(frensData.next_revenues_time).getTime()=== new Date().getTime() && dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM))
-            frensData.content.length !==0 &&  setRefList(frensData.content);
+            frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
-
 
     return(
         <div className={s.frens_wrap}>
@@ -65,7 +64,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
                 <p className={s.subtitle}>You receive a 5% bonus on points earned by friends</p>
             </div>
             <div className={s.frens_list_wrap}>
-                <p className={s.frens_amount}>{`${200} frens`}</p>
+                {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} frens`}</p>}
                 <ul className={s.frens_list}>
                     {refList?.map((elem,index)=>(
                         <FrensItem key={index} {...elem} /> 

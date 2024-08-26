@@ -18,6 +18,7 @@ export type TFrensItem={
     type:string,
     updatedAt:string,
     username:string,
+    day_revenues: number;
     birthdate?:{},
 }
 export  type TFrensInfoData={

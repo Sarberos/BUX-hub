@@ -20,7 +20,8 @@
     }
     .raiting_list{
         position: relative;
-        max-height: 75vh;
+        max-height: 80vh;
+        min-height: 75vh;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -31,12 +32,14 @@
         scrollbar-width: none;
         @media screen and (max-height: 730px){
             max-height: 73vh;
+            min-height: 73vh;
         }
         @media screen and (max-height: 680px){
             max-height: 71vh;
         }
         @media screen and (max-height: 625px){
             max-height: 70vh;
+            min-height: 69vh;
         }
     }
 }

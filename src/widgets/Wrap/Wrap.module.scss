@@ -9,6 +9,8 @@
         max-width: 750px;
         width: 100%;
         margin:  0 auto;
+        display: flex;
+        flex-direction: column;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         .footer_wrap{
