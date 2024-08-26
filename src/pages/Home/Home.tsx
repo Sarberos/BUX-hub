@@ -72,7 +72,6 @@ const onClaimFarming=()=>{
   })
 
 useEffect(()=>{
-  debugger
   coins!==state.totalCoins && setCoins(state.totalCoins);
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
   timerValue!==state.timer &&   setTimerValue(state.timer)  
