@@ -1,10 +1,9 @@
 import s from '@pages/Frens/Frens.module.scss'
-import { FRENSLIST } from '@shared/Frens/consts/frensList'
 import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp'
 import FrensItem from '@widgets/Frens/FrensItem/FrensItem'
 import InvitePopUp from '@widgets/Frens/InvitePopUp/InvitePopUp'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
-import { useGetFrensInfo } from '@shared/Frens/hooks/useGetFrensInfo'
+import { TFrensItem, useGetFrensInfo } from '@shared/Frens/hooks/useGetFrensInfo'
 import { TTimerType } from '@pages/Home/Home'
 import { useClaimFrensCoins } from '@shared/Frens/hooks/useClaimFrensCoins'
 import {useState,useEffect} from 'react'
@@ -28,6 +27,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
     const {mutate:claimCoins}=useClaimFrensCoins()
 
     const [refCoins,setRefCoins]=useState<number>(0)
+    const [refList, setRefList]=useState<TFrensItem[]>()
 
     const onClaimFrensCoins=()=>{
         claimCoins();
@@ -40,6 +40,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
             frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeEndDateFormat(frensData.next_revenues_time)))
             new Date(frensData.next_revenues_time).getTime()=== new Date().getTime() && dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM))
+            frensData.content.length !==0 &&  setRefList(frensData.content);
         }
     },[frensData])
 
@@ -66,7 +67,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             <div className={s.frens_list_wrap}>
                 <p className={s.frens_amount}>{`${200} frens`}</p>
                 <ul className={s.frens_list}>
-                    {FRENSLIST.map((elem,index)=>(
+                    {refList?.map((elem,index)=>(
                         <FrensItem key={index} {...elem} /> 
                     ))}
                 </ul>
