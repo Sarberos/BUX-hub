@@ -33,12 +33,13 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
         claimCoins();
         dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))
         dispatch(updateTotalCoins(refCoins))
-        dispatch(setTaimerValue({formattedHours:'12',formattedMinutes:'00',hours:12,minuts:0}))
+        dispatch(setTaimerValue({formattedHours:'24',formattedMinutes:'00',hours:24,minuts:0}))
     }
     useEffect(()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
             frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeEndDateFormat(frensData.next_revenues_time)))
+            new Date(frensData.next_revenues_time).getTime()=== new Date().getTime() && dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM))
         }
     },[frensData])
 

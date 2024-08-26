@@ -92,7 +92,7 @@ useEffect(()=>{
     const intervalId = setInterval(() => {  
       if (farmTimerValue) {  
         handlingTaimer(farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch);  }  
-    },1000);  
+    },60000);  
   
     return () => clearInterval(intervalId);  
   },[farmTimerValue])
@@ -106,7 +106,7 @@ useEffect(()=>{
       if (frensTimerValue) {  
         frensHandlingTaimer(frensTimerValue.minuts || 0, frensTimerValue.hours || 0,dispatch);  
       }  
-    },1000);  
+    },60000);  
   
     return () => clearInterval(frensInterval);  
   

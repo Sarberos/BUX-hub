@@ -17,7 +17,7 @@ const initialState: IFrensState = {
     hours:0,
     minuts:0,
   },
-  farmStatus:EnumFrensFarmStatus.CLAIM,
+  farmStatus:EnumFrensFarmStatus.FARMING,
 }
 
 export const frensSlice = createSlice({
