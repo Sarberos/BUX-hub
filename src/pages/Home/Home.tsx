@@ -82,7 +82,7 @@ useEffect(()=>{
 },[startLoading,claimLoading,statusLoading,bonusStatusLoading])
 useEffect(()=>{
     if(farmInfo){
-      dispatch(updateTotalCoins(farmInfo.coins))
+      coins !==farmInfo.coins && dispatch(updateTotalCoins(farmInfo.coins))
       dispatch(setStoreFarmStatus(farmInfo.status));
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 

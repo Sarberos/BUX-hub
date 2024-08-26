@@ -22,6 +22,7 @@ export type TFrensItem={
 }
 export  type TFrensInfoData={
     content: TFrensItem[];
+    next_revenues_time:string;
     revenues: number;
     status:string;
 }

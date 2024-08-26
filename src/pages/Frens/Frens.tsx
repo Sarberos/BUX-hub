@@ -10,9 +10,9 @@ import { useClaimFrensCoins } from '@shared/Frens/hooks/useClaimFrensCoins'
 import {useState,useEffect} from 'react'
 import { EnumFrensFarmStatus } from '@shared/Frens/consts/frensFarmStatus.enum'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
-// import { changeDateFormat } from '@features/Home/changeDateFormat'
 import { setFrensFarmStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
+import { changeEndDateFormat } from '@features/Home/changeEndDateFormat'
 
 export type TFrensProps = {
   timerValue: TTimerType;
@@ -30,7 +30,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
     const [refCoins,setRefCoins]=useState<number>(0)
 
     const onClaimFrensCoins=()=>{
-        claimCoins;
+        claimCoins();
         dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))
         dispatch(updateTotalCoins(refCoins))
         dispatch(setTaimerValue({formattedHours:'12',formattedMinutes:'00',hours:12,minuts:0}))
@@ -38,7 +38,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
     useEffect(()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
-            // frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeDateFormat(frensData.start_time)))
+            frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeEndDateFormat(frensData.next_revenues_time)))
         }
     },[frensData])
 
