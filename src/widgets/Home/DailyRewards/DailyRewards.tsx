@@ -8,12 +8,14 @@ import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function({onClose}:{onClose:()=> void}){
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
     const {mutate:claim_bonus}=useClaimBonus()
+    const queryClient =useQueryClient()
 
 
     const onClaimBonus=(dayNumber:number)=>{
@@ -22,6 +24,7 @@ export default function({onClose}:{onClose:()=> void}){
         const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber)
         dispatch(updateTotalCoins(currentObj[1].rewardValue))
+        queryClient.invalidateQueries({ queryKey: ['farm_info'] })
     }
     return(
         <div className={s.daily_reward_wrap}>

@@ -34,6 +34,7 @@ export type TTimerType = {
 
 
 export function Home({timerValue,setTimerValue}:{timerValue:TTimerType,setTimerValue:(value:TTimerType)=>void}){
+  console.log(`Bearer ${JSON.stringify(window.Telegram.Utils.urlParseQueryString(window.Telegram.WebApp.initData))}`);
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
