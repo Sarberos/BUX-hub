@@ -1,3 +1,22 @@
 {
-    "hello":"Hello {{name}}"
+    "hello":"Hello {{name}}",
+    "farming": "Farming",
+    "day":"day",
+    "tasks":"Tasks",
+    "tasksSub":"Complete tasks and get more points",
+    "start":"Start",
+    "raitingTitle":"World leaderboard",
+    "frensTitle":"Invite frens",
+    "claim":"Claim",
+    "frensSub":"You receive a 5% bonus on points earned by friends",
+    "frens":"frens",
+    "invite_fren":"Invite a fren",
+    "sendToTelgram":"Send to Telegram",
+    "copyLink":"Copy link",
+    "sendInvite":"Send Invite",
+    "startFarming":"Start farming ",
+    "rewardsProfit":"Your total profit",
+    "dailyReward":"Daily reward",
+    "open":"Open",
+    "successCop":"Successfully copied"
 }

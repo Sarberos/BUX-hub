@@ -7,11 +7,14 @@ import { useClaimBonus } from '@shared/Home/hooks/useClaimBonus'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
+import { useTranslation } from 'react-i18next'
 
 export default function({onClose}:{onClose:()=> void}){
-    const state=useAppSelector(state=>state.home)
+    const {t} =useTranslation()
     const dispatch =useAppDispatch()
+    const state=useAppSelector(state=>state.home)
     const {mutate:claim_bonus}=useClaimBonus()
+
 
     const onClaimBonus=(dayNumber:number)=>{
         claim_bonus();
@@ -23,7 +26,7 @@ export default function({onClose}:{onClose:()=> void}){
     return(
         <div className={s.daily_reward_wrap}>
             <div className={s.reward_title}>
-                Daily reward
+                {t('dailyReward')}
             </div>
             <div className={s.box_slider}>
                 {DAYBOXLIST.map((elem,index)=>(
@@ -31,10 +34,10 @@ export default function({onClose}:{onClose:()=> void}){
                 ))}
             </div>
             <div className={s.rewar_subtitle}>
-            Your total profit: 259К
+            {`${t('rewardsProfit')}: ${259}К`}
             </div>
             <div className={s.claim_btn}>
-                <MainBtn event={()=>onClaimBonus(state.bonusDay)} >Claim</MainBtn>
+                <MainBtn event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>
             </div>
             <BottomLine/>
         </div>

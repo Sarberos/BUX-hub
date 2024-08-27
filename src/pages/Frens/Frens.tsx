@@ -13,6 +13,7 @@ import { setFrensFarmStatus, setTaimerValue } from '@shared/utilits/redux/redux_
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { changeEndDateFormat } from '@features/Home/changeEndDateFormat'
 import { Preloader } from '@widgets/UI/Preloader/Preloader'
+import { useTranslation } from 'react-i18next'
 
 export type TFrensProps = {
   timerValue: TTimerType;
@@ -22,6 +23,7 @@ export type TFrensProps = {
 };
 
 export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
+    const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const frensState=useAppSelector(state=>state.frens)
     const{data:frensData,isLoading:frensLoading}=useGetFrensInfo();
@@ -50,21 +52,21 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
       }else return(
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>
-                <p className={s.title}>Invite frens</p>
+                <p className={s.title}>{t("frensTitle")}</p>
             </div>
             <div className={s.frens_coins_wrap}>
                 <div className={s.frens_coins_wrap}>
                     <p className={s.frens_coins_value}>{refCoins}</p>
                     {frensState.farmStatus===EnumFrensFarmStatus.FARMING ? (
-                        <button disabled={true} className={s.frens_coin_claim_btn}>{`Claim ${timerValue?.formattedHours}h ${timerValue?.formattedMinutes}m`}</button>
+                        <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${timerValue?.formattedHours}h ${timerValue?.formattedMinutes}m`}</button>
                     ):(
-                        <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>Claim</button>
+                        <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>
                     )}
                     
                 </div>
             </div>
             <div className={s.subtitle_wrap}>
-                <p className={s.subtitle}>You receive a 5% bonus on points earned by friends</p>
+                <p className={s.subtitle}>{t("frensSub")}</p>
             </div>
             <div className={s.frens_list_wrap}>
                 {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} frens`}</p>}
@@ -75,7 +77,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
                 </ul>
             </div>
             <div className={s.invite_frens_btn}>
-                <MainBtn event={()=>setInvateStat(true)} >Invite a fren</MainBtn>
+                <MainBtn event={()=>setInvateStat(true)} >{t("invite_fren")}</MainBtn>
             </div>
             <div className={inviteStat ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
                 <BottomPopUp onClose={()=>setInvateStat(false)}>

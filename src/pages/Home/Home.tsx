@@ -108,13 +108,13 @@ if(statusLoading){
         </div>
         <div className={s.farming_btn}>
           {farmStatus === EnumFarmStatus.START && (
-            <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>Start farming</MainBtn>
+            <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
           )}
           {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn  timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn  event={()=>onClaimFarming()}>
               <div className={s.claim_home_btn}>  
-                <div>Claim</div>
+                <div>{t('claim')}</div>
                 <div>
                   <KoinQuantity
                     coinValue={claimedCoins}

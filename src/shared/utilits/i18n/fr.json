@@ -1,4 +1,23 @@
-{
-    "hello":"Bonjour {{name}}"
-
+{  
+    "hello": "Bonjour {{name}}",  
+    "farming": "Agriculture",  
+    "day": "jour",  
+    "tasks": "tâches",  
+    "tasksSub": "Complétez des tâches et gagnez plus de points",  
+    "start": "Commencer",  
+    "raitingTitle": "Classement mondial",  
+    "frensTitle": "Inviter des amis",  
+    "claim": "Réclamer",  
+    "frensSub": "Vous recevez un bonus de 5% sur les points gagnés par vos amis",  
+    "frens": "amis",  
+    "invite_fren": "inviter un ami",  
+    "sendToTelgram": "Envoyer sur Telegram",  
+    "copyLink": "Copier le lien",  
+    "sendInvite": "Envoyer l'invitation",  
+    
+    "startFarming": "Commencer l'agriculture",  
+    "rewardsProfit": "Votre profit total",  
+    "dailyReward": "Récompense quotidienne",  
+    "open": "Ouvrir",  
+    "successCop": "Copié avec succès"  
 }

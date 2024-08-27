@@ -8,8 +8,10 @@ import PopUp from '@widgets/UI/PopUp/PopUp';
 import { useAppDispatch } from '@shared/utilits/redux/hooks';
 import { callIsLoading, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
+import { useTranslation } from 'react-i18next';
 
 export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setMiniTasksOpen: (value:boolean)=> void })=>{
+  const {t}= useTranslation()
   const dispatch=useAppDispatch()
   const {data:tasksList,isLoading:taskInfoLoading}=useGetTasksInf()
   
@@ -38,8 +40,8 @@ if(taskInfoLoading){
 }else return (
       <div className={s.task_wrapper}>
         <div style={miniTaskStyle}className={s.title_wrap} >
-          <div className={s.title}>Tasks</div>
-          <div className={s.subtitle}>Complete tasks and get more points</div>
+          <div className={s.title}>{t("tasks")}</div>
+          <div className={s.subtitle}>{t("tasksSub")}</div>
         </div>
         
         <ul style={miniTaskStyle} className={s.task_list}>
@@ -52,7 +54,7 @@ if(taskInfoLoading){
           ))}
         </ul>
         <div className={ completeTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
-          <MainBtn event={onClaim}>Сlaim</MainBtn>
+          <MainBtn event={onClaim}>{t("claim")}</MainBtn>
         </div>
         <div className={miniTaskOpen ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
               <PopUp onClose={()=>setMiniTasksOpen(false)}>

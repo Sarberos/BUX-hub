@@ -3,8 +3,10 @@ import { TRaitngItem, useGetRaitingList } from "@shared/Raiting/hooks/useGetRait
 import RaitingItem from "@widgets/Raiting/RaitingItem";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import {useEffect,useState} from 'react'
+import { useTranslation } from "react-i18next";
 
 export const Raiting = () => {
+  const {t} =useTranslation()
   const{data:raitingData,isLoading:raitingReqLoading}=useGetRaitingList()
 
   const [sortesData, setSortedData]=useState<TRaitngItem[]>()
@@ -25,7 +27,7 @@ export const Raiting = () => {
   }else return (
     <div className={s.raiting_wrapper}>
       <div className={s.raiting_title_wrap}>
-        <p className={s.title}>World leaderboard</p>
+        <p className={s.title}>{t("raitingTitle")}</p>
       </div>
       <ul className={s.raiting_list}>
         {sortesData?.map((elem,index)=>(
