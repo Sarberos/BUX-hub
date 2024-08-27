@@ -9,27 +9,30 @@ import { useAppDispatch } from '@shared/utilits/redux/hooks';
 import { callIsLoading, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { useTranslation } from 'react-i18next';
+import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 
 export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setMiniTasksOpen: (value:boolean)=> void })=>{
   const {t}= useTranslation()
   const dispatch=useAppDispatch()
   const {data:tasksList,isLoading:taskInfoLoading}=useGetTasksInf()
+  const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
-  const [completeTasks,setcompliteTasks]=useState<TTaskItem[]>()
+  const [compliteTasks,setcompliteTasks]=useState<TTaskItem[]>()
   
   useEffect(()=>{
     dispatch(callIsLoading(taskInfoLoading))
   },[taskInfoLoading])
   useEffect(()=>{   
       if(tasksList){
-        const compliteTasks=tasksList.content.filter(item=>item.status==='claim')
+        const compliteTasks=tasksList.content.filter(item=>item.status==='in-progress')
         setcompliteTasks(compliteTasks)
       }
     },[tasksList])
 
 const onClaim=()=>{
+  claimTasksCoins();
   let coins:number=0;
-  completeTasks?.map(item=>{
+  compliteTasks?.map(item=>{
     coins+=item.coins
   })
   dispatch(updateTotalCoins(coins))
@@ -53,7 +56,7 @@ if(taskInfoLoading){
             />
           ))}
         </ul>
-        <div className={ completeTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
+        <div className={ compliteTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
           <MainBtn event={onClaim}>{t("claim")}</MainBtn>
         </div>
         <div className={miniTaskOpen ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>

@@ -41,5 +41,15 @@
         font-weight: 600;
         padding:  12px 14px ;
         border-radius: 50px ;
+        &.success{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #303030;
+        }
+        .success_img{
+            width:22px;
+            height: 22px;
+        }
     }
 }

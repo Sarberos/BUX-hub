@@ -3,11 +3,14 @@ import default_ico from '@shared/Tasks/assets/tasks_img/tasksFire.svg'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
+import { useTranslation } from 'react-i18next'
+import success_arrow from '@shared/Tasks/assets/tasks_img/success_arrow.svg'
 
 
 
 
-export default function({title,sub_tasks,coins,id,link,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
+export default function({title,sub_tasks,coins,id,link,status,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
+    const {t}=useTranslation()
     const {mutate:startTask,}=useStartTask()
     const{openLink}=useTelegramApi()
     const handleStart=(id:number)=>{
@@ -25,7 +28,13 @@ export default function({title,sub_tasks,coins,id,link,openMiniTasks}:TTaskItem&
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            <button onClick={sub_tasks &&  sub_tasks.length!==0  ? openMiniTasks:()=>{handleStart(id)} } className={s.status_btn}>{sub_tasks && sub_tasks.length!==0  ? 'Open' : 'Start'}</button>
+            {status==='pending' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
+            {status==='in-progress' && 
+            <button disabled={true} className={`${s.status_btn} ${s.success}`}>
+                <img src={success_arrow} className={s.success_img}/>
+            </button>}
+            {sub_tasks.length !==0 && <button onClick={openMiniTasks} className={s.status_btn}>{t("open")}</button>}
+            
         </div>
     )
 }

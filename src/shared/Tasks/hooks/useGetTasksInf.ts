@@ -12,7 +12,7 @@ export type TTaskItem={
     id: number;
     link:string;
     main_task_id:number,
-    status:string;
+    status:'in-progress'|'pending';
     sub_tasks:TTaskItem[],
     title:string,
     updatedAt:string,
