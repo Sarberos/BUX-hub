@@ -4,17 +4,24 @@ import tg_ico from '@shared/Frens/assets/frens_img/tg_ico.svg'
 import copy_ico from '@shared/Frens/assets/frens_img/copy_ico.svg'
 import BottomLine from '@widgets/UI/BottomLine/BottomLine'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
-import  { Toaster } from 'react-hot-toast';
-import { copyToClipboard } from '@features/Frens/copyLink'
+import  { Toaster, toast } from 'react-hot-toast';
 
 
 export default function(){
-    const {user,tg}=useTelegramApi()
-
-    const hadleSendToTelegram=()=>{
-      tg.openInvoice(`https://t.me/SarberosBot?start=${user?.id}`,()=>{console.log('SEND TG END');
-      })
-    }
+  const {user,tg}=useTelegramApi()
+  
+const copyToClipboard = (textToCopy: string) => {
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      toast.success("Успешно скопированна");
+    })
+    .catch((err) => {
+      toast.error(err);
+    });
+};  
+const hadleSendToTelegram = () => {
+  tg.openTelegramLink(`https://t.me/SarberosBot?start=${user?.id}`);
+};
     
     return (
       <div className={s.invite_pop_up_wrap}>
