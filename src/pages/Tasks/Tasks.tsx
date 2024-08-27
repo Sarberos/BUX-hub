@@ -33,7 +33,7 @@ const onClaim=()=>{
   let coins:number=0;
   compliteTasks?.map(item=>{
     coins+=item.coins
-    claimTasksCoins(item.main_task_id);
+    claimTasksCoins(item.id);
   })
   dispatch(updateTotalCoins(coins))
 }
