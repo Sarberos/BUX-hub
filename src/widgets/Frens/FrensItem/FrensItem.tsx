@@ -7,6 +7,7 @@ import frens_ava from '@shared/Frens/assets/frens_img/frens_ava.svg'
 
 
 export default function({photo,active_usernames,coins,day_revenues}:TFrensItem){
+
     return(
         <div className={s.fren_profile_wrap}>
             <div className={s.fren_info}>

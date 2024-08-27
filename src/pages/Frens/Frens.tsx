@@ -49,7 +49,8 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
     },[frensData])
     if(frensLoading){
         return <Preloader />
-      }else return(
+      }else
+       return(
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>
                 <p className={s.title}>{t("frensTitle")}</p>
@@ -69,7 +70,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
                 <p className={s.subtitle}>{t("frensSub")}</p>
             </div>
             <div className={s.frens_list_wrap}>
-                {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} frens`}</p>}
+                {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${t('frens',{count:frensData?.content?.length})}`}</p>}
                 <ul className={s.frens_list}>
                     {refList?.map((elem,index)=>(
                         <FrensItem key={index} {...elem} /> 
