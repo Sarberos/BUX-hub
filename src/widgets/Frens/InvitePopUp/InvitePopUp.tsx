@@ -4,17 +4,18 @@ import tg_ico from '@shared/Frens/assets/frens_img/tg_ico.svg'
 import copy_ico from '@shared/Frens/assets/frens_img/copy_ico.svg'
 import BottomLine from '@widgets/UI/BottomLine/BottomLine'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
-import  { Toaster, toast } from 'react-hot-toast';
+import  { toast } from 'react-hot-toast';
 
 
-export default function(){
+export default function({setInvateStat}:{setInvateStat:(v:boolean)=>void}){
   const {user,tg}=useTelegramApi()
   const currentLink=`https://t.me/SarberosBot?start=${user?.id}`;
   
-const copyToClipboard = (textToCopy: string) => {
+const copyToClipboard =(textToCopy: string) => {
   navigator.clipboard.writeText(textToCopy)
     .then(() => {
       toast.success("Успешно скопированна");
+      setInvateStat(false)
     })
     .catch((err) => {
       toast.error(err);
@@ -46,7 +47,6 @@ const hadleSendToTelegram = () => {
               >
                 Copy link
               </p>
-              <Toaster />
             </div>
           </MainBtn>
         </div>

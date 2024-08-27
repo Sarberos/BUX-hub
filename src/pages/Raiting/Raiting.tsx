@@ -1,11 +1,14 @@
 import s from "@pages/Raiting/Raiting.module.scss";
 import { TRaitngItem, useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
 import RaitingItem from "@widgets/Raiting/RaitingItem";
+import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import {useEffect,useState} from 'react'
 
 export const Raiting = () => {
-  const{data:raitingData}=useGetRaitingList()
+  const{data:raitingData,isLoading:raitingReqLoading}=useGetRaitingList()
+
   const [sortesData, setSortedData]=useState<TRaitngItem[]>()
+
 
   useEffect(()=>{
     if (raitingData) {
@@ -17,7 +20,9 @@ export const Raiting = () => {
       setSortedData(sortArr)
     }
   },[raitingData])
-  return (
+  if(raitingReqLoading){
+    return <Preloader />
+  }else return (
     <div className={s.raiting_wrapper}>
       <div className={s.raiting_title_wrap}>
         <p className={s.title}>World leaderboard</p>

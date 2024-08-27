@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setFrensFarmStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { changeEndDateFormat } from '@features/Home/changeEndDateFormat'
+import { Preloader } from '@widgets/UI/Preloader/Preloader'
 
 export type TFrensProps = {
   timerValue: TTimerType;
@@ -23,7 +24,7 @@ export type TFrensProps = {
 export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
     const dispatch =useAppDispatch()
     const frensState=useAppSelector(state=>state.frens)
-    const{data:frensData}=useGetFrensInfo();
+    const{data:frensData,isLoading:frensLoading}=useGetFrensInfo();
     const {mutate:claimCoins}=useClaimFrensCoins()
 
     const [refCoins,setRefCoins]=useState<number>(0)
@@ -44,8 +45,9 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
-
-    return(
+    if(frensLoading){
+        return <Preloader />
+      }else return(
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>
                 <p className={s.title}>Invite frens</p>
@@ -77,7 +79,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             </div>
             <div className={inviteStat ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
                 <BottomPopUp onClose={()=>setInvateStat(false)}>
-                  <InvitePopUp />
+                  <InvitePopUp setInvateStat={setInvateStat} />
                 </BottomPopUp>
             </div>
         </div>

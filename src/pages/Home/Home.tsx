@@ -37,12 +37,12 @@ export function Home({timerValue,setTimerValue}:{timerValue:TTimerType,setTimerV
   const {user}=useTelegramApi()
   const {t} = useTranslation()
 
-  const state=useAppSelector(state=>state.home)
   const dispatch= useAppDispatch()
-  const {mutate:startReq,isPending:startLoading}=useStartFarm()
-  const {mutate:claimReq,isPending:claimLoading}=useClaimFarmCoins()
+  const state=useAppSelector(state=>state.home)
+  const {mutate:startReq}=useStartFarm()
+  const {mutate:claimReq}=useClaimFarmCoins()
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
-  const {data:bonusInfo ,isLoading:bonusStatusLoading}=useGetBonusStatus()
+  const {data:bonusInfo}=useGetBonusStatus()
 
   const [dailyRewardSt, setDailyRewardSt]= useState(false)
   const [dailyRewardTime, setDailyRewardTime]= useState('')
@@ -76,10 +76,6 @@ useEffect(()=>{
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
   timerValue!==state.timer &&   setTimerValue(state.timer)  
 },[state])
-
-useEffect(()=>{
-
-},[startLoading,claimLoading,statusLoading,bonusStatusLoading])
 useEffect(()=>{
     if(farmInfo){
       farmInfo.coins>coins && dispatch(updateTotalCoins(farmInfo.coins))
@@ -93,7 +89,7 @@ useEffect(()=>{
     }  
   },[farmInfo,bonusInfo])
 
-if(false){
+if(statusLoading){
   return <Preloader />
 }else
  return (
