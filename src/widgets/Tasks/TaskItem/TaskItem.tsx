@@ -2,16 +2,17 @@ import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
 import default_ico from '@shared/Tasks/assets/tasks_img/tasksFire.svg'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
+import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
 
 
 
 
 export default function({title,sub_tasks,coins,id,link,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
     const {mutate:startTask,}=useStartTask()
-
+    const{openLink}=useTelegramApi()
     const handleStart=(id:number)=>{
         startTask(id);
-        window.location.href = link
+        link && openLink(link)
     }
     return (
         <div className={s.task_item_wrap}>
