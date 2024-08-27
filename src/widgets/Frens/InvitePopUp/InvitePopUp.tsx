@@ -9,6 +9,7 @@ import  { Toaster, toast } from 'react-hot-toast';
 
 export default function(){
   const {user,tg}=useTelegramApi()
+  const currentLink=`https://t.me/SarberosBot?start=${user?.id}`;
   
 const copyToClipboard = (textToCopy: string) => {
   navigator.clipboard.writeText(textToCopy)
@@ -20,7 +21,7 @@ const copyToClipboard = (textToCopy: string) => {
     });
 };  
 const hadleSendToTelegram = () => {
-  tg.openTelegramLink(`https://t.me/SarberosBot?start=${user?.id}`);
+  tg.requestWriteAccess();
 };
     
     return (
@@ -35,7 +36,7 @@ const hadleSendToTelegram = () => {
               <p className={s.btn_title}>Send to Telegram</p>
             </div>
           </MainBtn>
-          <MainBtn event={()=>copyToClipboard(`https://t.me/SarberosBot?start=${user?.id}`)}>
+          <MainBtn event={()=>copyToClipboard(currentLink)}>
             <div className={s.bnt_info_wrap}>
               <div className={s.btn_img_wrap}>
                 <img src={copy_ico} alt="" className={s.btn_img} />
