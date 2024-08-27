@@ -30,10 +30,10 @@ export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setM
     },[tasksList])
 
 const onClaim=()=>{
-  claimTasksCoins();
   let coins:number=0;
   compliteTasks?.map(item=>{
     coins+=item.coins
+    claimTasksCoins(item.main_task_id);
   })
   dispatch(updateTotalCoins(coins))
 }

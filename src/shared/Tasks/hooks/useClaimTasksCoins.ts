@@ -5,6 +5,6 @@ import { useMutation} from "@tanstack/react-query"
 export const useClaimTasksCoins=()=>{
     return useMutation({
         mutationKey:['claim_coins','task'],
-        mutationFn: TasksFetching.claimTaskCoins,
+        mutationFn: (id:number)=>TasksFetching.claimTaskCoins(id),
     })
 }
