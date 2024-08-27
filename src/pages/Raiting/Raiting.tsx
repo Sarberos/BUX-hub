@@ -24,7 +24,8 @@ export const Raiting = () => {
   },[raitingData])
   if(raitingReqLoading){
     return <Preloader />
-  }else return (
+  }else 
+  return (
     <div className={s.raiting_wrapper}>
       <div className={s.raiting_title_wrap}>
         <p className={s.title}>{t("raitingTitle")}</p>
