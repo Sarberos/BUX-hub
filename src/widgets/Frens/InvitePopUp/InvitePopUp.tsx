@@ -9,13 +9,18 @@ import { copyToClipboard } from '@features/Frens/copyLink'
 
 
 export default function(){
-    const {user}=useTelegramApi()
+    const {user,tg}=useTelegramApi()
+
+    const hadleSendToTelegram=()=>{
+      tg.openInvoice(`https://t.me/SarberosBot?start=${user?.id}`,()=>{console.log('SEND TG END');
+      })
+    }
     
     return (
       <div className={s.invite_pop_up_wrap}>
         <p className={s.invite_title}>Send Invite</p>
         <div className={s.btn_group}>
-          <MainBtn>
+          <MainBtn event={()=>hadleSendToTelegram()}>
             <div className={s.bnt_info_wrap}>
               <div className={s.btn_img_wrap}>
                 <img src={tg_ico} alt="" className={s.btn_img} />
