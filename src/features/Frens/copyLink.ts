@@ -6,7 +6,7 @@ export const copyToClipboard = (textToCopy:string) => {
         .then(() => {  
         //   toast.success('Успешно скопированна')
         })  
-        .catch(err => {  
-        //   toast.error(err)
-        });  
+        // .catch(err => {  
+        // //   toast.error(err)
+        // });  
   };  
