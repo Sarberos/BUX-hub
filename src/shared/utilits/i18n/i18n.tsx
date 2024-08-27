@@ -6,16 +6,16 @@ import geLang from "./ge.json"
 import frLang from "./fr.json"
 
 const resources = {
-  ru: {
+  RU: {
     translation: ruLang,
   },
-  en: {
+  ENG: {
     translation: enLang,
   },
-  ge: {
+  GER: {
     translation: geLang,
   },
-  fr: {
+  FRA: {
     translation: frLang,
   },
 };
@@ -24,8 +24,8 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    fallbackLng: "ru",
-    lng: "ru",
+    fallbackLng: "ENG",
+    lng: 'RU',
     interpolation: {
       escapeValue: false // react already safes from xss
     }

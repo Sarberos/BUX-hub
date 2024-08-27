@@ -35,6 +35,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
         dispatch(updateTotalCoins(refCoins))
         dispatch(setTaimerValue({formattedHours:'24',formattedMinutes:'00',hours:24,minuts:0}))
     }
+
     useEffect(()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
