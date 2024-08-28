@@ -24,7 +24,7 @@ export const PAGESNAMES:TPagesItem[]=[
         activeImg:home_active_ico,
         whiteThemImg:home_white_ico,
         whiteThemActiveImg:home_white_active_ico,
-        link:'/'
+        link:'/farm'
     },
     {
         id:2,

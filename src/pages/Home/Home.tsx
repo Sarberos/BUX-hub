@@ -16,7 +16,7 @@ import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
 import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-import { setBonusDay, setFormattedTaimer, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { setBonusDay, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 
@@ -33,7 +33,7 @@ export type TTimerType = {
 } | null; 
 
 
-export function Home({timerValue,setTimerValue}:{timerValue:TTimerType,setTimerValue:(value:TTimerType)=>void}){
+export function Home(){
   console.log(`Bearer ${JSON.stringify(window.Telegram.Utils.urlParseQueryString(window.Telegram.WebApp.initData))}`);
   const {user}=useTelegramApi()
   const {t} = useTranslation()
@@ -66,7 +66,7 @@ const onClaimFarming=()=>{
     const intervalId = setInterval(() => {  
       const nextDate:Date = new Date(dailyRewardTime);
       const now:Date= new Date();
-      nextDate.getTime()===now.getTime() && setDailyRewardSt(true)
+      nextDate.getTime()===now.getTime() && dispatch(setIsDailyReward(true))
     },1000);  
   
     return () => clearInterval(intervalId);  
@@ -75,7 +75,6 @@ const onClaimFarming=()=>{
 useEffect(()=>{
   coins!==state.totalCoins && setCoins(state.totalCoins);
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
-  timerValue!==state.timer &&   setTimerValue(state.timer)  
 },[state])
 useEffect(()=>{
     if(farmInfo){
@@ -90,10 +89,11 @@ useEffect(()=>{
     }  
   },[farmInfo,bonusInfo])
 
-if(statusLoading){
-  return <Preloader />
-}else
+// if(statusLoading){
+//   return <Preloader />
+// }else
  return (
+  <>
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
           <p className={s.title}>{t("hello", { name: user?.username })}</p>
@@ -111,7 +111,7 @@ if(statusLoading){
           {farmStatus === EnumFarmStatus.START && (
             <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
           )}
-          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn  timerValue={`${timerValue?.formattedHours}:${timerValue?.formattedMinutes}`} coinValue={claimedCoins}  />}
+          {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn  coinValue={claimedCoins}  />}
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn  event={()=>onClaimFarming()}>
               <div className={s.claim_home_btn}>  
@@ -131,19 +131,17 @@ if(statusLoading){
             </MainBtn>
           )}
         </div>
-        <div
-          className={
-            dailyRewardSt
-              ? `${s.daily_reward} ${s.active}`
-              : `${s.daily_reward}`
-          }
-        >
-          <BottomPopUp onClose={() => setDailyRewardSt(false)}>
-            <DailyRewards
-              onClose={() => setDailyRewardSt(false)}
-            />
-          </BottomPopUp>
-        </div>
       </div>
+      {state.isDailyReward && (
+         <div className={`${s.daily_reward}`}>
+         <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
+           <DailyRewards
+             onClose={() => dispatch(setIsDailyReward(false))}
+           />
+         </BottomPopUp>
+       </div>
+      )}
+       
+</>
     );
 }

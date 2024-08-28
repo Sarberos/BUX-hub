@@ -12,6 +12,8 @@ interface HomeState {
     bonusDay:number;
     isLoading: boolean;
     lang: 'RU'| 'ENG' |'FRA'|'GER'
+    isMiniTasks: boolean;
+    isDailyReward:boolean,
 }
 
 const initialState: HomeState = {
@@ -26,7 +28,8 @@ const initialState: HomeState = {
 bonusDay:0,
 isLoading:false,
 lang:'RU',
-
+isMiniTasks: false,
+isDailyReward:false,
 }
 
 export const homeSlice = createSlice({
@@ -51,6 +54,12 @@ export const homeSlice = createSlice({
     setLanguage:(state, action: PayloadAction<'RU'| 'ENG' |'FRA'|'GER'>) => {
         state.lang = action.payload
     },
+    setIsMiniTasks:(state, action: PayloadAction<boolean>) => {
+      state.isMiniTasks = action.payload
+  },
+    setIsDailyReward:(state, action: PayloadAction<boolean>) => {
+      state.isDailyReward = action.payload
+  },
 
   },
 })
@@ -62,6 +71,8 @@ export const {
   setBonusDay,
   callIsLoading,
   setLanguage,
+  setIsMiniTasks,
+  setIsDailyReward
 } = homeSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

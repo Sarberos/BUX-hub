@@ -1,15 +1,12 @@
 .raiting_wrapper{
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    padding: 32px 8px 17px ;
-    margin: auto 0;
-    @media screen and (max-height: 680px){
-        padding-top: 25px;
-    }
+    padding: 0 8px ;
+    
     .raiting_title_wrap{
         width: 100%;
         align-items: center;
+        margin: 32px 0 16px;
         .title{
             color: #fff;
             font-size:28px;
@@ -19,10 +16,7 @@
         }
     }
     .raiting_list{
-        position: relative;
-        max-height: 80vh;
-        min-height: 75vh;
-        height: 100%;
+        flex: 1;
         display: flex;
         flex-direction: column;
         background: rgba(0, 0, 0, 0.5);
@@ -30,16 +24,5 @@
         border-radius: 30px;
         overflow-y: scroll;
         scrollbar-width: none;
-        @media screen and (max-height: 730px){
-            max-height: 73vh;
-            min-height: 73vh;
-        }
-        @media screen and (max-height: 680px){
-            max-height: 71vh;
-        }
-        @media screen and (max-height: 625px){
-            max-height: 70vh;
-            min-height: 69vh;
-        }
     }
 }

@@ -10,13 +10,13 @@ const router = createBrowserRouter(routes);
 export const ProviderContainer=({children}:{children?: React.ReactNode})=>{
     const queryClient = new QueryClient()
 
- return(
-    <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router}/>
-            {children}
-            <Toaster />
-        </QueryClientProvider>
-    </Provider>
- )
+ return (
+   <Provider store={store}>
+     <QueryClientProvider client={queryClient}>
+       <RouterProvider router={router} />
+       {children}
+       <Toaster />
+     </QueryClientProvider>
+   </Provider>
+ );
 }

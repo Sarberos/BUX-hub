@@ -3,7 +3,7 @@ import { Timer } from '@widgets/Timer/Timer'
 import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity'
 import { useTranslation } from 'react-i18next'
 
-export default function MainTaimerBtn({coinValue,timerValue='05:22'}:{coinValue:number,timerValue:string|null|undefined}){
+export default function MainTaimerBtn({coinValue}:{coinValue:number}){
   const {t} = useTranslation()  
   
   return(
@@ -17,7 +17,7 @@ export default function MainTaimerBtn({coinValue,timerValue='05:22'}:{coinValue:
                 <KoinQuantity coinValue={coinValue} style={{color:'#000',fontSize:'13px',fontWeight:'800',}} imgStyle={{width: '16px',height:'16px'}}/>
               </div>
               <div className={s.timer_btn}>
-                <Timer timerValue={timerValue} />
+                <Timer />
               </div>
             </div>
             </div>

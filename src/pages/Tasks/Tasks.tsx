@@ -11,13 +11,14 @@ import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { useTranslation } from 'react-i18next';
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 
-export const Tasks=({setMiniTasksOpen,miniTaskOpen}:{miniTaskOpen: boolean, setMiniTasksOpen: (value:boolean)=> void })=>{
+export const Tasks=()=>{
   const {t}= useTranslation()
   const dispatch=useAppDispatch()
   const {data:tasksList,isLoading:taskInfoLoading}=useGetTasksInf()
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [compliteTasks,setcompliteTasks]=useState<TTaskItem[]>()
+  const[miniTaskOpen,setMiniTasksOpen]=useState<boolean>()
   
   useEffect(()=>{
     dispatch(callIsLoading(taskInfoLoading))
@@ -38,32 +39,26 @@ const onClaim=()=>{
   dispatch(updateTotalCoins(coins))
 }
 const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
-if(taskInfoLoading){
-  return <Preloader />
-}else return (
+// if(taskInfoLoading){
+//   return <Preloader />
+// }else 
+  return (
       <div className={s.task_wrapper}>
         <div style={miniTaskStyle}className={s.title_wrap} >
           <div className={s.title}>{t("tasks")}</div>
           <div className={s.subtitle}>{t("tasksSub")}</div>
-        </div>
-        
-        <ul style={miniTaskStyle} className={s.task_list}>
-          {tasksList?.content.map((elem, index) => (
-            <TaskItem
-              openMiniTasks={()=>setMiniTasksOpen(true)}
-              {...elem}
-              key={index}
-            />
-          ))}
-        </ul>
+        </div>     
+          <div style={miniTaskStyle} className={s.task_list}>
+            {tasksList?.content.map((elem, index) => (
+              <TaskItem
+                {...elem}
+                key={index}
+              />
+            ))}
+          </div>
         <div className={ compliteTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
           <MainBtn event={onClaim}>{t("claim")}</MainBtn>
         </div>
-        <div className={miniTaskOpen ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
-              <PopUp onClose={()=>setMiniTasksOpen(false)}>
-                {/* <MiniTasks /> */}
-              </PopUp>
-            </div>
       </div>
     );
 }
