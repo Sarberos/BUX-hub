@@ -4,15 +4,13 @@ import { useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import { setFormattedTaimer, setIsMiniTasks, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
+import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
-import PopUp from "@widgets/UI/PopUp/PopUp";
-import MiniTasks from "@widgets/Tasks/MiniTasks/MiniTasks";
 
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
@@ -45,6 +43,7 @@ export const  Wrap=() =>{
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
   const dispatch = useAppDispatch()
+
 
   const [currenPageId, setCurrentPageId] = useState(1);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
@@ -89,11 +88,11 @@ if(false){
       </BottomPopUp>
     </div>
   }
-  {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
+  {/* {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
     <PopUp onClose={()=>dispatch(setIsMiniTasks(true))}>
       <MiniTasks />
     </PopUp>
-  </div> }
+  </div> } */}
     {!frenState.inviteStatus && !state.isMiniTasks && <>
       <div className={s.child_wrap}>
         <Outlet/>
