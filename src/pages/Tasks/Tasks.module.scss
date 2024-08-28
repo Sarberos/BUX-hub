@@ -34,24 +34,34 @@
         }
     }
     .task_list{
-        flex: 1 1 254px;
+        flex: 1 1 auto;
+        max-height: 254px;
         display: flex ;
         flex-direction: column;
         gap: 20px;
         padding: 0 18px;
-        margin: 0 15px;
+        margin: 0 15px 60px;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 15px; 
         overflow-y: scroll;
         scrollbar-width: none;
+        @media screen and (max-height:640px) {
+            max-height: 210px
+        }
+        @media screen and (max-height:680px) {
+            margin-bottom: 30px;
+        }
     }
     .main_claim_btn{
         width: 100%;
         padding: 0 18px;
-        margin: 60px 0 10px;
+        margin-bottom: 10px;
         &.disable{
             display: none;
         }
+        @media screen and (max-height:680px) {
+            margin-top: 30px;
+        };
     }
     .mini_tasks_wrap{
         transform: rotateX(90deg);

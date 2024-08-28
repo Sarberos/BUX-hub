@@ -16,7 +16,8 @@
         }
     }
     .raiting_list{
-        flex: 1 1 496px;
+        flex: 1 1 auto;
+        max-height: 496px;
         display: flex;
         flex-direction: column;
         background: rgba(0, 0, 0, 0.5);
@@ -24,5 +25,12 @@
         border-radius: 30px;
         overflow-y: scroll;
         scrollbar-width: none;
+        margin-bottom: 17px;
+        @media screen and (max-height:690px){
+        max-height: 450px;
+        }
+        @media screen and (max-height:640px){
+        max-height: 410px;
+        }
     }
 }
