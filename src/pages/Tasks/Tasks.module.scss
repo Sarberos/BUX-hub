@@ -34,7 +34,7 @@
         }
     }
     .task_list{
-        flex: 1;
+        flex: 1 1 254px;
         display: flex ;
         flex-direction: column;
         gap: 20px;
@@ -42,6 +42,8 @@
         margin: 0 15px;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 15px; 
+        overflow-y: scroll;
+        scrollbar-width: none;
     }
     .main_claim_btn{
         width: 100%;
