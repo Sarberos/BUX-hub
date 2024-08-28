@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 // const parsedData= window.Telegram.Utils.urlParseQueryString(window.Telegram.WebApp.initData);
-const parsedData= window.Telegram.Utils.urlParseQueryString(btoa(window.Telegram.WebApp.initData));
+const parsedData= window.Telegram.WebApp.initData;
 
 api.interceptors.request.use((config) => {
   // config.headers.Authorization = `Bearer ${JSON.stringify(parsedData)}`;
