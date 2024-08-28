@@ -32,11 +32,11 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
                 </div>
             </div>
             {status==='pending' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
-            {status==='in-progress' && 
+            {false && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks.length !==0 && <button onClick={()=>{dispatch(setIsMiniTasks(true))}} className={s.status_btn}>{t("open")}</button>}
+            {sub_tasks.length ===0 && <button onClick={()=>{dispatch(setIsMiniTasks(true))}} className={s.status_btn}>{t("open")}</button>}
     
         </div>
     )

@@ -95,7 +95,7 @@ if(statusLoading){
   <>
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
-          <p className={s.title}>{t("hello", { name: user?.username })}</p>
+          <p className={s.title}>{t("hello",{name:''}) + user?.username}</p>
         </div>
         <div className={s.lang_daycounter_wrap}>
           <Lang_DayCounter />
