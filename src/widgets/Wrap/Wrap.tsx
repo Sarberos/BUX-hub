@@ -41,7 +41,7 @@ const handlingTaimer = (mins: number, hours: number, dispatch: any) => {
   dispatch(setFormattedTaimer({ formattedHours, formattedMinutes, hours, minuts: mins }));  
 }
 
-export const  Wrap=({children}:{children?: React.ReactNode}) =>{
+export const  Wrap=() =>{
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
   const dispatch = useAppDispatch()
@@ -96,7 +96,6 @@ if(false){
   </div> }
     {!frenState.inviteStatus && !state.isMiniTasks && <>
       <div className={s.child_wrap}>
-        {children}
         <Outlet/>
       </div>
       <div className={s.footer_wrap}>

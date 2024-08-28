@@ -12,17 +12,19 @@ import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 export const Tasks=()=>{
   const {t}= useTranslation()
   const dispatch=useAppDispatch()
+
   const {data:tasksList,isLoading:taskInfoLoading}=useGetTasksInf()
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [compliteTasks,setcompliteTasks]=useState<TTaskItem[]>()
   
+  // const ytu= encodeURIComponent()
   useEffect(()=>{
     dispatch(callIsLoading(taskInfoLoading))
   },[taskInfoLoading])
   useEffect(()=>{   
       if(tasksList){
-        const compliteTasks=tasksList.content.filter(item=>item.status==='in-progress')
+        const compliteTasks=tasksList.content.filter(item=>item.status==='completed')
         setcompliteTasks(compliteTasks)
       }
     },[tasksList])
@@ -52,8 +54,8 @@ if(taskInfoLoading){
               />
             ))}
           </div>
-        <div className={ compliteTasks?.length===0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
-          <MainBtn event={onClaim}>{t("claim")}</MainBtn>
+        <div className={ compliteTasks?.length!==0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
+          <MainBtn event={()=>onClaim()}>{t("claim")}</MainBtn>
         </div>
       </div>
     );

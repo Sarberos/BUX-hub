@@ -67,7 +67,7 @@ export const Frens=()=>{
             <div className={s.subtitle_wrap}>
                 <p className={s.subtitle}>{t("frensSub")}</p>
             </div>
-            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${t('frens',{count:frensData?.content?.length})}`}</p>}
+            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')}`}</p>}
             <div className={s.frens_list}>
                 {refList?.map((elem,index)=>(
                     <FrensItem key={index} {...elem} /> 

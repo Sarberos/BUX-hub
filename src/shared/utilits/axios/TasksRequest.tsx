@@ -7,7 +7,7 @@ class TasksFetching {
     return resp.data;
 }
   static async startLinkTask({telegram_id=1,link,id}:TStartLinkTaskF) {
-    const resp= await api.get(`task/:${telegram_id}/goToLink/:${link}/:${id}`);
+    const resp= await api.get(`task/goToLink/${telegram_id}/${link}/${id}`);
     return resp.data;
 }
   static async startTask(id:number) {

@@ -39,7 +39,7 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
                 </div>
             </div>
             {status==='pending' || status ==='in-progress' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
-            {false && 
+            {status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
