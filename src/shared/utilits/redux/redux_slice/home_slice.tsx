@@ -13,7 +13,9 @@ interface HomeState {
     isLoading: boolean;
     lang: 'RU'| 'ENG' |'FRA'|'GER'
     isMiniTasks: boolean;
-    isDailyReward:boolean,
+    isDailyReward:{
+      isOpen: boolean,
+    },
 }
 
 const initialState: HomeState = {

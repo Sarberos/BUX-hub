@@ -1,12 +1,13 @@
 import api from "./axiosSetting";
+import { TStartLinkTaskF } from "@shared/Tasks/hooks/useStartLinkTask";
 
 class TasksFetching {
   static async tasksList() {
     const resp= await api.get('task/all-tasks-with-user');
     return resp.data;
 }
-  static async completeTask() {
-    const resp= await api.get('task/:telegram_id/goToLink/:link/:task_id');
+  static async startLinkTask({telegram_id,link,id}:TStartLinkTaskF) {
+    const resp= await api.get(`task/${telegram_id}/goToLink/${link}/${id}`);
     return resp.data;
 }
   static async startTask(id:number) {
