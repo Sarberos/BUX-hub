@@ -18,7 +18,6 @@ export const Tasks=()=>{
   
   const [compliteTasks,setcompliteTasks]=useState<TTaskItem[]>()
   
-  // const ytu= encodeURIComponent()
   useEffect(()=>{
     dispatch(callIsLoading(taskInfoLoading))
   },[taskInfoLoading])
@@ -54,7 +53,7 @@ if(taskInfoLoading){
               />
             ))}
           </div>
-        <div className={ compliteTasks?.length!==0 ? `${s.main_claim_btn} ${s.disable}`:`${s.main_claim_btn}`}>
+        <div className={ compliteTasks?.length!==0 ?`${s.main_claim_btn}`: `${s.main_claim_btn} ${s.disable}`}>
           <MainBtn event={()=>onClaim()}>{t("claim")}</MainBtn>
         </div>
       </div>
