@@ -46,12 +46,12 @@ if(taskInfoLoading){
           <div className={s.subtitle}>{t("tasksSub")}</div>
         </div>     
           <div className={s.task_list}>
-            {tasksList?.content.map((elem, index) => (
+            {tasksList?.content.filter(elem=>elem.status!=='claimed').map((elem, index) => 
               <TaskItem
                 {...elem}
                 key={index}
               />
-            ))}
+            )}
           </div>
         <div className={ compliteTasks?.length!==0 ?`${s.main_claim_btn}`: `${s.main_claim_btn} ${s.disable}`}>
           <MainBtn event={()=>onClaim()}>{t("claim")}</MainBtn>

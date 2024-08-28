@@ -12,7 +12,7 @@ import TasksFetching from '@shared/utilits/axios/TasksRequest'
 
 
 
-export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
+export default function({title,sub_tasks,coins,id,link,status,main_task_id}:TTaskItem){
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
     const {user,openLink}=useTelegramApi()
@@ -22,11 +22,11 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
     const {mutate:startTask,}=useStartTask()
     // const {}=useStartLinkTask({id,link,telegram_id:user?.id},isStartLinkTask)
 
-    const handleStart=(id:number)=>{
+    const handleStart= async(id:number)=>{
         const redLink:string=encodeURIComponent(link)
-        link && TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id});
-        !link && startTask(id)
-        link && openLink(link)
+        await startTask(id)
+        TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id}); 
+        openLink(link!==null?link:redLink)
     }
     return (
         <div className={s.task_item_wrap}>
@@ -39,12 +39,13 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {status!=='completed' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
-            {status ==='completed' && 
+            {status==='pending' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>} 
+            {main_task_id!==null && sub_tasks.length !==0 && status!=='completed' && <button onClick={()=>{dispatch(setIsMiniTasks(true))}} className={s.status_btn}>{t("open")}</button>}
+            {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks.length !==0 && status!=='pending' && <button onClick={()=>{dispatch(setIsMiniTasks(true))}} className={s.status_btn}>{t("open")}</button>}
+            {status==='pending' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("Claim")}</button>} 
     
         </div>
     )

@@ -11,7 +11,7 @@ import { setInviteStatus } from '@shared/utilits/redux/redux_slice/frens_slice'
 
 export default function(){
   const {t} = useTranslation()
-  const {user,openLink}=useTelegramApi()
+  const {user,tg}=useTelegramApi()
   const dispatch= useAppDispatch()
   const currentLink=`https://t.me/SarberosBot?start=${user?.id}`;
   
@@ -27,7 +27,7 @@ const copyToClipboard =(textToCopy: string) => {
 };  
 
 const hadleSendToTelegram = () => {
-  openLink(`tg://msg_url?url=${currentLink}&text=Присоединяйся к нашей команде`)
+  tg.openTelegramLink(`tg://msg_url?url=${currentLink}&text=Присоединяйся к нашей команде`)
   dispatch(setInviteStatus(false))
 };
     
