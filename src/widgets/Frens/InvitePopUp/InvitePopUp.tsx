@@ -28,7 +28,7 @@ const copyToClipboard =(textToCopy: string) => {
 
 const hadleSendToTelegram = () => {
   debugger;
-  tg.openTelegramLink(`tg://msg_url?url=https://t.me/SarberosBot&text=Присоединяйся к нашей команде`)
+  tg.openTelegramLink(`https://t.me/SarberosBot?start=895313334&text=Присоединяйся`)
   dispatch(setInviteStatus(false))
 };
     
