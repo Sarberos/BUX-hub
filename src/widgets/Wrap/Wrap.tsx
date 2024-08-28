@@ -110,7 +110,7 @@ useEffect(()=>{
     return () => clearInterval(frensInterval);  
   
   },[frensTimerValue])
-  
+
   
 if(false){
   return <Preloader />
