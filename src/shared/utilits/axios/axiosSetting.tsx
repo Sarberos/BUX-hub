@@ -7,10 +7,12 @@ const api = axios.create({
   baseURL: apiUrl,
 });
 
-const parsedData= window.Telegram.Utils.urlParseQueryString(window.Telegram.WebApp.initData);
+// const parsedData= window.Telegram.Utils.urlParseQueryString(window.Telegram.WebApp.initData);
+const parsedData= btoa(window.Telegram.WebApp.initData);
 
 api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${JSON.stringify(parsedData)}`;
+  // config.headers.Authorization = `Bearer ${JSON.stringify(parsedData)}`;
+  config.headers.Authorization = `Bearer ${(parsedData)}`;
   return config;
 });
 api.interceptors.response.use(response=>response,error=>{
