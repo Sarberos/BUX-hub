@@ -24,9 +24,8 @@ export  type TTaskInf={
 export const useGetTasksInf=()=>{
     // const dispatch=useAppDispatch();
     // const state= useAppSelector(state=>state.home);
-    const {data,isLoading}=useQuery<TTaskInf>({
+    return useQuery<TTaskInf>({
     queryKey:['task_inf'],
     queryFn: TasksFetching.tasksList,
 })
-return{data,isLoading}
 }

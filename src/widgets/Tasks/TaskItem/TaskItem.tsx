@@ -38,7 +38,7 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {status==='pending' || status ==='in-progress' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
+            {status!=='completed' && <button  disabled={status==='in-progress'} onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
             {status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
