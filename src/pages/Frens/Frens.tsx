@@ -1,7 +1,5 @@
 import s from '@pages/Frens/Frens.module.scss'
-import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp'
 import FrensItem from '@widgets/Frens/FrensItem/FrensItem'
-import InvitePopUp from '@widgets/Frens/InvitePopUp/InvitePopUp'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import { TFrensItem, useGetFrensInfo } from '@shared/Frens/hooks/useGetFrensInfo'
 import { TTimerType } from '@pages/Home/Home'
@@ -9,7 +7,7 @@ import { useClaimFrensCoins } from '@shared/Frens/hooks/useClaimFrensCoins'
 import {useState,useEffect} from 'react'
 import { EnumFrensFarmStatus } from '@shared/Frens/consts/frensFarmStatus.enum'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
-import { setFrensFarmStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
+import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { changeEndDateFormat } from '@features/Home/changeEndDateFormat'
 import { Preloader } from '@widgets/UI/Preloader/Preloader'
@@ -22,7 +20,7 @@ export type TFrensProps = {
   setInvateStat: (value:boolean)=>void
 };
 
-export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
+export const Frens=()=>{
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const frensState=useAppSelector(state=>state.frens)
@@ -47,9 +45,9 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
-    if(frensLoading){
-        return <Preloader />
-      }else
+    // if(frensLoading){
+    //     return <Preloader />
+    //   }else
        return(
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>
@@ -59,7 +57,7 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
                 <div className={s.frens_coins_wrap}>
                     <p className={s.frens_coins_value}>{refCoins}</p>
                     {frensState.farmStatus===EnumFrensFarmStatus.FARMING ? (
-                        <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${timerValue?.formattedHours}h ${timerValue?.formattedMinutes}m`}</button>
+                        <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${frensState.timer?.formattedHours}h ${frensState.timer?.formattedMinutes}m`}</button>
                     ):(
                         <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>
                     )}
@@ -69,21 +67,14 @@ export const Frens=({setInvateStat,inviteStat,timerValue}:TFrensProps)=>{
             <div className={s.subtitle_wrap}>
                 <p className={s.subtitle}>{t("frensSub")}</p>
             </div>
-            <div className={s.frens_list_wrap}>
-                {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${t('frens',{count:frensData?.content?.length})}`}</p>}
-                <ul className={s.frens_list}>
-                    {refList?.map((elem,index)=>(
-                        <FrensItem key={index} {...elem} /> 
-                    ))}
-                </ul>
+            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${t('frens',{count:frensData?.content?.length})}`}</p>}
+            <div className={s.frens_list}>
+                {refList?.map((elem,index)=>(
+                    <FrensItem key={index} {...elem} /> 
+                ))}
             </div>
             <div className={s.invite_frens_btn}>
-                <MainBtn event={()=>setInvateStat(true)} >{t("invite_fren")}</MainBtn>
-            </div>
-            <div className={inviteStat ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
-                <BottomPopUp onClose={()=>setInvateStat(false)}>
-                  <InvitePopUp setInvateStat={setInvateStat} />
-                </BottomPopUp>
+                <MainBtn event={()=>dispatch(setInviteStatus(true))} >{t("invite_fren")}</MainBtn>
             </div>
         </div>
 

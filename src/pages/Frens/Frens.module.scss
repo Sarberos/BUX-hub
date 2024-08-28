@@ -1,8 +1,9 @@
 .frens_wrap{
     display: flex;
     flex-direction: column;
+    height: 100%;
+    padding: 0 15px;
     position: relative;
-    height: 100vh;
     .title_wrap{
         width: 100%;
         margin-top: 20px;
@@ -15,7 +16,7 @@
         }
     }
     .frens_coins_wrap{
-        margin: 9px 15px 15px;
+        margin: 9px 0 15px;
         padding: 18px 0;
         align-items: center;
         border-radius:20px ;
@@ -57,53 +58,36 @@
             text-align: center;
         }
     }
-    .frens_list_wrap{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 37px;
-        gap: 16px;
-        padding: 0 10px;
+    .frens_amount{
+        color: #fff;
+        font-size:20px ;
+        font-weight: 800;
+        line-height: 135%;
+        text-align: start;
+        margin: 37px 0 16px;
         @media screen and (max-height: 690px) {
             margin-top: 15px;    
         }
-        .frens_amount{
-            color: #fff;
-            font-size:20px ;
-            font-weight: 800;
-            line-height: 135%;
-        }
-        .frens_list{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.67);
-            border-top-left-radius: 20px ;
-            border-top-right-radius: 20px ;
-            max-height: 40vh;
-            height: 100%;
-            overflow: scroll;
-            scrollbar-width: none;
-        }
+    }
+
+    .frens_list{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.67);
+        border-top-left-radius: 20px ;
+        border-top-right-radius: 20px ;
+        overflow: scroll;
+        scrollbar-width: none;
     }
     .invite_frens_btn{
         width: 100%;
+        padding: 0 15px;
         position: absolute;
-        bottom: 95px;
+        bottom: 10px;
+        left: 0;
         z-index: 5;
-        padding: 0 10px;
     }
-    .invite_fren_pop_up{
-        transform: rotateX(90deg);
-        transform-origin: 0% 100%;
-        transition: 0.3s;
-        width: 100%;
-        position: sticky;
-        bottom:0px;
-        z-index: 10;
-        &.active{
-            transform: rotateX(0);
-            transition: .3s;
-        }
-    }
+    
 }

@@ -22,9 +22,9 @@ export const Raiting = () => {
       setSortedData(sortArr)
     }
   },[raitingData])
-  if(raitingReqLoading){
-    return <Preloader />
-  }else 
+  // if(raitingReqLoading){
+  //   return <Preloader />
+  // }else 
   return (
     <div className={s.raiting_wrapper}>
       <div className={s.raiting_title_wrap}>

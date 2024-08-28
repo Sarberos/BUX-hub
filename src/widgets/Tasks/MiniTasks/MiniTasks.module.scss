@@ -30,9 +30,12 @@
         }
     }
     .mini_tasks_list{
+        flex: 1 1 204px;
         display: flex;
         margin-bottom: 60px;
         flex-direction: column;
+        overflow: scroll;
+        scrollbar-width: none;
         @media screen and (max-height: 720px){
             margin-bottom: 30px;
         }

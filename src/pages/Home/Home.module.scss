@@ -1,7 +1,5 @@
 .wrapper{
     width: 100%;
-    padding-bottom: 45px;
-    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;  
@@ -61,8 +59,8 @@
     .farming_btn{
         margin-bottom:45px;
         padding: 0 16px;
-        @media screen and (max-height: 630px){
-            margin-bottom:45px;
+        @media screen and (max-height: 575px){
+            margin-bottom:25px;
         }
     } 
     .daily_reward{

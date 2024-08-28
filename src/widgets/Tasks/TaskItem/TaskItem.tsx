@@ -5,11 +5,14 @@ import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
 import { useTranslation } from 'react-i18next'
 import success_arrow from '@shared/Tasks/assets/tasks_img/success_arrow.svg'
+import { useAppDispatch } from '@shared/utilits/redux/hooks'
+import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice'
 
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,openMiniTasks}:TTaskItem&{openMiniTasks?:()=>void}){
+export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
+    const dispatch = useAppDispatch()
     const {t}=useTranslation()
     const {mutate:startTask,}=useStartTask()
     const{openLink}=useTelegramApi()
@@ -33,8 +36,8 @@ export default function({title,sub_tasks,coins,id,link,status,openMiniTasks}:TTa
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks.length !==0 && <button onClick={openMiniTasks} className={s.status_btn}>{t("open")}</button>}
-            
+            {sub_tasks.length !==0 && <button onClick={()=>{dispatch(setIsMiniTasks(true))}} className={s.status_btn}>{t("open")}</button>}
+    
         </div>
     )
 }
