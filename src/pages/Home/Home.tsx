@@ -16,7 +16,7 @@ import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
 import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-import { setBonusDay, setFormattedTaimer, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { setBonusDay, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 
@@ -66,7 +66,7 @@ const onClaimFarming=()=>{
     const intervalId = setInterval(() => {  
       const nextDate:Date = new Date(dailyRewardTime);
       const now:Date= new Date();
-      nextDate.getTime()===now.getTime() && setDailyRewardSt(true)
+      nextDate.getTime()===now.getTime() && dispatch(setIsDailyReward(true))
     },1000);  
   
     return () => clearInterval(intervalId);  
@@ -93,6 +93,7 @@ useEffect(()=>{
 //   return <Preloader />
 // }else
  return (
+  <>
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
           <p className={s.title}>{t("hello", { name: user?.username })}</p>
@@ -130,19 +131,17 @@ useEffect(()=>{
             </MainBtn>
           )}
         </div>
-        {/* <div
-          className={
-            dailyRewardSt
-              ? `${s.daily_reward} ${s.active}`
-              : `${s.daily_reward}`
-          }
-        >
-          <BottomPopUp onClose={() => setDailyRewardSt(false)}>
-            <DailyRewards
-              onClose={() => setDailyRewardSt(false)}
-            />
-          </BottomPopUp>
-        </div> */}
       </div>
+      {state.isDailyReward && (
+         <div className={`${s.daily_reward}`}>
+         <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
+           <DailyRewards
+             onClose={() => dispatch(setIsDailyReward(false))}
+           />
+         </BottomPopUp>
+       </div>
+      )}
+       
+</>
     );
 }

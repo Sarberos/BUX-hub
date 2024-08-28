@@ -63,19 +63,6 @@
             margin-bottom:25px;
         }
     } 
-    .daily_reward{
-        transform: rotateX(90deg);
-        transform-origin: 0% 100%;
-        transition: 0.3s;
-        width: 100%;
-        position: sticky;
-        bottom:0px;
-        z-index: 10;
-        &.active{
-            transform: rotateX(0);
-            transition: .3s;
-        }
-    }
 } 
 .claim_home_btn{
     display: flex;
@@ -86,5 +73,18 @@
     div{
         font-size: 17px;
         font-weight: 800;
+    }
+}
+.daily_reward{
+    transform: rotateX(0);//
+    transform-origin: 0% 100%;
+    transition: 0.3s;
+    width: 100%;
+    position: sticky;
+    bottom:0px;
+    z-index: 10;
+    &.active{
+        transform: rotateX(0);
+        transition: .3s;
     }
 }

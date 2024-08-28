@@ -2,7 +2,6 @@ import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import s from './DailyRewards.module.scss'
 import { DAYBOXLIST } from '@shared/Home/consts/dayBoxList'
 import DayBox from '../DayBox/DayBox'
-import BottomLine from '@widgets/UI/BottomLine/BottomLine'
 import { useClaimBonus } from '@shared/Home/hooks/useClaimBonus'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
@@ -42,7 +41,6 @@ export default function({onClose}:{onClose:()=> void}){
             <div className={s.claim_btn}>
                 <MainBtn event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>
             </div>
-            <BottomLine/>
         </div>
     )
 }
