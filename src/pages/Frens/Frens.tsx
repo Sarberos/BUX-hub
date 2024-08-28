@@ -45,9 +45,9 @@ export const Frens=()=>{
             frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
-    // if(frensLoading){
-    //     return <Preloader />
-    //   }else
+    if(frensLoading){
+        return <Preloader />
+      }else
        return(
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>

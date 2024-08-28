@@ -45,7 +45,6 @@ export function Home(){
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
   const {data:bonusInfo}=useGetBonusStatus()
 
-  const [dailyRewardSt, setDailyRewardSt]= useState(false)
   const [dailyRewardTime, setDailyRewardTime]= useState('')
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
@@ -83,15 +82,15 @@ useEffect(()=>{
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 
     if(bonusInfo){ 
-      bonusInfo.status=== EnumBonusStatus.CLAIM?setDailyRewardSt(true):setDailyRewardSt(false);
+      bonusInfo.status=== EnumBonusStatus.CLAIM?dispatch(setIsDailyReward(true)):dispatch(setIsDailyReward(false));
       setDailyRewardTime(bonusInfo.next_bonus_time)
       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
     }  
   },[farmInfo,bonusInfo])
 
-// if(statusLoading){
-//   return <Preloader />
-// }else
+if(statusLoading){
+  return <Preloader />
+}else
  return (
   <>
       <div className={s.wrapper}>

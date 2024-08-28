@@ -1,10 +1,8 @@
 import s from '@pages/Tasks/Tasks.module.scss'
 import {useState,useEffect} from 'react'
 import { TTaskItem, useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf';
-// import MiniTasks from '@widgets/Tasks/MiniTasks/MiniTasks';
 import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn';
-import PopUp from '@widgets/UI/PopUp/PopUp';
 import { useAppDispatch } from '@shared/utilits/redux/hooks';
 import { callIsLoading, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
@@ -18,7 +16,6 @@ export const Tasks=()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [compliteTasks,setcompliteTasks]=useState<TTaskItem[]>()
-  const[miniTaskOpen,setMiniTasksOpen]=useState<boolean>()
   
   useEffect(()=>{
     dispatch(callIsLoading(taskInfoLoading))
@@ -38,17 +35,16 @@ const onClaim=()=>{
   })
   dispatch(updateTotalCoins(coins))
 }
-const miniTaskStyle:React.CSSProperties=miniTaskOpen ?{zIndex:-1} :{}
-// if(taskInfoLoading){
-//   return <Preloader />
-// }else 
+if(taskInfoLoading){
+  return <Preloader />
+}else 
   return (
       <div className={s.task_wrapper}>
-        <div style={miniTaskStyle}className={s.title_wrap} >
+        <div className={s.title_wrap} >
           <div className={s.title}>{t("tasks")}</div>
           <div className={s.subtitle}>{t("tasksSub")}</div>
         </div>     
-          <div style={miniTaskStyle} className={s.task_list}>
+          <div className={s.task_list}>
             {tasksList?.content.map((elem, index) => (
               <TaskItem
                 {...elem}
