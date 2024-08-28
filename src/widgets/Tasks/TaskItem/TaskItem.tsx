@@ -7,23 +7,28 @@ import { useTranslation } from 'react-i18next'
 import success_arrow from '@shared/Tasks/assets/tasks_img/success_arrow.svg'
 import { useAppDispatch } from '@shared/utilits/redux/hooks'
 import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice'
-import { TStartLinkTaskF, useStartLinkTask } from '@shared/Tasks/hooks/useStartLinkTask'
+import { useStartLinkTask } from '@shared/Tasks/hooks/useStartLinkTask'
+import {useState} from 'react'
 
 
 
 
 export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
     const {t}=useTranslation()
-    const {user}=useTelegramApi()
     const dispatch = useAppDispatch()
+    const {user,openLink}=useTelegramApi()
+
+    const [isStartLinkTask,setIsStartLink]=useState<boolean>(false)
+
     const {mutate:startTask,}=useStartTask()
-    const {mutate:startLinkTask,}=useStartLinkTask()
-    const{openLink}=useTelegramApi()
-    const handleStart=(starInfo:Omit<TStartLinkTaskF,'telegram_id'>& {telegram_id:number |undefined})=>{
-        const {id,link,telegram_id}=starInfo
-        telegram_id && link && startLinkTask({id,link,telegram_id});
+    const {}=useStartLinkTask({id,link,telegram_id:user?.id},isStartLinkTask)
+
+    const handleStart=(id:number)=>{
+        link && setIsStartLink(true);
+        setIsStartLink(false)
         !link && startTask(id)
         link && openLink(link)
+        
     }
     return (
         <div className={s.task_item_wrap}>
@@ -36,7 +41,7 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {status==='pending' || status ==='in-progress' && <button onClick={()=>{handleStart({id,link,telegram_id:user?.id})}} className={s.status_btn}>{t("start")}</button>}
+            {status==='pending' || status ==='in-progress' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>}
             {false && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>

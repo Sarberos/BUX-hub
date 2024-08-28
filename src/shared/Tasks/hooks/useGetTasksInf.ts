@@ -28,12 +28,5 @@ export const useGetTasksInf=()=>{
     queryKey:['task_inf'],
     queryFn: TasksFetching.tasksList,
 })
-// useEffect(()=>{
-//     debugger
-//     dispatch(callIsLoading(isLoading))
-// },[isLoading])
-// useEffect(()=>{
-//     !isSuccess && navigate('/not_found')
-// },[isSuccess])
 return{data,isLoading}
 }
