@@ -7,8 +7,6 @@ export const useClaimTasksCoins=()=>{
     return useMutation({
         mutationKey:['claim_coins','task'],
         mutationFn: (id:number)=>TasksFetching.claimTaskCoins(id),
-        onSuccess: ()=>{queryClient.invalidateQueries({queryKey:[
-            
-        ]})}
+        onSuccess: ()=>{queryClient.invalidateQueries({queryKey:['task_inf']})}
     })
 }
