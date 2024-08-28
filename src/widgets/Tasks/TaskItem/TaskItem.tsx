@@ -7,8 +7,7 @@ import { useTranslation } from 'react-i18next'
 import success_arrow from '@shared/Tasks/assets/tasks_img/success_arrow.svg'
 import { useAppDispatch } from '@shared/utilits/redux/hooks'
 import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice'
-import { useStartLinkTask } from '@shared/Tasks/hooks/useStartLinkTask'
-import {useState} from 'react'
+import TasksFetching from '@shared/utilits/axios/TasksRequest'
 
 
 
@@ -18,17 +17,15 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
     const dispatch = useAppDispatch()
     const {user}=useTelegramApi()
 
-    const [isStartLinkTask,setIsStartLink]=useState<boolean>(false)
+    // const [isStartLinkTask,setIsStartLink]=useState<boolean>(false)
 
     const {mutate:startTask,}=useStartTask()
-    const {}=useStartLinkTask({id,link,telegram_id:user?.id},isStartLinkTask)
+    // const {}=useStartLinkTask({id,link,telegram_id:user?.id},isStartLinkTask)
 
     const handleStart=(id:number)=>{
-        link && setIsStartLink(true);
-        setIsStartLink(false)
+        link && TasksFetching.startLinkTask({id,link,telegram_id:user?.id});
         !link && startTask(id)
         // link && openLink(link)
-        
     }
     return (
         <div className={s.task_item_wrap}>
