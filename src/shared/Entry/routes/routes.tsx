@@ -13,20 +13,20 @@ export const routes: RouteObject[] = [
       errorElement:<NotFoundPage /> ,
       children: [
       { 
-        path: 'farm',  
-        element: <Wrap><Home/></Wrap>,
+        path: '/',  
+        element: <Home/>,
       },
       { 
         path: 'tasks',  
-      element: <Wrap><Tasks /></Wrap>,
+      element: <Tasks/>
       },
       { 
         path: 'raiting',  
-        element: <Wrap><Raiting /></Wrap>,
+        element: <Raiting />,
       },
       { 
         path: '/frens',  
-        element:<Wrap> <Frens /></Wrap>, 
+        element:<Frens />, 
       },
       ]
     },  
