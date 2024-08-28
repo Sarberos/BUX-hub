@@ -23,7 +23,8 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
     // const {}=useStartLinkTask({id,link,telegram_id:user?.id},isStartLinkTask)
 
     const handleStart=(id:number)=>{
-        link && TasksFetching.startLinkTask({id,link,telegram_id:user?.id});
+        const redLink:string=encodeURIComponent(link)
+        link && TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id});
         !link && startTask(id)
         // link && openLink(link)
     }
