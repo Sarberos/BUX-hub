@@ -16,7 +16,7 @@ import {useState} from 'react'
 export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
-    const {user,openLink}=useTelegramApi()
+    const {user}=useTelegramApi()
 
     const [isStartLinkTask,setIsStartLink]=useState<boolean>(false)
 
@@ -27,7 +27,7 @@ export default function({title,sub_tasks,coins,id,link,status}:TTaskItem){
         link && setIsStartLink(true);
         setIsStartLink(false)
         !link && startTask(id)
-        link && openLink(link)
+        // link && openLink(link)
         
     }
     return (
