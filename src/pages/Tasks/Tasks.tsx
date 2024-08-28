@@ -28,7 +28,7 @@ if(taskInfoLoading){
   <>
    {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
     <PopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
-      <MiniTasks tasksList={tasksList}   />
+      <MiniTasks claimTasksCoins={claimTasksCoins} tasksList={tasksList}   />
     </PopUp>
   </div> }
     <div className={s.task_wrapper}>

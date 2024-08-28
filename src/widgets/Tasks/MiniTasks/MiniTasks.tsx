@@ -9,7 +9,7 @@ import { setIsMiniTasks, updateTotalCoins } from '@shared/utilits/redux/redux_sl
 import { useQueryClient } from '@tanstack/react-query'
 
 
-export default function ({tasksList}:{tasksList:TTaskInf|undefined}){
+export default function ({tasksList,claimTasksCoins}:{tasksList:TTaskInf|undefined,claimTasksCoins:(id:number)=>void}){
   const dispatch= useAppDispatch()
   const queryClient =useQueryClient()
   const homeState=useAppSelector(state=>state.home)
@@ -23,6 +23,7 @@ export default function ({tasksList}:{tasksList:TTaskInf|undefined}){
 const onMiniTaskClaim=()=>{
   let coins:number=0;
   completedTasks.map(elem=>{coins+=elem.coins})
+  claimTasksCoins(homeState.miniTaskId)
   dispatch(updateTotalCoins(coins))
   dispatch(setIsMiniTasks(false))
   queryClient.invalidateQueries({queryKey:['task_inf']})
