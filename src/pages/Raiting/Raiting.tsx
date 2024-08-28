@@ -30,7 +30,7 @@ export const Raiting = () => {
       <div className={s.raiting_title_wrap}>
         <p className={s.title}>{t("raitingTitle")}</p>
       </div>
-      <ul className={s.raiting_list}>
+      <div className={s.raiting_list}>
         {sortesData?.map((elem,index)=>(
           <RaitingItem
           key={index}
@@ -49,7 +49,7 @@ export const Raiting = () => {
             userName={elem.userName}
           />
         ))} */}
-      </ul>
+      </div>
     </div>
   );
 };
