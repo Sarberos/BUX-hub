@@ -11,7 +11,6 @@ import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/uti
 import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
-import PopUp from "@widgets/UI/PopUp/PopUp";
 
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
@@ -92,9 +91,9 @@ if(false){
     </div>
   }
   {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
-    <PopUp onClose={()=>dispatch(setIsMiniTasks(true))}>
+  <BottomPopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
       {/* <MiniTasks /> */}
-    </PopUp>
+  </BottomPopUp>
   </div> }
     {!frenState.inviteStatus && !state.isMiniTasks && <>
       <div className={s.child_wrap}>
