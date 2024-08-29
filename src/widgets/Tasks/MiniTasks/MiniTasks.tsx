@@ -23,6 +23,9 @@ export const MiniTasks = ()=>{
   //   dispatch(setIsMiniTasks(false))
   //   queryClient.invalidateQueries({queryKey:['task_inf']})
   // }
+  console.log("MINITASK ID"+state.miniTaskId);
+  console.log("TASK INF"+tasksInf);
+  
   
 if (isLoading) {
   <div>Загрузка</div>
@@ -38,9 +41,9 @@ return (
         return elem.sub_tasks.map(item=> (<TaskItem  {...item} key={index} />)) 
       }
       )} */}
-      {tasksInf && tasksInf?.content.find(elem=>elem.id ==52)?.sub_tasks.map((item,index)=>(
+      {/* {tasksInf && tasksInf?.content.find(elem=>elem.id ==52)?.sub_tasks.map((item,index)=>(
         <TaskItem  {...item} key={index} />
-      ))}
+      ))} */}
     </div>
     {/* <div className={s.claim_btn}>
       {completedTasks.length !==0 &&<MainBtn event={()=>onMiniTaskClaim()}>Claim</MainBtn>}
