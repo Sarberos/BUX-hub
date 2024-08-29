@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import {useEffect, useState} from 'react'
-import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
+// import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const Tasks=()=>{
@@ -37,12 +37,12 @@ useEffect(()=>{
 },[tasksList])
 
 
-const onMiniTaskClaim=()=>{
-  let coins:number= completedTasks.reduce((acc, elem) => acc + elem.coins, 0);
-  dispatch(updateTotalCoins(coins))
-  dispatch(setIsMiniTasks(false))
-  queryClient.invalidateQueries({queryKey:['task_inf']})
-}
+// const onMiniTaskClaim=()=>{
+//   let coins:number= completedTasks.reduce((acc, elem) => acc + elem.coins, 0);
+//   dispatch(updateTotalCoins(coins))
+//   dispatch(setIsMiniTasks(false))
+//   queryClient.invalidateQueries({queryKey:['task_inf']})
+// }
 
 
 if(taskInfoLoading){
@@ -52,7 +52,7 @@ if(taskInfoLoading){
   <>
    {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
     <PopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
-      <MiniTasks tasksList={tasksList} completedTasks={completedTasks} onMiniTaskClaim={onMiniTaskClaim}/>
+      {/* <MiniTasks tasksList={tasksList} completedTasks={completedTasks} onMiniTaskClaim={onMiniTaskClaim}/> */}
     </PopUp>
   </div> }
     <div className={s.task_wrapper}>
