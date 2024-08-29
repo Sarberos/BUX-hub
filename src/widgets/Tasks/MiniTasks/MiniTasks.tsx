@@ -2,6 +2,7 @@ import s from './MiniTasks.module.scss'
 import intro_img from '@shared/Tasks/assets/tasks_img/Tasks_intro.png'
 import TaskItem from '../TaskItem/TaskItem'
 import {useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf'
+import { useAppSelector } from '@shared/utilits/redux/hooks'
 // import { useState ,useEffect} from 'react'
 
 
@@ -9,8 +10,8 @@ import {useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf'
 export const MiniTasks = ()=>{
   // const queryClient =useQueryClient()
   // const dispatch=useAppDispatch()
-  const {data:tasksInf}=useGetTasksInf()
-  // const state = useAppSelector(state=>state.home)
+  const {data:tasksInf,isLoading}=useGetTasksInf()
+  const state = useAppSelector(state=>state.home)
   // const [completedTasks , setCompletedTasks]=useState<TTaskItem[]>([])
 
  
@@ -23,7 +24,9 @@ export const MiniTasks = ()=>{
   //   queryClient.invalidateQueries({queryKey:['task_inf']})
   // }
   
-
+if (isLoading) {
+  <div>Загрузка</div>
+}else
 return (
   <div className={s.mini_tasks_wrapper}>
     <div className={s.intro_img_wrap}>
@@ -31,10 +34,13 @@ return (
     </div>
     <div className={s.mini_tasks_subtitle}>Complete extra tasks</div>
     <div className={s.mini_tasks_list}>
-      {tasksInf?.content.map((elem, index) => {
+      {/* {tasksInf?.content.map((elem, index) => {
         return elem.sub_tasks.map(item=> (<TaskItem  {...item} key={index} />)) 
       }
-      )}
+      )} */}
+      {tasksInf && tasksInf?.content.find(elem=>elem.id ===state.miniTaskId)?.sub_tasks.map((item,index)=>(
+        <TaskItem  {...item} key={index} />
+      ))}
     </div>
     {/* <div className={s.claim_btn}>
       {completedTasks.length !==0 &&<MainBtn event={()=>onMiniTaskClaim()}>Claim</MainBtn>}
