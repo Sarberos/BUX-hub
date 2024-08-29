@@ -15,7 +15,6 @@ interface HomeState {
     isMiniTasks: boolean;
     isDailyReward:boolean,
     miniTaskId:number,
-    taskList:
 }
 
 const initialState: HomeState = {
