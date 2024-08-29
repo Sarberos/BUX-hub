@@ -1,25 +1,19 @@
 import s from './MiniTasks.module.scss'
 import intro_img from '@shared/Tasks/assets/tasks_img/Tasks_intro.png'
 import TaskItem from '../TaskItem/TaskItem'
-import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
-import { useState ,useEffect} from 'react'
-import { useAppSelector } from '@shared/utilits/redux/hooks'
+import {useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf'
+// import { useState ,useEffect} from 'react'
 
 
 
-export const MiniTasks = ({allTasks}:{allTasks:TTaskItem[]|undefined})=>{
+export const MiniTasks = ()=>{
   // const queryClient =useQueryClient()
   // const dispatch=useAppDispatch()
-  const state = useAppSelector(state=>state.home)
-  const [tasksList , setTasksList]=useState<TTaskItem[]>([])
+  const {data:tasksInf}=useGetTasksInf()
+  // const state = useAppSelector(state=>state.home)
   // const [completedTasks , setCompletedTasks]=useState<TTaskItem[]>([])
 
-  useEffect(()=>{
-    if (allTasks) {
-      setTasksList(allTasks.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks)
-      // setCompletedTasks(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks.filter(elem=>elem.status==='completed'))
-    }
-  },[allTasks])
+ 
 
 
   // const onMiniTaskClaim=()=>{
@@ -37,7 +31,7 @@ return (
     </div>
     <div className={s.mini_tasks_subtitle}>Complete extra tasks</div>
     <div className={s.mini_tasks_list}>
-      {tasksList.map((elem, index) => (
+      {tasksInf?.content[0].sub_tasks.map((elem, index) => (
         <TaskItem  {...elem} key={index} />
       ))}
     </div>
