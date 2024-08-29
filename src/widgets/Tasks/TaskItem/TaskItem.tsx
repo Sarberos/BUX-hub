@@ -35,6 +35,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,claim
     }
     const handleOpen=(id:number)=>{
         dispatch(setIsMiniTasks(true))
+        console.log("MINITASKS OPEN ")
         dispatch(setMiniTaskId(id))
     }
  
