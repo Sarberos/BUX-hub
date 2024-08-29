@@ -20,7 +20,7 @@ export const Tasks=()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
-  const [miniTaskOpen , setminiTaskOpen]=useState<boolean>()
+  const [miniTaskOpen , setminiTaskOpen]=useState<boolean>(false)
   // const [completedTasks,setCompletedTasks]=useState<TTaskItem[]>([])
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
   
