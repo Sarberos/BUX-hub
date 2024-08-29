@@ -7,6 +7,7 @@ import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
 
 
 export const MiniTasks = ({tasksList,completedTasks,onMiniTaskClaim}:{tasksList:TTaskItem[]|[],completedTasks:TTaskItem[]|[],onMiniTaskClaim:()=>void})=>{
+// export const MiniTasks = ()=>{
 
 return (
   <div className={s.mini_tasks_wrapper}>

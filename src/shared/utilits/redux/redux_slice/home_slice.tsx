@@ -14,7 +14,8 @@ interface HomeState {
     lang: 'RU'| 'ENG' |'FRA'|'GER'
     isMiniTasks: boolean;
     isDailyReward:boolean,
-    miniTaskId:number
+    miniTaskId:number,
+    taskList:
 }
 
 const initialState: HomeState = {

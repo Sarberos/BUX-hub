@@ -19,20 +19,18 @@ export const Tasks=()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
-  const [middleIsMini,setMiddleIsMini]=useState<boolean>(state.isMiniTasks)
 
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
   
-useEffect(()=>{
-  middleIsMini !== state.isMiniTasks && setMiddleIsMini(state.isMiniTasks)
-},[state.isMiniTasks])
 
-useEffect(()=>{
-  if(tasksInf){
-    const miniTaskList=tasksInf.content.filter(elem=>elem.id===state.miniTaskId);
-    setTasksList(miniTaskList)
-  }
-},[tasksInf])
+useEffect(() => {  
+  if (state.isMiniTasks) {  
+    const miniTaskList = tasksInf?.content.filter(elem => elem.id === state.miniTaskId);  
+    miniTaskList && setTasksList(miniTaskList);  
+  } else {  
+    setTasksList(tasksInf?.content || []);  
+  }  
+}, [state.isMiniTasks, tasksInf]); // Добавьте state.isMiniTasks в зависимости  
 useEffect(()=>{
   // if(tasksList){
   //   const minitaskCompliteList=tasksList.filter(elem=>elem.status==='completed');
@@ -54,7 +52,7 @@ if(taskInfoLoading){
 }else 
   return (
     <>
-    {middleIsMini &&  <div >
+    {state.isMiniTasks &&  <div >
     <BottomPopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
         {/* <MiniTasks /> */}
     </BottomPopUp>

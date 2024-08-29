@@ -11,6 +11,7 @@ import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/uti
 import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
+// import { MiniTasks } from "@widgets/Tasks/MiniTasks/MiniTasks";
 
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
