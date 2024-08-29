@@ -44,10 +44,6 @@ return (
     </div>
     <div className={s.mini_tasks_subtitle}>Complete extra tasks</div>
     <div className={s.mini_tasks_list}>
-      {tasksInf?.content.map((elem, index) => {
-        return elem.sub_tasks.map(item=> (<TaskItem  {...item} key={index} />)) 
-      }
-      )}
       {tasksInf && tasksInf?.content.filter(elem=>elem.id ==state.miniTaskId).map((item)=>{
         return item.sub_tasks && item.sub_tasks.map(((el,index)=>(
           <TaskItem  {...el} key={index} />
