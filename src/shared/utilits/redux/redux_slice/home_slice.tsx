@@ -31,7 +31,7 @@ isLoading:false,
 lang:'RU',
 isMiniTasks: false,
 isDailyReward:false,
-miniTaskId: 0,
+miniTaskId: 52,
 }
 
 export const homeSlice = createSlice({
