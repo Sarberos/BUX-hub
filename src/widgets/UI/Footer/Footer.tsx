@@ -9,8 +9,8 @@ export const Footer=({currenPageId,setCurrentPageId}:TFooterProps)=>{
         <div className={s.wrapper}>
             <div className={s.inner_wrapper}>
                 <nav className={s.navigation}>
-                    {PAGESNAMES.map(elem=>(
-                        <Link to={elem.link}> 
+                    {PAGESNAMES.map((elem,index)=>(
+                        <Link  key={index} to={elem.link}> 
                         <li onClick={()=>setCurrentPageId(elem.id)} className={s.nav_item}>
                             <img src={elem.id===currenPageId?elem.activeImg :elem.img} className={s.nav_item_img} />
                         </li>
