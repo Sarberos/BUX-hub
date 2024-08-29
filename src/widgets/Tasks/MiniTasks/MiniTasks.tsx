@@ -31,7 +31,7 @@ return (
     </div>
     <div className={s.mini_tasks_subtitle}>Complete extra tasks</div>
     <div className={s.mini_tasks_list}>
-      {tasksInf?.content[0].sub_tasks.map((elem, index) => (
+      {tasksInf?.content.map((elem, index) => (
         <TaskItem  {...elem} key={index} />
       ))}
     </div>
