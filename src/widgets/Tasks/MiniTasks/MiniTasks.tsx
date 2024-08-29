@@ -42,7 +42,7 @@ return (
       }
       )} */}
       {tasksInf && tasksInf?.content.filter(elem=>elem.id ==state.miniTaskId).map((item)=>{
-        return item.sub_tasks.map(((el,index)=>(
+        return item.sub_tasks && item.sub_tasks.map(((el,index)=>(
           <TaskItem  {...el} key={index} />
         )
         ))
