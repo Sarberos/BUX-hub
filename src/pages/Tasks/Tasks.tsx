@@ -21,6 +21,8 @@ export const Tasks=()=>{
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
   // const [completedTasks,setCompletedTasks]=useState<TTaskItem[]>([])
+  console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
+  
 
 useEffect(()=>{
   if(tasksInf){

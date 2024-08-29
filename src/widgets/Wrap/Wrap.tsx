@@ -40,15 +40,17 @@ const handlingTaimer = (mins: number, hours: number, dispatch: any) => {
 }
 
 export const  Wrap=() =>{
+  
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
   const dispatch = useAppDispatch()
-
-
+  
+  
   const [currenPageId, setCurrentPageId] = useState(1);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
-
+  
+  console.log('WRAP MINITASK STYLE '+state.isMiniTasks);
 
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
