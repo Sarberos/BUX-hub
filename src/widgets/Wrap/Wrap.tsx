@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import { setFormattedTaimer, setIsMiniTasks, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
+import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
@@ -90,11 +90,11 @@ if(false){
       </BottomPopUp>
     </div>
   }
-  {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
+  {/* {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
   <BottomPopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
-      {/* <MiniTasks /> */}
+      <MiniTasks />
   </BottomPopUp>
-  </div> }
+  </div> } */}
     {!frenState.inviteStatus && !state.isMiniTasks && <>
       <div className={s.child_wrap}>
         <Outlet/>
