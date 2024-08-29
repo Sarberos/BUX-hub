@@ -13,7 +13,7 @@ import { useQueryClient } from '@tanstack/react-query'
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,main_task_id,claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void,setminiTaskOpen?:(value:boolean)=>void}){
+export default function({title,sub_tasks,coins,id,link,status,main_task_id,claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()

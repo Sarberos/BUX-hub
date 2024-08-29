@@ -8,7 +8,7 @@ import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import {useEffect, useState} from 'react'
 import { setIsMiniTasks, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import PopUp from '@widgets/UI/PopUp/PopUp';
-import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
+// import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
 import { useQueryClient } from '@tanstack/react-query';
 
 
@@ -23,7 +23,10 @@ export const Tasks=()=>{
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
   const [completedTasks , setCompletedTasks]=useState<TTaskItem[]>([])
+
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
+  console.log(tasksList);
+  
   
 useEffect(()=>{
   if (tasksInf) {
@@ -48,19 +51,18 @@ if(taskInfoLoading){
   return (
     <>
 {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
-    <PopUp onClose={()=>dispatch(setIsMiniTasks(true))}>
-      <MiniTasks completedTasks={completedTasks } onMiniTaskClaim={onMiniTaskClaim} tasksList={tasksList} />
+    <PopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
+      {/* <MiniTasks completedTasks={completedTasks } onMiniTaskClaim={onMiniTaskClaim} tasksList={tasksList} /> */}
     </PopUp>
   </div> }
     <div className={s.task_wrapper}>
-      <div className={s.title_wrap} >
+      <div onClick={onMiniTaskClaim} className={s.title_wrap} >
         <div className={s.title}>{t("tasks")}</div>
         <div className={s.subtitle}>{t("tasksSub")}</div>
       </div>     
         <div className={s.task_list}>
           {tasksInf?.content.filter(elem=>elem.status!=='claimed').map((elem, index) => 
             <TaskItem
-            // setminiTaskOpen={setminiTaskOpen}
             claimTasksCoins={claimTasksCoins}
               {...elem}
               key={index}
