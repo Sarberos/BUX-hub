@@ -19,9 +19,13 @@ export const Tasks=()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
+  const [middleIsMini,setMiddleIsMini]=useState<boolean>(state.isMiniTasks)
 
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
   
+useEffect(()=>{
+  middleIsMini !== state.isMiniTasks && setMiddleIsMini(state.isMiniTasks)
+},[state.isMiniTasks])
 
 useEffect(()=>{
   if(tasksInf){
@@ -50,7 +54,7 @@ if(taskInfoLoading){
 }else 
   return (
     <>
-    {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
+    {middleIsMini &&  <div >
     <BottomPopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
         {/* <MiniTasks /> */}
     </BottomPopUp>
