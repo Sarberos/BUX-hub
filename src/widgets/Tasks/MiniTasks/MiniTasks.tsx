@@ -1,6 +1,6 @@
 import s from './MiniTasks.module.scss'
 import intro_img from '@shared/Tasks/assets/tasks_img/Tasks_intro.png'
-import TaskItem from '../TaskItem/TaskItem'
+// import TaskItem from '../TaskItem/TaskItem'
 import {useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf'
 import { useAppSelector } from '@shared/utilits/redux/hooks'
 // import { useState ,useEffect} from 'react'
@@ -41,8 +41,10 @@ return (
         return elem.sub_tasks.map(item=> (<TaskItem  {...item} key={index} />)) 
       }
       )} */}
-      {tasksInf && tasksInf?.content.find(elem=>elem.id ==52)?.sub_tasks.map((item,index)=>(
-        <TaskItem  {...item} key={index} />
+      {tasksInf && tasksInf?.content.filter(elem=>elem.id ==52).map((item)=>(
+        // <TaskItem  {...item} key={index} />
+        <div>{item.sub_tasks.length}</div>
+
       ))}
     </div>
     {/* <div className={s.claim_btn}>
