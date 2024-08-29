@@ -38,7 +38,7 @@ return (
         return elem.sub_tasks.map(item=> (<TaskItem  {...item} key={index} />)) 
       }
       )} */}
-      {tasksInf && tasksInf?.content.find(elem=>elem.id ===state.miniTaskId)?.sub_tasks.map((item,index)=>(
+      {tasksInf && tasksInf?.content.find(elem=>elem.id ==52)?.sub_tasks.map((item,index)=>(
         <TaskItem  {...item} key={index} />
       ))}
     </div>
