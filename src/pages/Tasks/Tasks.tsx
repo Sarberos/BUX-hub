@@ -26,7 +26,7 @@ export const Tasks=()=>{
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
   
 useEffect(()=>{
-  if (tasksInf) {
+  if (tasksInf?.content.length && tasksInf?.content.length>0) {
     const helpArr:TTaskItem[]=tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)
     setTasksList(helpArr[0].sub_tasks)
     const helpArr2:TTaskItem[]=helpArr[0].sub_tasks.filter(elem=>elem.status==='completed')
