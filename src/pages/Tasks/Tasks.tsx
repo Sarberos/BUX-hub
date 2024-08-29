@@ -6,12 +6,15 @@ import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { useTranslation } from 'react-i18next';
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import {useEffect, useState} from 'react'
-import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
-import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice';
-// import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
+import { setIsMiniTasks, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import PopUp from '@widgets/UI/PopUp/PopUp';
+import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
+import { useQueryClient } from '@tanstack/react-query';
+
 
 export const Tasks=()=>{
   const {t}= useTranslation()
+  const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
 
@@ -19,32 +22,24 @@ export const Tasks=()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
-
+  const [completedTasks , setCompletedTasks]=useState<TTaskItem[]>([])
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
   
-
-useEffect(() => {  
-  if (state.isMiniTasks) {  
-    const miniTaskList = tasksInf?.content.filter(elem => elem.id === state.miniTaskId);  
-    miniTaskList && setTasksList(miniTaskList);  
-  } else {  
-    setTasksList(tasksInf?.content || []);  
-  }  
-}, [state.isMiniTasks, tasksInf]); // Добавьте state.isMiniTasks в зависимости  
 useEffect(()=>{
-  // if(tasksList){
-  //   const minitaskCompliteList=tasksList.filter(elem=>elem.status==='completed');
-  //   setCompletedTasks(minitaskCompliteList)
-  // }
-},[tasksList])
+  if (tasksInf) {
+    setTasksList(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks)
+    setCompletedTasks(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks.filter(elem=>elem.status==='completed'))
+  }
+},[tasksInf])
 
 
-// const onMiniTaskClaim=()=>{
-//   let coins:number= completedTasks.reduce((acc, elem) => acc + elem.coins, 0);
-//   dispatch(updateTotalCoins(coins))
-//   dispatch(setIsMiniTasks(false))
-//   queryClient.invalidateQueries({queryKey:['task_inf']})
-// }
+
+const onMiniTaskClaim=()=>{
+  let coins:number= completedTasks.reduce((acc, elem) => acc + elem.coins, 0);
+  dispatch(updateTotalCoins(coins))
+  dispatch(setIsMiniTasks(false))
+  queryClient.invalidateQueries({queryKey:['task_inf']})
+}
 
 
 if(taskInfoLoading){
@@ -52,10 +47,10 @@ if(taskInfoLoading){
 }else 
   return (
     <>
-    {state.isMiniTasks &&  <div >
-    <BottomPopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
-        {/* <MiniTasks /> */}
-    </BottomPopUp>
+{state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
+    <PopUp onClose={()=>dispatch(setIsMiniTasks(true))}>
+      <MiniTasks completedTasks={completedTasks } onMiniTaskClaim={onMiniTaskClaim} tasksList={tasksList} />
+    </PopUp>
   </div> }
     <div className={s.task_wrapper}>
       <div className={s.title_wrap} >
