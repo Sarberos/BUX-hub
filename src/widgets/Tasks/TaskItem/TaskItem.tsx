@@ -35,7 +35,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,claim
     }
     const handleOpen=(id:number)=>{
         dispatch(setMiniTaskId(id))
-        dispatch(setIsMiniTasks(true))
+        dispatch(setIsMiniTasks(true)); 
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
  
@@ -51,12 +51,12 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,claim
                 </div>
             </div>
             {status==='pending' && <button onClick={()=>{handleStart(id)}} className={s.status_btn}>{t("start")}</button>} 
-            {true && sub_tasks.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
+            {sub_tasks && sub_tasks.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
             {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks.length==0 && status==='in-progress' && <button disabled={true} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button disabled={true} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
             {main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
 
         </div>
