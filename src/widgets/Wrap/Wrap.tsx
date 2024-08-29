@@ -94,7 +94,7 @@ if(false){
       <MiniTasks />
     </PopUp>
   </div> } */}
-    {!frenState.inviteStatus && !state.isMiniTasks && <>
+    {!frenState.inviteStatus && <>
       <div className={s.child_wrap}>
         <Outlet/>
       </div>
