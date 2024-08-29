@@ -1,6 +1,6 @@
 import s from './MiniTasks.module.scss'
 import intro_img from '@shared/Tasks/assets/tasks_img/Tasks_intro.png'
-import TaskItem from '../TaskItem/TaskItem'
+// import TaskItem from '../TaskItem/TaskItem'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { TTaskInf, TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
