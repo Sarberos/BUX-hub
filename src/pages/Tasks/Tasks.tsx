@@ -27,8 +27,10 @@ export const Tasks=()=>{
   
 useEffect(()=>{
   if (tasksInf) {
-    setTasksList(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks)
-    setCompletedTasks(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks.filter(elem=>elem.status==='completed'))
+    // setTasksList(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks)
+    // setCompletedTasks(tasksInf.content.filter(elem=>elem.id ===state.miniTaskId)[0].sub_tasks.filter(elem=>elem.status==='completed'))
+    setTasksList([])
+    setCompletedTasks([])
   }
 },[tasksInf])
 
