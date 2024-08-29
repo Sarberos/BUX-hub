@@ -20,6 +20,7 @@ export const Tasks=()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
+  const [miniTaskOpen , setminiTaskOpen]=useState<boolean>()
   // const [completedTasks,setCompletedTasks]=useState<TTaskItem[]>([])
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
   
@@ -51,7 +52,7 @@ if(taskInfoLoading){
 }else 
   return (
   <>
-   {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
+   {miniTaskOpen &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
     <PopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
       {/* <MiniTasks tasksList={tasksList} completedTasks={completedTasks} onMiniTaskClaim={onMiniTaskClaim}/> */}
     </PopUp>
@@ -64,7 +65,7 @@ if(taskInfoLoading){
         <div className={s.task_list}>
           {tasksInf?.content.filter(elem=>elem.status!=='claimed').map((elem, index) => 
             <TaskItem
-          
+            setminiTaskOpen={setminiTaskOpen}
             claimTasksCoins={claimTasksCoins}
               {...elem}
               key={index}
