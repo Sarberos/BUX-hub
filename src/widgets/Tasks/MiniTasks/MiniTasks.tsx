@@ -41,9 +41,9 @@ return (
         return elem.sub_tasks.map(item=> (<TaskItem  {...item} key={index} />)) 
       }
       )} */}
-      {tasksInf && tasksInf?.content.filter(elem=>elem.id ==52).map((item)=>(
+      {tasksInf && tasksInf?.content.filter(elem=>elem.id ==state.miniTaskId).map((item)=>(
         // <TaskItem  {...item} key={index} />
-        <div>{item.sub_tasks.length}</div>
+        <div style={{color:'#fff'}}>{item.sub_tasks.length}</div>
 
       ))}
     </div>
