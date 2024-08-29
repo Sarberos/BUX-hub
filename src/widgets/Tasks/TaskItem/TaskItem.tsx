@@ -34,8 +34,9 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,claim
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleOpen=(id:number)=>{
-        dispatch(setIsMiniTasks(true))
         dispatch(setMiniTaskId(id))
+        dispatch(setIsMiniTasks(true))
+        queryClient.invalidateQueries({queryKey:['task_inf']})
     }
  
     return (
