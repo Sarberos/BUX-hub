@@ -1,15 +1,17 @@
 .bottom_wrap{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     .bottom_pop_up__wrap{
         position: absolute;
+        top:0;
         bottom:0;
         right: 0;
         left:0;
         display: flex;
         flex-direction: column;
-        // background-image: url(./../../../shared/Wrap/assets/img/fix_tsks_background.png);
+        background-image: url(./../../../shared/Wrap/assets/img/fix_tsks_background.png);
         background-size: 100% 100%;
+        
     }
     .bottom_inner_wrap{
         margin-top: 60px;
