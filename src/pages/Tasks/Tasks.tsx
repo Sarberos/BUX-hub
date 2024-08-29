@@ -7,7 +7,7 @@ import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { useTranslation } from 'react-i18next';
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import PopUp from '@widgets/UI/PopUp/PopUp';
-// import MiniTasks from '@widgets/Tasks/MiniTasks/MiniTasks';
+import MiniTasks from '@widgets/Tasks/MiniTasks/MiniTasks';
 
 export const Tasks=()=>{
   const {t}= useTranslation()
@@ -26,9 +26,9 @@ if(taskInfoLoading){
 }else 
   return (
   <>
-   {!state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
+   {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
     <PopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
-      {/* <MiniTasks claimTasksCoins={claimTasksCoins} tasksList={tasksList}   /> */}
+      <MiniTasks claimTasksCoins={claimTasksCoins} tasksList={tasksList}   />
     </PopUp>
   </div> }
     <div className={s.task_wrapper}>

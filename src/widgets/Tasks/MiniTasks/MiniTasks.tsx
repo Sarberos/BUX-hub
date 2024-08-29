@@ -36,9 +36,9 @@ return (
     </div>
     <div className={s.mini_tasks_subtitle}>Complete extra tasks</div>
     <div className={s.mini_tasks_list}>
-      {tasksList?.content.filter(elem=>elem.id===homeState.miniTaskId)[0].sub_tasks.map((elem, index) => (
+      {/* {tasksList?.content.filter(elem=>elem.id===homeState.miniTaskId)[0].sub_tasks.map((elem, index) => (
         <TaskItem  {...elem} key={index} />
-      ))}
+      ))} */}
     </div>
     <div className={s.claim_btn}>
       {completedTasks && completedTasks.length !==0 &&<MainBtn event={()=>onMiniTaskClaim()}>Claim</MainBtn>}
