@@ -2,30 +2,48 @@ import s from '@pages/Tasks/Tasks.module.scss'
 import { TTaskItem, useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf';
 import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-import {setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice';
+import {setIsMiniTasks, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { useTranslation } from 'react-i18next';
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import {useEffect, useState} from 'react'
 import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const Tasks=()=>{
   const {t}= useTranslation()
+const queryClient =useQueryClient()
   const dispatch=useAppDispatch()
   const state = useAppSelector(state=>state.home)
 
   const {data:tasksInf,isLoading:taskInfoLoading}=useGetTasksInf()
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
+  
   const [tasksList , setTasksList]=useState<TTaskItem[]>([])
+  const [completedTasks,setCompletedTasks]=useState<TTaskItem[]>([])
 
 useEffect(()=>{
   if(tasksInf){
-    setTasksList(tasksInf.content)
+    const miniTaskList=tasksInf.content.filter(elem=>elem.id===state.miniTaskId);
+    setTasksList(miniTaskList)
   }
 },[tasksInf])
+useEffect(()=>{
+  if(tasksList){
+    const minitaskCompliteList=tasksList.filter(elem=>elem.status==='completed');
+    setCompletedTasks(minitaskCompliteList)
+  }
+},[tasksList])
 
-  
+
+const onMiniTaskClaim=()=>{
+  let coins:number= completedTasks.reduce((acc, elem) => acc + elem.coins, 0);
+  dispatch(updateTotalCoins(coins))
+  dispatch(setIsMiniTasks(false))
+  queryClient.invalidateQueries({queryKey:['task_inf']})
+}
+
 
 if(taskInfoLoading){
   return <Preloader />
@@ -34,7 +52,7 @@ if(taskInfoLoading){
   <>
    {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
     <PopUp onClose={()=>dispatch(setIsMiniTasks(false))}>
-      <MiniTasks tasksList={tasksList}/>
+      <MiniTasks tasksList={tasksList} completedTasks={completedTasks} onMiniTaskClaim={onMiniTaskClaim}/>
     </PopUp>
   </div> }
     <div className={s.task_wrapper}>
