@@ -6,7 +6,7 @@ export const useTgSubscribe=()=>{
     const queryClient = useQueryClient()
     return useMutation({
         mutationKey:['claim_coins','task'],
-        mutationFn: (id:number)=>TasksFetching.claimTaskCoins(id),
+        mutationFn: (id:number)=>TasksFetching.tgSubscribe(id),
         onSuccess: ()=>{queryClient.invalidateQueries({queryKey:['task_inf']})}
     })
 }

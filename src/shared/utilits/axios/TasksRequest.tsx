@@ -14,8 +14,8 @@ class TasksFetching {
     const resp= await api.post(`task/start-task/${id}`);
     return resp.data;
 }
-  static async tgSubscribe() {
-    const resp= await api.post('task/start-task/:id');
+  static async tgSubscribe(id:number) {
+    const resp= await api.post(`task/start-task/${id}`);
     return resp.data;
 }
   static async claimTaskCoins(id:number) {
