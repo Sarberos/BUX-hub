@@ -58,7 +58,7 @@ export const Frens=()=>{
                     <p className={s.frens_coins_value}>{refCoins}</p>
                     {frensData?.content?.length!==0  && frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${frensState.timer?.formattedHours}h ${frensState.timer?.formattedMinutes}m`}</button>           }
                     {frensData?.content?.length!==0  && frensState.farmStatus===EnumFrensFarmStatus.CLAIM &&  <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>}
-                    {frensData?.content?.length===0 && <button  onClick={()=>dispatch(setInviteStatus(true))} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('frensTitle')}</button> }
+                    {!frensData ||frensData?.content?.length===0 && <button  onClick={()=>dispatch(setInviteStatus(true))} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('frensTitle')}</button> }
                 </div>
             </div>
             <div className={s.subtitle_wrap}>
