@@ -50,7 +50,7 @@ export const  Wrap=() =>{
   const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
   
   useEffect(()=>{
-    user?.language_code && dispatch(setLanguage(user.language_code.toUpperCase() ))
+    user?.language_code && dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
   },[user?.language_code])
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)

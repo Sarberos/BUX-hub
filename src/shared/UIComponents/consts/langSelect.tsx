@@ -7,19 +7,19 @@ export type TLang={
 
 export const LANGLIST:TLang[]=[
     {
-        label:'RUS',
+        label:'RU',
         value:'RU',
     },
     {
-        label:"ENG",
+        label:"EN",
         value:"EN",
     },
     {
-        label:"FRE",
+        label:"FR",
         value:'FR',
     },
     {
-        label:'GER',
+        label:'DE',
         value:'DE',
     },
 ]

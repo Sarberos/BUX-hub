@@ -15,7 +15,7 @@ export const  LangSelect=()=>{
       i18next.changeLanguage(lng);
     }
     useEffect(()=>{
-      changeLng(homeState.lang)
+      changeLng(homeState.lang.value)
     },[homeState.lang])
 
     return (
@@ -28,7 +28,7 @@ export const  LangSelect=()=>{
           className={langBurg?`${s.language_select} ${s.active}`:`${s.language_select}`}
         >
           <div  className={`${s.language_item} ${s.active}`}>
-            <div className={s.lang_title}>{homeState.lang}</div>
+            <div className={s.lang_title}>{homeState.lang.label}</div>
 
             <div className={s.active_language_item}>
               <img src={select_img} alt="" className={s.select_ico} />
@@ -43,9 +43,9 @@ export const  LangSelect=()=>{
           }
         >
             {LANGLIST.map((elem,index)=>{
-                if (elem.value!==homeState.lang) {
+                if (elem.value!==homeState.lang.value) {
                     return(
-                        <div key={index} onClick={()=>dispatch(setLanguage(elem.value))} className={`${s.language_item}  ${s.burger}`}>
+                        <div key={index} onClick={()=>dispatch(setLanguage(elem))} className={`${s.language_item}  ${s.burger}`}>
                             <div className={s.lang_title}>{elem.label}</div>
                         </div>
                     )

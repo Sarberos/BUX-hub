@@ -11,7 +11,10 @@ interface HomeState {
     timer:TTimerType;
     bonusDay:number;
     isLoading: boolean;
-    lang: string
+    lang: {
+      label:string,
+      value:string,
+    }
     isMiniTasks: boolean;
     isDailyReward:boolean,
     miniTaskId:number,
@@ -28,7 +31,10 @@ const initialState: HomeState = {
 },
 bonusDay:0,
 isLoading:false,
-lang:'ENG',
+lang:{
+  label:'EN',
+  value:'EN'
+},
 isMiniTasks: false,
 isDailyReward:false,
 miniTaskId: 0,
@@ -53,7 +59,7 @@ export const homeSlice = createSlice({
     callIsLoading:(state, action: PayloadAction<boolean>) => {
         state.isLoading = action.payload
     },
-    setLanguage:(state, action: PayloadAction<string>) => {
+    setLanguage:(state, action: PayloadAction<{value:string,label:string}>) => {
         state.lang = action.payload
     },
     setIsMiniTasks:(state, action: PayloadAction<boolean>) => {
