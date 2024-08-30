@@ -1,6 +1,6 @@
 import s from "@pages/Raiting/Raiting.module.scss";
 import { TRaitngItem, useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
-// import RaitingItem from "@widgets/Raiting/RaitingItem";
+import RaitingItem from "@widgets/Raiting/RaitingItem";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import {useEffect,useState} from 'react'
 import { useTranslation } from "react-i18next";
