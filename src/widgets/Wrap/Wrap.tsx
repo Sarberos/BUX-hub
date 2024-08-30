@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
+import { setFormattedTaimer, setLanguage, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
+import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
   if (mins === 0) {  
@@ -39,18 +40,18 @@ const handlingTaimer = (mins: number, hours: number, dispatch: any) => {
 }
 
 export const  Wrap=() =>{
-  
+  const {user}=useTelegramApi()
+  const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
-  const dispatch = useAppDispatch()
-  
   
   const [currenPageId, setCurrentPageId] = useState(1);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
   
-  console.log('WRAP MINITASK STYLE '+state.isMiniTasks);
-
+  useEffect(()=>{
+    user?.language_code && dispatch(setLanguage(user.language_code.toUpperCase() ))
+  },[user?.language_code])
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
 },[state.timer])

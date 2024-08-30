@@ -34,14 +34,11 @@ export type TTimerType = {
 
 
 export function Home(){
-  // console.log(`Bearer ${JSON.stringify(window.Telegram.Utils.urlParseQueryString(window.Telegram.WebApp.initData))}`);
-  console.log(`Bearer ${btoa(window.Telegram.WebApp.initData)}`);
-  
   const {user}=useTelegramApi()
   const {t} = useTranslation()
-
   const dispatch= useAppDispatch()
   const state=useAppSelector(state=>state.home)
+
   const {mutate:startReq}=useStartFarm()
   const {mutate:claimReq}=useClaimFarmCoins()
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
@@ -62,7 +59,6 @@ const onClaimFarming=()=>{
   dispatch(setStoreFarmStatus(EnumFarmStatus.START))
   dispatch(updateTotalCoins(480))
 }
-
   useEffect(()=>{
     const intervalId = setInterval(() => {  
       const nextDate:Date = new Date(dailyRewardTime);
@@ -72,7 +68,6 @@ const onClaimFarming=()=>{
   
     return () => clearInterval(intervalId);  
   })
-
 useEffect(()=>{
   coins!==state.totalCoins && setCoins(state.totalCoins);
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);

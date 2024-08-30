@@ -43,10 +43,10 @@ export const  LangSelect=()=>{
           }
         >
             {LANGLIST.map((elem,index)=>{
-                if (elem!==homeState.lang) {
+                if (elem.value!==homeState.lang) {
                     return(
-                        <div key={index} onClick={()=>dispatch(setLanguage(elem))} className={`${s.language_item}  ${s.burger}`}>
-                            <div className={s.lang_title}>{elem}</div>
+                        <div key={index} onClick={()=>dispatch(setLanguage(elem.value))} className={`${s.language_item}  ${s.burger}`}>
+                            <div className={s.lang_title}>{elem.label}</div>
                         </div>
                     )
                 }

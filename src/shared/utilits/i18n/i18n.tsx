@@ -9,13 +9,13 @@ const resources = {
   RU: {
     translation: ruLang,
   },
-  ENG: {
+  EN: {
     translation: enLang,
   },
-  GER: {
+  DE: {
     translation: geLang,
   },
-  FRA: {
+  FR: {
     translation: frLang,
   },
 };
@@ -24,7 +24,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    fallbackLng: "ENG",
+    fallbackLng: "EN",
     lng: 'RU',
     interpolation: {
       escapeValue: false // react already safes from xss
