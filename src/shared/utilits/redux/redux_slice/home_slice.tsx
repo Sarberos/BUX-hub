@@ -28,10 +28,10 @@ const initialState: HomeState = {
 },
 bonusDay:0,
 isLoading:false,
-lang:'RU',
+lang:'ENG',
 isMiniTasks: false,
 isDailyReward:false,
-miniTaskId: 52,
+miniTaskId: 0,
 }
 
 export const homeSlice = createSlice({
