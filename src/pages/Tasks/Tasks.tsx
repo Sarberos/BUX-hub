@@ -34,7 +34,8 @@ if(taskInfoLoading){
         <div className={s.subtitle}>{t("tasksSub")}</div>
       </div>     
         <div className={s.task_list}>
-          {tasksInf?.content.filter(elem=>elem.status!=='claimed').map((elem, index) => 
+          {/* {tasksInf?.content.filter(elem=>elem.status!=='claimed').map((elem, index) =>  */}
+          {tasksInf?.content.map((elem, index) => 
             <TaskItem
             claimTasksCoins={claimTasksCoins}
               {...elem}
