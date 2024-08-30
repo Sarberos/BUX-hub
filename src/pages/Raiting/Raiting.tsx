@@ -31,23 +31,12 @@ export const Raiting = () => {
         <p className={s.title}>{t("raitingTitle")}</p>
       </div>
       <div className={s.raiting_list}>
-        {sortesData?.map((elem,index)=>(
+        {/* {sortesData?.map((elem,index)=>(
           <RaitingItem
           key={index}
           place={index+1}
           {...elem}
         />
-        ))}
-
-        {/* {RAITINGLIST.map((elem, index) => (
-          <RaitingItem
-            isMe={elem.isMe}
-            key={index}
-            coinQuantity={elem.coinQuantity}
-            placeNumber={elem.placeNumber}
-            userLvl={elem.userLvl}
-            userName={elem.userName}
-          />
         ))} */}
       </div>
     </div>
