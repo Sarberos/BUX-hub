@@ -12,6 +12,7 @@ import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
+import i18next from "i18next";
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
   if (mins === 0) {  
@@ -50,7 +51,11 @@ export const  Wrap=() =>{
   const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
   
   useEffect(()=>{
-    user?.language_code && dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
+    if(user?.language_code){
+      console.log('LANGUEGE COD'+user.language_code);
+    dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
+    i18next.changeLanguage(user?.language_code);
+  }
   },[user?.language_code])
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
