@@ -1,10 +1,10 @@
 import s from '@pages/Tasks/Tasks.module.scss'
 import {useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf';
-// import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
+import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
 import {useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { useTranslation } from 'react-i18next';
-// import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
+import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
@@ -13,8 +13,8 @@ export const Tasks=()=>{
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
 
-  const {isLoading:taskInfoLoading}=useGetTasksInf()
-  // const {mutate:claimTasksCoins}=useClaimTasksCoins()
+  const {data:tasksInf,isLoading:taskInfoLoading}=useGetTasksInf()
+  const {mutate:claimTasksCoins}=useClaimTasksCoins()
 
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
 
@@ -34,13 +34,13 @@ if(taskInfoLoading){
         <div className={s.subtitle}>{t("tasksSub")}</div>
       </div>     
         <div className={s.task_list}>
-          {/* {tasksInf?.content.map((elem, index) => 
+          {tasksInf?.content.map((elem, index) => 
             <TaskItem
             claimTasksCoins={claimTasksCoins}
               {...elem}
               key={index}
             />
-          )} */}
+          )}
         </div>
     </div> 
     </>
