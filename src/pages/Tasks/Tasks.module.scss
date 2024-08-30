@@ -34,8 +34,7 @@
         }
     }
     .task_list{
-        flex: 1 1 auto;
-        max-height: 254px;
+        flex: 1 1 254px;
         display: flex ;
         flex-direction: column;
         gap: 20px;
@@ -46,10 +45,10 @@
         overflow-y: scroll;
         scrollbar-width: none;
         @media screen and (max-height:640px) {
-            max-height: 210px
+            // flex-shrink: 210px
         }
         @media screen and (max-height:680px) {
-            margin-bottom: 30px;
+            // flex-shrink: 30px;
         }
     }
     .main_claim_btn{

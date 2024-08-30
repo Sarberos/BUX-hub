@@ -85,9 +85,9 @@ useEffect(()=>{
     }  
   },[farmInfo,bonusInfo])
 
-if(statusLoading){
-  return <Preloader />
-}else
+// if(statusLoading){
+//   return <Preloader />
+// }else
  return (
   <>
       <div className={s.wrapper}>

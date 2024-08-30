@@ -39,7 +39,7 @@ export default function({onClose}:{onClose:()=> void}){
                 })}
             </div>
             <div className={s.rewar_subtitle}>
-            {`${t('rewardsProfit')}: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)}К`}
+            {`${t('rewardsProfit')}: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
             </div>
             <div className={s.claim_btn}>
                 <MainBtn event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>
