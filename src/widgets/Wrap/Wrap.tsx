@@ -52,8 +52,8 @@ export const  Wrap=() =>{
   
   useEffect(()=>{
     tg.setHeaderColor('#00000');
-    tg.showAlert('jnsjngnjgndfjgjgdf',()=>{})
-    console.log('VIEW PORT HEIGHT'+tg.viewportHeight);
+    // tg.showAlert('jnsjngnjgndfjgjgdf',()=>{})
+    // console.log('VIEW PORT HEIGHT'+tg.viewportHeight);
     
   })
   useEffect(()=>{
