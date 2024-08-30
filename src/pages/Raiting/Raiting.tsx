@@ -32,13 +32,13 @@ console.log(sortesData);
         <p className={s.title}>{t("raitingTitle")}</p>
       </div>
       <div className={s.raiting_list}>
-        {/* {sortesData?.map((elem,index)=>(
+        {sortesData?.map((elem,index)=>(
           <RaitingItem
           key={index}
           place={index+1}
           {...elem}
         />
-        ))} */}
+        ))}
       </div>
     </div>
   );
