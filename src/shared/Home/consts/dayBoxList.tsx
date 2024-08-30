@@ -12,36 +12,43 @@ export const DAYBOXLIST:&Omit<TDayBoxProps,'currentDay'>[]=[
     {
         boxImg:first,
         rewardDay:1,
-        rewardValue: 10000 ,
+        rewardLabel: '10K',
+        rewardValue: 10000,
     },
     {
         boxImg:second,
         rewardDay:2,
+        rewardLabel: '15K',
         rewardValue: 15000,
     },
     {
         boxImg:third,
         rewardDay:3,
+        rewardLabel: '20K',
         rewardValue: 20000,
     },
     {
         boxImg:fourth,
         rewardDay:4,
+        rewardLabel: '25K',
         rewardValue: 25000,
     },
     {
         boxImg:fifth,
         rewardDay:5,
+        rewardLabel: '35K',
         rewardValue: 35000,
     },
     {
         boxImg:sixth,
         rewardDay:6,
+        rewardLabel: '55K',
         rewardValue: 55000,
     },
     {
         boxImg:seventh,
         rewardDay:7,
+        rewardLabel: '75K',
         rewardValue: 75000,
     },
 ]

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 
 
-export default function ({currentDay,boxImg,rewardValue,rewardDay,}:TDayBoxProps){
+export default function ({currentDay,boxImg,rewardLabel,rewardDay,}:TDayBoxProps){
     const {t}=useTranslation()
    const untouchStyle:React.CSSProperties=currentDay===rewardDay-1 ? {display:'none'}:{}
    
@@ -16,7 +16,7 @@ export default function ({currentDay,boxImg,rewardValue,rewardDay,}:TDayBoxProps
                 <div className={s.prize_img_wrap}>
                     <img src={boxImg}  className={s.prize_img} />
                 </div>
-                <div className={s.reward_value}>{`${rewardValue}K`}</div>
+                <div className={s.reward_value}>{rewardLabel}</div>
             </div>
             <div className={s.day_counter}>{`${t("day")} ${rewardDay}`}</div>
         </div>
