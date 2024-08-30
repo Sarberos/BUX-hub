@@ -19,5 +19,9 @@
     "rewardsProfit": "Ihr Gesamtgewinn",  
     "dailyReward": "Tägliche Belohnung",  
     "open": "Öffnen",  
-    "successCop": "Erfolgreich kopiert"  
+    "successCop": "Erfolgreich kopiert"  ,
+    "сlaimFarm":"Beanspruchen",
+    "frensClaim":"Beanspruchen",
+    "miniTasksTitile":"Zusätzliche Aufgaben abschließen"
+
 }

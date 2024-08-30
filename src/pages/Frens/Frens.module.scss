@@ -45,6 +45,9 @@
                 &.active{
                 background-color: #fff;
                 }
+                &.disable{
+                    background-color: #303030;
+                 }
             }
         }
     }

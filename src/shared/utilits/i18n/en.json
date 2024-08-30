@@ -18,5 +18,8 @@
     "rewardsProfit":"Your total profit",
     "dailyReward":"Daily reward",
     "open":"Open",
-    "successCop":"Successfully copied"
+    "successCop":"Successfully copied",
+    "сlaimFarm":"Claim",  
+    "frensClaim":"Claim",
+    "miniTasksTitile":"Complete extra tasks"
 }

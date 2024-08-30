@@ -8,10 +8,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import { setIsMiniTasks, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins'
+import { useTranslation } from 'react-i18next'
+import { Preloader } from '@widgets/UI/Preloader/Preloader'
 
 
 
 export const MiniTasks = ()=>{
+  const {t} = useTranslation()
   const queryClient =useQueryClient()
   const dispatch=useAppDispatch()
   const {data:tasksInf,isLoading}=useGetTasksInf()
@@ -37,14 +40,14 @@ useEffect(()=>{
 
   
 if (isLoading) {
-  <div>Загрузка</div>
+  <Preloader/>
 }else
 return (
   <div className={s.mini_tasks_wrapper}>
     <div className={s.intro_img_wrap}>
       <img src={intro_img} className={s.intro_img} />
     </div>
-    <div className={s.mini_tasks_subtitle}>Complete extra tasks</div>
+    <div className={s.mini_tasks_subtitle}>{t("miniTasksTitile")}</div>
     <div className={s.mini_tasks_list}>
       {tasksInf && tasksInf?.content.filter(elem=>elem.id ==state.miniTaskId).map((item)=>{
         return item.sub_tasks && item.sub_tasks.map(((el,index)=>(
@@ -54,8 +57,8 @@ return (
       })}
     </div>
     <div className={s.claim_btn}>
-      {completedTasks.length !==0 &&<MainBtn event={()=>onMiniTaskClaim()}>Claim</MainBtn>}
-      {!completedTasks && <MainBtn  backColor='#818181'>Claim</MainBtn>}
+      {completedTasks.length !==0 &&<MainBtn event={()=>onMiniTaskClaim()}>{t("claim")}</MainBtn>}
+      {!completedTasks && <MainBtn  backColor='#818181'>{t("claim")}</MainBtn>}
     </div>
   </div>            
 );

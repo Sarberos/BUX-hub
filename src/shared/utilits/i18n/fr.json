@@ -15,10 +15,13 @@
     "sendToTelgram": "Envoyer sur Telegram",  
     "copyLink": "Copier le lien",  
     "sendInvite": "Envoyer l'invitation",  
-    
+    "сlaimFarm":"Réclamer",  
     "startFarming": "Commencer l'agriculture",  
     "rewardsProfit": "Votre profit total",  
     "dailyReward": "Récompense quotidienne",  
     "open": "Ouvrir",  
-    "successCop": "Copié avec succès"  
+    "successCop": "Copié avec succès" ,
+    "frensClaim": "Réclamer" ,
+    "miniTasksTitile":"Compléter des tâches supplémentaires"
+
 }

@@ -111,7 +111,7 @@ if(statusLoading){
           {farmStatus === EnumFarmStatus.CLAIM && (
             <MainBtn  event={()=>onClaimFarming()}>
               <div className={s.claim_home_btn}>  
-                <div>{t('claim')}</div>
+                <div>{t('сlaimFarm')}</div>
                 <div>
                   <KoinQuantity
                     coinValue={claimedCoins}
