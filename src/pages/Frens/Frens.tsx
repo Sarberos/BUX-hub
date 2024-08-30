@@ -36,7 +36,7 @@ export const Frens=()=>{
         dispatch(updateTotalCoins(refCoins))
         dispatch(setTaimerValue({formattedHours:'24',formattedMinutes:'00',hours:24,minuts:0}))
     }
-    onClaimFrensCoins()
+
     useEffect(()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
@@ -56,11 +56,11 @@ export const Frens=()=>{
             <div className={s.frens_coins_wrap}>
                 <div className={s.frens_coins_wrap}>
                     <p className={s.frens_coins_value}>{refCoins}</p>
-                    {/* {frensState.farmStatus===EnumFrensFarmStatus.FARMING ? (
+                    {frensState.farmStatus===EnumFrensFarmStatus.FARMING ? (
                         <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${frensState.timer?.formattedHours}h ${frensState.timer?.formattedMinutes}m`}</button>
                     ):(
                         <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>
-                    )} */}
+                    )}
                     
                 </div>
             </div>
