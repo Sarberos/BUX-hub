@@ -1,7 +1,7 @@
 .raiting_wrapper{
     display: flex;
     flex-direction: column;
-    padding: 0 8px ;
+    padding: 0 8px 17px;
     
     .raiting_title_wrap{
         width: 100%;
@@ -24,7 +24,7 @@
         border-radius: 30px;
         overflow-y: scroll;
         scrollbar-width: none;
-        margin-bottom: 17px;
+        // margin-bottom: 17px;
         @media screen and (max-height:690px){
         // max-height: 450px;
         }

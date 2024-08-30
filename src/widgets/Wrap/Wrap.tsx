@@ -41,7 +41,7 @@ const handlingTaimer = (mins: number, hours: number, dispatch: any) => {
 }
 
 export const  Wrap=() =>{
-  const {user}=useTelegramApi()
+  const {user,tg}=useTelegramApi()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
@@ -50,6 +50,10 @@ export const  Wrap=() =>{
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
   
+  useEffect(()=>{
+    tg.setHeaderColor('#00000');
+    tg.showAlert('jnsjngnjgndfjgjgdf',()=>{})
+  })
   useEffect(()=>{
     if(user?.language_code){
       user?.language_code==='ru'||user?.language_code==='en'||user?.language_code==='fr'||user?.language_code==='de' && dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
