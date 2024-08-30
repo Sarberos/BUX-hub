@@ -18,9 +18,9 @@ export const Tasks=()=>{
 
   console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
 
-// if(taskInfoLoading){
-//   return <Preloader />
-// }else 
+if(taskInfoLoading){
+  return <Preloader />
+}else 
   return (
     <>
 {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
