@@ -42,7 +42,7 @@ if(taskInfoLoading){
             />
           )}
         </div>
-    </div>
+    </div> 
     </>
     );
 

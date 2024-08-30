@@ -7,6 +7,7 @@ import { useState ,useEffect} from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { setIsMiniTasks, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
+import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins'
 
 
 
@@ -14,6 +15,7 @@ export const MiniTasks = ()=>{
   const queryClient =useQueryClient()
   const dispatch=useAppDispatch()
   const {data:tasksInf,isLoading}=useGetTasksInf()
+  const {mutate:claimTasksCoins}=useClaimTasksCoins()
   const state = useAppSelector(state=>state.home)
   const [completedTasks , setCompletedTasks]=useState<TTaskItem[]>([])
 
@@ -25,14 +27,14 @@ useEffect(()=>{
 }
 },[tasksInf])
 
-  const onMiniTaskClaim=()=>{
+  const onMiniTaskClaim=async()=>{
     let coins:number= completedTasks.reduce((acc, elem) => acc + elem.coins, 0);
     dispatch(updateTotalCoins(coins))
     dispatch(setIsMiniTasks(false))
+    await claimTasksCoins(state.miniTaskId)
     queryClient.invalidateQueries({queryKey:['task_inf']})
   }
 
-  
   
 if (isLoading) {
   <div>Загрузка</div>
