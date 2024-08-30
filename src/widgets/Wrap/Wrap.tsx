@@ -52,8 +52,7 @@ export const  Wrap=() =>{
   
   useEffect(()=>{
     if(user?.language_code){
-      console.log('LANGUEGE COD'+user.language_code);
-    dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
+      user?.language_code==='ru'||user?.language_code==='en'||user?.language_code==='fr'||user?.language_code==='de' && dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
     i18next.changeLanguage(user?.language_code);
   }
   },[user?.language_code])
