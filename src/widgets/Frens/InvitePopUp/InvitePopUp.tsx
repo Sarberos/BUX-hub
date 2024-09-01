@@ -13,7 +13,7 @@ export default function(){
   const {t} = useTranslation()
   const {user,tg}=useTelegramApi()
   const dispatch= useAppDispatch()
-  const currentLink=`https://t.me/SarberosBot?start=${user?.id}`;
+  const currentLink=`https://t.me/anarchy_devmode_bot?start=${user?.id}`;
   
 const copyToClipboard =(textToCopy: string) => {
   navigator.clipboard.writeText(textToCopy)
@@ -27,7 +27,7 @@ const copyToClipboard =(textToCopy: string) => {
 };  
 
 const hadleSendToTelegram = () => { 
-  tg.openTelegramLink(`https://t.me/share?url=${currentLink}&text=Присоединяйся`)
+  tg.openTelegramLink(`https://t.me/share?url=${currentLink}&text=Join me on BUX and let's earn together! Use my invite link to join the fun. 🤩`)
   dispatch(setInviteStatus(false))
 };
     

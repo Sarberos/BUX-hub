@@ -2,7 +2,6 @@ import s from "./Wrap.module.scss";
 import { TTimerType } from "@pages/Home/Home";
 import { useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
-import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import { setFormattedTaimer, setLanguage, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
@@ -83,9 +82,6 @@ useEffect(()=>{
   
   },[frensTimerValue])
   
-if(false){
-  return <Preloader />
-}else 
   return (
   <div className={s.wrap}>
     {frenState.inviteStatus && <div className={frenState.inviteStatus ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
@@ -94,11 +90,6 @@ if(false){
       </BottomPopUp>
     </div>
   }
-  {/* {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
-    <PopUp onClose={()=>dispatch(setIsMiniTasks(true))}>
-      <MiniTasks />
-    </PopUp>
-  </div> } */}
     {!frenState.inviteStatus && <>
       <div className={s.child_wrap}>
         <Outlet/>
