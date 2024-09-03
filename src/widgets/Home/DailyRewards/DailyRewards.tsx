@@ -39,7 +39,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
     return(
         <div className={s.daily_reward_wrap}>
             <div className={s.reward_title}>
-                {userLanguage==='cr'? 'Ежедневная награда': t('dailyReward') }
+                {userLanguage==='ru'? 'Ежедневная награда': t('dailyReward') }
             </div>
             <div className={s.box_slider}>
                 {DAYBOXLIST.map((elem,index)=>{
@@ -49,7 +49,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
                 })}
             </div>
             <div className={s.rewar_subtitle}>
-                {`${userLanguage==='cr'? 'Твой общий доход': t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
+                {`${userLanguage==='ru'? 'Твой общий доход': t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
             </div>
             <div className={s.claim_btn}>
                 {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
