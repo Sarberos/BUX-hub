@@ -11,6 +11,12 @@ import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
+import home_bg from '@shared/Wrap/assets/img/new_main.png'
+import tasks_bg from '@shared/Wrap/assets/img/new_tasks.png'
+import raiting_bg from '@shared/Wrap/assets/img/new_raiting.png'
+import frens_bg from '@shared/Wrap/assets/img/new_frens.png'
+
+
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
   if (mins === 0) {  
@@ -51,6 +57,7 @@ export const  Wrap=() =>{
   const frenState = useAppSelector(state=>state.frens)
   
   const [currenPageId, setCurrentPageId] = useState(1);
+  const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
   
@@ -82,9 +89,16 @@ useEffect(()=>{
     return () => clearInterval(frensInterval);  
   
   },[frensTimerValue])
+
+  useEffect(()=>{
+    currenPageId ===1 && setBackground(home_bg)
+    currenPageId ===2 && setBackground(tasks_bg)
+    currenPageId ===3 && setBackground(raiting_bg)
+    currenPageId ===4 && setBackground(frens_bg)
+  },[currenPageId])
   
   return (
-  <div className={s.wrap}>
+  <div style={{backgroundImage:`url(${background})`}}  className={s.wrap}>
     {frenState.inviteStatus && <div className={frenState.inviteStatus ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
       <BottomPopUp onClose={()=>dispatch(setInviteStatus(false))}>
         <InvitePopUp  />
