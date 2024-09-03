@@ -1,5 +1,5 @@
 {
-    "hello":"Hello {{name}}",
+    "hello":"Hello, {{name}}",
     "farming": "Farming",
     "day":"day",
     "tasks":"Tasks",
