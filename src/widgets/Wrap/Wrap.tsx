@@ -3,7 +3,7 @@ import { TTimerType } from "@pages/Home/Home";
 import { useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import { setFormattedTaimer, setLanguage, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
+import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
@@ -11,7 +11,6 @@ import { Outlet } from "react-router";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
 import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
-import i18next from "i18next";
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
   if (mins === 0) {  
@@ -40,7 +39,7 @@ const handlingTaimer = (mins: number, hours: number, dispatch: any) => {
 }
 
 export const  Wrap=() =>{
-  const {user,tg}=useTelegramApi()
+  const {tg}=useTelegramApi()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
@@ -50,15 +49,9 @@ export const  Wrap=() =>{
   const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
   
 
-  useEffect(()=>{
+useEffect(()=>{
     tg.expand()
   })
-  useEffect(()=>{
-    if(user?.language_code){
-      user?.language_code==='ru'||user?.language_code==='en'||user?.language_code==='fr'||user?.language_code==='de' && dispatch(setLanguage({value:user.language_code.toUpperCase(),label:user.language_code.toUpperCase() }))
-    i18next.changeLanguage(user?.language_code);
-  }
-  },[user?.language_code])
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
 },[state.timer])
