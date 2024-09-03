@@ -27,7 +27,7 @@ const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {
 const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) => {  
   sec > 0 && sec--;  
   if (sec === 0) {  
-    mins--;
+    mins > 0 && mins--; 
     sec=59;
     if(mins===0){
       if (hours === 0) {  
