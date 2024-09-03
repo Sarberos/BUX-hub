@@ -133,6 +133,7 @@ if(statusLoading){
          <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
            <DailyRewards
              onClose={() => dispatch(setIsDailyReward(false))}
+             buttonActive={bonusInfo?.status===EnumBonusStatus.CLAIM}
            />
          </BottomPopUp>
        </div>

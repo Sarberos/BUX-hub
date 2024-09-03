@@ -9,7 +9,7 @@ import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
 import { useQueryClient } from '@tanstack/react-query'
 
-export default function({onClose}:{onClose:()=> void}){
+export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive: boolean}){
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
@@ -42,7 +42,8 @@ export default function({onClose}:{onClose:()=> void}){
             {`${t('rewardsProfit')}: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
             </div>
             <div className={s.claim_btn}>
-                <MainBtn event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>
+                {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
+                {buttonActive && <MainBtn  backColor={'#282828'} event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
             </div>
         </div>
     )
