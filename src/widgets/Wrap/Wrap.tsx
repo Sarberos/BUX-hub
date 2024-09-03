@@ -1,5 +1,5 @@
 import s from "./Wrap.module.scss";
-import { TTimerType } from "@pages/Home/Home";
+import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
 import { useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
@@ -24,18 +24,23 @@ const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {
   const formattedMinutes = String(mins).padStart(2, '0');  
   dispatch(setTaimerValue({ formattedHours, formattedMinutes, hours, minuts: mins }));  
 }
-const handlingTaimer = (mins: number, hours: number, dispatch: any) => {  
-  mins > 0 && mins--;  
-  if (mins === 0) {  
-    if (hours === 0) {  
-      dispatch(setStoreFarmStatus(EnumFarmStatus.CLAIM));  
-    }  
-    hours--;  
-    mins = 59;  
+const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) => {  
+  sec > 0 && sec--;  
+  if (sec === 0) {  
+    if(mins===0){
+      if (hours === 0) {  
+        dispatch(setStoreFarmStatus(EnumFarmStatus.CLAIM));  
+      }  
+      hours--;  
+      mins = 59;  
+    }
+    mins--;
+    sec=59;
   }  
   const formattedHours = String(hours).padStart(2, '0');  
   const formattedMinutes = String(mins).padStart(2, '0');  
-  dispatch(setFormattedTaimer({ formattedHours, formattedMinutes, hours, minuts: mins }));  
+  const formattedSec = String(sec).padStart(2, '0');  
+  dispatch(setFormattedTaimer({ formattedHours, formattedMinutes,formattedSec,sec, hours, minuts: mins }));  
 }
 
 export const  Wrap=() =>{
@@ -46,7 +51,7 @@ export const  Wrap=() =>{
   
   const [currenPageId, setCurrentPageId] = useState(1);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
-  const [frensTimerValue, setFrensTimerValue]=useState<TTimerType>(frenState.timer)
+  const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
   
 
 useEffect(()=>{
@@ -58,8 +63,8 @@ useEffect(()=>{
 useEffect(()=>{
     const intervalId = setInterval(() => {  
       if (farmTimerValue) {  
-        handlingTaimer(farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch);  }  
-    },60000);  
+        handlingTaimer(farmTimerValue.sec || 0 ,farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch);  }  
+    },1000);  
   
     return () => clearInterval(intervalId);  
   },[farmTimerValue])

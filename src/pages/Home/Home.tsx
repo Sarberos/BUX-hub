@@ -28,6 +28,14 @@ export type TFarmInfo={
 export type TTimerType = {  
   formattedHours: string;  
   formattedMinutes: string;  
+  formattedSec:string;
+  minuts: number;  
+  hours: number;  
+  sec:number;
+} | null; 
+export type TFrensTimerType = {  
+  formattedHours: string;  
+  formattedMinutes: string;  
   minuts: number;  
   hours: number;  
 } | null; 
@@ -52,7 +60,7 @@ export function Home(){
 const onStartFarming=()=>{
   startReq();
   dispatch(setStoreFarmStatus(EnumFarmStatus.FARMING))
-  dispatch(setFormattedTaimer({formattedHours:'12',formattedMinutes:'00',hours:12,minuts:0}))
+  dispatch(setFormattedTaimer({formattedHours:'12',formattedMinutes:'00',formattedSec:'00',hours:12,minuts:0,sec:0}))
 }
 const onClaimFarming=()=>{
   claimReq();

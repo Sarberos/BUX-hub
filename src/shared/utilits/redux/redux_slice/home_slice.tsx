@@ -26,8 +26,10 @@ const initialState: HomeState = {
   timer:{
     formattedHours:'00',
     formattedMinutes:'00',
+    formattedSec:'00',
     hours:0,
     minuts:0,
+    sec:0,
 },
 bonusDay:0,
 isLoading:false,

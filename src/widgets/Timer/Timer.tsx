@@ -10,7 +10,7 @@ export const Timer=()=>{
                 <div className={s.taimer_img_wrap}>
                     <img src={taimerIco} className={s.taimer_img}/>
                 </div>
-                <div className={s.taimer_value}>{`${homeState.timer?.formattedHours}:${homeState.timer?.formattedMinutes}`}</div>
+                <div className={s.taimer_value}>{`${homeState.timer?.formattedHours}:${homeState.timer?.formattedMinutes}:${homeState.timer?.formattedSec}`}</div>
             </div>
         </div>
     )

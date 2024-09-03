@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store_config'
-import { TTimerType } from '@pages/Home/Home';
+import { TFrensTimerType } from '@pages/Home/Home';
 import { EnumFrensFarmStatus } from '@shared/Frens/consts/frensFarmStatus.enum';
 
 
 interface IFrensState {
-  timer:TTimerType;
+  timer:TFrensTimerType;
   farmStatus: EnumFrensFarmStatus,
   inviteStatus: boolean,
 }
@@ -26,7 +26,7 @@ export const frensSlice = createSlice({
   name: 'frens',
   initialState,
   reducers: {
-    setTaimerValue:(state, action: PayloadAction<TTimerType>) => {
+    setTaimerValue:(state, action: PayloadAction<TFrensTimerType>) => {
       state.timer = action.payload
   },
     setInviteStatus:(state, action: PayloadAction<boolean>) => {
