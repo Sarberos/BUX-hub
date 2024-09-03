@@ -14,7 +14,7 @@ export default function ({active_usernames=['Anonim'],coins,place,telegramId}:TR
     const isMy:boolean|undefined=user && user.id===parseInt(telegramId)
     
     const meItemStyle: React.CSSProperties = isMy
-      ? { backgroundColor: "#fff", position: "sticky", bottom: 0,}
+      ? { backgroundColor: "#CCE1E1", position: "sticky", bottom: 0}
       : {};  
 
     
@@ -25,7 +25,6 @@ export default function ({active_usernames=['Anonim'],coins,place,telegramId}:TR
                 <div className={s.raiting_title_wrap}>
                     {!isMy &&<p className={s.raiting_title}>{active_usernames && active_usernames[0]}</p>}
                     {isMy && <p className={s.raiting_title}>{t('you')}</p>}
-                    <p className={s.raiting_subtitle}>{`${3} lvl`}</p>
                 </div>
             </div>
             <div className={s.coin_quantity}>{coins}</div>
