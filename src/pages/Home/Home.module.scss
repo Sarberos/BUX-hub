@@ -24,11 +24,17 @@
         @media screen and (max-height: 630px){
             margin-bottom: 40px;
         }
+        @media screen and (max-height: 550px){
+            margin-top: 25px;
+        }
     } 
     .lang_daycounter_wrap{
         position:absolute;
         top:31px;
         right:16px;
+        @media screen and (max-height: 550px){
+           top: 25px;
+        }
     }
     .koin_wrap{
         margin: 0 auto 31px;
