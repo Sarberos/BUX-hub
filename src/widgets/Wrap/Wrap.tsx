@@ -27,6 +27,8 @@ const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {
 const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) => {  
   sec > 0 && sec--;  
   if (sec === 0) {  
+    mins--;
+    sec=59;
     if(mins===0){
       if (hours === 0) {  
         dispatch(setStoreFarmStatus(EnumFarmStatus.CLAIM));  
@@ -34,8 +36,7 @@ const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) =
       hours--;  
       mins = 59;  
     }
-    mins--;
-    sec=59;
+    
   }  
   const formattedHours = String(hours).padStart(2, '0');  
   const formattedMinutes = String(mins).padStart(2, '0');  

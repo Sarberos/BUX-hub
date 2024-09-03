@@ -1,5 +1,5 @@
 {  
-    "hello": "Hallo {{name}}",  
+    "hello": "Hallo",  
     "farming": "Landwirtschaft",  
     "day": "Tag",  
     "tasks": "Aufgaben",  
