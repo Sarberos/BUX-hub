@@ -93,14 +93,14 @@ useEffect(()=>{
     }  
   },[farmInfo,bonusInfo])
 
-if(statusLoading){
-  return <Preloader />
-}else
+// if(statusLoading){
+//   return <Preloader />
+// }else
  return (
   <>
       <div className={s.wrapper}>
         <div className={s.title_wrap}>
-          <p className={s.title}>{t("hello")}</p>
+          <p className={s.title}>{`${t("hello")},`}</p>
           <p className={s.title}>{user?.username}</p>
         </div>
         <div className={s.lang_daycounter_wrap}>
