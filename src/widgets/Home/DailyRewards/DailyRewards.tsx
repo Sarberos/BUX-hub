@@ -21,11 +21,10 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
 
     const [userLanguage,setLanguage]=useState<string>()
     useEffect(()=>{
-        setLanguage(user?.language_code)
         if(user?.language_code){
-          user?.language_code==='ru'
+            setLanguage(user?.language_code)
       }
-      },[user?.language_code])
+      })
 
 
     const onClaimBonus=(dayNumber:number)=>{
@@ -50,7 +49,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
                 })}
             </div>
             <div className={s.rewar_subtitle}>
-                {`${userLanguage==='ru'? 'Твой общий доход':t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
+                {`${userLanguage==='ru'? 'Твой общий доход': t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
             </div>
             <div className={s.claim_btn}>
                 {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
