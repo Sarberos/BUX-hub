@@ -8,13 +8,24 @@ import { setBonusDay, updateTotalCoins } from '@shared/utilits/redux/redux_slice
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
 import { useQueryClient } from '@tanstack/react-query'
+import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
+import { useEffect, useState } from 'react'
 
 export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive: boolean}){
     const {t} =useTranslation()
+    const {user}=useTelegramApi()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
     const {mutate:claim_bonus}=useClaimBonus()
     const queryClient =useQueryClient()
+
+    const [userLanguage,setLanguage]=useState<string>()
+    useEffect(()=>{
+        setLanguage(user?.language_code)
+        if(user?.language_code){
+          user?.language_code==='ru'
+      }
+      },[user?.language_code])
 
 
     const onClaimBonus=(dayNumber:number)=>{
@@ -29,7 +40,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
     return(
         <div className={s.daily_reward_wrap}>
             <div className={s.reward_title}>
-                {t('dailyReward')}
+                {userLanguage==='ru'? 'Ежедневная награда': t('dailyReward') }
             </div>
             <div className={s.box_slider}>
                 {DAYBOXLIST.map((elem,index)=>{
@@ -39,7 +50,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
                 })}
             </div>
             <div className={s.rewar_subtitle}>
-            {`${t('rewardsProfit')}: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
+                {`${userLanguage==='ru'? 'Твой общий доход':t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
             </div>
             <div className={s.claim_btn}>
                 {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
