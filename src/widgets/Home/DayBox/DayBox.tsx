@@ -9,7 +9,6 @@ export default function ({currentDay,boxImg,rewardLabel,rewardDay,}:TDayBoxProps
    
     return (
         <div  className={s.prize_box_wrap}>
-=   
         <div className={s.prize_box_inner_wrap}>
             <div className={s.reward_info_wrap}>
                 <div className={s.prize_img_wrap}>

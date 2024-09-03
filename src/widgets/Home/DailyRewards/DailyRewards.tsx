@@ -54,7 +54,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
             </div>
             <div className={s.claim_btn}>
                 {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
-                {!buttonActive && <MainBtn  backColor={'#282828'} event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
+                {!buttonActive && <MainBtn  backColor={'#282828'} disabled={true} >{t('claim')}</MainBtn>}
             </div>
         </div>
     )
