@@ -27,13 +27,13 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
       })
 
 
-    const onClaimBonus=(dayNumber:number)=>{
-        claim_bonus();
+    const onClaimBonus=async(dayNumber:number)=>{
         onClose();
         dispatch(setBonusDay(state.bonusDay+1))
         const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber+1)
-        dispatch(updateTotalCoins(currentObj[0].rewardValue))
+            dispatch(updateTotalCoins(currentObj[0].rewardValue))
+        await claim_bonus();
         queryClient.invalidateQueries({ queryKey: ['bonus_status'] })
     }
     return(

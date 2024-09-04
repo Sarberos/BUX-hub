@@ -3,8 +3,6 @@ export type TPagesItem={
     img: string,
     activeImg:string,
     link: string,
-    whiteThemImg: string,
-    whiteThemActiveImg: string,
 }
 export type TFooterProps={
     currenPageId:number,
