@@ -8,24 +8,13 @@ import { setBonusDay, updateTotalCoins } from '@shared/utilits/redux/redux_slice
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
 import { useQueryClient } from '@tanstack/react-query'
-import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
-import { useEffect, useState } from 'react'
 
 export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive: boolean}){
     const {t} =useTranslation()
-    const {user}=useTelegramApi()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
     const {mutate:claim_bonus}=useClaimBonus()
     const queryClient =useQueryClient()
-
-    const [userLanguage,setLanguage]=useState<string>('')
-    useEffect(()=>{
-        if(user?.language_code){
-            setLanguage(user.language_code)
-      }
-      })
-
 
     const onClaimBonus=async(dayNumber:number)=>{
         onClose();
