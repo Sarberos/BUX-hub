@@ -1,4 +1,5 @@
 import s from "@pages/Raiting/Raiting.module.scss";
+// import { RAITINGLIST } from "@shared/Raiting/consts/raitingList";
 import { TRaitngItem, useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
 import RaitingItem from "@widgets/Raiting/RaitingItem";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";

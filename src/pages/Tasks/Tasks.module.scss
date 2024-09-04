@@ -3,8 +3,6 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    @media screen and (max-height: 600px){
-    }
     .title_wrap{
         width: 100%;
         display: flex;
@@ -34,7 +32,8 @@
         }
     }
     .task_list{
-        flex: 1 1 254px;
+        flex: 1;
+        max-height: calc(100vh - 320px);
         display: flex ;
         flex-direction: column;
         gap: 20px;
@@ -44,11 +43,8 @@
         border-radius: 15px; 
         overflow-y: scroll;
         scrollbar-width: none;
-        @media screen and (max-height:640px) {
-            // flex-shrink: 210px
-        }
-        @media screen and (max-height:680px) {
-            // flex-shrink: 30px;
+        @media screen  and (max-height:570px) {
+            
         }
     }
     .main_claim_btn{

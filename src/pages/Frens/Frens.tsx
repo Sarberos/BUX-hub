@@ -50,7 +50,7 @@ export const Frens=()=>{
     if(frensLoading){ 
         return <Preloader />
       }else
-       return(
+     return(
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>
                 <p className={s.title}>{t("frensTitle")}</p>
@@ -68,6 +68,9 @@ export const Frens=()=>{
             </div>
             {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')}`}</p>}
             {frensData?.content?.length!=0 && <div className={s.frens_list}>
+                {/* {FRENSLIST?.map((elem,index)=>(
+                    <FrensItem key={index} {...elem} /> 
+                ))} */}
                 {refList?.map((elem,index)=>(
                     <FrensItem key={index} {...elem} /> 
                 ))}
