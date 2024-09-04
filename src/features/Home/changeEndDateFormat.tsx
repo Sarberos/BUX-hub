@@ -1,4 +1,4 @@
-export const changeEndDateFormat=(date:string|null)=>{
+export const calcDateValue=(date:string|null)=>{
     if (!date) {  
         return null; 
     }  

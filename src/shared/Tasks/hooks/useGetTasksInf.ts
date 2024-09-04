@@ -16,6 +16,7 @@ export type TTaskItem={
     sub_tasks:TTaskItem[]|undefined,
     title:string,
     updatedAt:string,
+    channel_link:null|string,
 }
 export  type TTaskInf={
     content:TTaskItem[],

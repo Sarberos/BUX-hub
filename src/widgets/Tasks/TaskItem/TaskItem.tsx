@@ -14,9 +14,7 @@ import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,main_task_id,channel_id,claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
-    const tgLink=`https://t.me/${channel_id}`
-
+export default function({title,sub_tasks,coins,id,link,status,main_task_id,channel_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
@@ -27,14 +25,14 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
 
     const handleStart= async(id:number)=>{
         const redLink:string=encodeURIComponent(link)
+        openLink(link!==null?link:redLink)
         await startTask(id)
         TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id}); 
-        openLink(link!==null?link:redLink)
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart= async(id:number)=>{
         await startTask(id);
-        openLink(tgLink)
+        channel_link && openLink(channel_link);
         checkTgSubs(id);
     }
     const handleClaim=(id:number)=>{
@@ -65,7 +63,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_id ===null? openLink(link): openLink(tgLink)}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_id ===null? openLink(link):channel_link?  openLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
             {!sub_tasks && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
 
         </div>

@@ -8,7 +8,7 @@ import { EnumFrensFarmStatus } from '@shared/Frens/consts/frensFarmStatus.enum'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
-import { changeEndDateFormat } from '@features/Home/changeEndDateFormat'
+import { calcDateValue } from '@features/Home/changeEndDateFormat'
 import { Preloader } from '@widgets/UI/Preloader/Preloader'
 import { useTranslation } from 'react-i18next'
 import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp'
@@ -42,8 +42,7 @@ export const Frens=()=>{
     useEffect(()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
-            frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  dispatch(setTaimerValue(changeEndDateFormat(frensData.next_revenues_time)))
-            new Date(frensData.next_revenues_time).getTime()=== new Date().getTime() && dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM))
+            new Date(frensData.next_revenues_time).getTime() <= new Date().getTime() ? dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM)):dispatch(setTaimerValue(calcDateValue(frensData.next_revenues_time)))
             frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
