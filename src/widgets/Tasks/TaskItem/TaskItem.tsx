@@ -14,7 +14,7 @@ import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,main_task_id,channel_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
+export default function({title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
@@ -31,8 +31,8 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart= async(id:number)=>{
-        await startTask(id);
         channel_link && openLink(channel_link);
+        await startTask(id);
         checkTgSubs(id);
     }
     const handleClaim=(id:number)=>{
@@ -57,14 +57,15 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {sub_tasks?.length===0 && status==='pending' && <button onClick={channel_id.length >=1 ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
+            {sub_tasks?.length===0 && status==='pending' && <button onClick={channel_link!=null ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
             {sub_tasks && sub_tasks.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
             {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_id ===null? openLink(link):channel_link?  openLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
             {!sub_tasks && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
+            
+            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  openLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
 
         </div>
     )
