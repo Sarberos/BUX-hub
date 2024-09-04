@@ -6,10 +6,8 @@ import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
-import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
+import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
-import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp";
-import InvitePopUp from "@widgets/Frens/InvitePopUp/InvitePopUp";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 import home_bg from '@shared/Wrap/assets/img/new_main.png'
 import tasks_bg from '@shared/Wrap/assets/img/new_tasks.png'
@@ -99,12 +97,6 @@ useEffect(()=>{
   
   return (
   <div style={{backgroundImage:`url(${background})`}}  className={s.wrap}>
-    {frenState.inviteStatus && <div className={frenState.inviteStatus ?  `${s.invite_fren_pop_up} ${s.active}`:`${s.invite_fren_pop_up}`}>
-      <BottomPopUp onClose={()=>dispatch(setInviteStatus(false))}>
-        <InvitePopUp  />
-      </BottomPopUp>
-    </div>
-  }
     {!frenState.inviteStatus && <>
       <div className={s.child_wrap}>
         <Outlet/>

@@ -12,17 +12,3 @@
     } 
 }
 
-
-.invite_fren_pop_up{
-    transform: rotateX(90deg);
-    transform-origin: 0% 100%;
-    transition: .3s;
-    width: 100%;
-    position: sticky;
-    bottom:0px;
-    z-index: 10;
-    &.active{
-        transform: rotateX(0);
-        transition: .3s;
-    }
-}
