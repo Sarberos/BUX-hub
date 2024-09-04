@@ -33,6 +33,7 @@ export const Frens=()=>{
     const [refList, setRefList]=useState<TFrensItem[]>()
 
     const onClaimFrensCoins=()=>{
+        setRefCoins(0)
         claimCoins();
         dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))
         dispatch(updateTotalCoins(refCoins))
