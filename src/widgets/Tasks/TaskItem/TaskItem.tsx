@@ -31,7 +31,9 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart= async(id:number)=>{
-        await startTask(id)
+        const tgLink=`https://t.me/${channel_id}`
+        await startTask(id);
+        openLink(tgLink)
         checkTgSubs(id);
     }
     const handleClaim=(id:number)=>{
