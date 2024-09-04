@@ -3,12 +3,12 @@ import Lottie from "react-lottie";
 import animationData from "@shared/Home/assets/anim/Animation - 1725476922777.json"; // Убедитесь, что путь к вашему файлу анимации правильный  
 
 export const AnimationMainImg = () => {  
-    const [size, setSize] = useState({ height: 250, width: 250 });  
+    const [size, setSize] = useState(300);  
 
     const updateSize = () => {  
-        const newHeight = window.innerHeight * 0.5; // 30% от высоты экрана  
-        const newWidth = (newHeight / 250) * 250; // Сохраняем пропорции  
-        setSize({ height: newHeight, width: newWidth });  
+        const newHeight = window.innerHeight * 0.48; // 30% от высоты экрана  
+
+        setSize(newHeight);  
     };  
 
     useEffect(() => {  
@@ -26,7 +26,7 @@ export const AnimationMainImg = () => {
         }  
     };  
 
-    return <Lottie options={defaultOptions} height={size.height} width={size.width} />;  
+    return <Lottie options={defaultOptions} height={size} width={300} />;  
 };
 
 
