@@ -23,7 +23,6 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
     const {mutate:startTask,}=useStartTask()
     const {mutate:checkTgSubs,}=useTgSubscribe()
 
-
     const handleStart= async(id:number)=>{
         const redLink:string=encodeURIComponent(link)
         await startTask(id)
@@ -63,7 +62,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id,chann
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
-            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button disabled={true} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ openLink(link)}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
             {!sub_tasks && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
 
         </div>
