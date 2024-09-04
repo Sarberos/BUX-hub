@@ -34,7 +34,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
         const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber+1)
         dispatch(updateTotalCoins(currentObj[0].rewardValue))
-        queryClient.invalidateQueries({ queryKey: ['farm_info'] })
+        queryClient.invalidateQueries({ queryKey: ['bonus_status'] })
     }
     return(
         <div className={s.daily_reward_wrap}>
