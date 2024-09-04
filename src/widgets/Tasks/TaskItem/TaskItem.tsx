@@ -9,22 +9,26 @@ import { useAppDispatch } from '@shared/utilits/redux/hooks'
 import { setIsMiniTasks, setMiniTaskId, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import TasksFetching from '@shared/utilits/axios/TasksRequest'
 import { useQueryClient } from '@tanstack/react-query'
+import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
 
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,main_task_id,claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
+export default function({title,sub_tasks,coins,id,link,status,main_task_id,channel_id,claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
     const {user,openLink}=useTelegramApi()
 
     const {mutate:startTask,}=useStartTask()
+    const {mutate:checkTgSubs,}=useTgSubscribe()
+
 
     const handleStart= async(id:number)=>{
         const redLink:string=encodeURIComponent(link)
         await startTask(id)
-        TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id}); 
+        channel_id!==null && checkTgSubs(id);
+        link!==null && await TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id}); 
         openLink(link!==null?link:redLink)
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }

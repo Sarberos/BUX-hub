@@ -18,14 +18,17 @@
             scrollbar-width: none;
 
         }
-        @media screen and (max-height: 700px){
+        @media screen and (max-height: 705px){
             margin-bottom: 55px;
         }
-        @media screen and (max-height: 630px){
+        @media screen and (max-height: 655px){
             margin-bottom: 40px;
         }
         @media screen and (max-height: 550px){
             margin-top: 25px;
+        }
+        @media screen and (max-height: 505px){
+            margin-bottom: 20px;
         }
     } 
     .lang_daycounter_wrap{

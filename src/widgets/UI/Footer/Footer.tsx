@@ -6,18 +6,33 @@ import { Link } from 'react-router-dom'
 export const Footer=({currenPageId,setCurrentPageId}:TFooterProps)=>{    
 
     return (
-        <div className={s.wrapper}>
-            <div className={s.inner_wrapper}>
-                <nav className={s.navigation}>
-                    {PAGESNAMES.map((elem,index)=>(
-                        <Link  key={index} to={elem.link}> 
-                        <li onClick={()=>setCurrentPageId(elem.id)} className={s.nav_item}>
-                            <img src={elem.id===currenPageId?elem.activeImg :elem.img} className={s.nav_item_img} />
-                        </li>
-                        </Link>
-                    ))}
-                </nav>
-            </div>
+      <div className={s.wrapper}>
+        <div className={s.inner_wrapper}>
+          <nav className={s.navigation}>
+            {PAGESNAMES.map((elem, index) => (
+              <Link key={index} to={elem.link}>
+                <li
+                  onClick={() => setCurrentPageId(elem.id)}
+                  className={s.nav_item}
+                >
+                  <svg
+                    width="25"
+                    height="25"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <image
+                      href={
+                        elem.id === currenPageId ? elem.activeImg : elem.img
+                      }
+                      width="25"
+                      height="25"
+                    />
+                  </svg>
+                </li>
+              </Link>
+            ))}
+          </nav>
         </div>
-    )
+      </div>
+    );
 }
