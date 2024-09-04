@@ -92,5 +92,17 @@
         left: 0;
         z-index: 5;
     }
-    
+}
+.daily_reward{
+    transform: rotateX(0);//
+    transform-origin: 0% 100%;
+    transition: 0.3s;
+    width: 100%;
+    position: sticky;
+    bottom:0px;
+    z-index: 10;
+    &.active{
+        transform: rotateX(0);
+        transition: .3s;
+    }
 }

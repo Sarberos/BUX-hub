@@ -97,7 +97,6 @@ useEffect(()=>{
   
   return (
   <div style={{backgroundImage:`url(${background})`}}  className={s.wrap}>
-    {!frenState.inviteStatus && <>
       <div className={s.child_wrap}>
         <Outlet/>
       </div>
@@ -107,8 +106,6 @@ useEffect(()=>{
           setCurrentPageId={setCurrentPageId}
         />
       </div>
-    </>
-    }
   </div>
   );
 }

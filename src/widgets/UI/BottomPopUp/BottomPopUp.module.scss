@@ -1,6 +1,6 @@
 .bottom_wrap{
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.59);
     .bottom_pop_up__wrap{
         position: absolute;
         width: 100%;
@@ -12,6 +12,7 @@
             border-top-right-radius: 20px;
             margin: 0 auto;
             padding-bottom: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
             .cross_wrap{
                 position: absolute;
                 top:11px;

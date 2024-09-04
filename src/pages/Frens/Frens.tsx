@@ -48,10 +48,11 @@ export const Frens=()=>{
             frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
-    if(frensLoading){ 
-        return <Preloader />
-      }else
+    // if(frensLoading){ 
+    //     return <Preloader />
+    //   }else
      return(
+        <>
         <div className={s.frens_wrap}>
             <div className={s.title_wrap}>
                 <p className={s.title}>{t("frensTitle")}</p>
@@ -79,13 +80,14 @@ export const Frens=()=>{
             <div className={s.invite_frens_btn}>
                 <MainBtn event={()=>dispatch(setInviteStatus(true))} >{t("invite_fren")}</MainBtn>
             </div>
-            {frensState.inviteStatus && <div>
-            <BottomPopUp onClose={()=>dispatch(setInviteStatus(false))}>
-                <InvitePopUp  />
-            </BottomPopUp>
-            </div>
-  }
         </div>
-
+        {frensState.inviteStatus && (
+            <div className={`${s.daily_reward}`}>
+                <BottomPopUp onClose={()=>dispatch(setInviteStatus(false))}>
+                    <InvitePopUp  />
+                </BottomPopUp>
+            </div>)
+        }
+        </>
     )
 }
