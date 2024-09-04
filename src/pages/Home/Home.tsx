@@ -1,6 +1,6 @@
 import s from '@pages/Home/Home.module.scss'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn';    
-import main_img from '@shared/Home/assets/home_img/main_img.png'
+// import main_img from '@shared/Home/assets/home_img/main_img.png'
 import { Lang_DayCounter } from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
 import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
 import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
@@ -110,7 +110,7 @@ if(statusLoading){
           <KoinQuantity coinValue={coins} />
         </div>
         <div className={s.main_img_wrap}>
-          <img src={main_img} alt="" className={s.main_img} />
+          {/* <img src={main_img} alt="" className={s.main_img} /> */}
         </div>
         <div className={s.farming_btn}>
           {farmStatus === EnumFarmStatus.START && (
