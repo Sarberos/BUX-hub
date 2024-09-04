@@ -84,13 +84,22 @@
         overflow: scroll;
         scrollbar-width: none;
     }
-    .invite_frens_btn{
+    .invite_frens_btn_wrap{
         width: 100%;
         padding: 0 17px;
         position: absolute;
         bottom: 14px;
         left: 0;
         z-index: 5;
+        .invite_frens_btn{
+            width: 100%;
+            padding: 15px 0;
+            color: #000000;
+            background-color: #fff;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
+        }
     }
 }
 .daily_reward{

@@ -1,6 +1,5 @@
 import s from '@pages/Frens/Frens.module.scss'
 import FrensItem from '@widgets/Frens/FrensItem/FrensItem'
-import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import { TFrensItem, useGetFrensInfo } from '@shared/Frens/hooks/useGetFrensInfo'
 import { TTimerType } from '@pages/Home/Home'
 import { useClaimFrensCoins } from '@shared/Frens/hooks/useClaimFrensCoins'
@@ -77,8 +76,8 @@ export const Frens=()=>{
                     <FrensItem key={index} {...elem} /> 
                 ))}
             </div>}
-            <div className={s.invite_frens_btn}>
-                <MainBtn event={()=>dispatch(setInviteStatus(true))} >{t("invite_fren")}</MainBtn>
+            <div className={s.invite_frens_btn_wrap}>
+                <button onClick={()=>dispatch(setInviteStatus(true))} className={s.invite_frens_btn}>{t("invite_fren")}</button>
             </div>
         </div>
         {frensState.inviteStatus && (
