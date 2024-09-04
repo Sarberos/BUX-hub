@@ -24,11 +24,14 @@
         @media screen and (max-height: 655px){
             margin-bottom: 40px;
         }
+        @media screen and (max-height: 600px){
+            margin-bottom: 30px;
+        }
         @media screen and (max-height: 550px){
             margin-top: 25px;
         }
         @media screen and (max-height: 505px){
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
     } 
     .lang_daycounter_wrap{
@@ -73,6 +76,9 @@
         }
         @media screen and (max-height: 550px){
             margin-bottom: 18px;
+        }
+        @media screen and (max-height: 500px){
+            margin-bottom: 5px;
         }
     }
     .farming_btn{
