@@ -8,7 +8,7 @@ import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
-// import { TASKLIST } from '@shared/Tasks/consts/tasks_list';
+import { TASKLIST } from '@shared/Tasks/consts/tasks_list';
 export const Tasks=()=>{
   const {t}= useTranslation()
   const dispatch = useAppDispatch()
@@ -35,13 +35,13 @@ if(taskInfoLoading){
         <div className={s.subtitle}>{t("tasksSub")}</div>
       </div>     
         <div className={s.task_list}>
-          {/* {TASKLIST.map((elem, index) => 
+          {TASKLIST.map((elem, index) => 
             <TaskItem
             claimTasksCoins={claimTasksCoins}
               {...elem}
               key={index}
             />
-          )} */}
+          )}
           {tasksInf?.content.map((elem, index) => 
             <TaskItem
             claimTasksCoins={claimTasksCoins}

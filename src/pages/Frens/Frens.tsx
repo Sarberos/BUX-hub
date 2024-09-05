@@ -21,6 +21,13 @@ export type TFrensProps = {
   setInvateStat: (value:boolean)=>void
 };
 
+
+export const comprasionNumbers=(revenuosDate:string)=>{
+    const revTime=new Date(revenuosDate);
+    const now = new Date();
+    return revTime <=now
+}
+
 export const Frens=()=>{
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
@@ -42,7 +49,7 @@ export const Frens=()=>{
     useEffect(()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
-            new Date(frensData.next_revenues_time).getTime() <= new Date().getTime() ? dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM)):dispatch(setTaimerValue(calcDateValue(frensData.next_revenues_time)))
+            comprasionNumbers(frensData.next_revenues_time) ?  dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM)) : dispatch(setTaimerValue(calcDateValue(frensData.next_revenues_time)));
             frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
         }
     },[frensData])
