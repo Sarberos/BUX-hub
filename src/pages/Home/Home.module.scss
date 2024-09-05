@@ -84,10 +84,13 @@
     .farming_btn{
         margin-bottom:45px;
         padding: 0 16px;
-        @media screen and (max-height: 575px){
+        margin-top: 70px;
+        @media screen and (max-height: 580px){
+            margin-top: 50px;
             margin-bottom:25px;
         }
         @media screen and (max-height: 540px){
+            margin-top: 30px;
             margin-bottom:18px;
         }
     } 
