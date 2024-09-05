@@ -113,9 +113,9 @@ useEffect(()=>{
         <div className={s.main_img_wrap}>
           <AnimationMainImg />
         </div>
-        {/* <div className={s.main_img_wrap}>
+        <div className={s.main_img_wrap}>
           <img src={main_img} alt="" className={s.main_img} />
-        </div> */}
+        </div>
         <div className={s.farming_btn}>
           {farmStatus === EnumFarmStatus.START && (
             <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
