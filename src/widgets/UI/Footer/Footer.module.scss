@@ -14,8 +14,10 @@
         border-top-right-radius: 20px;
         z-index: 10;
         .navigation{
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 51px;
             .nav_item{
                 display: flex;
                 justify-content: center;

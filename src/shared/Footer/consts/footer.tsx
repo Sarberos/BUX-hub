@@ -1,4 +1,4 @@
-import home_ico from '@shared/Footer/assets/footer_img/Mask groupnew_home.svg'
+import home_ico from '@shared/Footer/assets/footer_img/Mask group300px_new_a_home.svg'
 import tasks_ico from '@shared/Footer/assets/footer_img/Mask groupnew_tasks.svg'
 import raiting_ico from '@shared/Footer/assets/footer_img/Mask groupnew_raiting.svg'
 import frens_ico from '@shared/Footer/assets/footer_img/new_frens.svg'
