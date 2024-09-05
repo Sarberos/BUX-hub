@@ -62,6 +62,7 @@ export const  Wrap=() =>{
 
 useEffect(()=>{
     tg.expand()
+    tg.setHeaderColor("#00000");
   })
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
