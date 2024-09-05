@@ -31,9 +31,9 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart= async(id:number)=>{
-        channel_link && openLink(channel_link);
-        await startTask(id);
+        startTask(id);
         checkTgSubs(id);
+        channel_link && openLink(channel_link);
     }
     const handleClaim=(id:number)=>{
         claimTasksCoins && claimTasksCoins(id)

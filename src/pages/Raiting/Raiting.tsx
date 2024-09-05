@@ -1,5 +1,5 @@
 import s from "@pages/Raiting/Raiting.module.scss";
-// import { RAITINGLIST } from "@shared/Raiting/consts/raitingList";
+import { RAITINGLIST } from "@shared/Raiting/consts/raitingList";
 import { TRaitngItem, useGetRaitingList } from "@shared/Raiting/hooks/useGetRaitingList";
 import RaitingItem from "@widgets/Raiting/RaitingItem";
 import { Preloader } from "@widgets/UI/Preloader/Preloader";
@@ -11,7 +11,6 @@ export const Raiting = () => {
   const{data:raitingData,isLoading:raitingReqLoading}=useGetRaitingList()
 
   const [sortesData, setSortedData]=useState<TRaitngItem[]>()
-console.log(sortesData);
 
 
   useEffect(()=>{
@@ -33,13 +32,13 @@ console.log(sortesData);
         <p className={s.title}>{t("raitingTitle")}</p>
       </div>
       <div className={s.raiting_list}>
-        {/* {RAITINGLIST.map((elem,index)=>(
+        {RAITINGLIST.map((elem,index)=>(
           <RaitingItem
           key={index}
           place={index+1}
           {...elem}
         />
-        ))} */}
+        ))}
         {sortesData?.map((elem,index)=>(
           <RaitingItem
           key={index}
