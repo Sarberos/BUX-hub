@@ -6,7 +6,7 @@ export const AnimationMainImg = () => {
     const [size, setSize] = useState(300);  
 
     const updateSize = () => {  
-        const newHeight = window.innerHeight * 0.42; 
+        const newHeight = window.innerHeight * 0.3; 
 
         setSize(newHeight);  
     };  
