@@ -1,7 +1,7 @@
 import s from './InvitePopUp.module.scss'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
-import tg_ico from '@shared/Frens/assets/frens_img/Mask groupnew_tg.svg'
-import copy_ico from '@shared/Frens/assets/frens_img/Mask groupnew_copy.svg'
+import tg_ico from '@shared/Frens/assets/frens_img/Mask group600px_new_tg.svg'
+import copy_ico from '@shared/Frens/assets/frens_img/Mask group600px_new_copy.svg'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
 import  { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next'
@@ -38,7 +38,7 @@ const hadleSendToTelegram = () => {
           <MainBtn event={()=>hadleSendToTelegram()}>
             <div className={s.bnt_info_wrap}>
               <div className={s.btn_img_wrap}>
-                <img src={tg_ico} alt="" className={s.btn_img} />
+                <img src={tg_ico} alt="" className={`${s.btn_img} ${s.tg}`} />
               </div>
               <p className={s.btn_title}>{t("sendToTelgram")}</p>
             </div>
@@ -46,7 +46,7 @@ const hadleSendToTelegram = () => {
           <MainBtn event={()=>copyToClipboard(currentLink)}>
             <div className={s.bnt_info_wrap}>
               <div className={s.btn_img_wrap}>
-                <img src={copy_ico} alt="" className={s.btn_img} />
+                <img src={copy_ico} alt="" className={`${s.btn_img} ${s.copy}`} />
               </div>
               <p
                 className={s.btn_title}
