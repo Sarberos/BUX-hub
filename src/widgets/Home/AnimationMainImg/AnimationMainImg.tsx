@@ -6,7 +6,7 @@ export const AnimationMainImg = () => {
     const [size, setSize] = useState(300);  
 
     const updateSize = () => {  
-        const newHeight = window.innerHeight * 0.44; // 30% от высоты экрана  
+        const newHeight = window.innerHeight * 0.42; 
 
         setSize(newHeight);  
     };  
