@@ -1,7 +1,7 @@
 import s from './InvitePopUp.module.scss'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
-import tg_ico from '@shared/Frens/assets/frens_img/tg_ico.svg'
-import copy_ico from '@shared/Frens/assets/frens_img/copy_ico.svg'
+import tg_ico from '@shared/Frens/assets/frens_img/Mask groupnew_tg.svg'
+import copy_ico from '@shared/Frens/assets/frens_img/Mask groupnew_copy.svg'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
 import  { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next'
