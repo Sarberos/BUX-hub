@@ -7,15 +7,17 @@
     .inner_wrapper{
         width: 100%;
         margin: 0 auto;
-        padding: 30px 0 ;
+        padding: 26px 0 30px ;
         position: relative;
         background-color:#000000;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         z-index: 10;
         .navigation{
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
             .nav_item{
                 display: flex;
                 justify-content: center;
