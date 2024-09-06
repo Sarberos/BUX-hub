@@ -72,7 +72,7 @@ const helpFunc=async(channel_link:string,id:number)=>{
             </button>}
             {sub_tasks?.length===0 && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
             
-            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
         </div>
     )
 }
