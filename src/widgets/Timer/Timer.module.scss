@@ -1,5 +1,9 @@
 .taimer_wrap{
-    padding: 14px 16px;
+    width: 121px;
+    height: 48px;
+    display: flex;
+    align-items: cneter;
+    justify-content: center;
     border-radius:200px ;
     background-color: rgba(0, 0, 0, 0.77);
     .inner_wrap{
@@ -7,10 +11,14 @@
         flex-direction: row;
         align-items: center;
         gap:8px;
-        .taimer_img{
+        .taimer_img_wrap{
             width: 16px;
             height: 16px;
-            object-fit: contain;
+            .taimer_img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
         .taimer_value{
             color: #fff;
