@@ -46,6 +46,13 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
  
+
+const helpFunc=async(channel_link:string,id:number)=>{
+    await checkTgSubs(id);
+    openLink(channel_link)
+}
+
+    
     return (
         <div className={s.task_item_wrap}>
             <div className={s.info}>
@@ -57,7 +64,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {sub_tasks?.length===0 && status==='pending' && <button onClick={!channel_link ? ()=>{handleStart(id)}:()=>{handleTgStart(id);checkTgSubs(id);}} className={s.status_btn}>{t("start")}</button>} 
+            {sub_tasks?.length===0 && status==='pending' && <button onClick={!channel_link ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
             {sub_tasks.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
             {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
@@ -65,7 +72,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
             </button>}
             {sub_tasks?.length===0 && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
             
-            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  openLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks && sub_tasks.length==0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
         </div>
     )
 }
