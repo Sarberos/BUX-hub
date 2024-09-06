@@ -25,8 +25,8 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const {mutateAsync:checkTgSubs,}=useTgSubscribe()
 
     const handleStart= async(id:number)=>{
-        const redLink:string=encodeURIComponent(link)
         await startTask(id)
+        const redLink:string=encodeURIComponent(link)
         openLink(apiUrl+`task/goToLink/${user?.id}/${redLink}/${id}`)
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
@@ -46,10 +46,14 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         dispatch(setIsMiniTasks(true)); 
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
-    const secondLinkOpen = (channel_link: string, id: number) => {
+    const secondTgLinkOpen = (channel_link: string, id: number) => {
         status!==EnumTaskStatus.CLAIMED &&checkTgSubs(id);
       openLink(channel_link);
     };
+    const secondLinkOpen=(tg_id:number,link:string,id:number)=>{
+        const redLink:string=encodeURIComponent(link)
+        openLink(apiUrl+`task/goToLink/${tg_id}/${redLink}/${id}`)
+    }
     return (
         <div className={s.task_item_wrap}>
             <div className={s.info}>
@@ -66,15 +70,23 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     {t("start")}  
                 </button>  
                 ) : null}  
-            {sub_tasks&&sub_tasks.length!==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
+            {(sub_tasks&&sub_tasks.length!==0 &&status!==EnumTaskStatus.CLAIMED) && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
+            {(sub_tasks&&sub_tasks.length!==0 && status===EnumTaskStatus.CLAIMED) &&
+            <button onClick={()=>handleOpen(id)} className={`${s.status_btn} ${s.completed}`}>
+                <img src={success_arrow} className={s.success_img}/>
+            </button>}
+            {(main_task_id!==null && status ===EnumTaskStatus.IN_PROGRESS) && <button onClick={()=>{user && secondLinkOpen(user?.id,link,id)}} className={s.status_btn}>  
+                    {t("start")}  
+                </button>}
+
             {main_task_id!==null && status ==='completed' && 
-            <button disabled={true} className={`${s.status_btn} ${s.success}`}>
+            <button onClick={()=>{openLink(link)}} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
             {sub_tasks?.length===0 && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
             
-            {sub_tasks?.length===0 && status===EnumTaskStatus.CLAIMED && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
-            { sub_tasks && sub_tasks.length==0 && status===EnumTaskStatus.IN_PROGRESS && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks?.length===0 && status===EnumTaskStatus.CLAIMED && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            { sub_tasks && sub_tasks.length==0 && status===EnumTaskStatus.IN_PROGRESS && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
         </div>
     )
 }

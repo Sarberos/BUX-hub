@@ -19,7 +19,7 @@ export const Raiting = () => {
         (a,b)=>{
           return (b.coins || 0) - (a.coins || 0);  
         }
-      )
+      ).slice(0,15)
       setSortedData(sortArr)
     }
   },[raitingData])

@@ -13,17 +13,17 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
-    const {mutate:claim_bonus}=useClaimBonus()
+    const {mutateAsync:claim_bonus}=useClaimBonus()
     const queryClient =useQueryClient()
 
     const onClaimBonus=async(dayNumber:number)=>{
-        onClose();
-        dispatch(setBonusDay(state.bonusDay+1))
-        const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
+            dispatch(setBonusDay(state.bonusDay+1))
+            const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber+1)
             dispatch(updateTotalCoins(currentObj[0].rewardValue))
-        await claim_bonus();
-        queryClient.invalidateQueries({ queryKey: ['bonus_status'] })
+            onClose();
+            await claim_bonus();
+            queryClient.invalidateQueries({ queryKey: ['bonus_status'] })
     }
     return(
         <div className={s.daily_reward_wrap}>

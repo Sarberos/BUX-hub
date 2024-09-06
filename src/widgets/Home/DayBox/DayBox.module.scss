@@ -1,10 +1,11 @@
 .prize_box_wrap{
     width: 97px;
     min-width: 97px;
+        height: 142px;
     position: relative;
     .prize_box_inner_wrap{
         width:100%;
-        height: 142px;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -54,11 +55,11 @@
         position: absolute;
         display: flex;
         justify-content: center;
-        top:25%;
+        top:18%;
         z-index: 10;
         .prize_img{
-            width:60px;
-            height: 40px;
+            width:100%;
+            height:100%;
             object-fit: cover;
         }
     }

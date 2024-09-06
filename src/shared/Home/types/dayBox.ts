@@ -4,4 +4,8 @@ export type TDayBoxProps={
     rewardValue: number,
     rewardDay: number,
     currentDay:number,
+    style:{
+        width:string,
+    }
+
 }

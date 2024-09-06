@@ -2,8 +2,7 @@ import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import s from './DayBox.module.scss'
 import { useTranslation } from 'react-i18next'
 
-
-export default function ({currentDay,boxImg,rewardLabel,rewardDay,}:TDayBoxProps){
+export default function ({currentDay,boxImg,rewardLabel,rewardDay,style}:TDayBoxProps){
     const {t}=useTranslation()
    const untouchStyle:React.CSSProperties=currentDay===rewardDay-1 ? {display:'none'}:{}
    
@@ -16,8 +15,8 @@ export default function ({currentDay,boxImg,rewardLabel,rewardDay,}:TDayBoxProps
             <div className={s.day_counter}>{`${t("day")} ${rewardDay}`}</div>
             <div style={untouchStyle} className={s.untouch_box}></div>
         </div>
-            <div className={s.prize_img_wrap}>
-                    <img src={boxImg}  className={s.prize_img} />
+            <div style={style} className={s.prize_img_wrap}>
+                    <img  src={boxImg}  className={s.prize_img} />
             </div>
         </div>  
     )

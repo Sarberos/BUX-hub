@@ -59,12 +59,7 @@ return (
         )
         ))
       })}
-      {tasksInf && tasksInf?.content.filter(elem=>elem.id ==state.miniTaskId).map((item)=>{
-        return item.sub_tasks && item.sub_tasks.map(((el,index)=>(
-          <TaskItem  {...el} key={index} />
-        )
-        ))
-      })}
+
     </div>
     <div className={s.claim_btn}>
       {mainTask?.status===EnumTaskStatus.COMPLETED &&<MainBtn event={()=>onMiniTaskClaim()}>{t("claim")}</MainBtn>}

@@ -53,6 +53,13 @@
             background-color: #303030;
             padding:  6px 19px ;
         }
+        &.completed{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4fadab;
+            padding:  6px 19px ;
+        }
         &.disable{
         background-color: #303030;
         }
