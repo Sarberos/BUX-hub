@@ -10,6 +10,7 @@ import { setIsMiniTasks, setMiniTaskId, updateTotalCoins } from '@shared/utilits
 import TasksFetching from '@shared/utilits/axios/TasksRequest'
 import { useQueryClient } from '@tanstack/react-query'
 import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
+import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
 
 
 
@@ -65,14 +66,18 @@ const helpFunc=async(channel_link:string,id:number)=>{
                 </div>
             </div>
             {sub_tasks?.length===0 && status==='pending' && <button onClick={!channel_link ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
-            {sub_tasks.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
+            {sub_tasks?.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
             {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>
             </button>}
             {sub_tasks?.length===0 && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
             
-            {sub_tasks.length===0 && status==='claimed' || sub_tasks && sub_tasks.length==0 && status==='in-progress' && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks?.length===0 && status===EnumTaskStatus.CLAIMED && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            { sub_tasks && sub_tasks.length==0 && status===EnumTaskStatus.IN_PROGRESS && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
         </div>
     )
 }
+
+
+
