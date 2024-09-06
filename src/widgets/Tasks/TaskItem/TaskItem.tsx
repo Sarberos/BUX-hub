@@ -20,7 +20,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
     const dispatch = useAppDispatch()
     const {user,openLink}=useTelegramApi()
 
-    const {mutate:startTask,}=useStartTask()
+    const {mutateAsync:startTask,}=useStartTask()
     const {mutate:checkTgSubs,}=useTgSubscribe()
 
     const handleStart= async(id:number)=>{
