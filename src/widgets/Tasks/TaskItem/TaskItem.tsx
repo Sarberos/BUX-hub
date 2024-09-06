@@ -1,5 +1,5 @@
 import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
-import default_ico from '@shared/Tasks/assets/tasks_img/tasksFire.svg'
+import default_ico from '@shared/Tasks/assets/tasks_img/Mask group600px_new_fire_ico.svg'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
@@ -57,7 +57,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {sub_tasks?.length===0 && status==='pending' && <button onClick={channel_link ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
+            {sub_tasks?.length===0 && status==='pending' && <button onClick={!channel_link ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
             {sub_tasks.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
             {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
