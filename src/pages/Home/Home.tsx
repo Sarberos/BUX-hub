@@ -16,7 +16,7 @@ import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
 import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-import { setBonusDay, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { setBonusDay, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
@@ -43,8 +43,6 @@ export type TFrensTimerType = {
 
 
 export function Home(){
-  console.log(window.Telegram.WebApp.initData);
-  
   const {user}=useTelegramApi()
   const {t} = useTranslation()
   const dispatch= useAppDispatch()
@@ -85,7 +83,7 @@ useEffect(()=>{
 },[state])
 useEffect(()=>{
     if(farmInfo){
-      farmInfo.coins>coins && dispatch(updateTotalCoins(farmInfo.coins))
+      farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
       dispatch(setStoreFarmStatus(farmInfo.status));
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 

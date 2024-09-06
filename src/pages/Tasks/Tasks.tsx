@@ -17,7 +17,6 @@ export const Tasks=()=>{
   const {data:tasksInf,isLoading:taskInfoLoading}=useGetTasksInf()
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
 
-  console.log('TASK MINITASK STATUS'+ state.isMiniTasks);
 
 if(taskInfoLoading){
   return <Preloader />

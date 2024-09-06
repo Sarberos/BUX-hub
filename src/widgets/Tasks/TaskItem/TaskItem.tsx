@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next'
 import success_arrow from '@shared/Tasks/assets/tasks_img/success_arrow.svg'
 import { useAppDispatch } from '@shared/utilits/redux/hooks'
 import { setIsMiniTasks, setMiniTaskId, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
-import TasksFetching from '@shared/utilits/axios/TasksRequest'
 import { useQueryClient } from '@tanstack/react-query'
 import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
 import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
+import { apiUrl } from '@shared/utilits/axios/axiosSetting'
 
 
 
@@ -22,13 +22,12 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
     const {user,openLink}=useTelegramApi()
 
     const {mutateAsync:startTask,}=useStartTask()
-    const {mutate:checkTgSubs,}=useTgSubscribe()
+    const {mutateAsync:checkTgSubs,}=useTgSubscribe()
 
     const handleStart= async(id:number)=>{
         const redLink:string=encodeURIComponent(link)
-        openLink(link!==null?link:redLink)
         await startTask(id)
-        TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id}); 
+        openLink(apiUrl+`task/goToLink/${user?.id}/${redLink}/${id}`)
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart=async(id:number)=>{
@@ -40,6 +39,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
         claimTasksCoins && claimTasksCoins(id)
         dispatch(updateTotalCoins(coins))
         queryClient.invalidateQueries({queryKey:['task_inf']})
+        queryClient.invalidateQueries({queryKey:['farm_info']})
     }
     const handleOpen=(id:number)=>{
         dispatch(setMiniTaskId(id))
@@ -48,8 +48,8 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
     }
  
 
-const helpFunc=async(channel_link:string,id:number)=>{
-    await checkTgSubs(id);
+const helpFunc=(channel_link:string,id:number)=>{
+    checkTgSubs(id);
     openLink(channel_link)
 }
 
@@ -65,8 +65,12 @@ const helpFunc=async(channel_link:string,id:number)=>{
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
-            {sub_tasks?.length===0 && status==='pending' && <button onClick={!channel_link ? ()=>{handleStart(id)}:()=>{handleTgStart(id)}} className={s.status_btn}>{t("start")}</button>} 
-            {sub_tasks?.length !==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
+            {(sub_tasks?.length === 0 && status === 'pending') || (main_task_id && status === 'pending') ? (  
+                <button onClick={!channel_link ? () => { handleStart(id) } : () => { handleTgStart(id) }} className={s.status_btn}>  
+                    {t("start")}  
+                </button>  
+                ) : null}  
+            {sub_tasks&&sub_tasks.length!==0 && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
             {main_task_id!==null && status ==='completed' && 
             <button disabled={true} className={`${s.status_btn} ${s.success}`}>
                 <img src={success_arrow} className={s.success_img}/>

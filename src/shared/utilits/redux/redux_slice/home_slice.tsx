@@ -52,6 +52,9 @@ export const homeSlice = createSlice({
     updateTotalCoins:(state, action: PayloadAction<number>) => {
         state.totalCoins += action.payload
     },
+    setTotalCoins:(state, action: PayloadAction<number>) => {
+        state.totalCoins = action.payload
+    },
     setFormattedTaimer:(state, action: PayloadAction<TTimerType>) => {
         state.timer = action.payload
     },
@@ -85,7 +88,8 @@ export const {
   setLanguage,
   setIsMiniTasks,
   setIsDailyReward,
-  setMiniTaskId
+  setMiniTaskId,
+  setTotalCoins
 } = homeSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

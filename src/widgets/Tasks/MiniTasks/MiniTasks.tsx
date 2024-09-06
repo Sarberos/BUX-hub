@@ -10,6 +10,7 @@ import MainBtn from '@widgets/UI/MainBtn/MainBtn'
 import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins'
 import { useTranslation } from 'react-i18next'
 import { Preloader } from '@widgets/UI/Preloader/Preloader'
+import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
 
 
 
@@ -21,10 +22,12 @@ export const MiniTasks = ()=>{
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
   const state = useAppSelector(state=>state.home)
   const [completedTasks , setCompletedTasks]=useState<TTaskItem[]>([])
+  const [mainTask, setMainTask]=useState<TTaskItem>()
 
  
 useEffect(()=>{
   if(tasksInf){
+    setMainTask(tasksInf?.content.find(elem=>elem.id ==state.miniTaskId))
     const helpArr=tasksInf?.content.find(elem=>elem.id ==state.miniTaskId)
     helpArr?.sub_tasks && setCompletedTasks(helpArr.sub_tasks.filter(item=>item.status==="completed"))
 }
@@ -36,6 +39,7 @@ useEffect(()=>{
     dispatch(setIsMiniTasks(false))
     await claimTasksCoins(state.miniTaskId)
     queryClient.invalidateQueries({queryKey:['task_inf']})
+    queryClient.invalidateQueries({queryKey:['farm_info']})
   }
 
   
@@ -57,8 +61,8 @@ return (
       })}
     </div>
     <div className={s.claim_btn}>
-      {completedTasks.length !==0 &&<MainBtn event={()=>onMiniTaskClaim()}>{t("claim")}</MainBtn>}
-      {!completedTasks && <MainBtn  backColor='#818181'>{t("claim")}</MainBtn>}
+      {mainTask?.status===EnumTaskStatus.COMPLETED &&<MainBtn event={()=>onMiniTaskClaim()}>{t("claim")}</MainBtn>}
+      {mainTask?.status===EnumTaskStatus.CLAIMED &&  <MainBtn disabled={true}  backColor='#818181'>{t("claim")}</MainBtn>}
     </div>
   </div>            
 );
