@@ -30,8 +30,8 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
         TasksFetching.startLinkTask({id,link:redLink,telegram_id:user?.id}); 
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
-    const handleTgStart=(id:number)=>{
-        startTask(id)
+    const handleTgStart=async(id:number)=>{
+        await startTask(id)
         checkTgSubs(id);
         channel_link && openLink(channel_link);
     }
