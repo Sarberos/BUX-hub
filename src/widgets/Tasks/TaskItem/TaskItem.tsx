@@ -48,11 +48,11 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     }
     const secondTgLinkOpen = (channel_link: string, id: number) => {
         status!==EnumTaskStatus.CLAIMED &&checkTgSubs(id);
-        openLink(channel_link);
+        tg.openTelegramLink(channel_link);
     };
     const secondLinkOpen=(tg_id:number,link:string,id:number)=>{
         const redLink:string=encodeURIComponent(link)
-        tg.openTelegramLink(apiUrl+`task/goToLink/${tg_id}/${redLink}/${id}`)
+        openLink(apiUrl+`task/goToLink/${tg_id}/${redLink}/${id}`)
     }
     return (
         <div className={s.task_item_wrap}>
