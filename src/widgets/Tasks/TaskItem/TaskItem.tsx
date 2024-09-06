@@ -1,5 +1,4 @@
 import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
-import default_ico from '@shared/Tasks/assets/tasks_img/Mask group600px_new_fire_ico.svg'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
@@ -11,11 +10,12 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
 import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
 import { apiUrl } from '@shared/utilits/axios/axiosSetting'
+import { TASKSIMG } from '@shared/Tasks/consts/task_ico'
 
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
+export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
@@ -46,23 +46,19 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
         dispatch(setIsMiniTasks(true)); 
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
- 
-
-const helpFunc=(channel_link:string,id:number)=>{
-    checkTgSubs(id);
-    openLink(channel_link)
-}
-
-    
+    const secondLinkOpen = (channel_link: string, id: number) => {
+        status!==EnumTaskStatus.CLAIMED &&checkTgSubs(id);
+      openLink(channel_link);
+    };
     return (
         <div className={s.task_item_wrap}>
             <div className={s.info}>
                 <div className={s.info_img_wrap}>
-                    <img src={default_ico} alt="" className={s.info_img} />
+                    <img src={TASKSIMG[icon]} alt="" className={s.info_img} />
                 </div>
                 <div className={s.item_title_wrap}>
                     <p className={s.item_title}>{title}</p>
-                    <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `0/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
+                    <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `${sub_tasks.filter(item=>item.status===EnumTaskStatus.CLAIMED||EnumTaskStatus.COMPLETED).length}/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
             {(sub_tasks?.length === 0 && status === 'pending') || (main_task_id && status === 'pending') ? (  
@@ -77,8 +73,8 @@ const helpFunc=(channel_link:string,id:number)=>{
             </button>}
             {sub_tasks?.length===0 && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
             
-            {sub_tasks?.length===0 && status===EnumTaskStatus.CLAIMED && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
-            { sub_tasks && sub_tasks.length==0 && status===EnumTaskStatus.IN_PROGRESS && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  helpFunc(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            {sub_tasks?.length===0 && status===EnumTaskStatus.CLAIMED && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
+            { sub_tasks && sub_tasks.length==0 && status===EnumTaskStatus.IN_PROGRESS && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
         </div>
     )
 }

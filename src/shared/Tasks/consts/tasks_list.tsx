@@ -2,6 +2,7 @@
 // import facebook_ico from '@shared/Tasks/assets/tasks_img/facebook_ico.svg'
 // import inst_ico from '@shared/Tasks/assets/tasks_img/inst_ico.svg'
 import { TTaskItem } from "../hooks/useGetTasksInf";
+import { EnumIcons } from "../types/taskImg.enum";
 
 
 export const TASKLIST:TTaskItem[]=[
@@ -18,7 +19,7 @@ export const TASKLIST:TTaskItem[]=[
        title:'adsadsada',
        updatedAt:'',
         channel_link:null,
-        
+        icon:EnumIcons.FACEBOOK
     },
 
 
