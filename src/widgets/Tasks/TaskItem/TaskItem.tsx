@@ -19,7 +19,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
-    const {user,openLink}=useTelegramApi()
+    const {tg,user,openLink}=useTelegramApi()
 
     const {mutateAsync:startTask,}=useStartTask()
     const {mutateAsync:checkTgSubs,}=useTgSubscribe()
@@ -33,7 +33,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const handleTgStart=async(id:number)=>{
         await startTask(id)
         checkTgSubs(id);
-        channel_link && openLink(channel_link);
+        channel_link && tg.openTelegramLink(channel_link);
     }
     const handleClaim=(id:number)=>{
         claimTasksCoins && claimTasksCoins(id)
@@ -48,11 +48,11 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     }
     const secondTgLinkOpen = (channel_link: string, id: number) => {
         status!==EnumTaskStatus.CLAIMED &&checkTgSubs(id);
-      openLink(channel_link);
+        openLink(channel_link);
     };
     const secondLinkOpen=(tg_id:number,link:string,id:number)=>{
         const redLink:string=encodeURIComponent(link)
-        openLink(apiUrl+`task/goToLink/${tg_id}/${redLink}/${id}`)
+        tg.openTelegramLink(apiUrl+`task/goToLink/${tg_id}/${redLink}/${id}`)
     }
     return (
         <div className={s.task_item_wrap}>
