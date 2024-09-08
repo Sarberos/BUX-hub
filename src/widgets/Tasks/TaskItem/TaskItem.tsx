@@ -39,6 +39,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         await startTask(id)
         checkTgSubs(id);
         channel_link && tg.openTelegramLink(channel_link);
+        queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleClaim=(id:number)=>{
         claimTasksCoins && claimTasksCoins(id)
