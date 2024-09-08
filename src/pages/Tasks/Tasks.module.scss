@@ -33,7 +33,8 @@
     }
     .task_list{
         flex: 1;
-        max-height: calc(100vh - 320px);
+        max-height: calc(100vh - 365px);
+        // max-height: calc(100vh - 320px);
         display: flex ;
         flex-direction: column;
         gap: 20px;
@@ -43,8 +44,11 @@
         border-radius: 15px; 
         overflow-y: scroll;
         scrollbar-width: none;
-        @media screen  and (max-height:570px) {
-            
+        @media screen  and (max-height:650px) {
+            max-height: calc(100vh - 355px);
+        }
+        @media screen  and (max-height:590px) {
+            max-height: calc(100vh - 318px);
         }
     }
     .main_claim_btn{

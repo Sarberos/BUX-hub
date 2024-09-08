@@ -32,7 +32,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const handleStart= async(id:number)=>{
         await startTask(id)
         const redLink:string=encodeURIComponent(link)
-        openLink(apiUrl+`task/goToLink/${1213507635}/${redLink}/${id}`)
+        openLink(apiUrl+`task/goToLink/${userId}/${redLink}/${id}`)
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart=async(id:number)=>{
@@ -83,7 +83,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     currentBtn = <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn = <button  onClick={()=>{ !channel_link? secondLinkOpen(1213507635,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn = userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(userId,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     // currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user.id,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
             }
@@ -106,7 +106,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     </button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn =<button  onClick={()=>{ !channel_link? secondLinkOpen(1213507635,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn =userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(userId,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     // currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user?.id,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
             }
