@@ -38,7 +38,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
                 })}
             </div>
             <div className={s.rewar_subtitle}>
-                {`${t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)/1000}К`}
+                {`${t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)}`}
             </div>
             <div className={s.claim_btn}>
                 {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
