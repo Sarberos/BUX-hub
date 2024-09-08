@@ -88,7 +88,7 @@ useEffect(()=>{
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 
     if(bonusInfo){ 
-      bonusInfo.status=== EnumBonusStatus.CLAIM && dispatch(setIsDailyReward(true));
+      bonusInfo.status=== EnumBonusStatus.CLAIM ? dispatch(setIsDailyReward(true)): dispatch(setIsDailyReward(false));
       setDailyRewardTime(bonusInfo.next_bonus_time)
       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
     }  
