@@ -22,8 +22,8 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
-    const {tg,user,openLink}=useTelegramApi()
-    
+    const {tg,userId,openLink}=useTelegramApi()
+
     const {mutateAsync:startTask,}=useStartTask()
     const {mutateAsync:checkTgSubs,}=useTgSubscribe()
 
@@ -32,7 +32,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const handleStart= async(id:number)=>{
         await startTask(id)
         const redLink:string=encodeURIComponent(link)
-        openLink(apiUrl+`task/goToLink/${user?.id}/${redLink}/${id}`)
+        openLink(apiUrl+`task/goToLink/${1213507635}/${redLink}/${id}`)
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart=async(id:number)=>{
@@ -83,14 +83,15 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     currentBtn = <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user.id,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn = <button  onClick={()=>{ !channel_link? secondLinkOpen(1213507635,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    // currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user.id,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
             }
         }
         }else if(main_task_id){
             switch (status) {
                 case EnumTaskStatus.PENDING:
-                    currentBtn= <button onClick={!channel_link ? () => { handleStart(id) } : () => { handleTgStart(id) }} className={s.status_btn}>{t("start")} </button> 
+                    currentBtn= <button onClick={ () => { !channel_link ? handleStart(id) : handleTgStart(id) }} className={s.status_btn}>{t("start")} </button> 
                     break;
             
                 case EnumTaskStatus.COMPLETED:
@@ -105,7 +106,8 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     </button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user?.id,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn =<button  onClick={()=>{ !channel_link? secondLinkOpen(1213507635,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    // currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user?.id,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
             }
         }
@@ -126,7 +128,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     <p className={s.item_title}>{title}</p>
                     <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `${sub_tasks.filter((item)=>{
                         return item.status===EnumTaskStatus.COMPLETED || item.status===EnumTaskStatus.CLAIMED
-                    }) }/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
+                    }).length}/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
                 </div>
             </div>
             {currentBtn}
