@@ -1,4 +1,4 @@
-import { TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
+import {  TTaskItem } from '@shared/Tasks/hooks/useGetTasksInf'
 import s from '@widgets/Tasks/TaskItem/TaskItem.module.scss'
 import { useStartTask } from '@shared/Tasks/hooks/useStartTask'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
@@ -9,9 +9,9 @@ import { setIsMiniTasks, setMiniTaskId, updateTotalCoins } from '@shared/utilits
 import { useQueryClient } from '@tanstack/react-query'
 import { useTgSubscribe } from '@shared/Tasks/hooks/useTgSubscribe'
 import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
-import { apiUrl } from '@shared/utilits/axios/axiosSetting'
 import { TASKSIMG } from '@shared/Tasks/consts/task_ico'
 import { ReactNode, useEffect, useState } from 'react'
+import { useCompleteMainTask } from '@shared/Tasks/hooks/complete_mainTasks'
 
 
 
@@ -23,16 +23,24 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
     const {tg,userId,openLink}=useTelegramApi()
+// const userId =895313334;
+// const userId =1213507635;
 
     const {mutateAsync:startTask,}=useStartTask()
     const {mutateAsync:checkTgSubs,}=useTgSubscribe()
+    const {mutateAsync:completeMainTask}=useCompleteMainTask()
 
     const [currentBtn, setCurrentBtn]=useState<ReactNode>()
 
-    const handleStart= async(id:number)=>{
-        await startTask(id)
-        const redLink:string=encodeURIComponent(link)
-        openLink(apiUrl+`task/goToLink/${userId}/${redLink}/${id}`)
+    const handleStart= async(id:number,link:string)=>{
+        await startTask(id);
+        openLink(link)
+        queryClient.invalidateQueries({queryKey:['task_inf']})
+    }
+    const handleSubStart= async(id:number,link:string,main_task_id: number)=>{
+        await startTask(id);
+        openLink(link)
+        completeMainTask(main_task_id);
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleTgStart=async(id:number)=>{
@@ -57,10 +65,8 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         tg.openTelegramLink(channel_link);
         queryClient.invalidateQueries({queryKey:['task_inf']})
     };
-    const secondLinkOpen=(tg_id:number,link:string,id:number)=>{
-        const redLink:string=encodeURIComponent(link)
-        openLink(apiUrl+`task/goToLink/${tg_id}/${redLink}/${id}`)
-        queryClient.invalidateQueries({queryKey:['task_inf']})
+    const secondLinkOpen=(link:string)=>{
+        openLink(link)
     }
 
     const chooseBtn=(status:"in-progress" | "pending" | "completed" | "claimed",main_task_id:number|null,channel_link:string|null, id:number,sub_tasks:TTaskItem[])=>{
@@ -73,7 +79,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
             }else if (sub_tasks.length ===0 ){
             switch (status) {
                 case EnumTaskStatus.PENDING:
-                    currentBtn= <button onClick={!channel_link ? () => { handleStart(id) } : () => { handleTgStart(id) }} className={s.status_btn}>{t("start")} </button> 
+                    currentBtn= <button onClick={!channel_link ? () => { handleStart(id,link) } : () => { handleTgStart(id) }} className={s.status_btn}>{t("start")} </button> 
                     break;
             
                 case EnumTaskStatus.COMPLETED:
@@ -84,15 +90,14 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     currentBtn = <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn = userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(userId,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
-                    // currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user.id,link,id):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn = userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(link):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
             }
         }
         }else if(main_task_id){
             switch (status) {
                 case EnumTaskStatus.PENDING:
-                    currentBtn= <button onClick={ () => { !channel_link ? handleStart(id) : handleTgStart(id) }} className={s.status_btn}>{t("start")} </button> 
+                    currentBtn= <button onClick={ () => { !channel_link ? handleSubStart(id,link,main_task_id) : handleTgStart(id) }} className={s.status_btn}>{t("start")} </button> 
                     break;
             
                 case EnumTaskStatus.COMPLETED:
@@ -107,8 +112,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     </button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn =userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(userId,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
-                    // currentBtn = user && <button  onClick={()=>{ !channel_link? secondLinkOpen(user?.id,link,id):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn =userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(link):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
             }
         }
@@ -134,29 +138,6 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
             </div>
             {currentBtn}
 
-            {/* {(sub_tasks?.length === 0 && status === 'pending') || (main_task_id && status === 'pending') ? (  
-                <button onClick={!channel_link ? () => { handleStart(id) } : () => { handleTgStart(id) }} className={s.status_btn}>  
-                    {t("start")}  
-                    
-                </button>  
-                ) : null}  
-            {(sub_tasks&&sub_tasks.length!==0 &&status!==EnumTaskStatus.CLAIMED) && <button onClick={()=>handleOpen(id)} className={s.status_btn}>{t("open")}</button>}
-            {(sub_tasks&&sub_tasks.length!==0 && status===EnumTaskStatus.CLAIMED) &&
-            <button onClick={()=>handleOpen(id)} className={`${s.status_btn} ${s.completed}`}>
-                <img src={success_arrow} className={s.success_img}/>
-            </button>}
-            {(main_task_id!==null && status ===EnumTaskStatus.IN_PROGRESS) && <button onClick={()=>{user && secondLinkOpen(user?.id,link,id)}} className={s.status_btn}>  
-                    {t("start")}  
-                </button>}
-
-            {main_task_id!==null && status ==='completed' && 
-            <button onClick={()=>{openLink(link)}} className={`${s.status_btn} ${s.success}`}>
-                <img src={success_arrow} className={s.success_img}/>
-            </button>}
-            {sub_tasks?.length===0 && main_task_id===null && status==='completed' && <button onClick={()=>{handleClaim(id)}} className={`${s.status_btn}`}>{t("Claim")}</button>} 
-            
-            {sub_tasks?.length===0 && status===EnumTaskStatus.CLAIMED && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>} 
-            { sub_tasks && sub_tasks.length==0 && status===EnumTaskStatus.IN_PROGRESS && <button  onClick={()=>{ channel_link ===null? openLink(link):channel_link?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>}  */}
         </div>
     )
 }
