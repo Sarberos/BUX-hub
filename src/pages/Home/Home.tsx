@@ -55,7 +55,6 @@ export function Home(){
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
   const {data:bonusInfo}=useGetBonusStatus()
 
-  const [dailyRewardTime, setDailyRewardTime]= useState('')
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
   const claimedCoins:number=480;
@@ -70,15 +69,7 @@ const onClaimFarming=()=>{
   dispatch(setStoreFarmStatus(EnumFarmStatus.START))
   dispatch(updateTotalCoins(480))
 }
-  useEffect(()=>{
-    const intervalId = setInterval(() => {  
-      const nextDate:Date = new Date(dailyRewardTime);
-      const now:Date= new Date();
-      nextDate.getTime()===now.getTime() && dispatch(setIsDailyReward(true))
-    },1000);  
-  
-    return () => clearInterval(intervalId);  
-  })
+
 useEffect(()=>{
   coins!==state.totalCoins && setCoins(state.totalCoins);
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
@@ -94,7 +85,6 @@ useEffect(()=>{
         dispatch(setIsDailyReward(true))
         dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
       }
-      setDailyRewardTime(bonusInfo.next_bonus_time)
       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
     }  
   },[farmInfo,bonusInfo])
