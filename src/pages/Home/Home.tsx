@@ -79,7 +79,7 @@ useEffect(()=>{
   BonusFetching.bonusStatus().then(
     resp => setBonusInfo(resp.data)
   )
-})
+},[])
 useEffect(()=>{
     if(bonusInfo){ 
       if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
