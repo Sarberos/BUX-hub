@@ -7,14 +7,12 @@ import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setBonusDay, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
-import { useQueryClient } from '@tanstack/react-query'
 
 export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive: boolean}){
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
     const {mutateAsync:claim_bonus}=useClaimBonus()
-    const queryClient =useQueryClient()
 
     const onClaimBonus=async(dayNumber:number)=>{
             dispatch(setBonusDay(state.bonusDay+1))
@@ -23,7 +21,6 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
             dispatch(updateTotalCoins(currentObj[0].rewardValue))
             onClose();
             await claim_bonus();
-            queryClient.invalidateQueries({ queryKey: ['bonus_status'] })
     }
     return(
         <div className={s.daily_reward_wrap}>

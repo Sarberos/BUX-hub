@@ -8,7 +8,6 @@ import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
-// import { TASKLIST } from '@shared/Tasks/consts/tasks_list';
 export const Tasks=()=>{
   const {t}= useTranslation()
   const dispatch = useAppDispatch()

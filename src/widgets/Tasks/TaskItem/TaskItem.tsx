@@ -15,9 +15,6 @@ import { useCompleteMainTask } from '@shared/Tasks/hooks/complete_mainTasks'
 
 
 
-
-
-
 export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
@@ -126,11 +123,9 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         }
         return currentBtn
     }
-
     useEffect(()=>{
         setCurrentBtn(chooseBtn(status,main_task_id,channel_link,id,sub_tasks))
     },[status,main_task_id,channel_link,id,sub_tasks])
-
     return (
         <div className={s.task_item_wrap}>
             <div className={s.info}>
@@ -145,7 +140,6 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                 </div>
             </div>
             {currentBtn}
-
         </div>
     )
 }
