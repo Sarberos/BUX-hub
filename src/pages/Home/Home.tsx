@@ -147,7 +147,6 @@ if(statusLoading){
          <div className={`${s.daily_reward}`}>
          <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
            <DailyRewards
-             onClose={() => dispatch(setIsDailyReward(false))}
              buttonActive={bonusInfo?.status===EnumBonusStatus.CLAIM}
            />
          </BottomPopUp>

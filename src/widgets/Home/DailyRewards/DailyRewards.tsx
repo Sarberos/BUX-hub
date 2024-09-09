@@ -4,12 +4,12 @@ import { DAYBOXLIST } from '@shared/Home/consts/dayBoxList'
 import DayBox from '../DayBox/DayBox'
 import { useClaimBonus } from '@shared/Home/hooks/useClaimBonus'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
-import { setBonusDay, setDailyRewardsStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
+import { setBonusDay, setDailyRewardsStatus, setIsDailyReward, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum'
 
-export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive: boolean}){
+export default function({buttonActive}:{ buttonActive: boolean}){
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
@@ -20,7 +20,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
             const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber+1)
             dispatch(updateTotalCoins(currentObj[0].rewardValue))
-            onClose();
+            dispatch(setIsDailyReward(false))
             await claim_bonus();
             dispatch(setDailyRewardsStatus(EnumBonusStatus.WAIT))
     }

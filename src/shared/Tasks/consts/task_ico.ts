@@ -3,7 +3,8 @@ import fBImg from '@shared/Tasks/assets/tasks_img/facebook_ico.svg'
 import instImg from '@shared/Tasks/assets/tasks_img/inst_ico.svg'
 import tg from '@shared/Tasks/assets/tasks_img/telegram.svg'
 import youtube from '@shared/Tasks/assets/tasks_img/youtube.svg'
-import twiter from '@shared/Tasks/assets/tasks_img/x.svg'
+import twiter from '@shared/Tasks/assets/tasks_img/offline_bolt_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg'
+// import twiter from '@shared/Tasks/assets/tasks_img/x.svg'
 import fire from '@shared/Tasks/assets/tasks_img/Mask group600px_new_fire_ico.svg'
 
 
