@@ -12,6 +12,7 @@ import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
 import { TASKSIMG } from '@shared/Tasks/consts/task_ico'
 import { ReactNode, useEffect, useState } from 'react'
 import { useCompleteMainTask } from '@shared/Tasks/hooks/complete_mainTasks'
+import { LoadBtn } from '../LoadBtn/LoadBtn'
 
 
 
@@ -95,7 +96,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     currentBtn = <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn = userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(link):channel_link ?  secondTgLinkOpen(channel_link,id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn = userId && <LoadBtn  event={()=>{ !channel_link? secondLinkOpen(link):channel_link ?  secondTgLinkOpen(channel_link,id):''}} />
                     break;
             }
         }
@@ -117,7 +118,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     </button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
-                    currentBtn =userId && <button  onClick={()=>{ !channel_link? secondLinkOpen(link):channel_link?  secondTgLinkOpen(channel_link,id,main_task_id):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn =userId && <LoadBtn  event={()=>{ !channel_link? secondLinkOpen(link):channel_link?  secondTgLinkOpen(channel_link,id,main_task_id):''}} />
                     break;
             }
         }
