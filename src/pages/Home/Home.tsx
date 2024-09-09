@@ -14,12 +14,13 @@ import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
 import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
-import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
+import { TBonusData } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
 import { setBonusDay, setDailyRewardsStatus, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
+import BonusFetching from '@shared/utilits/axios/BonusRequest';
 
 export type TFarmInfo={
   coins: number,
@@ -53,8 +54,8 @@ export function Home(){
   const {mutate:startReq}=useStartFarm()
   const {mutate:claimReq}=useClaimFarmCoins()
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
-  const {data:bonusInfo}=useGetBonusStatus()
-
+  // const {data:bonusInfo}=useGetBonusStatus()
+  const [bonusInfo, setBonusInfo]=useState<TBonusData>()
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
   const claimedCoins:number=480;
@@ -75,11 +76,11 @@ useEffect(()=>{
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
 },[state])
 useEffect(()=>{
-    if(farmInfo){
-      farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
-      dispatch(setStoreFarmStatus(farmInfo.status));
-      farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
-    } 
+  BonusFetching.bonusStatus().then(
+    resp => setBonusInfo(resp.data)
+  )
+})
+useEffect(()=>{
     if(bonusInfo){ 
       if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
         dispatch(setIsDailyReward(true))
@@ -87,7 +88,28 @@ useEffect(()=>{
       }
       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
     }  
-  },[farmInfo,bonusInfo])
+  },[bonusInfo])
+useEffect(()=>{
+    if(farmInfo){
+      farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
+      dispatch(setStoreFarmStatus(farmInfo.status));
+      farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
+    } 
+  },[farmInfo])
+// useEffect(()=>{
+//     if(farmInfo){
+//       farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
+//       dispatch(setStoreFarmStatus(farmInfo.status));
+//       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
+//     } 
+//     if(bonusInfo){ 
+//       if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
+//         dispatch(setIsDailyReward(true))
+//         dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
+//       }
+//       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
+//     }  
+//   },[farmInfo,bonusInfo])
 
 if(statusLoading){
   return <Preloader />

@@ -11,6 +11,6 @@ export const useGetBonusStatus=()=>{
     return useQuery<TBonusData>({
         queryKey:['bonus_status'],
         queryFn: BonusFetching.bonusStatus,
-        refetchOnMount: true,
+        enabled:true,
     })
 }
