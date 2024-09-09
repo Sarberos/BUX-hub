@@ -46,6 +46,11 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         channel_link && tg.openTelegramLink(channel_link);
         checkTgSubs(id);
         queryClient.invalidateQueries({queryKey:['task_inf']})
+        setTimeout(async () => {  
+            await checkTgSubs(id);  
+         queryClient.invalidateQueries({queryKey:['task_inf']})
+
+        }, 10000); 
     }
     const handleSubTgStart=async(id:number,main_task_id:number)=>{
         await startTask(id)
