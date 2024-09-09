@@ -77,8 +77,7 @@ useEffect(()=>{
 },[state])
 useEffect(()=>{
   BonusFetching.bonusStatus().then(
-    resp => {setBonusInfo(resp.data);console.log(resp);}
-    
+    resp => {setBonusInfo(resp);}
     
   )
 },[])
