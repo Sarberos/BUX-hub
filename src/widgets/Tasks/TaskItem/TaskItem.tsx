@@ -12,11 +12,10 @@ import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
 import { TASKSIMG } from '@shared/Tasks/consts/task_ico'
 import { ReactNode, useEffect, useState } from 'react'
 import { useCompleteMainTask } from '@shared/Tasks/hooks/complete_mainTasks'
-import { EnumIcons } from '@shared/Tasks/types/taskImg.enum'
 
 
 
-export default function({title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
+export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
@@ -131,7 +130,7 @@ export default function({title,sub_tasks,coins,id,link,status,main_task_id, chan
         <div className={s.task_item_wrap}>
             <div className={s.info}>
                 <div className={s.info_img_wrap}>
-                    <img src={TASKSIMG[EnumIcons.TWITTER]} alt="" className={s.info_img} />
+                    <img src={TASKSIMG[icon]} alt="" className={s.info_img} />
                 </div>
                 <div className={s.item_title_wrap}>
                     <p className={s.item_title}>{title}</p>
