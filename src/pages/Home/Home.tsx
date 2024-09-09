@@ -16,7 +16,7 @@ import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import { changeDateFormat } from '@features/Home/changeDateFormat';
 import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-import { setBonusDay, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
+import { setBonusDay, setDailyRewardsStatus, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
@@ -90,7 +90,10 @@ useEffect(()=>{
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 
     if(bonusInfo){ 
-      bonusInfo.status=== EnumBonusStatus.CLAIM && dispatch(setIsDailyReward(true))
+      if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
+        dispatch(setIsDailyReward(true))
+        dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
+      }
       setDailyRewardTime(bonusInfo.next_bonus_time)
       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
     }  
@@ -115,9 +118,6 @@ if(statusLoading){
         <div className={s.main_img_wrap}>
           <AnimationMainImg />
         </div>
-        {/* <div className={s.main_img_wrap}>
-          <img src={main_img} alt="" className={s.main_img} />
-        </div> */}
         <div className={s.farming_btn}>
           {farmStatus === EnumFarmStatus.START && (
             <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>

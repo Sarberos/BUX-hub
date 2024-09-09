@@ -3,10 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './../store_config'
 import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum'
 import { TTimerType } from '@pages/Home/Home';
+import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 
 
 interface HomeState {
     farmStatus: string;
+    dailyRewardsStatus: EnumBonusStatus;
     totalCoins:number;
     timer:TTimerType;
     bonusDay:number;
@@ -22,6 +24,7 @@ interface HomeState {
 
 const initialState: HomeState = {
   farmStatus: EnumFarmStatus.START,
+  dailyRewardsStatus:EnumBonusStatus.WAIT,
   totalCoins:0,
   timer:{
     formattedHours:'00',
@@ -48,6 +51,9 @@ export const homeSlice = createSlice({
   reducers: {
     setStoreFarmStatus:(state, action: PayloadAction<string>) => {
         state.farmStatus = action.payload
+    },
+    setDailyRewardsStatus:(state, action: PayloadAction<EnumBonusStatus>) => {
+        state.dailyRewardsStatus = action.payload
     },
     updateTotalCoins:(state, action: PayloadAction<number>) => {
         state.totalCoins += action.payload
@@ -81,6 +87,7 @@ export const homeSlice = createSlice({
 
 export const {
   setStoreFarmStatus,
+  setDailyRewardsStatus,
   updateTotalCoins,
   setFormattedTaimer,
   setBonusDay,

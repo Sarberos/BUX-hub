@@ -4,9 +4,10 @@ import { DAYBOXLIST } from '@shared/Home/consts/dayBoxList'
 import DayBox from '../DayBox/DayBox'
 import { useClaimBonus } from '@shared/Home/hooks/useClaimBonus'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
-import { setBonusDay, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
+import { setBonusDay, setDailyRewardsStatus, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
 import { TDayBoxProps } from '@shared/Home/types/dayBox'
 import { useTranslation } from 'react-i18next'
+import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum'
 
 export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive: boolean}){
     const {t} =useTranslation()
@@ -21,6 +22,7 @@ export default function({buttonActive,onClose}:{onClose:()=> void, buttonActive:
             dispatch(updateTotalCoins(currentObj[0].rewardValue))
             onClose();
             await claim_bonus();
+            dispatch(setDailyRewardsStatus(EnumBonusStatus.WAIT))
     }
     return(
         <div className={s.daily_reward_wrap}>
