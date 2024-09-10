@@ -75,6 +75,11 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         main_task_id && status!==EnumTaskStatus.CLAIMED &&completeMainTask(main_task_id);
         tg.openTelegramLink(channel_link);
         queryClient.invalidateQueries({queryKey:['task_inf']})
+        setTimeout(async () => {  
+            await checkTgSubs(id);  
+         queryClient.invalidateQueries({queryKey:['task_inf']})
+
+        }, 10000); 
     };
     const secondLinkOpen=(link:string)=>{
         openLink(link)
