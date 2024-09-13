@@ -7,9 +7,11 @@
     .child_wrap{
         order: 1;
         flex:1;  
+        
     }
     .footer_wrap{
         order: 2;
+        z-index: 10;
     } 
 }
 

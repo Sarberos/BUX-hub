@@ -4,6 +4,7 @@
     background:linear-gradient(to top,#000000,rgb(45 45 45));
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    z-index: 10;
     .inner_wrapper{
         width: 100%;
         margin: 0 auto;
@@ -12,7 +13,6 @@
         background-color:#000000;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
-        z-index: 10;
         .navigation{
             display: flex;
             flex-direction: row;

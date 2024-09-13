@@ -83,6 +83,9 @@
         border-top-right-radius: 20px ;
         overflow: scroll;
         scrollbar-width: none;
+        position: relative;
+        bottom: -6px;   
+        z-index: 2;
     }
     .invite_frens_btn_wrap{
         width: 100%;
