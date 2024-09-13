@@ -37,8 +37,12 @@ export default function({buttonActive}:{ buttonActive: boolean}){
                 })}
             </div>
             <div className={s.rewar_subtitle}>
-                {`${t('rewardsProfit') }: ${DAYBOXLIST.reduce((acc,item)=>acc + item.rewardValue, 0)}`}
-            </div>
+          {`${t("rewardsProfit")}: ${DAYBOXLIST.reduce((acc, item) => {
+            return item.rewardDay <= state.bonusDay
+              ? acc + item.rewardValue
+              : acc;
+          }, 0)}`}
+        </div>
             <div className={s.claim_btn}>
                 {buttonActive && <MainBtn  event={()=>onClaimBonus(state.bonusDay)} >{t('claim')}</MainBtn>}
                 {!buttonActive && <MainBtn  backColor={'#282828'} disabled={true} ><p style={{color:'#6C6C6C'}}>{t('claim')}</p></MainBtn>}
