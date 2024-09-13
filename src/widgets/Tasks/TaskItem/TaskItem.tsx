@@ -32,8 +32,10 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
 
     const handleStart= async(id:number,link:string)=>{
         await startTask(id);
-        openLink(link)
-        queryClient.invalidateQueries({queryKey:['task_inf']})
+        openLink(link);
+        setTimeout(()=>{
+            queryClient.invalidateQueries({queryKey:['task_inf']})
+        },3000)
     }
     const handleSubStart= async(id:number,link:string,main_task_id: number)=>{
         await startTask(id);
