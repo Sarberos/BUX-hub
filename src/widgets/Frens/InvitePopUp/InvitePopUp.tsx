@@ -1,7 +1,7 @@
 import s from './InvitePopUp.module.scss'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn'
-import tg_ico from '@shared/Frens/assets/frens_img/Mask group600px_new_tg.svg'
-import copy_ico from '@shared/Frens/assets/frens_img/Mask group600px_new_copy.svg'
+import tg_ico from '@shared/assets/high quality svg/telegram_red_black.svg'
+import copy_ico from '@shared/assets/high quality svg/copy_red_black_ico.svg'
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi'
 import  { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next'
@@ -48,9 +48,7 @@ const hadleSendToTelegram = () => {
               <div className={s.btn_img_wrap}>
                 <img src={copy_ico} alt="" className={`${s.btn_img} ${s.copy}`} />
               </div>
-              <p
-                className={s.btn_title}
-              >
+              <p className={s.btn_title}>
                 {t("copyLink")}
               </p>
             </div>
