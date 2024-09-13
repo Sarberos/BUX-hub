@@ -15,10 +15,20 @@
         gap: 11px;
         overflow: scroll;
         scrollbar-width: none;
-        .info_img{
-            width: 30px;
-            height: 30px;
-            object-fit: contain;
+        .info_img_wrap{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            .info_img{
+                width: 30px;
+                height: 30px;
+                object-fit: contain;
+            }
+            .info_img.fire{
+                width: 35px;
+                height: 35px;
+            }
         }
         .item_title_wrap{
             flex: 1;
@@ -58,7 +68,7 @@
             align-items: center;
             justify-content: center;
             background-color: #4fadab;
-            padding:  6px 19px ;
+            padding:  8px 19px ;
         }
         &.disable{
         background-color: #303030;

@@ -13,6 +13,7 @@ import { TASKSIMG } from '@shared/Tasks/consts/task_ico'
 import { ReactNode, useEffect, useState } from 'react'
 import { useCompleteMainTask } from '@shared/Tasks/hooks/complete_mainTasks'
 import { LoadBtn } from '../LoadBtn/LoadBtn'
+import { EnumIcons } from '@shared/Tasks/types/taskImg.enum'
 
 
 
@@ -143,7 +144,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         <div className={s.task_item_wrap}>
             <div className={s.info}>
                 <div className={s.info_img_wrap}>
-                    <img src={TASKSIMG[icon]} alt="" className={s.info_img} />
+                    <img src={TASKSIMG[icon]} alt="" className={icon===EnumIcons.FIRE ? `${s.info_img} ${s.fire}`:`${s.info_img}`} />
                 </div>
                 <div className={s.item_title_wrap}>
                     <p className={s.item_title}>{title}</p>

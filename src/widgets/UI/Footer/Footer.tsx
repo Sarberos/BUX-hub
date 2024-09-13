@@ -15,18 +15,7 @@ export const Footer=({currenPageId,setCurrentPageId}:TFooterProps)=>{
                   onClick={() => setCurrentPageId(elem.id)}
                   className={s.nav_item}
                 >
-                  <svg
-                    width="25"
-                    height="25"
-                  >
-                    <image
-                      href={
-                        elem.id === currenPageId ? elem.activeImg : elem.img
-                      }
-                      width="25"
-                      height="25"
-                    />
-                  </svg>
+                  <img src={elem.id === currenPageId ? elem.activeImg : elem.img}/>
                 </li>
               </Link>
             ))}

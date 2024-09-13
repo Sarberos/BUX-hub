@@ -1,5 +1,5 @@
 import s from './Lang_DayCounter.module.scss'
-import fire_ico from '@shared/Home/assets/home_img/Mask group600px_new_fire_ico.svg'
+import fire_ico from '@shared/assets/high quality svg/icon fire главный экран.svg'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setIsDailyReward } from '@shared/utilits/redux/redux_slice/home_slice'
 import { LangSelect } from '@widgets/UI/LangSelect/LangSelect'

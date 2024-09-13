@@ -1,11 +1,10 @@
 import { TTaskImg } from "../types/taskImg.enum";
-import fBImg from '@shared/Tasks/assets/tasks_img/facebook_ico.svg'
-import instImg from '@shared/Tasks/assets/tasks_img/inst_ico.svg'
-import tg from '@shared/Tasks/assets/tasks_img/telegram.svg'
-import youtube from '@shared/Tasks/assets/tasks_img/youtube.svg'
-// import twiter from '@shared/Tasks/assets/tasks_img/offline_bolt_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg'
-import twiter from '@shared/Tasks/assets/tasks_img/x.svg'
-import fire from '@shared/Tasks/assets/tasks_img/Mask group600px_new_fire_ico.svg'
+import fBImg from '@shared/assets/high quality svg/facebook_red.svg'
+import instImg from '@shared/assets/high quality svg/inst_red.svg'
+import tg from '@shared/assets/high quality svg/telegram_red.svg'
+import youtube from '@shared/assets/high quality svg/youtube_red.svg'
+import twiter from '@shared/assets/high quality svg/x_red.svg'
+import fire from '@shared/assets/high quality svg/fire_red.svg'
 
 
 

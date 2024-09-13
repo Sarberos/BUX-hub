@@ -22,9 +22,10 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                .nav_item_img{
+                img{
                     width: 25px;
                     height: 25px;
+                    object-fit: contain;
                 }
             }
         }
