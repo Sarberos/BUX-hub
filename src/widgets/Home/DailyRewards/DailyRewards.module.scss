@@ -20,6 +20,7 @@
         width: 100%;
         overflow: scroll;
         scrollbar-width: none;
+        padding-left: 17px;
     }
     .rewar_subtitle{
         color:#fff;
@@ -29,7 +30,7 @@
         text-align: center; 
     }
     .claim_btn{
-        width: 100%;
-        margin: 32px 0 20px;
+        width: calc(100% - 34px);
+        margin: 32px 17px 20px;
     }
 }
