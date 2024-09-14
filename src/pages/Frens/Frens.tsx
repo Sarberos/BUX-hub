@@ -74,7 +74,7 @@ export const Frens=()=>{
             <div className={s.subtitle_wrap}>
                 <p className={s.subtitle}>{t("frensSub")}</p>
             </div>
-            {frensData &&frensData?.content?.length==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')} (${frensData?.content?.length}/${avalibleFrensInvites} ${t('invited')})`}</p>}
+            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')} (${frensData?.content?.length}/${avalibleFrensInvites} ${t('invited')})`}</p>}
             {frensData?.content?.length!=0 && <div className={s.frens_list}>
                 {/* {FRENSLIST?.map((elem,index)=>(
                     <FrensItem key={index} {...elem} /> 
