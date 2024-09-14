@@ -21,7 +21,7 @@ export default function({buttonActive}:{ buttonActive: boolean}){
 
     useEffect(() => {   
       setScreenWidth(window.innerWidth);  
-  }, []); 
+  }, [window.innerWidth]); 
     const onClaimBonus=async(dayNumber:number)=>{
             dispatch(setBonusDay(state.bonusDay+1))
             const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
@@ -37,9 +37,8 @@ export default function({buttonActive}:{ buttonActive: boolean}){
         <div className={s.reward_title}>{t("dailyReward")}</div>
         <div className={s.box_slider}>
           <Swiper
-            spaceBetween={2}
             initialSlide={state.bonusDay}
-            slidesPerView={screenWidth/105}
+            slidesPerView={screenWidth/107}
           >
             {DAYBOXLIST.map((elem,index)=>(
                 <SwiperSlide>
