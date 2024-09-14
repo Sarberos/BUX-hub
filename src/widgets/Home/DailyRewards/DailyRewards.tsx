@@ -10,13 +10,18 @@ import { useTranslation } from 'react-i18next'
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum'
 import { SwiperSlide,Swiper } from 'swiper/react'
 import 'swiper/css'
+import { useEffect, useState } from 'react'
 
 export default function({buttonActive}:{ buttonActive: boolean}){
+    const [screenWidth, setScreenWidth]=useState(window.innerWidth)
     const {t} =useTranslation()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
     const {mutateAsync:claim_bonus}=useClaimBonus()
 
+    useEffect(() => {   
+      setScreenWidth(window.innerWidth);  
+  }, []); 
     const onClaimBonus=async(dayNumber:number)=>{
             dispatch(setBonusDay(state.bonusDay+1))
             const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
@@ -34,51 +39,7 @@ export default function({buttonActive}:{ buttonActive: boolean}){
           <Swiper
             spaceBetween={2}
             initialSlide={state.bonusDay}
-            breakpoints={{  
-            320: {  
-                slidesPerView: 3,
-            },  
-            340: {  
-                slidesPerView: 3.25,
-            },  
-            350: {  
-                slidesPerView: 3.4,
-            },  
-            365: {  
-                slidesPerView: 3.5,
-            },  
-            377: {  
-                slidesPerView: 3.65,
-            },  
-            390: {  
-                slidesPerView: 3.75,
-            },  
-            405: {  
-                slidesPerView: 3.9,
-            },  
-            412: {  
-                slidesPerView: 3.9,
-            },  
-            417: {  
-                slidesPerView: 4.0,
-            },  
-            
-            425: {  
-                slidesPerView: 4,
-            },  
-            450: {  
-                slidesPerView: 4,
-            },  
-            550: {  
-                slidesPerView: 5,
-            },  
-            640: {  
-                slidesPerView: 6,
-            },  
-            768: {  
-                slidesPerView: 7, 
-            },
-            }}
+            slidesPerView={screenWidth/105}
           >
             {DAYBOXLIST.map((elem,index)=>(
                 <SwiperSlide>
