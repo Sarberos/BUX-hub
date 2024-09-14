@@ -44,7 +44,7 @@ export type TFrensTimerType = {
 
 
 export function Home(){
-  console.log(window.Telegram.WebApp.initDataUnsafe?.user?.id);
+  console.log(`Bearer ${window.Telegram.WebApp.initData}`);
   
   const {user}=useTelegramApi()
   const {t} = useTranslation()
@@ -58,7 +58,7 @@ export function Home(){
   const [bonusInfo, setBonusInfo]=useState<TBonusData>()
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
-  const claimedCoins:number=480;
+  const claimedCoins:number=150;
 
 const onStartFarming=()=>{
   startReq();
