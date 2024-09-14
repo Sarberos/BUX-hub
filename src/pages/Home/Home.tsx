@@ -45,7 +45,6 @@ export type TFrensTimerType = {
 
 export function Home(){
   console.log(`Bearer ${window.Telegram.WebApp.initData}`);
-  
   const {user}=useTelegramApi()
   const {t} = useTranslation()
   const dispatch= useAppDispatch()
