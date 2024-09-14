@@ -33,7 +33,7 @@ export default function({buttonActive}:{ buttonActive: boolean}){
         <div className={s.box_slider}>
           <Swiper
             spaceBetween={2}
-            initialSlide={2}
+            initialSlide={state.bonusDay+1}
             breakpoints={{  
             320: {  
                 slidesPerView: 3,
@@ -57,8 +57,12 @@ export default function({buttonActive}:{ buttonActive: boolean}){
                 slidesPerView: 3.9,
             },  
             412: {  
+                slidesPerView: 3.9,
+            },  
+            417: {  
                 slidesPerView: 4.0,
             },  
+            
             425: {  
                 slidesPerView: 4,
             },  
