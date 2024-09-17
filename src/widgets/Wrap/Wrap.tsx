@@ -9,10 +9,10 @@ import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
-import home_bg from '@shared/Wrap/assets/img/new_main.png'
-import tasks_bg from '@shared/Wrap/assets/img/new_tasks.png'
-import raiting_bg from '@shared/Wrap/assets/img/new_raiting.png'
-import frens_bg from '@shared/Wrap/assets/img/new_frens.png'
+import home_bg from '@shared/Wrap/assets/img/farm_page.png'
+import tasks_bg from '@shared/Wrap/assets/img/tasks_page.png'
+import raiting_bg from '@shared/Wrap/assets/img/raiting_page.png'
+import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
 
 
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
