@@ -24,6 +24,7 @@ export type TFrensItem={
 export  type TFrensInfoData={
     content: TFrensItem[];
     next_revenues_time:string;
+    referals_limit:number;
     revenues: number;
     status:string;
 }

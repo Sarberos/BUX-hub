@@ -20,7 +20,8 @@ export default function({buttonActive}:{ buttonActive: boolean}){
     const {mutateAsync:claim_bonus}=useClaimBonus()
 
     useEffect(() => {   
-      setScreenWidth(window.innerWidth);  
+      window.innerWidth>=107 ?setScreenWidth(window.innerWidth):1
+      
   }, [window.innerWidth]); 
     const onClaimBonus=async(dayNumber:number)=>{
             dispatch(setBonusDay(state.bonusDay+1))
