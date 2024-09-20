@@ -16,7 +16,7 @@ export const Preloader=()=>{
             <img src={preloader_bg_img} alt="" className={s.preloader_bg_img} />
             {/*<img src={preloder_git} alt="" className={s.preloader_img} /> */}
             <div className={s.preloader_img}>
-                <Lottie options={defaultOptions} height={100} width={100} />
+                <Lottie options={defaultOptions} height={150} width={150} />
             </div>
         </div>
     )

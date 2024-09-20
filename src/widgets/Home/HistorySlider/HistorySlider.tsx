@@ -10,7 +10,7 @@ import { useOutletContext } from "@widgets/Wrap/Wrap";
 export const HistorySlider=()=>{
   const swiperRef = useRef<any>(null); 
   const {setIsHistory}=useOutletContext()
-  const [crossIsActive, setIsActive]=useState<boolean>(true)
+  const [crossIsActive, setIsActive]=useState<boolean>(false)
 
   useEffect(() => {  
     const swiper = swiperRef.current?.swiper;  
@@ -20,7 +20,7 @@ export const HistorySlider=()=>{
           swiper.autoplay.stop(); 
           setTimeout(()=>{
             setIsActive(true)
-          },1000)
+          },100)
         }  
       };  
 
@@ -63,7 +63,7 @@ export const HistorySlider=()=>{
             className={`${s.swiper_btn} ${s.next}`}
             onClick={() => swiperRef.current.swiper.slideNext()}
           ></button>
-          {crossIsActive && (
+          {true && (
             <div
               onClick={() => setIsHistory(false)}
               className={
