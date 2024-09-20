@@ -21,6 +21,7 @@ import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
 import { Preloader } from '@widgets/UI/Preloader/Preloader';
 import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
 import BonusFetching from '@shared/utilits/axios/BonusRequest';
+import { useOutletContext } from '@widgets/Wrap/Wrap';
 
 export type TFarmInfo={
   coins: number,
@@ -44,16 +45,15 @@ export type TFrensTimerType = {
 
 
 export function Home(){
-  console.log(`Bearer ${window.Telegram.WebApp.initData}`);
   const {user}=useTelegramApi()
   const {t} = useTranslation()
   const dispatch= useAppDispatch()
   const state=useAppSelector(state=>state.home)
+  const {setIsHistory}=useOutletContext()
 
   const {mutate:startReq}=useStartFarm()
   const {mutate:claimReq}=useClaimFarmCoins()
   const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
-  // const {data:bonusInfo}=useGetBonusStatus()
   const [bonusInfo, setBonusInfo]=useState<TBonusData>()
   const [coins,setCoins]=useState<number>(state.totalCoins)
   const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
@@ -75,10 +75,14 @@ useEffect(()=>{
   farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
 },[state])
 useEffect(()=>{
-  BonusFetching.bonusStatus().then(
-    resp => {setBonusInfo(resp);}
+  try {
+    BonusFetching.bonusStatus().then(
+      resp => {setBonusInfo(resp);}
+    )
+  } catch (e) {
+    console.log("Daily Rew error"+'\n'+e);
     
-  )
+  }
 },[])
 useEffect(()=>{
     if(bonusInfo){ 
@@ -92,24 +96,12 @@ useEffect(()=>{
 useEffect(()=>{
     if(farmInfo){
       farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
-      dispatch(setStoreFarmStatus(farmInfo.status));
+      if(farmInfo.status!==EnumFarmStatus.START ){
+        state.farmStatus !== farmInfo.status && dispatch(setStoreFarmStatus(farmInfo.status));
+      }
       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
     } 
   },[farmInfo])
-// useEffect(()=>{
-//     if(farmInfo){
-//       farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
-//       dispatch(setStoreFarmStatus(farmInfo.status));
-//       farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
-//     } 
-//     if(bonusInfo){ 
-//       if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
-//         dispatch(setIsDailyReward(true))
-//         dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
-//       }
-//       state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
-//     }  
-//   },[farmInfo,bonusInfo])
 
 if(statusLoading){
   return <Preloader />
@@ -127,7 +119,7 @@ if(statusLoading){
         <div className={s.koin_wrap}>
           <KoinQuantity coinValue={coins} />
         </div>
-        <div className={s.main_img_wrap}>
+        <div className={s.main_img_wrap}  onClick={()=>setIsHistory(true)}>
           <AnimationMainImg />
         </div>
         <div className={s.farming_btn}>
@@ -164,6 +156,7 @@ if(statusLoading){
          </BottomPopUp>
        </div>
       )} 
+  
 </>
     );
 }

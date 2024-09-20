@@ -1,6 +1,6 @@
 import s from "./Wrap.module.scss";
 import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
@@ -13,7 +13,20 @@ import home_bg from '@shared/Wrap/assets/img/farm_page.png'
 import tasks_bg from '@shared/Wrap/assets/img/tasks_page.png'
 import raiting_bg from '@shared/Wrap/assets/img/raiting_page.png'
 import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
+import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 
+
+export interface IOutletContext{
+  setIsHistory:(v:boolean)=>void;
+}
+const OutleContext=createContext<IOutletContext|undefined>(undefined)
+export const useOutletContext=()=>{
+  const context=useContext(OutleContext);
+  if(!context){
+    throw new Error('useOutletContext must be used within an OutletProvider')
+  }
+  return context
+}
 
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
   mins > 0 && mins--;  
@@ -58,6 +71,11 @@ export const  Wrap=() =>{
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
+  const [isHistory,setIsHistory]=useState<boolean>(true)
+
+  const outletContext={
+    setIsHistory
+  }
   
 
 useEffect(()=>{
@@ -96,8 +114,10 @@ useEffect(()=>{
     currenPageId ===4 && setBackground(frens_bg)
   },[currenPageId])
   
+
   return (
-  <div style={{backgroundImage:`url(${background})`}}  className={s.wrap}>
+    <OutleContext.Provider value={outletContext}>
+    <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}>
       <div className={s.child_wrap}>
         <Outlet/>
       </div>
@@ -107,6 +127,13 @@ useEffect(()=>{
           setCurrentPageId={setCurrentPageId}
         />
       </div>
-  </div>
+
+      {isHistory && 
+      <div className={s.history_elem}>
+        <HistorySlider />
+      </div>
+      }
+    </div>
+    </OutleContext.Provider>
   );
 }
