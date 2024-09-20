@@ -38,6 +38,9 @@
     &.next{
         right:0;
     }
+    .swiper_btn:active{
+        background: transparent;
+    }
 }
 .cross_wrap{
     opacity: 0;
@@ -48,7 +51,7 @@
     border-radius: 5px;
     border:1px solid #969696;
     z-index: 11;
-    transition:  1.5;
+    transform: translateY(-47px);
     &.active{
         opacity:1;
         transition: opacity 0.5s ease;

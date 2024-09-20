@@ -10,7 +10,7 @@ import { useOutletContext } from "@widgets/Wrap/Wrap";
 export const HistorySlider=()=>{
   const swiperRef = useRef<any>(null); 
   const {setIsHistory}=useOutletContext()
-  const [crossIsActive, setIsActive]=useState<boolean>(false)
+  const [crossIsActive, setIsActive]=useState<boolean>(true)
 
   useEffect(() => {  
     const swiper = swiperRef.current?.swiper;  
