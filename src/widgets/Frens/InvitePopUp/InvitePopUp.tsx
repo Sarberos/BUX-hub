@@ -27,7 +27,7 @@ const copyToClipboard =(textToCopy: string) => {
 };  
 
 const hadleSendToTelegram = () => { 
-  tg.openTelegramLink(`https://t.me/share?url=${currentLink}&text=Join me on BUX and let's earn together! Use my invite link to join the fun. 🤩`)
+  tg.openTelegramLink(`https://t.me/share?url=${currentLink}&text=Join me on BuxHub and together we will create the Community of the future 🛸`)
   dispatch(setInviteStatus(false))
 };
     

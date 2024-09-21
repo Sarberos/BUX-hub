@@ -65,7 +65,7 @@ export const HistorySlider=()=>{
         >
           {historySldesArr.map((elem, index) => (
             <SwiperSlide key={index}>
-              <div onTouchStart={stopAutoPlay} onTouchEnd={countineAutoPlay} className={s.history_wrap}>
+              <div className={s.history_wrap}>
                 <div className={s.history_slide_wrap}>
                   <img src={elem} className={s.history_slide} />
                 </div>
@@ -74,10 +74,14 @@ export const HistorySlider=()=>{
           ))}
           <button
             className={`${s.swiper_btn} ${s.prev}`}
+            onTouchStart={stopAutoPlay}
+            onTouchEnd={countineAutoPlay}
             onClick={() => swiperRef.current.swiper.slidePrev()}
           ></button>
           <button
             className={`${s.swiper_btn} ${s.next}`}
+            onTouchStart={stopAutoPlay}
+            onTouchEnd={countineAutoPlay}
             onClick={() => swiperRef.current.swiper.slideNext()}
           ></button>
           {true && (
