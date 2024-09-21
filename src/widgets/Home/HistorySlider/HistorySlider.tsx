@@ -13,6 +13,11 @@ export const HistorySlider=()=>{
   const {setIsHistory}=useOutletContext()
   const [crossIsActive, setIsActive]=useState<boolean>(false)
   const {user}=useTelegramApi();
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    console.log("Геолокация не поддерживается браузером.");
+  }  
   console.log(user?.language_code);
 
   useEffect(() => {  
@@ -84,3 +89,28 @@ export const HistorySlider=()=>{
       </>
     );
 }
+
+
+function showPosition(position:any) {  
+    const latitude = position.coords.latitude; // Получаем широту  
+    const longitude = position.coords.longitude; // Получаем долготу  
+
+    console.log(`Широта: ${latitude}, Долгота: ${longitude}`);  
+}  
+
+function showError(error:any) {  
+    switch(error.code) {  
+        case error.PERMISSION_DENIED:  
+            console.log("Пользователь отклонил запрос на геолокацию.");  
+            break;  
+        case error.POSITION_UNAVAILABLE:  
+            console.log("Информация о местоположении недоступна.");  
+            break;  
+        case error.TIMEOUT:  
+            console.log("Запрос на определение местоположения превысил время ожидания.");  
+            break;  
+        case error.UNKNOWN_ERROR:  
+            console.log("Произошла неизвестная ошибка.");  
+            break;  
+    }  
+}  
