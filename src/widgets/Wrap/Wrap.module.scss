@@ -4,10 +4,10 @@
     flex-direction: column;
     height: 100vh;
     background-size: 100% 100%;
+    background-color: #000;
     .child_wrap{
         order: 1;
         flex:1;  
-        
     }
     .footer_wrap{
         order: 2;

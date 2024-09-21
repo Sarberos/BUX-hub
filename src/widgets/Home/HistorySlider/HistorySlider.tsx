@@ -14,14 +14,20 @@ export const HistorySlider=()=>{
   const [crossIsActive, setIsActive]=useState<boolean>(false)
   const {user}=useTelegramApi();
   const historySldesArr=user?.language_code==="ru" ? historySlides.slice(0,5) : historySlides.slice(5,10);
+  
+  const stopAutoPlay=()=>{
+    const swiper = swiperRef.current?.swiper;
+    if (swiper) {
+      swiper.autoplay.stop()
+    }
+  }
+  const countineAutoPlay=()=>{
+    const swiper = swiperRef.current?.swiper;
+    if (swiper) {
+      swiper.autoplay.start()
+    }
+  }
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);  
-
-if (isMobile) {  
-    console.log("Устройство: мобильный телефон");  
-} else {  
-    console.log("Устройство: ноутбук или ПК");  
-}
 
 
   useEffect(() => {  
@@ -52,14 +58,14 @@ if (isMobile) {
             nextEl: ".swiper_btn.next",
             prevEl: ".swiper_btn.prev",
           }}
-          autoplay={{ delay: 6000 }}
+          autoplay={{ delay: 7500 }}
           slidesPerView={1}
           speed={400}
           loop={false}
         >
           {historySldesArr.map((elem, index) => (
             <SwiperSlide key={index}>
-              <div className={s.history_wrap}>
+              <div onTouchStart={stopAutoPlay} onTouchEnd={countineAutoPlay} className={s.history_wrap}>
                 <div className={s.history_slide_wrap}>
                   <img src={elem} className={s.history_slide} />
                 </div>

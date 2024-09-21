@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";  
 import Lottie from "react-lottie";  
 import animationData from "@shared/Home/assets/anim/Animation - 1725476922777.json"; 
 
 export const AnimationMainImg = () => {  
-    const [size, setSize] = useState(300);  
-    const updateSize = () => {  
-        const newHeight = window.innerHeight * 0.35; 
-
-        setSize(newHeight);  
-    };  
-    useEffect(() => {  
-        updateSize();  
-        window.addEventListener("resize", updateSize);  
-        return () => window.removeEventListener("resize", updateSize);  
-    }, []);  
+    const size=window.innerHeight * 0.35;
 
     const defaultOptions = {  
         loop: true,  

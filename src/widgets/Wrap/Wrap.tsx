@@ -22,7 +22,7 @@ export interface IOutletContext{
 }
 const OutleContext=createContext<IOutletContext|undefined>(undefined)
 export const useOutletContext=()=>{
-  const context=useContext(OutleContext);
+  const context=useContext(OutleContext); 
   if(!context){
     throw new Error('useOutletContext must be used within an OutletProvider')
   }
