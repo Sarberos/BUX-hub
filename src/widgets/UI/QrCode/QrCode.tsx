@@ -1,5 +1,5 @@
 import s from './QrCode.module.scss'
-import qr_img from '@shared/assets/qr/букс с компа.jpg'
+import qr_img from '@shared/assets/qr/букс с компа.webp'
  
 export const QrCode=()=>{
     return(
