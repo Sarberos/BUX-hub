@@ -4,6 +4,7 @@ import { SwiperSlide,Swiper } from 'swiper/react'
 import { useEffect, useRef, useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { useOutletContext } from "@widgets/Wrap/Wrap";
+import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 
 
 
@@ -11,6 +12,8 @@ export const HistorySlider=()=>{
   const swiperRef = useRef<any>(null); 
   const {setIsHistory}=useOutletContext()
   const [crossIsActive, setIsActive]=useState<boolean>(false)
+  const {user}=useTelegramApi();
+  console.log(user?.language_code);
 
   useEffect(() => {  
     const swiper = swiperRef.current?.swiper;  
@@ -20,10 +23,9 @@ export const HistorySlider=()=>{
           swiper.autoplay.stop(); 
           setTimeout(()=>{
             setIsActive(true)
-          },100)
+          },3000)
         }  
       };  
-
       swiper.on('slideChangeTransitionEnd', handleSlideChange);  
       return () => {  
         swiper.off('slideChangeTransitionEnd', handleSlideChange);  
