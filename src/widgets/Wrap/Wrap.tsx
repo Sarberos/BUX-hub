@@ -14,6 +14,7 @@ import tasks_bg from '@shared/Wrap/assets/img/tasks_page.png'
 import raiting_bg from '@shared/Wrap/assets/img/raiting_page.png'
 import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
+import { QrCode } from "@widgets/UI/QrCode/QrCode";
 
 
 export interface IOutletContext{
@@ -66,6 +67,7 @@ export const  Wrap=() =>{
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);  
   
   const [currenPageId, setCurrentPageId] = useState(1);
   const [background, setBackground] = useState(home_bg);
@@ -114,7 +116,9 @@ useEffect(()=>{
     currenPageId ===4 && setBackground(frens_bg)
   },[currenPageId])
   
-
+if(!isMobile){
+  return <QrCode />
+}else 
   return (
     <OutleContext.Provider value={outletContext}>
     <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}>
