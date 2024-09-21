@@ -9,5 +9,4 @@ import third_en from '@shared/assets/history_slider/Слайд 3 анг .webp'
 import fourth_en from '@shared/assets/history_slider/Слайд 4 анг псд версия 2 .webp'
 import fifth_en from '@shared/assets/history_slider/Слайд 5 eng.webp'
 
-export const ruHistorySlider=[first_ru,second_ru,third_ru,fourth_ru,fifth_ru];
-export const enHistorySlider=[first_en,second_en,third_en,fourth_en,fifth_en];
+export const historySlides=[first_ru,second_ru,third_ru,fourth_ru,fifth_ru,first_en,second_en,third_en,fourth_en,fifth_en];
