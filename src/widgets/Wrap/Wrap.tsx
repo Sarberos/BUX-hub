@@ -113,9 +113,6 @@ useEffect(()=>{
     currenPageId ===3 && setBackground(raiting_bg)
     currenPageId ===4 && setBackground(frens_bg)
   },[currenPageId])
-  // useEffect(()=>{
-  //   if(isHistory){}
-  // },[isHistory])
 
 
 if(!isMobile){

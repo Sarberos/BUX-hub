@@ -90,20 +90,21 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
       } 
     },[farmInfo])
 
-let clickTaimer: ReturnType<typeof setTimeout> | null = null; 
-const handleDoubleClick=()=>{
-  if (clickTaimer) {
-    clearTimeout(clickTaimer);  
-    clickTaimer = null; 
-    setIsHistory(true)
-  }else{
-    clickTaimer=setTimeout(()=>{
-      console.log('Одиночное нажатие');
-      
-    },300)
-  }
+    let clickTimer: ReturnType<typeof setTimeout> | null = null;  
 
-}
+    const handleDoubleClick = () => {  
+      if (clickTimer) {  
+        clearTimeout(clickTimer);
+        clickTimer = null;
+        setIsHistory(true);  
+        console.log("Двойное нажатие");  
+      } else {  
+        clickTimer = setTimeout(() => {  
+          console.log("Одиночное нажатие");  
+          clickTimer = null; 
+        }, 300);  
+      }  
+    };
   if(statusLoading ||bonusLoading){
     return <Preloader />
   }else

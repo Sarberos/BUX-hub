@@ -2,7 +2,7 @@
 @keyframes fadeIn {  
     from {  
       opacity: 0;  
-      transform: translateY(20px); /* Двигаем элемент вниз для эффекта */  
+      transform: translateY(20px); 
     }  
     to {  
       opacity: 1;  
@@ -12,7 +12,7 @@
 @keyframes fadeOut {  
     from {  
       opacity: 1;  
-      transform: translateY(0px); /* Двигаем элемент вниз для эффекта */  
+      transform: translateY(0px);
     }  
     to {  
       opacity: 0;  
@@ -48,12 +48,12 @@
     align-items: center;
     justify-content: center;
     background-color: #000;
-     &.fade-in {  
-    animation: fadeIn 0.5s ease forwards; // Анимация появления  
+     &.fadeIn {  
+    animation: fadeIn 0.5s ease ; // Анимация появления  
   }  
 
-  &.fade-out {  
-    animation: fadeOut 0.5s ease forwards; // Анимация исчезновения  
+  &.fadeOut {  
+    animation: fadeOut 0.5s ease ; // Анимация исчезновения  
   } 
 }
 
