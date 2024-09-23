@@ -1,0 +1,15 @@
+.pagination_wrap{
+    display: flex;
+    flex-direction: row;
+    gap:14px;
+    align-items: center;
+    .pagination_elem{
+        width:6px;
+        height:6px;
+        border-radius: 50%;
+        background-color:#303030 ;
+        &.active{
+            background-color: #4fadab;
+        }
+    }
+}
