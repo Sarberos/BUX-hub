@@ -106,7 +106,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
           <div className={s.koin_wrap}>
             <KoinQuantity coinValue={coins} />
           </div>
-          <div className={s.main_img_wrap}  onDoubleClick={()=>setIsHistory(true)}>
+          <div className={s.main_img_wrap}  onClick={()=>setIsHistory(true)}>
             <AnimationMainImg />
           </div>
           <div className={s.farming_btn}>

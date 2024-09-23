@@ -73,7 +73,7 @@ export const  Wrap=() =>{
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
-  const [isHistory,setIsHistory]=useState<boolean>(false)
+  const [isHistory,setIsHistory]=useState<boolean>(true)
 
   const outletContext={
     setIsHistory
