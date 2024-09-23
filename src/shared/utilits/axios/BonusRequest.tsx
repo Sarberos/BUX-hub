@@ -1,7 +1,7 @@
 import api from "./axiosSetting";
 
 class BonusFetching {
-  static async bonusStatus() {
+  static async bonusStatusReq() {
     const resp= await api.get('bonus/status');
     return resp.data;
 }

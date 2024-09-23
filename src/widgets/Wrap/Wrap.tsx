@@ -73,13 +73,12 @@ export const  Wrap=() =>{
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
-  const [isHistory,setIsHistory]=useState<boolean>(true)
-
+  const [isHistory,setIsHistory]=useState<boolean>(false)
+  
   const outletContext={
     setIsHistory
   }
   
-
 useEffect(()=>{
     tg.expand()
     tg.setHeaderColor("#000000");
@@ -117,9 +116,9 @@ useEffect(()=>{
   },[currenPageId])
   
 if(!isMobile){
-  return <QrCode />
-}else 
-  return (
+  return <QrCode/>
+}
+return (
     <OutleContext.Provider value={outletContext}>
     <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}>
       <div className={s.child_wrap}>
@@ -131,13 +130,12 @@ if(!isMobile){
           setCurrentPageId={setCurrentPageId}
         />
       </div>
-
       {isHistory && 
       <div className={s.history_elem}>
         <HistorySlider />
       </div>
       }
     </div>
-    </OutleContext.Provider>
+    // </OutleContext.Provider>
   );
 }

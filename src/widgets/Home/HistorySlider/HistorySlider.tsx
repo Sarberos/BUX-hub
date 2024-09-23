@@ -11,10 +11,13 @@ import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 export const HistorySlider=()=>{
   const swiperRef = useRef<any>(null); 
   const {setIsHistory}=useOutletContext()
-  const [crossIsActive, setIsActive]=useState<boolean>(false)
+  const [crossIsActive, setIsActive]=useState<boolean>(false);
   const {user}=useTelegramApi();
-  const historySldesArr=user?.language_code==="ru" ? historySlides.slice(0,5) : historySlides.slice(5,10);
-  
+  const cngLanguages:string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];
+  let historySlidesArray;
+  if (user && user.language_code) {
+    historySlidesArray=cngLanguages.includes(user?.language_code) ? historySlides.slice(0, 5) :historySlides.slice(5, 10);
+  }
   const stopAutoPlay=()=>{
     const swiper = swiperRef.current?.swiper;
     if (swiper) {
@@ -28,8 +31,6 @@ export const HistorySlider=()=>{
     }
   }
 
-
-
   useEffect(() => {  
     const swiper = swiperRef.current?.swiper;  
     if (swiper) {  
@@ -38,7 +39,7 @@ export const HistorySlider=()=>{
           swiper.autoplay.stop(); 
           setTimeout(()=>{
             setIsActive(true)
-          },3000)
+          },2000)
         }  
       };  
       swiper.on('slideChangeTransitionEnd', handleSlideChange);  
@@ -63,7 +64,7 @@ export const HistorySlider=()=>{
           speed={400}
           loop={false}
         >
-          {historySldesArr.map((elem, index) => (
+          {historySlidesArray && historySlidesArray.map((elem, index) => (
             <SwiperSlide key={index}>
               <div className={s.history_wrap}>
                 <div className={s.history_slide_wrap}>

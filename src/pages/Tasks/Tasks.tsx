@@ -1,3 +1,4 @@
+
 import s from '@pages/Tasks/Tasks.module.scss'
 import {useGetTasksInf } from '@shared/Tasks/hooks/useGetTasksInf';
 import TaskItem from '@widgets/Tasks/TaskItem/TaskItem'
@@ -8,6 +9,7 @@ import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins';
 import { setIsMiniTasks } from '@shared/utilits/redux/redux_slice/home_slice';
 import PopUp from '@widgets/UI/PopUp/PopUp';
 import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
+
 export const Tasks=()=>{
   const {t}= useTranslation()
   const dispatch = useAppDispatch()
@@ -15,6 +17,8 @@ export const Tasks=()=>{
 
   const {data:tasksInf,isLoading:taskInfoLoading}=useGetTasksInf()
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
+
+
 
 
 if(taskInfoLoading){

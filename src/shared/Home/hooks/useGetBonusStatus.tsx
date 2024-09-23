@@ -6,11 +6,12 @@ export  type TBonusData={
     day:number,
     next_bonus_time:string,
     status:EnumBonusStatus,
+    welcome_status:boolean,
 }
 export const useGetBonusStatus=()=>{
     return useQuery<TBonusData>({
         queryKey:['bonus_status'],
-        queryFn: BonusFetching.bonusStatus,
+        queryFn: BonusFetching.bonusStatusReq,
         enabled:true,
     })
 }
