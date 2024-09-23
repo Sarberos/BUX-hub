@@ -87,3 +87,12 @@
         transition: .3s;
     }
 }
+.history_elem{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -13,13 +13,13 @@
   import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
   import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
   import { changeDateFormat } from '@features/Home/changeDateFormat';
-  import { TBonusData, useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
+  import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
   import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
   import { setBonusDay, setDailyRewardsStatus, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
   import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
   import { Preloader } from '@widgets/UI/Preloader/Preloader';
   import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
-  import { useOutletContext } from '@widgets/Wrap/Wrap';
+import { HistorySlider } from '@widgets/Home/HistorySlider/HistorySlider';
 
   export type TFarmInfo={
     coins: number,
@@ -47,15 +47,14 @@
     const {t} = useTranslation()
     const dispatch= useAppDispatch()
     const state=useAppSelector(state=>state.home)
-    const {setIsHistory}=useOutletContext()
 
     const {mutate:startReq}=useStartFarm()
     const {mutate:claimReq}=useClaimFarmCoins()
     const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
-    const {data:getBonusInf,isLoading:bonusLoading}=useGetBonusStatus()
-    const [bonusInfo, setBonusInfo]=useState<TBonusData>()
+    const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
     const [coins,setCoins]=useState<number>(state.totalCoins)
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
+    const [isHistory,setIsHistory]=useState<boolean>(false)
     const claimedCoins:number=150;
 
   const onStartFarming=()=>{
@@ -74,17 +73,12 @@
     farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
   },[state])
   useEffect(()=>{
-    if(getBonusInf){
-      setBonusInfo(getBonusInf);
-    }
-  },[getBonusInf])
-  useEffect(()=>{
       if(bonusInfo){ 
         if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
           dispatch(setIsDailyReward(true))
           dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
         }
-        !bonusInfo.welcome_status && setIsHistory(!bonusInfo.welcome_status)
+        bonusInfo.welcome_status && setIsHistory(bonusInfo.welcome_status)
         state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
       }  
     },[bonusInfo])
@@ -96,6 +90,13 @@
       } 
     },[farmInfo])
 
+  if(isHistory){
+    return (
+    <div className={s.history_elem}>
+      <HistorySlider setIsHistory={setIsHistory} />
+    </div>
+    )
+  }
   if(statusLoading ||bonusLoading){
     return <Preloader />
   }else

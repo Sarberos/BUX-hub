@@ -3,14 +3,12 @@ import s from "./HistorySlider.module.scss"
 import { SwiperSlide,Swiper } from 'swiper/react'
 import { useEffect, useRef, useState } from "react";
 import { Autoplay } from "swiper/modules";
-import { useOutletContext } from "@widgets/Wrap/Wrap";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 
 
 
-export const HistorySlider=()=>{
-  const swiperRef = useRef<any>(null); 
-  const {setIsHistory}=useOutletContext()
+export const HistorySlider=({setIsHistory}:{setIsHistory: (v:boolean)=>void})=>{
+  const swiperRef = useRef<any>(null);
   const [crossIsActive, setIsActive]=useState<boolean>(false);
   const {user}=useTelegramApi();
   const cngLanguages:string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];
