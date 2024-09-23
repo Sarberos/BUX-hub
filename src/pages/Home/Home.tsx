@@ -90,7 +90,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
       } 
     },[farmInfo])
 
-let clickTaimer:number|null;
+let clickTaimer: ReturnType<typeof setTimeout> | null = null; 
 const handleDoubleClick=()=>{
   if (clickTaimer) {
     clearTimeout(clickTaimer);  
