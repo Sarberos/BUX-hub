@@ -19,8 +19,7 @@
   import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
   import { Preloader } from '@widgets/UI/Preloader/Preloader';
   import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
-import { HistorySlider } from '@widgets/Home/HistorySlider/HistorySlider';
-
+import { useOutletContext } from '@widgets/Wrap/Wrap';
   export type TFarmInfo={
     coins: number,
     start_time: null|string,
@@ -48,16 +47,14 @@ import { HistorySlider } from '@widgets/Home/HistorySlider/HistorySlider';
     const dispatch= useAppDispatch()
     const state=useAppSelector(state=>state.home)
 
+    const {setIsHistory}=useOutletContext()
     const {mutate:startReq}=useStartFarm()
     const {mutate:claimReq}=useClaimFarmCoins()
     const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
     const [coins,setCoins]=useState<number>(state.totalCoins)
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
-    const [isHistory,setIsHistory]=useState<boolean>()
     const claimedCoins:number=150;
-
-    console.log(isHistory);
     
 
   const onStartFarming=()=>{
@@ -93,13 +90,6 @@ import { HistorySlider } from '@widgets/Home/HistorySlider/HistorySlider';
       } 
     },[farmInfo])
 
-  if(true){
-    return (
-    <div className={s.history_elem}>
-      <HistorySlider setIsHistory={setIsHistory} />
-    </div>
-    )
-  }
   if(statusLoading ||bonusLoading){
     return <Preloader />
   }else
