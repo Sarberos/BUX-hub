@@ -1,18 +1,17 @@
 import { historySlides } from "@shared/Home/consts/historyArr"
 import s from "./HistorySlider.module.scss"
 import { SwiperSlide,Swiper } from 'swiper/react'
-import { useEffect, useRef, useState } from "react";
-import { Autoplay } from "swiper/modules";
+import { useEffect, useRef } from "react";
+import { Autoplay,Pagination } from "swiper/modules";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 
 
 
 export const HistorySlider=({setIsHistory}:{setIsHistory: (v:boolean)=>void})=>{
   const swiperRef = useRef<any>(null);
-  const [crossIsActive, setIsActive]=useState<boolean>(false);
   const {user}=useTelegramApi();
   const cngLanguages:string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];
-  let historySlidesArray;
+  let historySlidesArray=historySlides.slice(0, 5);
   if (user && user.language_code) {
     historySlidesArray=cngLanguages.includes(user?.language_code) ? historySlides.slice(0, 5) :historySlides.slice(5, 10);
   }
@@ -36,8 +35,8 @@ export const HistorySlider=({setIsHistory}:{setIsHistory: (v:boolean)=>void})=>{
         if (swiper.isEnd) {  
           swiper.autoplay.stop(); 
           setTimeout(()=>{
-            setIsActive(true)
-          },2000)
+            setIsHistory(false)
+          },7500)
         }  
       };  
       swiper.on('slideChangeTransitionEnd', handleSlideChange);  
@@ -53,6 +52,7 @@ export const HistorySlider=({setIsHistory}:{setIsHistory: (v:boolean)=>void})=>{
           ref={swiperRef}
           className={s.swiper}
           modules={[Autoplay]}
+          pagination={true}
           navigation={{
             nextEl: ".swiper_btn.next",
             prevEl: ".swiper_btn.prev",
@@ -69,35 +69,20 @@ export const HistorySlider=({setIsHistory}:{setIsHistory: (v:boolean)=>void})=>{
                   <img src={elem} className={s.history_slide} />
                 </div>
               </div>
+              <button
+                className={`${s.swiper_btn} ${s.prev}`}
+                onTouchStart={stopAutoPlay}
+                onTouchEnd={countineAutoPlay}
+                onClick={() => swiperRef.current.swiper.slidePrev()}
+              ></button>
+              <button
+                className={`${s.swiper_btn} ${s.next}`}
+                onTouchStart={stopAutoPlay}
+                onTouchEnd={countineAutoPlay}
+                onClick={index===historySlidesArray.length-1 ?()=>{setIsHistory(false)}:() => swiperRef.current.swiper.slideNext()}
+              ></button>
             </SwiperSlide>
           ))}
-          <button
-            className={`${s.swiper_btn} ${s.prev}`}
-            onTouchStart={stopAutoPlay}
-            onTouchEnd={countineAutoPlay}
-            onClick={() => swiperRef.current.swiper.slidePrev()}
-          ></button>
-          <button
-            className={`${s.swiper_btn} ${s.next}`}
-            onTouchStart={stopAutoPlay}
-            onTouchEnd={countineAutoPlay}
-            onClick={() => swiperRef.current.swiper.slideNext()}
-          ></button>
-          {true && (
-            <div
-              onClick={() => setIsHistory(false)}
-              className={
-                crossIsActive
-                  ? `${s.cross_wrap} ${s.active}`
-                  : `${s.cross_wrap}`
-              }
-            >
-              <div className={s.cross}>
-                <span className={s.line1}></span>
-                <span className={s.line2}></span>
-              </div>
-            </div>
-          )}
         </Swiper>
       </>
     );

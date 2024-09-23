@@ -78,8 +78,6 @@ export const  Wrap=() =>{
   const outletContext={
     setIsHistory
   }
-
-  
 useEffect(()=>{
     tg.expand()
     tg.setHeaderColor("#000000");
@@ -119,13 +117,6 @@ useEffect(()=>{
 if(!isMobile){
   return <QrCode/>
 }
-if(isHistory){
-  return (
-  <div className={s.history_elem}>
-    <HistorySlider setIsHistory={setIsHistory} />
-  </div>
-  )
-}
 return (
   <OutleContext.Provider value={outletContext}>
     <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}>
@@ -139,6 +130,10 @@ return (
         />
       </div>
     </div>
+    {isHistory && <div className={s.history_elem}>
+      <HistorySlider setIsHistory={setIsHistory} />
+    </div>
+    }
   </OutleContext.Provider>
   );
 }

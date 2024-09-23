@@ -78,7 +78,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
           dispatch(setIsDailyReward(true))
           dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
         }
-        bonusInfo.welcome_status && setIsHistory(bonusInfo.welcome_status)
+        setIsHistory(bonusInfo.welcome_status)
         state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
       }  
     },[bonusInfo])
