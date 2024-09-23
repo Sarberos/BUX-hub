@@ -84,14 +84,14 @@
           dispatch(setIsDailyReward(true))
           dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
         }
-        bonusInfo.welcome_status && setIsHistory(bonusInfo.welcome_status)
+        !bonusInfo.welcome_status && setIsHistory(!bonusInfo.welcome_status)
         state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
       }  
     },[bonusInfo])
   useEffect(()=>{
       if(farmInfo){
         farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
-        state.farmStatus !== farmInfo.status && dispatch(setStoreFarmStatus(farmInfo.status));
+        farmInfo.status !== state.farmStatus   && dispatch(setStoreFarmStatus(farmInfo.status));
         farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
       } 
     },[farmInfo])
