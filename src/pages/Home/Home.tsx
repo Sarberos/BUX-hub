@@ -52,7 +52,7 @@
     const {mutate:startReq}=useStartFarm()
     const {mutate:claimReq}=useClaimFarmCoins()
     const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
-    const {data:getBonusInf}=useGetBonusStatus()
+    const {data:getBonusInf,isLoading:bonusLoading}=useGetBonusStatus()
     const [bonusInfo, setBonusInfo]=useState<TBonusData>()
     const [coins,setCoins]=useState<number>(state.totalCoins)
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
@@ -96,7 +96,7 @@
       } 
     },[farmInfo])
 
-  if(statusLoading){
+  if(statusLoading ||bonusLoading){
     return <Preloader />
   }else
   return (
