@@ -54,8 +54,11 @@ import { HistorySlider } from '@widgets/Home/HistorySlider/HistorySlider';
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
     const [coins,setCoins]=useState<number>(state.totalCoins)
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
-    const [isHistory,setIsHistory]=useState<boolean>(false)
+    const [isHistory,setIsHistory]=useState<boolean>()
     const claimedCoins:number=150;
+
+    console.log(isHistory);
+    
 
   const onStartFarming=()=>{
     startReq();
@@ -90,7 +93,7 @@ import { HistorySlider } from '@widgets/Home/HistorySlider/HistorySlider';
       } 
     },[farmInfo])
 
-  if(isHistory){
+  if(true){
     return (
     <div className={s.history_elem}>
       <HistorySlider setIsHistory={setIsHistory} />
