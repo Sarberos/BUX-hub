@@ -83,8 +83,8 @@
         if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
           dispatch(setIsDailyReward(true))
           dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
-          bonusInfo.welcome_status && setIsHistory(bonusInfo.welcome_status)
         }
+        bonusInfo.welcome_status && setIsHistory(bonusInfo.welcome_status)
         state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
       }  
     },[bonusInfo])
