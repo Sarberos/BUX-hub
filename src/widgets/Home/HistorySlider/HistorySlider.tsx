@@ -86,10 +86,8 @@ const handlePaginationClick = (index: number) => {
               onTouchEnd={continueAutoPlay}
               onClick={
                 index === historySlidesArray.length - 1
-                  ? () => swiperRef.current.swiper.slideNext()
-                  : () => {
-                      swiperRef.current.swiper.slideTo(index + 1);
-                    }
+                  ? () => setIsHistory(false)
+                  : () => swiperRef.current.swiper.slideNext()
               }
               className={`${s.swiper_btn} ${s.next}`}
             ></button>

@@ -90,13 +90,25 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
       } 
     },[farmInfo])
 
+let clickTaimer:number|undefined;
+const handleDoubleClick=()=>{
+  if (clickTaimer) {
+    setIsHistory(true)
+  }else{
+    clickTaimer=setTimeout(()=>{
+      console.log('Одиночное нажатие');
+      
+    },300)
+  }
+
+}
   if(statusLoading ||bonusLoading){
     return <Preloader />
   }else
   return (
     <>
         <div className={s.wrapper}>
-          <div className={s.title_wrap}>
+          <div  className={s.title_wrap}>
             <p className={s.title}>{`${t("hello")},`}</p>
             <p className={s.title}>{user?.username}</p>
           </div>
@@ -106,7 +118,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
           <div className={s.koin_wrap}>
             <KoinQuantity coinValue={coins} />
           </div>
-          <div className={s.main_img_wrap}  onClick={()=>setIsHistory(true)}>
+          <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
             <AnimationMainImg />
           </div>
           <div className={s.farming_btn}>

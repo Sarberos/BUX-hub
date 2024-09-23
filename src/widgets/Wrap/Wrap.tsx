@@ -73,7 +73,7 @@ export const  Wrap=() =>{
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
-  const [isHistory,setIsHistory]=useState<boolean>(true)
+  const [isHistory,setIsHistory]=useState<boolean>(false)
 
   const outletContext={
     setIsHistory
@@ -113,7 +113,11 @@ useEffect(()=>{
     currenPageId ===3 && setBackground(raiting_bg)
     currenPageId ===4 && setBackground(frens_bg)
   },[currenPageId])
-  
+  // useEffect(()=>{
+  //   if(isHistory){}
+  // },[isHistory])
+
+
 if(!isMobile){
   return <QrCode/>
 }
