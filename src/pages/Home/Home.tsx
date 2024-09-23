@@ -91,9 +91,7 @@
   useEffect(()=>{
       if(farmInfo){
         farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
-        if(farmInfo.status!==EnumFarmStatus.START ){
-          state.farmStatus !== farmInfo.status && dispatch(setStoreFarmStatus(farmInfo.status));
-        }
+        state.farmStatus !== farmInfo.status && dispatch(setStoreFarmStatus(farmInfo.status));
         farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
       } 
     },[farmInfo])
