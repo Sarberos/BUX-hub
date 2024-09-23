@@ -51,7 +51,7 @@ export const HistorySlider=({setIsHistory}:{setIsHistory: (v:boolean)=>void})=>{
         <Swiper
           ref={swiperRef}
           className={s.swiper}
-          modules={[Autoplay]}
+          modules={[Autoplay,Pagination]}
           pagination={true}
           navigation={{
             nextEl: ".swiper_btn.next",
