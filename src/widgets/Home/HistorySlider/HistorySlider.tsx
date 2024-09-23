@@ -54,33 +54,54 @@ const handlePaginationClick = (index: number) => {
   swiperRef.current.swiper.slideTo(index);  
 };  
 
-  return ( 
-      <Swiper  
-        ref={swiperRef}  
-        className={s.swiper}  
-        modules={[Pagination, Autoplay]}  
-        pagination={false} 
-        onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}  
-      >  
-        {historySlidesArray && historySlidesArray.map((elem, index) => (  
-          <SwiperSlide key={index}>  
-            <img src={elem} className={s.history_slide} />  
+  return (
+    <Swiper
+      ref={swiperRef}
+      className={s.swiper}
+      modules={[Pagination, Autoplay]}
+      pagination={false}
+      navigation={{
+        nextEl: ".swiper_btn.next",
+        prevEl: ".swiper_btn.prev",
+      }}
+      onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
+      autoplay={{ delay: 7500 }}
+      slidesPerView={1}
+      speed={400}
+      loop={false}
+    >
+      {historySlidesArray &&
+        historySlidesArray.map((elem, index) => (
+          <SwiperSlide key={index}>
+            <img src={elem} className={s.history_slide} />
             <button
-            onTouchStart={stopAutoPlay}
-            onTouchEnd={continueAutoPlay}
-            onClick={()=>{swiperRef.current.swiper.slideTo(index-1)}}
-            className={`${s.swiper_btn} ${s.prev}`}></button>
+              onTouchStart={stopAutoPlay}
+              onTouchEnd={continueAutoPlay}
+              onClick={() => swiperRef.current.swiper.slidePrev()}
+              className={`${s.swiper_btn} ${s.prev}`}
+            ></button>
             <button className={`${s.swiper_btn} ${s.next}`}></button>
             <button
-            onTouchStart={stopAutoPlay}
-            onTouchEnd={continueAutoPlay}
-            onClick={index===historySlidesArray.length-1 ? ()=>{setIsHistory(false)} :()=>{swiperRef.current.swiper.slideTo(index+1)}}
-            className={`${s.swiper_btn} ${s.next}`}></button>
-          </SwiperSlide>  
-        ))}  
+              onTouchStart={stopAutoPlay}
+              onTouchEnd={continueAutoPlay}
+              onClick={
+                index === historySlidesArray.length - 1
+                  ? () => swiperRef.current.swiper.slideNext()
+                  : () => {
+                      swiperRef.current.swiper.slideTo(index + 1);
+                    }
+              }
+              className={`${s.swiper_btn} ${s.next}`}
+            ></button>
+          </SwiperSlide>
+        ))}
       <div className={s.custom_pagination}>
-        <SwiperPagination currentIndex={currentIndex} btnEvent={handlePaginationClick} array={historySlidesArray} />
+        <SwiperPagination
+          currentIndex={currentIndex}
+          btnEvent={handlePaginationClick}
+          array={historySlidesArray}
+        />
       </div>
-      </Swiper>  
+    </Swiper>
   );  
 };
