@@ -18,6 +18,10 @@
         @media screen and (max-height: 650px){
             margin-top: 45px;
         }
+        @media screen  and (max-height:590px) {
+            gap: 10px;  
+            margin-bottom: 45px;
+        }
         .title{
             font-size: 28px;
             font-weight: 800;
@@ -33,7 +37,7 @@
     }
     .task_list{
         flex: 1;
-        max-height: calc(100vh - 365px);
+        max-height: calc(100vh - 380px);
         // max-height: calc(100vh - 320px);
         display: flex ;
         flex-direction: column;
@@ -47,7 +51,11 @@
         @media screen  and (max-height:650px) {
             max-height: calc(100vh - 355px);
         }
+        // @media screen  and (max-height:590px) {
+        //     max-height: calc(100vh - 318px);
+        // }
         @media screen  and (max-height:590px) {
+            margin-bottom: 54px;
             max-height: calc(100vh - 318px);
         }
     }
