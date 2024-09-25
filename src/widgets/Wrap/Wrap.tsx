@@ -120,7 +120,8 @@ if(!isMobile){
 }
 return (
   <OutleContext.Provider value={outletContext}>
-    <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}>
+    {/* <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}> */}
+    <div className={s.wrap}>
       <div className={s.child_wrap}>
         <Outlet/>
       </div>
@@ -130,6 +131,7 @@ return (
           setCurrentPageId={setCurrentPageId}
         />
       </div>
+      <img src={background} alt="" className={s.backgroung_img} />
     </div>
     {isHistory && <div className={s.history_elem}>
       <HistorySlider setIsHistory={setIsHistory} />
