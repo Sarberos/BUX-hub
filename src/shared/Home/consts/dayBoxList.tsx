@@ -14,15 +14,15 @@ export type StyleProps = {
     left?:string;
 
 }  
-interface DayBoxItem extends Omit<TDayBoxProps, 'currentDay'> {  
-    style: StyleProps;  
-} 
+interface DayBoxItem extends Omit<TDayBoxProps, 'currentDay'> {
+    style: StyleProps;
+}
 export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:first,
         rewardDay:1,
-        rewardLabel: '10',
-        rewardValue: 10,
+        rewardLabel: '20',
+        rewardValue: 20,
         style:{
             width:'86px',
             top:'21%',
@@ -32,8 +32,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:second,
         rewardDay:2,
-        rewardLabel: '20',
-        rewardValue: 20,
+        rewardLabel: '30',
+        rewardValue: 30,
         style:{
             width:'96px',
             top:'18%',
@@ -43,8 +43,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:third,
         rewardDay:3,
-        rewardLabel: '30',
-        rewardValue: 30,
+        rewardLabel: '40',
+        rewardValue: 40,
         style:{
             width:'95px',
             top:'21%',
@@ -54,8 +54,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:fourth,
         rewardDay:4,
-        rewardLabel: '40',
-        rewardValue: 40,
+        rewardLabel: '60',
+        rewardValue: 60,
         style:{
             width:'120px',
             top:'14%',
@@ -65,8 +65,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:fifth,
         rewardDay:5,
-        rewardLabel: '60',
-        rewardValue: 60,
+        rewardLabel: '80',
+        rewardValue: 80,
         style:{
             width:'110px',
             top:'6%',
@@ -76,8 +76,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:sixth,
         rewardDay:6,
-        rewardLabel: '80',
-        rewardValue: 80,
+        rewardLabel: '100',
+        rewardValue: 100,
         style:{
             width:'100px',
             top:'7%',
@@ -86,8 +86,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
     {
         boxImg:seventh,
         rewardDay:7,
-        rewardLabel: '100',
-        rewardValue: 100,
+        rewardLabel: '150',
+        rewardValue: 150,
         style:{
             width:'114px',
             top:'13%',

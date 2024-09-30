@@ -12,7 +12,7 @@
   import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
   import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
   import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
-  import { changeDateFormat } from '@features/Home/changeDateFormat';
+  import { changeDateFormat } from '@features/Home/changeDateFormat.ts';
   import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
   import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
   import { setBonusDay, setDailyRewardsStatus, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
@@ -20,6 +20,7 @@
   import { Preloader } from '@widgets/UI/Preloader/Preloader';
   import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
 import { useOutletContext } from '@widgets/Wrap/Wrap';
+  import {farmedCoinsCounter} from "@features/Wrap/farmedCoinsCounter.ts";
   export type TFarmInfo={
     coins: number,
     start_time: null|string,
@@ -42,6 +43,8 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
 
 
   export function Home(){
+    const claimedCoins:number=40;
+
     const {user}=useTelegramApi()
     const {t} = useTranslation()
     const dispatch= useAppDispatch()
@@ -54,13 +57,13 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
     const [coins,setCoins]=useState<number>(state.totalCoins)
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
-    const claimedCoins:number=150;
-    
+    const {setFarmedCoins,farmedCoins}=useOutletContext()
+
 
   const onStartFarming=()=>{
     startReq();
     dispatch(setStoreFarmStatus(EnumFarmStatus.FARMING))
-    dispatch(setFormattedTaimer({formattedHours:'12',formattedMinutes:'00',formattedSec:'00',hours:12,minuts:0,sec:0}))
+    dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
   }
   const onClaimFarming=()=>{
     claimReq();
@@ -84,14 +87,18 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
     },[bonusInfo])
   useEffect(()=>{
       if(farmInfo){
-        farmInfo.coins>coins && dispatch(setTotalCoins(farmInfo.coins))
+        farmInfo.coins> coins && dispatch(setTotalCoins(farmInfo.coins))
         farmInfo.status !== state.farmStatus   && dispatch(setStoreFarmStatus(farmInfo.status));
-        farmInfo.status===EnumFarmStatus.FARMING &&  dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)))
+        if(farmInfo.status===EnumFarmStatus.FARMING) {
+          const formatedDate = changeDateFormat(farmInfo.start_time);
+          dispatch(setFormattedTaimer(formatedDate));
+          (farmedCoins === 0 && formatedDate) && setFarmedCoins(farmedCoinsCounter(formatedDate.dateDifferce))
+        }
+
       } 
     },[farmInfo])
 
-    let clickTimer: ReturnType<typeof setTimeout> | null = null;  
-
+    let clickTimer: ReturnType<typeof setTimeout> | null = null;
     const handleDoubleClick = () => {  
       if (clickTimer) {  
         clearTimeout(clickTimer);
@@ -105,6 +112,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
         }, 300);  
       }  
     };
+
   if(statusLoading ||bonusLoading){
     return <Preloader />
   }else
@@ -128,7 +136,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
             {farmStatus === EnumFarmStatus.START && (
               <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
             )}
-            {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn  coinValue={claimedCoins}  />}
+            {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn />}
             {farmStatus === EnumFarmStatus.CLAIM && (
               <MainBtn  event={()=>onClaimFarming()}>
                 <div className={s.claim_home_btn}>  

@@ -48,13 +48,6 @@ export default function({buttonActive}:{ buttonActive: boolean}){
             ))}
           </Swiper>
         </div>
-        {/* <div className={s.box_slider}>
-                {DAYBOXLIST.map((elem,index)=>{
-                    return elem.rewardDay >= state.bonusDay + 1   
-                    ? <DayBox currentDay={state.bonusDay} {...elem} key={index} />   
-                    : null  
-                })}
-            </div> */}
         <div className={s.rewar_subtitle}>
           {`${t("rewardsProfit")}: ${DAYBOXLIST.reduce((acc, item) => {
             return item.rewardDay <= state.bonusDay

@@ -19,11 +19,13 @@ import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 
 export interface IOutletContext{
   setIsHistory:(v:boolean)=>void;
+  farmedCoins:number;
+  setFarmedCoins:(v:number)=>void;
 }
 const OutleContext=createContext<IOutletContext|undefined>(undefined)
 export const useOutletContext=()=>{
   const context=useContext(OutleContext); 
-  if(!context){
+    if(!context){
     throw new Error('useOutletContext must be used within an OutletProvider')
   }
   return context
@@ -62,21 +64,25 @@ const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) =
   dispatch(setFormattedTaimer({ formattedHours, formattedMinutes,formattedSec,sec, hours, minuts: mins }));  
 }
 
+
 export const  Wrap=() =>{
   const {tg}=useTelegramApi()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);  
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
   const [currenPageId, setCurrentPageId] = useState(1);
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
   const [isHistory,setIsHistory]=useState<boolean>(false)
+  const [farmedCoins, setFarmedCoins]=useState<number>(0)
 
   const outletContext={
-    setIsHistory
+    setIsHistory,
+    setFarmedCoins,
+    farmedCoins
   }
 useEffect(()=>{
     tg.expand()
@@ -93,19 +99,28 @@ useEffect(()=>{
   
     return () => clearInterval(intervalId);  
   },[farmTimerValue])
-  useEffect(()=>{
-    frensTimerValue!==frenState.timer && setFrensTimerValue(frenState.timer)
-  },[frenState.timer])
-  useEffect(()=>{
-    const frensInterval = setInterval(() => {  
-      if (frensTimerValue) {  
-        frensHandlingTaimer(frensTimerValue.minuts || 0, frensTimerValue.hours || 0,dispatch);  
-      }  
-    },60000);  
-  
-    return () => clearInterval(frensInterval);  
-  
-  },[frensTimerValue])
+useEffect(()=>{
+  frensTimerValue!==frenState.timer && setFrensTimerValue(frenState.timer)
+},[frenState.timer])
+useEffect(()=>{
+  const frensInterval = setInterval(() => {
+    if (frensTimerValue) {
+      frensHandlingTaimer(frensTimerValue.minuts || 0, frensTimerValue.hours || 0,dispatch);
+    }
+  },60000);
+
+  return () => clearInterval(frensInterval);
+
+},[frensTimerValue])
+
+  useEffect(() => {
+    const farmCoinsInterval=setInterval(()=>{
+      setFarmedCoins(prevState => prevState + 37)
+
+    },1000)
+
+    return () => clearInterval(farmCoinsInterval);
+  }, []);
 
   useEffect(()=>{
     currenPageId ===1 && setBackground(home_bg)
