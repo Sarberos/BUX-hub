@@ -1,16 +1,22 @@
 .koin_quantity{
-            display: flex;
-            flex-direction: row;
-            gap: 8px;
-            align-items: center;
-            
-            .koin_quantity_value{
-                color: #fff;
-                font-size: 22px;
-                font-weight: 800;
-            }
-            .koin_quantity_img{
-                display: flex;
-                align-items: center;
-            }
-        } 
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+
+      .koin_quantity_value{
+          color: #fff;
+          font-family: 'Helvetica';
+          font-size: 22px;
+          font-weight: 800;
+      }
+      .koin_quantity_img{
+          display: flex;
+          align-items: center;
+        width:27px;
+        height: 27px;
+        img{
+          object-fit: cover;
+        }
+      }
+  }
