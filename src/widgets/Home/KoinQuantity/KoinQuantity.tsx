@@ -11,7 +11,7 @@ export default function KoinQuantity({style,imgStyle,coinValue}:{coinValue:numbe
         <div className={s.koin_quantity}>
                 <p style={style} className={s.koin_quantity_value}>{coinValue}</p>
                 <div className={s.koin_quantity_img}>
-                  <img style={imgStyle} src={coin_ico} alt="" className={s.koin_quantity_img} />
+                  <img style={imgStyle} src={coin_ico}  className={s.koin_quantity_img} />
                 </div>
             </div>
     )
