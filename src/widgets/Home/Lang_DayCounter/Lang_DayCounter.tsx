@@ -3,9 +3,11 @@ import fire_ico from '@shared/assets/high quality svg/home_fire_red.svg'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setIsDailyReward } from '@shared/utilits/redux/redux_slice/home_slice'
 import { LangSelect } from '@widgets/UI/LangSelect/LangSelect'
+import {useTelegramApi} from "@shared/Home/hooks/useTelegramApi.tsx";
 
 
 export function Lang_DayCounter(){
+  const {tg} = useTelegramApi()
   const dispatch=useAppDispatch()
   const state=useAppSelector(state=>state.home)
     return (
@@ -13,6 +15,7 @@ export function Lang_DayCounter(){
         <LangSelect />
         <div
           onClick={() => {
+              tg.HapticFeedback.selectionChanged()
             dispatch(setIsDailyReward(true));
           }}
           className={s.day_counter}
