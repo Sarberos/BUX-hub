@@ -21,7 +21,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
-    const {tg, userId,openLink}=useTelegramApi()
+    const {tg, userId,openLink,hapticFeedBack}=useTelegramApi()
 // const userId =895313334;
 // const userId =1213507635;
 
@@ -63,6 +63,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleClaim=(id:number)=>{
+        hapticFeedBack()
         claimTasksCoins && claimTasksCoins(id)
         dispatch(updateTotalCoins(coins))
         queryClient.invalidateQueries({queryKey:['task_inf']})
