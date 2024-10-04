@@ -10,7 +10,7 @@
         align-items: center;
         gap: 16px;
         color: #fff;
-        margin: 94px 0 53px ;
+        margin: 94px 0 40px ;
         padding: 0 18px;
         @media screen and (max-height: 680px){
             margin-top: 70px;
@@ -20,7 +20,10 @@
         }
         @media screen  and (max-height:590px) {
             gap: 10px;  
-            margin-bottom: 45px;
+            margin-bottom: 30px;
+        }
+        @media screen and (max-height:545px) {
+            margin-bottom: 60px;
         }
         .title{
             font-size: 28px;
@@ -36,29 +39,30 @@
         }
     }
     .task_list{
-        flex: 1;
-        max-height: calc(100vh - 380px);
-        // max-height: calc(100vh - 320px);
-        display: flex ;
+        margin: 0 15px 0;
+        padding: 0 18px ;
+        display: flex;
+        max-height: 385px;
         flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
         gap: 20px;
-        padding: 0 18px;
-        margin: 0 15px 60px;
         background: rgba(0, 0, 0, 0.5);
-        border-radius: 15px; 
+        border-radius: 15px;
         overflow-y: scroll;
         scrollbar-width: none;
-        @media screen  and (max-height:650px) {
-            max-height: calc(100vh - 355px);
+        @media screen and (max-height:725px) {
+            max-height: 286px;
+        };
+        @media screen and (max-height:600px) {
+            gap:15px;
+            max-height: 271px;
         }
-        // @media screen  and (max-height:590px) {
-        //     max-height: calc(100vh - 318px);
-        // }
-        @media screen  and (max-height:590px) {
-            margin-bottom: 54px;
-            max-height: calc(100vh - 318px);
-        }
+        @media screen and (max-height:545px) {
+            max-height: 179px;
+        };
     }
+
     .main_claim_btn{
         width: 100%;
         padding: 0 18px;
