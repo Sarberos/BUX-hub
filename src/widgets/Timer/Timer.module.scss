@@ -2,7 +2,7 @@
     width: 121px;
     height: 48px;
     display: flex;
-    align-items: cneter;
+    align-items: center;
     justify-content: center;
     border-radius:200px ;
     background-color: rgba(0, 0, 0, 0.77);
@@ -21,6 +21,8 @@
             }
         }
         .taimer_value{
+            width:68px;
+            text-align: center;
             color: #fff;
             font-size: 16px ;
             font-weight: 600;

@@ -21,4 +21,53 @@
     src: url('./../../shared/Entry/assets/sf-font/SFProText-Light.ttf') format('truetype'); /* Путь к вашему файлу шрифта */  
     font-weight: 400;  
     font-style: normal;  
-}  
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 300; /* Light */
+    src: local('Helvetica'), url('./../../shared/Entry/assets/Helvetica/helvetica-light-587ebe5a59211.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400; /* Normal */
+    src: local('Helvetica'), url('./../../shared/Entry/assets/Helvetica/Helvetica.woff') format('woff');
+}
+
+//@font-face {
+//    font-family: 'Helvetica Compressed';
+//    font-style: normal;
+//    font-weight: 400; /* Normal */
+//    src: local('Helvetica Compressed'), url('./../../shared/Entry/assets/Helvetica/helvetica-compressed-5871d14b6903a.woff') format('woff');
+//}
+
+@font-face {
+    font-family: 'Helvetica Rounded Bold';
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    src: local('Helvetica '), url('./../../shared/Entry/assets/Helvetica/helvetica-rounded-bold-5871d05ead8de.woff') format('woff');
+}
+
+//@font-face {
+//    font-family: 'Helvetica Bold Oblique';
+//    font-style: normal;
+//    font-weight: 700; /* Bold */
+//    src: local('Helvetica Bold Oblique'), url('./../../shared/Entry/assets/Helvetica/Helvetica-BoldOblique.woff') format('woff');
+//}
+
+@font-face {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400; /* Normal */
+    src: local('Helvetica'), url('./../../shared/Entry/assets/Helvetica/Helvetica-Oblique.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    src: local('Helvetica'), url('./../../shared/Entry/assets/Helvetica/Helvetica-Bold.woff') format('woff');
+}

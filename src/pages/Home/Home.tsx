@@ -145,11 +145,12 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
                     <KoinQuantity
                       coinValue={claimedCoins}
                       style={{
+                        fontFamily: "SFProText",
                         color: "#000",
                         fontSize: "17px",
                         fontWeight: "800",
                       }}
-                      imgStyle={{ width: "16px", height: "16px" }}
+                      isSmall={true}
                     />
                   </div>
                 </div>

@@ -10,21 +10,20 @@ export default function MainTaimerBtn(){
 
   return(
         <button disabled={true}  className={s.main_btn}>
-            <div className={s.farmin_btn}>
-              <div className={s.info_title}>
-                <div className={s.farm_txt}>
-                  {t('farming')}
-                </div>
-                <div className={s.koin_quantitiy_btn}>
-                  <KoinQuantity coinValue={farmedCoins/10000} style={{color:'#000',fontSize:'20px',fontWeight:'800',}} imgStyle={{width: '16px',height:'16px'}}/>
-                </div>
-              </div>
-              <div className={s.koin_taimer_btn}>
-                <div className={s.timer_btn}>
-                  <Timer />
-                </div>
+          <div className={s.farmin_btn}>
+            <div className={s.koin_quantitiy_btn}>
+              <KoinQuantity coinValue={farmedCoins / 10000}
+                            style={{color: '#000', fontSize: '20px', fontWeight: '800',}} isSmall={true}/>
+            </div>
+            <div className={s.farm_txt}>
+              {t('farming')}
+            </div>
+            <div className={s.koin_taimer_btn}>
+              <div className={s.timer_btn}>
+                <Timer/>
               </div>
             </div>
+          </div>
         </button>
-    )
+  )
 }
