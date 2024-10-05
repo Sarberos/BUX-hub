@@ -55,11 +55,29 @@
         align-items: flex-end;
         margin-bottom:45px;
         padding: 0 16px;
+        position: relative;
         @media screen and (max-height: 580px){
             margin-bottom:25px;
         }
         @media screen and (max-height: 540px){
             margin-bottom:18px;
+        }
+        .farming_btn_anim{
+            position: absolute;
+            bottom: 9px;
+            left:0;
+            right:0;
+            height: 220px;
+            display: flex;
+            align-items: flex-end ;
+            justify-content: center;
+            z-index: 20;
+            opacity:0;
+            transition: .3s;
+            &.active{
+                opacity:1;
+                transition: .3s;
+            }
         }
     } 
 } 
@@ -70,8 +88,9 @@
     justify-content: center;
     gap: 7px;
     div{
+        font-family: "SFProText";
         font-size: 17px;
-        font-weight: 800;
+        font-weight:800;
     }
 }
 .daily_reward{

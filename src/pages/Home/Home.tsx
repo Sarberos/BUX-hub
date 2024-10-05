@@ -21,6 +21,7 @@
   import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
 import { useOutletContext } from '@widgets/Wrap/Wrap';
   import {farmedCoinsCounter} from "@features/Wrap/farmedCoinsCounter.ts";
+  import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
   export type TFarmInfo={
     coins: number,
     start_time: null|string,
@@ -45,7 +46,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
   export function Home(){
     const claimedCoins:number=40;
 
-    const {user}=useTelegramApi()
+    const {user,hapticFeedBack}=useTelegramApi()
     const {t} = useTranslation()
     const dispatch= useAppDispatch()
     const state=useAppSelector(state=>state.home)
@@ -59,6 +60,8 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
     const {setFarmedCoins,farmedCoins}=useOutletContext()
 
+    const [isCaim, setIsCaim] = useState<boolean>(false)
+
 
   const onStartFarming=()=>{
     startReq();
@@ -66,6 +69,11 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
     dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
   }
   const onClaimFarming=()=>{
+      setIsCaim(true);
+      setTimeout(()=>{
+        setIsCaim(false);
+      },3000)
+    hapticFeedBack()
     claimReq();
     dispatch(setStoreFarmStatus(EnumFarmStatus.START))
     dispatch(updateTotalCoins(claimedCoins))
@@ -99,18 +107,18 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
     },[farmInfo])
 
     let clickTimer: ReturnType<typeof setTimeout> | null = null;
-    const handleDoubleClick = () => {  
-      if (clickTimer) {  
+    const handleDoubleClick = () => {
+      if (clickTimer) {
         clearTimeout(clickTimer);
         clickTimer = null;
-        setIsHistory(true);  
-        console.log("Двойное нажатие");  
-      } else {  
-        clickTimer = setTimeout(() => {  
-          console.log("Одиночное нажатие");  
-          clickTimer = null; 
-        }, 300);  
-      }  
+        setIsHistory(true);
+        console.log("Двойное нажатие");
+      } else {
+        clickTimer = setTimeout(() => {
+          console.log("Одиночное нажатие");
+          clickTimer = null;
+        }, 300);
+      }
     };
 
   if(statusLoading ||bonusLoading){
@@ -133,6 +141,9 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
             <AnimationMainImg />
           </div>
           <div className={s.farming_btn}>
+            <div className={isCaim ? `${s.farming_btn_anim} ${s.active}`:s.farming_btn_anim}>
+              {isCaim && <SuccessClaimAnim/>}
+            </div>
             {farmStatus === EnumFarmStatus.START && (
               <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
             )}
