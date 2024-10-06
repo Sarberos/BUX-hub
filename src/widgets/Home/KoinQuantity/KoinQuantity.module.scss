@@ -1,27 +1,25 @@
 .koin_quantity{
       display: flex;
       flex-direction: row;
-      gap: 8px;
+      gap: 11px;
       align-items: center;
-      .koin_quantity_value{
-          color: #fff;
-          font-family: 'Helvetica';
-          font-size: 30px;
-          font-weight: 700;
-          position: relative;
-        .koin_quantity_img{
-          position: absolute;
-          top:50%;
-          right: -48px;
-          transform:translateY(-50%);
-          width:35px;
-          height: 35px;
-          object-fit: cover;
-          &.small{
-            width:20px;
-            height:20px;
-            right:-27px;
-          }
-        }
-      }
+  &.small{
+    gap:6px;
+    .koin_quantity_img{
+      width:20px;
+      height:20px;
+    }
+  }
+    .koin_quantity_value{
+        color: #fff;
+        font-family: 'Helvetica';
+        font-size: 30px;
+        font-weight: 700;
+        position: relative;
+    }
+    .koin_quantity_img{
+      width:35px;
+      height: 35px;
+      object-fit: cover;
+    }
   }

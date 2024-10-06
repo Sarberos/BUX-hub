@@ -1,31 +1,32 @@
 .taimer_wrap{
-    width: 121px;
+    padding:0 15px;
+    width: 123px;
     height: 48px;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content:flex-start ;
     border-radius:200px ;
     background-color: rgba(0, 0, 0, 0.77);
-    .inner_wrap{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap:8px;
-        .taimer_img_wrap{
-            width: 16px;
-            height: 16px;
-            .taimer_img{
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
+    position: relative;
+    .taimer_img_wrap{
+        width: 16px;
+        height: 16px;
+        .taimer_img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-        .taimer_value{
-            width:68px;
-            text-align: center;
-            color: #fff;
-            font-size: 16px ;
-            font-weight: 600;
-        }
+    }
+    .taimer_value{
+        position:absolute;
+        top:50%;
+        right:15px;
+        transform: translateY(-50%);
+        width:68px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px ;
+        font-weight: 600;
     }
 }

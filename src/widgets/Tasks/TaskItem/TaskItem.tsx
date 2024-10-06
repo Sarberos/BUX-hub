@@ -63,7 +63,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         queryClient.invalidateQueries({queryKey:['task_inf']})
     }
     const handleClaim=(id:number)=>{
-        hapticFeedBack()
+        hapticFeedBack();
         claimTasksCoins && claimTasksCoins(id)
         dispatch(updateTotalCoins(coins))
         queryClient.invalidateQueries({queryKey:['task_inf']})

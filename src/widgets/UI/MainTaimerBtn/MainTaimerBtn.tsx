@@ -3,6 +3,7 @@ import { Timer } from '@widgets/Timer/Timer'
 import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity'
 import { useTranslation } from 'react-i18next'
 import {useOutletContext} from "@widgets/Wrap/Wrap.tsx";
+import {keepCoinsFormat} from "@features/Home/keepCoinsFormat.ts";
 
 export default function MainTaimerBtn(){
   const {t} = useTranslation()
@@ -12,8 +13,8 @@ export default function MainTaimerBtn(){
         <button disabled={true}  className={s.main_btn}>
           <div className={s.farmin_btn}>
             <div className={s.koin_quantitiy_btn}>
-              <KoinQuantity coinValue={farmedCoins / 10000}
-                            style={{color: '#000', fontSize: '20px', fontWeight: '800',}} isSmall={true}/>
+              <KoinQuantity coinValue={keepCoinsFormat(farmedCoins / 100)}
+                            style={{color: '#000', fontSize: '20px', fontWeight: '400',fontStyle:"normal"}} isSmall={true}/>
             </div>
             <div className={s.farm_txt}>
               {t('farming')}

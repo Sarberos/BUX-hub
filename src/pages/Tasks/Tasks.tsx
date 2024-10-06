@@ -21,9 +21,9 @@ export const Tasks=()=>{
 
 
 
-if(taskInfoLoading){
-  return <Preloader />
-}else 
+// if(taskInfoLoading){
+//   return <Preloader />
+// }else
   return (
     <>
 {state.isMiniTasks &&  <div className={state.isMiniTasks ?`${s.mini_tasks_wrap} ${s.active}` :`${s.mini_tasks_wrap}`}>
@@ -37,7 +37,7 @@ if(taskInfoLoading){
         <div className={s.subtitle}>{t("tasksSub")}</div>
       </div>     
         <div className={s.task_list}>
-          {/* {TASKLIST.map((elem, index) => 
+          {/* {TASKLIST.map((elem, index) =>
             <TaskItem
             claimTasksCoins={claimTasksCoins}
               {...elem}

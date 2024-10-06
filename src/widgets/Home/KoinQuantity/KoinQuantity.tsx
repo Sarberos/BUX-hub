@@ -17,25 +17,14 @@ function chamgeCoinFormat(num:number){
 
 }
 
-export default function KoinQuantity({style,coinValue,isSmall=false}:{coinValue:number,style?:React.CSSProperties,isSmall?:boolean}){
+export default function KoinQuantity({style,coinValue,isSmall=false}:{coinValue:number|string,style?:React.CSSProperties,isSmall?:boolean}){
 
     return (
-        <div className={s.koin_quantity}>
+        <div className={isSmall ? `${s.koin_quantity} ${s.small}`:s.koin_quantity}>
                 <div style={style} className={s.koin_quantity_value}>
-                    {chamgeCoinFormat(coinValue)}
-                    <img src={coin_ico}  className={isSmall ? `${s.koin_quantity_img} ${s.small}` : s.koin_quantity_img} />
+                    {typeof coinValue === "number" ? chamgeCoinFormat(coinValue) :coinValue}
                 </div>
+                <img src={coin_ico}  className={s.koin_quantity_img} />
             </div>
     )
 }
-// export default function KoinQuantity({style,imgStyle,coinValue}:{coinValue:number,style?:React.CSSProperties,imgStyle?:React.CSSProperties}){
-//     const coin
-//     return (
-//         <div className={s.koin_quantity}>
-//                 <p style={style} className={s.koin_quantity_value}>{coinValue}</p>
-//                 <div className={s.koin_quantity_img}>
-//                   <img style={imgStyle} src={coin_ico}  className={s.koin_quantity_img} />
-//                 </div>
-//             </div>
-//     )
-// }
