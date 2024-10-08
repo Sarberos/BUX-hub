@@ -19,8 +19,7 @@
   import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
   import { Preloader } from '@widgets/UI/Preloader/Preloader';
   import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
-import { useOutletContext } from '@widgets/Wrap/Wrap';
-  import {farmedCoinsCounter} from "@features/Wrap/farmedCoinsCounter.ts";
+  import { useOutletContext } from '@widgets/Wrap/Wrap';
   import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
   export type TFarmInfo={
     coins: number,
@@ -58,7 +57,7 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
     const [coins,setCoins]=useState<number>(state.totalCoins)
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
-    const {setFarmedCoins,farmedCoins}=useOutletContext()
+    const {setFarmedCoins}=useOutletContext()
 
     const [isCaim, setIsCaim] = useState<boolean>(false)
 
@@ -99,13 +98,14 @@ import { useOutletContext } from '@widgets/Wrap/Wrap';
         farmInfo.status !== state.farmStatus   && dispatch(setStoreFarmStatus(farmInfo.status));
         if(farmInfo.status===EnumFarmStatus.FARMING) {
           const formatedDate = changeDateFormat(farmInfo.start_time);
-          dispatch(setFormattedTaimer(formatedDate));
-          (farmedCoins === 0 && formatedDate) && setFarmedCoins(farmedCoinsCounter(formatedDate.dateDifferce))
+          if (formatedDate){
+            dispatch(setFormattedTaimer(formatedDate));
+            setFarmedCoins((formatedDate.dateDifferce / 1000))
+          }
         }
 
       } 
     },[farmInfo])
-
     let clickTimer: ReturnType<typeof setTimeout> | null = null;
     const handleDoubleClick = () => {
       if (clickTimer) {
