@@ -59,10 +59,12 @@
     const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
     const {setFarmedCoins}=useOutletContext()
 
-    const [isCaim, setIsCaim] = useState<boolean>(false)
+    const [isCaim, setIsCaim] = useState<boolean>(false);
+    const [isAnim, setIsAnim] = useState<boolean>(false)
 
 
   const onStartFarming=()=>{
+    setIsAnim(true)
     startReq();
     dispatch(setStoreFarmStatus(EnumFarmStatus.FARMING))
     dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
@@ -97,6 +99,7 @@
         farmInfo.coins> coins && dispatch(setTotalCoins(farmInfo.coins))
         farmInfo.status !== state.farmStatus   && dispatch(setStoreFarmStatus(farmInfo.status));
         if(farmInfo.status===EnumFarmStatus.FARMING) {
+          setIsAnim(true);
           const formatedDate = changeDateFormat(farmInfo.start_time);
           if (formatedDate){
             dispatch(setFormattedTaimer(formatedDate));
@@ -138,7 +141,7 @@
             <KoinQuantity coinValue={coins} />
           </div>
           <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
-            <AnimationMainImg />
+            <AnimationMainImg isActive={isAnim} />
           </div>
           <div className={s.farming_btn}>
             <div className={isCaim ? `${s.farming_btn_anim} ${s.active}`:s.farming_btn_anim}>
