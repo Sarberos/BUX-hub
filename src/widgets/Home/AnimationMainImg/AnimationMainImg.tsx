@@ -1,19 +1,17 @@
 import Lottie from "react-lottie";  
 import animationData from "@shared/Home/assets/anim/Animation - 1725476922777.json"; 
 
-export const AnimationMainImg = () => {  
-    const size=window.innerHeight * 0.35;
-
+export const AnimationMainImg = () => {
     const defaultOptions = {  
         loop: true,  
         autoplay: true,  
-        animationData: animationData,  
+        animationData: animationData,
         rendererSettings: {  
             preserveAspectRatio: 'xMidYMid slice'  
         }  
     };  
 
-    return <Lottie options={defaultOptions} height={size} width={300} />;  
+    return <Lottie options={defaultOptions} style={{position:'relative',left:'6px'}} width={'100%'}/>;
 };
 
 
@@ -30,7 +28,7 @@ export const AnimationMainImg = () => {
 
 
 
-// import Lottie from 'react-lottie';  
+// import SuccessClaim from 'react-lottie';
 // import animationData from '@shared/Home/assets/anim/Animation - 1725476922777.json'; // путь к вашему JSON файлу  
 
 // export const AnimationMainImg = () => {  
@@ -43,6 +41,6 @@ export const AnimationMainImg = () => {
 //         }  
 //     };  
 
-//     return <Lottie options={defaultOptions} height={250} width={250} />;  
+//     return <SuccessClaim options={defaultOptions} height={250} width={250} />;
 // };  
 
