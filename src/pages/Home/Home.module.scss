@@ -36,18 +36,14 @@
         }
     }
     .koin_wrap{
-        margin: 0 auto 61px;
-        @media screen and (max-height: 700px){
-            margin-bottom: 30px;
-        }
+        margin: 0 auto ;
     }
     .main_img_wrap{
+        flex:1;
         width: 100%;
-        //position: absolute;
         display: flex;
         align-items: center;
         justify-content: center;
-        //top:30%;
         }
     .farming_btn{
         flex:1;

@@ -11,7 +11,7 @@ export const AnimationMainImg = () => {
         }  
     };  
 
-    return <Lottie options={defaultOptions} style={{position:'relative',left:'6px'}} width={'100%'}/>;
+    return <Lottie options={defaultOptions} style={{width:'100%',position:'relative',left:'6px'}} />;
 };
 
 
