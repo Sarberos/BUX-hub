@@ -8,11 +8,12 @@ import { EnumFrensFarmStatus } from '@shared/Frens/consts/frensFarmStatus.enum'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setFrensFarmStatus, setInviteStatus, setTaimerValue } from '@shared/utilits/redux/redux_slice/frens_slice'
 import { updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice'
-import { calcDateValue } from '@features/Home/changeEndDateFormat.ts'
+import { calcDateValue } from '@shared/Home/helpersFunc/changeEndDateFormat.ts'
 import { Preloader } from '@widgets/UI/Preloader/Preloader'
 import { useTranslation } from 'react-i18next'
 import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp'
 import InvitePopUp from '@widgets/Frens/InvitePopUp/InvitePopUp'
+import {useTelegramApi} from "@shared/Home/hooks/useTelegramApi.tsx";
 
 export type TFrensProps = {
   timerValue: TTimerType;
@@ -30,6 +31,7 @@ export const comprasionNumbers=(revenuosDate:string)=>{
 
 export const Frens=()=>{
     const {t} =useTranslation()
+    const {hapticFeedBack}=useTelegramApi()
     const dispatch =useAppDispatch()
     const frensState=useAppSelector(state=>state.frens)
     const{data:frensData,isLoading:frensLoading}=useGetFrensInfo();
@@ -39,6 +41,7 @@ export const Frens=()=>{
     const [refList, setRefList]=useState<TFrensItem[]>()
 
     const onClaimFrensCoins=()=>{
+        hapticFeedBack()
         setRefCoins(0)
         claimCoins();
         dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))

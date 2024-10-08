@@ -68,7 +68,6 @@
             display: flex;
             align-items: flex-end ;
             justify-content: center;
-            z-index: 20;
             z-index:-1;
             opacity:0;
             transition: .3s;
@@ -79,18 +78,6 @@
             }
         }
     } 
-} 
-.claim_home_btn{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    div{
-        font-family: "SFProText";
-        font-size: 17px;
-        font-weight:800;
-    }
 }
 .daily_reward{
     transform: rotateX(0);//

@@ -14,6 +14,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import { useCompleteMainTask } from '@shared/Tasks/hooks/complete_mainTasks'
 import { LoadBtn } from '../LoadBtn/LoadBtn'
 import { EnumIcons } from '@shared/Tasks/types/taskImg.enum'
+import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 
 
 
@@ -30,7 +31,14 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const {mutateAsync:completeMainTask}=useCompleteMainTask()
 
     const [currentBtn, setCurrentBtn]=useState<ReactNode>()
+    const [isAnimActive, setIsAnimActive] = useState<boolean>(false);
 
+    useEffect(() => {
+        if(isAnimActive) {
+            const timeout = setTimeout(() => setIsAnimActive(false), 3000);
+            return () => clearTimeout(timeout);
+        }
+    }, [isAnimActive]);
     const handleStart= async(id:number,link:string)=>{
         await startTask(id);
         openLink(link);
@@ -64,6 +72,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     }
     const handleClaim=(id:number)=>{
         hapticFeedBack();
+        setIsAnimActive(true);
         claimTasksCoins && claimTasksCoins(id)
         dispatch(updateTotalCoins(coins))
         queryClient.invalidateQueries({queryKey:['task_inf']})
@@ -107,7 +116,13 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     break;
             
                 case EnumTaskStatus.CLAIMED:
-                    currentBtn = <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                    currentBtn =
+                      <div className={s.status_btn_wrap}>
+                           <div className={isAnimActive ?`${s.status_btn_anim} ${s.active}`:s.status_btn_anim}>
+                               {isAnimActive &&<SuccessClaimAnim/>}
+                          </div>
+                            <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
+                      </div>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
                     currentBtn = userId && <LoadBtn  event={()=>{ !channel_link? secondLinkOpen(link):channel_link ?  secondTgLinkOpen(channel_link,id):''}} />

@@ -11,10 +11,12 @@ import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum'
 import { SwiperSlide,Swiper } from 'swiper/react'
 import 'swiper/css'
 import { useEffect, useState } from 'react'
+import {useTelegramApi} from "@shared/Home/hooks/useTelegramApi.tsx";
 
 export default function({buttonActive}:{ buttonActive: boolean}){
     const [screenWidth, setScreenWidth]=useState(window.innerWidth)
     const {t} =useTranslation()
+    const {hapticFeedBack}=useTelegramApi()
     const dispatch =useAppDispatch()
     const state=useAppSelector(state=>state.home)
     const {mutateAsync:claim_bonus}=useClaimBonus()
@@ -24,7 +26,8 @@ export default function({buttonActive}:{ buttonActive: boolean}){
       
   }, [window.innerWidth]); 
     const onClaimBonus=async(dayNumber:number)=>{
-            dispatch(setBonusDay(state.bonusDay+1))
+            hapticFeedBack();
+            dispatch(setBonusDay(state.bonusDay+1));
             const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber+1)
             dispatch(updateTotalCoins(currentObj[0].rewardValue))
@@ -33,7 +36,6 @@ export default function({buttonActive}:{ buttonActive: boolean}){
             dispatch(setDailyRewardsStatus(EnumBonusStatus.WAIT))
     }
     return (
-        
       <div className={s.daily_reward_wrap}>
         <div className={s.reward_title}>{t("dailyReward")}</div>
         <div className={s.box_slider}>

@@ -1,13 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from './../store_config'
-import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum'
-import { TTimerType } from '@pages/Home/Home';
-import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
+import type {PayloadAction} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
+import type {RootState} from './../store_config'
+import {EnumFarmStatus} from '@shared/Home/consts/farmStatus.enum'
+import {TTimerType} from '@pages/Home/Home';
+import {EnumBonusStatus} from '@shared/Home/consts/bonusStatus.enum';
 
 
 interface HomeState {
-    farmStatus: string;
+    farmStatus: EnumFarmStatus;
     dailyRewardsStatus: EnumBonusStatus;
     totalCoins:number;
     timer:TTimerType;
@@ -49,8 +49,20 @@ export const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    setStoreFarmStatus:(state, action: PayloadAction<string>) => {
-        state.farmStatus = action.payload
+    setFarmStatus:(state, action: PayloadAction<EnumFarmStatus>) => {
+      switch (action.payload){
+        case 'start':
+          state.farmStatus=EnumFarmStatus.START;
+          break;
+        case 'farming':
+        state.farmStatus=EnumFarmStatus.FARMING;
+        break;
+        case 'claim':
+        state.farmStatus=EnumFarmStatus.CLAIM;
+        break;
+        default:
+          state.farmStatus=EnumFarmStatus.START;
+      }
     },
     setDailyRewardsStatus:(state, action: PayloadAction<EnumBonusStatus>) => {
         state.dailyRewardsStatus = action.payload
@@ -86,7 +98,7 @@ export const homeSlice = createSlice({
 })
 
 export const {
-  setStoreFarmStatus,
+  setFarmStatus,
   setDailyRewardsStatus,
   updateTotalCoins,
   setFormattedTaimer,

@@ -1,49 +1,42 @@
-.main_btn {
+.taimer_btn_wrap {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 7px;
-    color: #000000;
     background-color: #ffffff40;
     border-radius: 50px;
     font-size: 17px;
     font-weight: 500;
-
-    .farmin_btn {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-        @media screen and (max-width:350px) {
-            gap: 12px;
-        }
-        .koin_quantitiy_btn{
-            position: absolute;
-            top:50%;
-            transform: translateY(-50%);
-            right:calc(128px + 11%);
-            @media screen and (max-width:380px) {
-                right:calc(128px + 9%);
-            }
-        }
-        .farm_txt {
-            margin-left: 8%;
-            font-family: 'Helvetica';
-            color: #000;
-            font-size: 20px;
-            font-weight: 800;
-            text-align: center;
+    overflow: hidden;
+        .taimer_btn_txt {
+            margin-left: 13%;
+            position: relative;
             @media screen and (max-width: 397px) {
-                margin-left: 5%;
+                margin-left:8%;
             }
             @media screen and (max-width: 365px) {
-                margin-left: 3%;
+                margin-left: 6%;
+            }
+            p{
+                font-family: 'Helvetica';
+                color: #000;
+                font-size: 20px;
+                font-weight: 500;
+                text-align: center;
+            }
+            .taimer_bnt_counter{
+                height: 100%;
+                position: absolute;
+                top:50%;
+                translate: 0 -50%;
+                left:105px;
+                @media screen and (max-width: 380px) {
+                    left:90px;
+                }
             }
         }
-        .koin_taimer_btn {
+        .taimer_btn {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -54,4 +47,3 @@
             }
         }
     }
-}

@@ -3,8 +3,7 @@ import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
 import {  createContext, useContext, useEffect, useState } from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import { setFormattedTaimer, setStoreFarmStatus } from "@shared/utilits/redux/redux_slice/home_slice";
-import { EnumFarmStatus } from "@shared/Home/consts/farmStatus.enum";
+import { setFormattedTaimer } from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
@@ -15,6 +14,7 @@ import raiting_bg from '@shared/Wrap/assets/img/raiting_page.png'
 import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
 import { QrCode } from "@widgets/UI/QrCode/QrCode";
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
+import {useQueryClient} from "@tanstack/react-query";
 
 
 export interface IOutletContext{
@@ -31,7 +31,7 @@ export const useOutletContext=()=>{
   return context
 }
 
-const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {  
+const frensHandlingTaimer = (mins: number, hours: number, dispatch: any ) => {
   mins > 0 && mins--;  
   if (mins === 0) {  
     if (hours === 0) {  
@@ -44,14 +44,14 @@ const frensHandlingTaimer = (mins: number, hours: number, dispatch: any) => {
   const formattedMinutes = String(mins).padStart(2, '0');  
   dispatch(setTaimerValue({ formattedHours, formattedMinutes, hours, minuts: mins }));  
 }
-const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) => {  
+const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any,queryClient:any) => {
   sec > 0 && sec--;  
   if (sec === 0) {  
     mins > 0 && mins--; 
     sec=59;
     if(mins===0){
-      if (hours === 0) {  
-        dispatch(setStoreFarmStatus(EnumFarmStatus.CLAIM));  
+      if (hours === 0) {
+        queryClient.invalidateQueries({queryKey:['farm_info']});
       }  
       hours--;  
       mins = 59;  
@@ -67,6 +67,7 @@ const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any) =
 
 export const  Wrap=() =>{
   const {tg}=useTelegramApi()
+  const queryClient=useQueryClient()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
@@ -87,14 +88,14 @@ export const  Wrap=() =>{
 useEffect(()=>{
     tg.expand()
     tg.setHeaderColor("#000000");
-  })
+  },[])
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
 },[state.timer])
 useEffect(()=>{
     const intervalId = setInterval(() => {  
       if (farmTimerValue) {  
-        handlingTaimer(farmTimerValue.sec || 0 ,farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch);  }  
+        handlingTaimer(farmTimerValue.sec || 0 ,farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch,queryClient);  }
     },1000);  
   
     return () => clearInterval(intervalId);  
@@ -115,8 +116,7 @@ useEffect(()=>{
 
   useEffect(() => {
     const farmCoinsInterval=setInterval(()=>{
-      setFarmedCoins(prevState => prevState + 37)
-
+      setFarmedCoins(prevState => prevState + 1)
     },1000)
 
     return () => clearInterval(farmCoinsInterval);

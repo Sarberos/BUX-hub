@@ -1,30 +1,40 @@
-  import s from '@pages/Home/Home.module.scss'
-  import MainBtn from '@widgets/UI/MainBtn/MainBtn';    
-  import { Lang_DayCounter } from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
-  import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
-  import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
-  import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
-  import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi';
-  import { useTranslation } from 'react-i18next';
-  import {useEffect,useState} from 'react'
-  import { useStartFarm } from '@shared/Home/hooks/useStartFarm';
-  import { useGetFarmInfo } from '@shared/Home/hooks/useGetFarmInfo';
-  import { EnumFarmStatus } from '@shared/Home/consts/farmStatus.enum';
-  import { useClaimFarmCoins } from '@shared/Home/hooks/useClaimFarmCoins';
-  import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
-  import { changeDateFormat } from '@features/Home/changeDateFormat.ts';
-  import { useGetBonusStatus } from '@shared/Home/hooks/useGetBonusStatus';
-  import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks';
-  import { setBonusDay, setDailyRewardsStatus, setFormattedTaimer, setIsDailyReward, setStoreFarmStatus, setTotalCoins, updateTotalCoins } from '@shared/utilits/redux/redux_slice/home_slice';
-  import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum';
-  import { Preloader } from '@widgets/UI/Preloader/Preloader';
-  import { AnimationMainImg } from '@widgets/Home/AnimationMainImg/AnimationMainImg';
-  import { useOutletContext } from '@widgets/Wrap/Wrap';
-  import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
-  export type TFarmInfo={
+import s from '@pages/Home/Home.module.scss'
+import MainBtn from '@widgets/UI/MainBtn/MainBtn';
+import {Lang_DayCounter} from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
+import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
+import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
+import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
+import {useTelegramApi} from '@shared/Home/hooks/useTelegramApi';
+import {useTranslation} from 'react-i18next';
+import {useEffect, useState} from 'react'
+import {useStartFarm} from '@shared/Home/hooks/useStartFarm';
+import {useGetFarmInfo} from '@shared/Home/hooks/useGetFarmInfo';
+import {EnumFarmStatus} from '@shared/Home/consts/farmStatus.enum';
+import {useClaimFarmCoins} from '@shared/Home/hooks/useClaimFarmCoins';
+import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
+import {changeDateFormat} from '@shared/Home/helpersFunc/changeDateFormat.ts';
+import {useGetBonusStatus} from '@shared/Home/hooks/useGetBonusStatus';
+import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
+import {
+  setBonusDay,
+  setDailyRewardsStatus,
+  setFormattedTaimer,
+  setIsDailyReward,
+  setFarmStatus,
+  setTotalCoins,
+  updateTotalCoins
+} from '@shared/utilits/redux/redux_slice/home_slice';
+import {EnumBonusStatus} from '@shared/Home/consts/bonusStatus.enum';
+import {Preloader} from '@widgets/UI/Preloader/Preloader';
+import {AnimationMainImg} from '@widgets/Home/AnimationMainImg/AnimationMainImg';
+import {useOutletContext} from '@widgets/Wrap/Wrap';
+import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
+import {MainClaimBtn} from "@widgets/UI/MainClaimBtn/MainClaimBtn.tsx";
+
+export type TFarmInfo={
     coins: number,
     start_time: null|string,
-    status:string
+    status:EnumFarmStatus,
   }
   export type TTimerType = {  
     formattedHours: string;  
@@ -55,60 +65,83 @@
     const {mutate:claimReq}=useClaimFarmCoins()
     const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
-    const [coins,setCoins]=useState<number>(state.totalCoins)
-    const [farmStatus, setFarmStatus]=useState<string>(state.farmStatus);
     const {setFarmedCoins}=useOutletContext()
 
-    const [isCaim, setIsCaim] = useState<boolean>(false);
+    const [isClaim, setIsClaim] = useState<boolean>(false)
     const [isAnim, setIsAnim] = useState<boolean>(false)
 
 
   const onStartFarming=()=>{
     setIsAnim(true)
     startReq();
-    dispatch(setStoreFarmStatus(EnumFarmStatus.FARMING))
+    dispatch(setFarmStatus(EnumFarmStatus.FARMING));
     dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
   }
   const onClaimFarming=()=>{
-      setIsCaim(true);
-      setTimeout(()=>{
-        setIsCaim(false);
-      },3000)
     hapticFeedBack()
     claimReq();
-    dispatch(setStoreFarmStatus(EnumFarmStatus.START))
     dispatch(updateTotalCoins(claimedCoins))
+    dispatch(setFarmStatus(EnumFarmStatus.START));
+    setIsClaim(true);
+    setTimeout(()=>setIsClaim(false),3000);
+  }
+  const chooseBtn =(farmStatus: EnumFarmStatus )=>{
+      switch (farmStatus) {
+        case EnumFarmStatus.CLAIM:
+          return(<MainClaimBtn onClick={onClaimFarming}/>);
+        case EnumFarmStatus.FARMING:
+          return <MainTaimerBtn />;
+        case EnumFarmStatus.START:
+          return(
+            <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={onStartFarming}>{t('startFarming')}</MainBtn>
+          )
+        default:
+          return <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
+      }
+
+    }
+  const rewardsPopUp=(bonusStatus:boolean)=>{
+      if(bonusStatus){
+        return (
+          <div className={`${s.daily_reward}`}>
+            <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
+              <DailyRewards
+                buttonActive={bonusInfo?.status === EnumBonusStatus.CLAIM}
+              />
+            </BottomPopUp>
+          </div>
+        )
+      }else{
+        return<></>
+      }
   }
 
-  useEffect(()=>{
-    coins!==state.totalCoins && setCoins(state.totalCoins);
-    farmStatus!==state.farmStatus && setFarmStatus(state.farmStatus);
-  },[state])
-  useEffect(()=>{
-      if(bonusInfo){ 
-        if (bonusInfo.status !==state.dailyRewardsStatus && bonusInfo.status=== EnumBonusStatus.CLAIM) {
+    useEffect(() => {
+      if (bonusInfo) {
+        if (bonusInfo.status !== state.dailyRewardsStatus && bonusInfo.status === EnumBonusStatus.CLAIM) {
           dispatch(setIsDailyReward(true))
           dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
         }
         setIsHistory(bonusInfo.welcome_status)
         state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
-      }  
+      }
     },[bonusInfo])
-  useEffect(()=>{
-      if(farmInfo){
-        farmInfo.coins> coins && dispatch(setTotalCoins(farmInfo.coins))
-        farmInfo.status !== state.farmStatus   && dispatch(setStoreFarmStatus(farmInfo.status));
-        if(farmInfo.status===EnumFarmStatus.FARMING) {
-          setIsAnim(true);
-          const formatedDate = changeDateFormat(farmInfo.start_time);
-          if (formatedDate){
-            dispatch(setFormattedTaimer(formatedDate));
-            setFarmedCoins((formatedDate.dateDifferce / 1000))
+    useEffect(()=>{
+        if(farmInfo){
+          farmInfo.coins> state.totalCoins && dispatch(setTotalCoins(farmInfo.coins))
+          dispatch(setFarmStatus(farmInfo.status));
+          if(farmInfo.status===EnumFarmStatus.FARMING) {
+            setIsAnim(true);
+            const formatedDate = changeDateFormat(farmInfo.start_time);
+            if (formatedDate){
+              dispatch(setFormattedTaimer(formatedDate));
+              setFarmedCoins((formatedDate.dateDifferce / 1000))
+            }
           }
-        }
 
-      } 
-    },[farmInfo])
+        }
+      },[farmInfo])
+
     let clickTimer: ReturnType<typeof setTimeout> | null = null;
     const handleDoubleClick = () => {
       if (clickTimer) {
@@ -138,50 +171,20 @@
             <Lang_DayCounter />
           </div>
           <div className={s.koin_wrap}>
-            <KoinQuantity coinValue={coins} />
+            <KoinQuantity coinValue={state.totalCoins} />
           </div>
           <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
             <AnimationMainImg isActive={isAnim} />
           </div>
           <div className={s.farming_btn}>
-            <div className={isCaim ? `${s.farming_btn_anim} ${s.active}`:s.farming_btn_anim}>
-              {isCaim && <SuccessClaimAnim/>}
+            <div className={isClaim ? `${s.farming_btn_anim} ${s.active}`:s.farming_btn_anim}>
+              {isClaim && <SuccessClaimAnim/>}
             </div>
-            {farmStatus === EnumFarmStatus.START && (
-              <MainBtn disabled={farmStatus !==EnumFarmStatus.START}  event={()=>onStartFarming()}>{t('startFarming')}</MainBtn>
-            )}
-            {farmStatus === EnumFarmStatus.FARMING && <MainTaimerBtn />}
-            {farmStatus === EnumFarmStatus.CLAIM && (
-              <MainBtn  event={()=>onClaimFarming()}>
-                <div className={s.claim_home_btn}>  
-                  <div>{t('сlaimFarm')}</div>
-                  <div>
-                    <KoinQuantity
-                      coinValue={claimedCoins}
-                      style={{
-                        fontFamily: "SFProText",
-                        color: "#000",
-                        fontSize: "17px",
-                        fontWeight: "800",
-                      }}
-                      isSmall={true}
-                    />
-                  </div>
-                </div>
-              </MainBtn>
-            )}
+            {chooseBtn(state.farmStatus)}
+            {/*{chooseBtn(EnumFarmStatus.CLAIM)}*/}
           </div>
         </div>
-        {state.isDailyReward && (
-          <div className={`${s.daily_reward}`}>
-          <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
-            <DailyRewards
-              buttonActive={bonusInfo?.status===EnumBonusStatus.CLAIM}
-            />
-          </BottomPopUp>
-        </div>
-        )} 
-    
+        {rewardsPopUp(state.isDailyReward)}
   </>
       );
   }
