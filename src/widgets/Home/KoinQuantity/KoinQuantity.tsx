@@ -1,5 +1,5 @@
 import s from './KoinQuantity.module.scss'
-import coin_ico from '@shared/Home/assets/home_img/small_coin_prod.png'
+import coin_ico from '@shared/Home/assets/home_img/coin_ico.svg'
 import {memo} from 'react'
 import {changeCoinFormat} from "@shared/Home/helpersFunc/changeCoinFormat.ts";
 

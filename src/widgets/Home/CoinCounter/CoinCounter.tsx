@@ -2,7 +2,7 @@
 import React from 'react';
 import s from './CoinCounter.module.scss';
 import {useOutletContext} from "@widgets/Wrap/Wrap.tsx";
-import coin_ico from "@shared/Home/assets/home_img/small_coin_prod.png";
+import coin_ico from "@shared/Home/assets/home_img/coin_ico.svg";
 
 const CoinCounter: React.FC = () => {
     let {farmedCoins}=useOutletContext();

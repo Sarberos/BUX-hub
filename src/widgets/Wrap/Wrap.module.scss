@@ -25,45 +25,15 @@
     }
 }
 
-.history_elem{
-    animation: fadeIn 0.4s ease;
-    position: absolute;
-    top:0;
-    left:0;
-    height: 100vh;
-    width: 100%;
-    z-index: 120;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #000;
-     &.fadeIn {  
-    animation: fadeIn 0.4s ease ; // Анимация появления
-  }  
-
-  &.fadeOut {  
-    animation: fadeOut 0.4s ease ; // Анимация исчезновения
-  } 
+.history_elem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  z-index: 20;
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-

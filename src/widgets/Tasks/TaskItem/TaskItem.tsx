@@ -72,6 +72,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     }
     const handleClaim=(id:number)=>{
         hapticFeedBack();
+        hapticFeedBack();
         setIsAnimActive(true);
         claimTasksCoins && claimTasksCoins(id)
         dispatch(updateTotalCoins(coins))
@@ -148,7 +149,8 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         return currentBtn
     }
     useEffect(()=>{
-        setCurrentBtn(chooseBtn(status,main_task_id,channel_link,id,sub_tasks))
+        setCurrentBtn(chooseBtn(EnumTaskStatus.CLAIMED,main_task_id,channel_link,id,sub_tasks))
+        // setCurrentBtn(chooseBtn(status,main_task_id,channel_link,id,sub_tasks))
     },[status,main_task_id,channel_link,id,sub_tasks])
     return (
       <div className={s.task_item_wrap}>

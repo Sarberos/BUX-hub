@@ -18,9 +18,9 @@ import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
 import {
   setBonusDay,
   setDailyRewardsStatus,
+  setFarmStatus,
   setFormattedTaimer,
   setIsDailyReward,
-  setFarmStatus,
   setTotalCoins,
   updateTotalCoins
 } from '@shared/utilits/redux/redux_slice/home_slice';
@@ -79,6 +79,10 @@ export type TFarmInfo={
   }
   const onClaimFarming=()=>{
     hapticFeedBack()
+    hapticFeedBack()
+    hapticFeedBack()
+    hapticFeedBack()
+    hapticFeedBack()
     claimReq();
     dispatch(updateTotalCoins(claimedCoins))
     dispatch(setFarmStatus(EnumFarmStatus.START));
@@ -118,17 +122,17 @@ export type TFarmInfo={
 
     useEffect(() => {
       if (bonusInfo) {
-        if (bonusInfo.status !== state.dailyRewardsStatus && bonusInfo.status === EnumBonusStatus.CLAIM) {
-          dispatch(setIsDailyReward(true))
-          dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM))
+        if (bonusInfo.status === EnumBonusStatus.CLAIM) {
+          dispatch(setIsDailyReward(true));
         }
+        dispatch(setDailyRewardsStatus(bonusInfo.status));
         setIsHistory(bonusInfo.welcome_status)
-        state.bonusDay!==bonusInfo.day && dispatch(setBonusDay(bonusInfo.day));
+        dispatch(setBonusDay(bonusInfo.day));
       }
     },[bonusInfo])
     useEffect(()=>{
         if(farmInfo){
-          farmInfo.coins> state.totalCoins && dispatch(setTotalCoins(farmInfo.coins))
+          farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins))
           dispatch(setFarmStatus(farmInfo.status));
           if(farmInfo.status===EnumFarmStatus.FARMING) {
             setIsAnim(true);
@@ -181,7 +185,8 @@ export type TFarmInfo={
               {isClaim && <SuccessClaimAnim/>}
             </div>
             <div className={s.farming_btn}>
-              {chooseBtn(state.farmStatus)}
+              {chooseBtn(EnumFarmStatus.CLAIM)}
+              {/*{chooseBtn(state.farmStatus)}*/}
             </div>
 
           </div>

@@ -25,14 +25,14 @@ export default function({buttonActive}:{ buttonActive: boolean}){
       window.innerWidth>=107 ?setScreenWidth(window.innerWidth):1
       
   }, [window.innerWidth]); 
-    const onClaimBonus=async(dayNumber:number)=>{
+    const onClaimBonus=(dayNumber:number)=>{
             hapticFeedBack();
             dispatch(setBonusDay(state.bonusDay+1));
             const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
             elem.rewardDay===dayNumber+1)
             dispatch(updateTotalCoins(currentObj[0].rewardValue))
             dispatch(setIsDailyReward(false))
-            await claim_bonus();
+            claim_bonus();
             dispatch(setDailyRewardsStatus(EnumBonusStatus.WAIT))
     }
     return (

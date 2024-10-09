@@ -45,7 +45,7 @@ export const Frens=()=>{
         setRefCoins(0)
         claimCoins();
         dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))
-        dispatch(updateTotalCoins(refCoins))
+        dispatch(updateTotalCoins(Math.ceil(refCoins)))
         dispatch(setTaimerValue({formattedHours:'24',formattedMinutes:'00',hours:24,minuts:0}))
     }
 
@@ -67,7 +67,7 @@ export const Frens=()=>{
             </div>
             <div className={s.frens_coins_wrap}>
                 <div className={s.frens_coins_wrap}>
-                    <p className={s.frens_coins_value}>{refCoins}</p>
+                    <p className={s.frens_coins_value}>{Math.ceil(refCoins)}</p>
                     {frensData?.content?.length!==0  && frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${frensState.timer?.formattedHours}h ${frensState.timer?.formattedMinutes}m`}</button>           }
                     {frensData?.content?.length!==0  && frensState.farmStatus===EnumFrensFarmStatus.CLAIM &&  <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>}
                     {!frensData ||frensData?.content?.length===0 && <button  onClick={()=>dispatch(setInviteStatus(true))} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('frensTitle')}</button> }

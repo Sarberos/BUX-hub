@@ -7,7 +7,7 @@ import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
 import { SwiperPagination } from "@widgets/UI/SwiperPagination/SwiperPagination";
 
 export const HistorySlider = ({ setIsHistory }: { setIsHistory: (v: boolean) => void }) => {  
-  const swiperRef = useRef<any>(null);  
+  const swiperRef = useRef<any>(null);
   const { user } = useTelegramApi();  
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);  
@@ -22,32 +22,31 @@ export const HistorySlider = ({ setIsHistory }: { setIsHistory: (v: boolean) => 
     if (swiper) {  
       swiper.autoplay.stop();  
     }  
-  };  
-
+  };
   const continueAutoPlay = () => {  
     const swiper = swiperRef.current?.swiper;  
     if (swiper) {  
       swiper.autoplay.start();  
     }  
   };
-  useEffect(() => {  
-    const swiper = swiperRef.current?.swiper;  
-    if (swiper) {  
-      const handleSlideChange = () => {  
-        setCurrentIndex(swiper.activeIndex);  
-        if (swiper.isEnd) {  
-          swiper.autoplay.stop();  
-          setTimeout(() => {  
-            setIsHistory(false);  
-          }, 7500);  
+  useEffect(() => {
+    const swiper = swiperRef.current?.swiper;
+    if (swiper) {
+      const handleSlideChange = () => {
+        setCurrentIndex(swiper.activeIndex);
+        if (swiper.isEnd) {
+          swiper.autoplay.stop();
+          setTimeout(() => {
+            setIsHistory(false);
+          }, 7000);
         }  
-      };  
-      swiper.on('slideChangeTransitionEnd', handleSlideChange);  
-      return () => {  
-        swiper.off('slideChangeTransitionEnd', handleSlideChange);  
-      };  
-    }  
-  }, []);  
+      };
+      swiper.on('slideChangeTransitionEnd', handleSlideChange);
+      return () => {
+        swiper.off('slideChangeTransitionEnd', handleSlideChange);
+      };
+    }
+  }, []);
 
 const handlePaginationClick = (index: number) => {  
   setCurrentIndex(index);  

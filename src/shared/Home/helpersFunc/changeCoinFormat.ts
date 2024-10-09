@@ -1,5 +1,5 @@
 export  function changeCoinFormat(num:number):string{
-    let helpArr=num.toString().split('').reverse();
+    let helpArr=Math.ceil(num).toString().split('').reverse();
     const arrowIndex:number=helpArr.indexOf('.');
     let middleArr=helpArr.slice(-(helpArr.length - arrowIndex-1));
 

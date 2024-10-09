@@ -1,6 +1,6 @@
 import s from "./Wrap.module.scss";
 import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
-import {  createContext, useContext, useEffect, useState } from "react";
+import {createContext, useContext, useEffect,  useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import { setFormattedTaimer } from "@shared/utilits/redux/redux_slice/home_slice";
@@ -15,7 +15,8 @@ import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
 import { QrCode } from "@widgets/UI/QrCode/QrCode";
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 import {useQueryClient} from "@tanstack/react-query";
-
+import { Transition } from 'react-transition-group';
+import {TTransitionType} from "@shared/UIComponents/types/historySlider.ts";
 
 export interface IOutletContext{
   setIsHistory:(v:boolean)=>void;
@@ -77,7 +78,7 @@ export const  Wrap=() =>{
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
-  const [isHistory,setIsHistory]=useState<boolean>(false)
+  const [isHistory,setIsHistory]=useState<boolean>(false);
   const [farmedCoins, setFarmedCoins]=useState<number>(0)
 
   const outletContext={
@@ -114,44 +115,53 @@ useEffect(()=>{
 
 },[frensTimerValue])
 
-  useEffect(() => {
-    const farmCoinsInterval=setInterval(()=>{
-      setFarmedCoins(prevState => prevState + 1)
-    },1000)
+useEffect(() => {
+  const farmCoinsInterval=setInterval(()=>{
+    setFarmedCoins(prevState => prevState + 1)
+  },1000)
 
-    return () => clearInterval(farmCoinsInterval);
-  }, []);
+  return () => clearInterval(farmCoinsInterval);
+}, []);
 
-  useEffect(()=>{
-    currenPageId ===1 && setBackground(home_bg)
-    currenPageId ===2 && setBackground(tasks_bg)
-    currenPageId ===3 && setBackground(raiting_bg)
-    currenPageId ===4 && setBackground(frens_bg)
-  },[currenPageId])
+useEffect(()=>{
+  currenPageId ===1 && setBackground(home_bg)
+  currenPageId ===2 && setBackground(tasks_bg)
+  currenPageId ===3 && setBackground(raiting_bg)
+  currenPageId ===4 && setBackground(frens_bg)
+},[currenPageId])
 
+  const transitionStyles:TTransitionType= {
+    entering: { opacity: 0, transform:'translateY(20)'},
+    entered:  { opacity: 1,transform:'translateY(0)', transition:'.4s'},
+    exiting:  {opacity: 0,transform:'translateY(20px)', transition:'.5s' },
+    exited:  {opacity:0},
+    unmounted: {},
+  };
 
 if(!isMobile){
   return <QrCode/>
 }
-return (
-  <OutleContext.Provider value={outletContext}>
-    {/* <div style={{ backgroundImage: `url(${background})` }} className={s.wrap}> */}
-    <div className={s.wrap}>
-      <div className={s.child_wrap}>
-        <Outlet/>
+  return (
+    <OutleContext.Provider value={outletContext}>
+      <div className={s.wrap}>
+        <div className={s.child_wrap}>
+          <Outlet/>
+        </div>
+        <div className={s.footer_wrap}>
+          <Footer
+            currenPageId={currenPageId}
+            setCurrentPageId={setCurrentPageId}
+          />
+        </div>
+        <img src={background} alt="" className={s.backgroung_img}/>
       </div>
-      <div className={s.footer_wrap}>
-        <Footer
-          currenPageId={currenPageId}
-          setCurrentPageId={setCurrentPageId}
-        />
-      </div>
-      <img src={background} alt="" className={s.backgroung_img} />
-    </div>
-    {isHistory && <div className={s.history_elem}>
-      <HistorySlider setIsHistory={setIsHistory} />
-    </div>
-    }
-  </OutleContext.Provider>
+        <Transition in={isHistory} timeout={600} mountOnEnter={true} unmountOnExit={true}>
+          {(state)=>(
+            <div className={s.history_elem} style={transitionStyles[state]}>
+              <HistorySlider setIsHistory={setIsHistory} />
+            </div>
+          )}
+        </Transition>
+      </OutleContext.Provider>
   );
 }

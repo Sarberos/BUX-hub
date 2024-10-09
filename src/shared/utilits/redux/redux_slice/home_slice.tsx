@@ -65,7 +65,16 @@ export const homeSlice = createSlice({
       }
     },
     setDailyRewardsStatus:(state, action: PayloadAction<EnumBonusStatus>) => {
-        state.dailyRewardsStatus = action.payload
+      switch (action.payload){
+        case 'wait':
+          state.dailyRewardsStatus=EnumBonusStatus.WAIT;
+          break;
+        case 'claim':
+          state.dailyRewardsStatus=EnumBonusStatus.CLAIM;
+          break;
+        default:
+          state.dailyRewardsStatus=EnumBonusStatus.WAIT;
+      }
     },
     updateTotalCoins:(state, action: PayloadAction<number>) => {
         state.totalCoins += action.payload

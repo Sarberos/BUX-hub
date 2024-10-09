@@ -1,7 +1,7 @@
 import s from './MainClaim.module.scss'
 import MainBtn from "@widgets/UI/MainBtn/MainBtn.tsx";
 import {useTranslation} from "react-i18next";
-import coin_ico from '@shared/Home/assets/home_img/small_coin_prod.png'
+import coin_ico from '@shared/Home/assets/home_img/coin_ico.svg'
 
 interface IMainClaimBtnProps{
   onClick:()=>void
