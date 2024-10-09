@@ -78,7 +78,7 @@ export type TFarmInfo={
     dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
   }
   const onClaimFarming=()=>{
-    for(let i=1; i<=20;i++){
+    for(let i=1; i<=10;i++){
       hapticFeedBack();
       setTimeout(()=>hapticFeedBack(),10*i)
     }
