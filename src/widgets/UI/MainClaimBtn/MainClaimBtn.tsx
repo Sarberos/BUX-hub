@@ -10,7 +10,7 @@ interface IMainClaimBtnProps{
 export const MainClaimBtn = ({onClick}:IMainClaimBtnProps) => {
   const {t}=useTranslation()
   return (
-    <MainBtn  event={onClick} >
+    <MainBtn backColor={"#c3e0fa"}  event={onClick} >
         <div className={s.claim_home_btn}>
           <p>{t('сlaimFarm')+" "+"40"}</p>
           <img src={coin_ico} alt="coin"/>

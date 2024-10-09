@@ -158,25 +158,16 @@ export type TFarmInfo={
       }
     };
 
-    let clickCounter = 0;
     let tripleClickTimer: ReturnType<typeof setTimeout> | null = null;
+    const hapticDoubleClick = () => {
+      if (tripleClickTimer) {
+        clearTimeout(tripleClickTimer);
+        clickTimer = null;
 
-    const handleTenClick = () => {
-      clickCounter++;
-      if (!tripleClickTimer) {
+      } else {
         tripleClickTimer = setTimeout(() => {
-          clickCounter = 0;
           tripleClickTimer = null;
-        }, 2000);
-      }
-      if (clickCounter ===5) {
-        for(let i=1; i<=10;i++){
-          hapticFeedBack();
-          setTimeout(()=>hapticFeedBack(),10*i)
-        }
-        clearTimeout(tripleClickTimer!);
-        clickCounter = 0;
-        tripleClickTimer = null;
+        }, 300);
       }
     };
 
@@ -187,7 +178,7 @@ export type TFarmInfo={
     <>
         <div className={s.wrapper}>
           <div  className={s.title_wrap}>
-            <p onClick={handleTenClick} className={s.title}>{`${t("hello")},`}</p>
+            <p onClick={hapticDoubleClick} className={s.title}>{`${t("hello")},`}</p>
             <p className={s.title}>{user?.username}</p>
           </div>
           <div className={s.lang_daycounter_wrap}>
@@ -204,8 +195,7 @@ export type TFarmInfo={
               {isClaim && <SuccessClaimAnim/>}
             </div>
             <div className={s.farming_btn}>
-              {chooseBtn(EnumFarmStatus.CLAIM)}
-              {/*{chooseBtn(state.farmStatus)}*/}
+              {chooseBtn(state.farmStatus)}
             </div>
 
           </div>
