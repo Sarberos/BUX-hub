@@ -35,7 +35,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
 
     useEffect(() => {
         if(isAnimActive) {
-            const timeout = setTimeout(() => setIsAnimActive(false), 3000);
+            const timeout = setTimeout(() => setIsAnimActive(false), 2800);
             return () => clearTimeout(timeout);
         }
     }, [isAnimActive]);
@@ -116,13 +116,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
                     break;
             
                 case EnumTaskStatus.CLAIMED:
-                    currentBtn =
-                      <div className={s.status_btn_wrap}>
-                           <div className={isAnimActive ?`${s.status_btn_anim} ${s.active}`:s.status_btn_anim}>
-                               {isAnimActive &&<SuccessClaimAnim/>}
-                          </div>
-                            <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
-                      </div>
+                    currentBtn = <button  onClick={()=>{ !channel_link? openLink(link):channel_link? tg.openTelegramLink(channel_link):''}} className={`${s.status_btn} ${s.disable}`}>{t("Claim")}</button>
                     break;
                 case EnumTaskStatus.IN_PROGRESS:
                     currentBtn = userId && <LoadBtn  event={()=>{ !channel_link? secondLinkOpen(link):channel_link ?  secondTgLinkOpen(channel_link,id):''}} />
@@ -157,20 +151,27 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         setCurrentBtn(chooseBtn(status,main_task_id,channel_link,id,sub_tasks))
     },[status,main_task_id,channel_link,id,sub_tasks])
     return (
-        <div className={s.task_item_wrap}>
-            <div className={s.info}>
-                <div className={s.info_img_wrap}>
-                    <img src={TASKSIMG[icon]} alt="" className={icon===EnumIcons.FIRE ? `${s.info_img} ${s.fire}`:`${s.info_img}`} />
-                </div>
-                <div className={s.item_title_wrap}>
-                    <p className={s.item_title}>{title}</p>
-                    <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length!==0 ? `${sub_tasks.filter((item)=>{
-                        return item.status===EnumTaskStatus.COMPLETED || item.status===EnumTaskStatus.CLAIMED
-                    }).length}/${sub_tasks.length} tasks, +${coins} `:`+${coins}`}</p>
-                </div>
-            </div>
-            {currentBtn}
-        </div>
+      <div className={s.task_item_wrap}>
+          <div className={s.info}>
+              <div className={s.info_img_wrap}>
+                  <img src={TASKSIMG[icon]} alt=""
+                       className={icon === EnumIcons.FIRE ? `${s.info_img} ${s.fire}` : `${s.info_img}`}/>
+              </div>
+              <div className={s.item_title_wrap}>
+                  <p className={s.item_title}>{title}</p>
+                  <p className={s.item_subtitle}>{sub_tasks && sub_tasks.length !== 0 ? `${sub_tasks.filter((item) => {
+                      return item.status === EnumTaskStatus.COMPLETED || item.status === EnumTaskStatus.CLAIMED
+                  }).length}/${sub_tasks.length} tasks, +${coins} ` : `+${coins}`}</p>
+              </div>
+          </div>
+          <div className={s.status_btn_wrap}>
+              <div className={isAnimActive ? `${s.status_btn_anim} ${s.active}` : s.status_btn_anim}>
+                  {isAnimActive && <SuccessClaimAnim/>}
+              </div>
+                {currentBtn}
+          </div>
+
+      </div>
     )
 }
 
