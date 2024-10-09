@@ -79,10 +79,10 @@ export type TFarmInfo={
   }
   const onClaimFarming=()=>{
     hapticFeedBack()
-    hapticFeedBack()
-    hapticFeedBack()
-    hapticFeedBack()
-    hapticFeedBack()
+    setTimeout(()=>hapticFeedBack(),500)
+    setTimeout(()=>hapticFeedBack(),1000)
+    setTimeout(()=>hapticFeedBack(),1500)
+    setTimeout(()=>hapticFeedBack(),2000)
     claimReq();
     dispatch(updateTotalCoins(claimedCoins))
     dispatch(setFarmStatus(EnumFarmStatus.START));
