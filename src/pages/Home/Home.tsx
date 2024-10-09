@@ -176,12 +176,14 @@ export type TFarmInfo={
           <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
             <AnimationMainImg isActive={isAnim} />
           </div>
-          <div className={s.farming_btn}>
+          <div className={s.farming_btn_wrap}>
             <div className={isClaim ? `${s.farming_btn_anim} ${s.active}`:s.farming_btn_anim}>
               {isClaim && <SuccessClaimAnim/>}
             </div>
-            {chooseBtn(state.farmStatus)}
-            {/*{chooseBtn(EnumFarmStatus.CLAIM)}*/}
+            <div className={s.farming_btn}>
+              {chooseBtn(state.farmStatus)}
+            </div>
+
           </div>
         </div>
         {rewardsPopUp(state.isDailyReward)}

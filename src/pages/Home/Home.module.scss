@@ -46,8 +46,7 @@
         justify-content: center;
         position: relative;
         }
-    .farming_btn{
-        flex:1;
+    .farming_btn_wrap{
         display: flex;
         align-items: flex-end;
         margin-bottom:45px;
@@ -77,10 +76,14 @@
                 z-index: 14;
             }
         }
+        .farming_btn{
+            width: 100%;
+            z-index: 15;
+        }
     } 
 }
 .daily_reward{
-    transform: rotateX(0);//
+    transform: rotateX(0);
     transform-origin: 0% 100%;
     transition: 0.3s;
     width: 100%;
