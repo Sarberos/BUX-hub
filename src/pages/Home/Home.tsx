@@ -151,23 +151,43 @@ export type TFarmInfo={
         clearTimeout(clickTimer);
         clickTimer = null;
         setIsHistory(true);
-        console.log("Двойное нажатие");
       } else {
         clickTimer = setTimeout(() => {
-          console.log("Одиночное нажатие");
           clickTimer = null;
         }, 300);
       }
     };
 
-  if(statusLoading ||bonusLoading){
+    let clickCounter = 0;
+    let tripleClickTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const handleTenClick = () => {
+      clickCounter++;
+      if (!tripleClickTimer) {
+        tripleClickTimer = setTimeout(() => {
+          clickCounter = 0;
+          tripleClickTimer = null;
+        }, 2000);
+      }
+      if (clickCounter ===5) {
+        for(let i=1; i<=10;i++){
+          hapticFeedBack();
+          setTimeout(()=>hapticFeedBack(),10*i)
+        }
+        clearTimeout(tripleClickTimer!);
+        clickCounter = 0;
+        tripleClickTimer = null;
+      }
+    };
+
+    if(statusLoading ||bonusLoading){
     return <Preloader />
   }else
   return (
     <>
         <div className={s.wrapper}>
           <div  className={s.title_wrap}>
-            <p className={s.title}>{`${t("hello")},`}</p>
+            <p onClick={handleTenClick} className={s.title}>{`${t("hello")},`}</p>
             <p className={s.title}>{user?.username}</p>
           </div>
           <div className={s.lang_daycounter_wrap}>
@@ -194,3 +214,4 @@ export type TFarmInfo={
   </>
       );
   }
+
