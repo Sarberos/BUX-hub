@@ -28,11 +28,19 @@
             flex-direction: column;
             gap: 9px;
             background: transparent;
+            position: relative;
             .frens_coins_value{
                 color:#fff;
                 font-size:28px ;
                 font-weight:800;
                 text-align: center;
+            }
+            .frens_coins_anim{
+                position: absolute;
+                top:-119px;
+                right:50%;
+                translate: 50% 0;
+                width:300px;
             }
             .frens_coin_claim_btn{
                 padding: 11px 15px;

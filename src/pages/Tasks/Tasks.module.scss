@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+    position: relative;
     .title_wrap{
         width: 100%;
         display: flex;
@@ -38,6 +39,22 @@
             text-align: center;
         }
     }
+    .task_list_single_anim{
+        position: absolute;
+        width:160px;
+        top:19%;
+        right:-12px;
+        @media screen and (max-height:725px) {
+            top:20%;
+            right:-15px;
+        };
+        @media screen and (max-height:680px) {
+            top:18%;
+        }
+        @media screen and (max-height:650px) {
+            top:14%;
+        }
+    }
     .task_list{
         margin: 0 15px 0;
         padding: 0 18px ;
@@ -61,6 +78,7 @@
         @media screen and (max-height:545px) {
             max-height: 179px;
         };
+
     }
 
     .main_claim_btn{

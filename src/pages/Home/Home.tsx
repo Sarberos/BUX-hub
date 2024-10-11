@@ -20,7 +20,7 @@ import {
   setDailyRewardsStatus,
   setFarmStatus,
   setFormattedTaimer,
-  setIsDailyReward,
+  setIsDailyReward, setReduxFarmedCoins,
   setTotalCoins,
   updateTotalCoins
 } from '@shared/utilits/redux/redux_slice/home_slice';
@@ -30,6 +30,7 @@ import {AnimationMainImg} from '@widgets/Home/AnimationMainImg/AnimationMainImg'
 import {useOutletContext} from '@widgets/Wrap/Wrap';
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import {MainClaimBtn} from "@widgets/UI/MainClaimBtn/MainClaimBtn.tsx";
+import {calcFarmedCoins} from "@shared/Home/helpersFunc/calcFarmedCoins.ts";
 
 export type TFarmInfo={
     coins: number,
@@ -65,7 +66,6 @@ export type TFarmInfo={
     const {mutate:claimReq}=useClaimFarmCoins()
     const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
-    const {setFarmedCoins}=useOutletContext()
 
     const [isClaim, setIsClaim] = useState<boolean>(false)
     const [isAnim, setIsAnim] = useState<boolean>(false)
@@ -135,10 +135,9 @@ export type TFarmInfo={
           dispatch(setFarmStatus(farmInfo.status));
           if(farmInfo.status===EnumFarmStatus.FARMING) {
             setIsAnim(true);
-            const formatedDate = changeDateFormat(farmInfo.start_time);
-            if (formatedDate){
-              dispatch(setFormattedTaimer(formatedDate));
-              setFarmedCoins((formatedDate.dateDifferce / 1000))
+            if (farmInfo.start_time){
+              dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)));
+              dispatch(setReduxFarmedCoins(calcFarmedCoins(farmInfo.start_time)))
             }
           }
 

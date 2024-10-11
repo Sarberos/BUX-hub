@@ -10,6 +10,7 @@ interface HomeState {
     farmStatus: EnumFarmStatus;
     dailyRewardsStatus: EnumBonusStatus;
     totalCoins:number;
+    farmedCoins:number;
     timer:TTimerType;
     bonusDay:number;
     isLoading: boolean;
@@ -26,6 +27,7 @@ const initialState: HomeState = {
   farmStatus: EnumFarmStatus.START,
   dailyRewardsStatus:EnumBonusStatus.WAIT,
   totalCoins:0,
+  farmedCoins:0,
   timer:{
     formattedHours:'00',
     formattedMinutes:'00',
@@ -82,6 +84,9 @@ export const homeSlice = createSlice({
     setTotalCoins:(state, action: PayloadAction<number>) => {
         state.totalCoins = action.payload
     },
+    setReduxFarmedCoins:(state, action: PayloadAction<number>) => {
+        state.farmedCoins = action.payload
+    },
     setFormattedTaimer:(state, action: PayloadAction<TTimerType>) => {
         state.timer = action.payload
     },
@@ -117,7 +122,8 @@ export const {
   setIsMiniTasks,
   setIsDailyReward,
   setMiniTaskId,
-  setTotalCoins
+  setTotalCoins,
+  setReduxFarmedCoins
 } = homeSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

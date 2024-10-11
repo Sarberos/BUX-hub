@@ -18,7 +18,7 @@ import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 
 
 
-export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins}:TTaskItem&{claimTasksCoins?:(value:number)=>void}){
+export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id, channel_link, claimTasksCoins,index,setIsFireCracker}:TTaskItem&{claimTasksCoins?:(value:number)=>void,index:number,setIsFireCracker?: (t:boolean)=>void}){
     const queryClient = useQueryClient()
     const {t}=useTranslation()
     const dispatch = useAppDispatch()
@@ -33,12 +33,6 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     const [currentBtn, setCurrentBtn]=useState<ReactNode>()
     const [isAnimActive, setIsAnimActive] = useState<boolean>(false);
 
-    useEffect(() => {
-        if(isAnimActive) {
-            const timeout = setTimeout(() => setIsAnimActive(false), 2800);
-            return () => clearTimeout(timeout);
-        }
-    }, [isAnimActive]);
     const handleStart= async(id:number,link:string)=>{
         await startTask(id);
         openLink(link);
@@ -72,11 +66,19 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
     }
     const handleClaim=(id:number)=>{
         hapticFeedBack();
-        setIsAnimActive(true);
         claimTasksCoins && claimTasksCoins(id)
         dispatch(updateTotalCoins(coins))
         queryClient.invalidateQueries({queryKey:['task_inf']})
         queryClient.invalidateQueries({queryKey:['farm_info']})
+        if(index===0 && setIsFireCracker ){
+            setIsFireCracker(true);
+            const animTimeout=setTimeout(()=>setIsFireCracker(false),2800);
+            return ()=>clearTimeout(animTimeout)
+        }else{
+            setIsAnimActive(true);
+            const timeout = setTimeout(() => setIsAnimActive(false), 2800);
+            return () => clearTimeout(timeout);
+        }
     }
     const handleOpen=(id:number)=>{
         dispatch(setMiniTaskId(id))
@@ -166,7 +168,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
           </div>
           <div className={s.status_btn_wrap}>
               <div className={isAnimActive ? `${s.status_btn_anim} ${s.active}` : s.status_btn_anim}>
-                  {isAnimActive && <SuccessClaimAnim/>}
+                  {isAnimActive  && <SuccessClaimAnim/>}
               </div>
                 {currentBtn}
           </div>

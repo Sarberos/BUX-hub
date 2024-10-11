@@ -3,7 +3,7 @@ import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
 import {createContext, useContext, useEffect,  useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import { setFormattedTaimer } from "@shared/utilits/redux/redux_slice/home_slice";
+import {setFormattedTaimer, setReduxFarmedCoins} from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
@@ -117,11 +117,11 @@ useEffect(()=>{
 
 useEffect(() => {
   const farmCoinsInterval=setInterval(()=>{
-    setFarmedCoins(prevState => prevState + 1)
-  },1000)
+    dispatch(setReduxFarmedCoins(parseFloat((state.farmedCoins + 0.01).toFixed(2))))
+  },2700)
 
   return () => clearInterval(farmCoinsInterval);
-}, []);
+}, [state.farmedCoins]);
 
 useEffect(()=>{
   currenPageId ===1 && setBackground(home_bg)

@@ -1,23 +1,23 @@
 .main_anim_wrap{
   position: absolute;
-  top:25px;
+  top:50%;
   left:50%;
-  translate: -43% 0;
+  translate: -43% -47%;
   width:100%;
-  @media screen and (max-width: 429px) {
-    translate: -49% 0;
-  }
-  @media screen and (max-height:718px) and (min-width: 430px){
-    top:-5px;
-  }
-  @media screen and (max-height:644px) and (min-width: 430px) {
-    top:-15px;
-  }
-  @media screen and (max-height:615px) and (min-width: 430px) {
-    top:-25px;
-  }
-  @media screen and (max-height:687px) and (max-width: 430px) {
-    top:0px;
-  }
+  //@media screen and (max-width: 429px) {
+  //  translate: -49% 0;
+  //}
+  //@media screen and (max-height:718px) and (min-width: 430px){
+  //  top:-5px;
+  //}
+  //@media screen and (max-height:644px) and (min-width: 430px) {
+  //  top:-15px;
+  //}
+  //@media screen and (max-height:615px) and (min-width: 430px) {
+  //  top:-25px;
+  //}
+  //@media screen and (max-height:687px) and (max-width: 430px) {
+  //  top:0px;
+  //}
 
 }

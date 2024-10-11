@@ -55,7 +55,7 @@ return (
     <div className={s.mini_tasks_list}>
       {tasksInf && tasksInf?.content.filter(elem=>elem.id ==state.miniTaskId).map((item)=>{
         return item.sub_tasks && item.sub_tasks.map(((el,index)=>(
-          <TaskItem  {...el} key={index} />
+          <TaskItem index={index} {...el} key={index} />
         )
         ))
       })}
