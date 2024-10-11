@@ -1,5 +1,5 @@
 import s from './KoinQuantity.module.scss'
-import coin_ico from '@shared/Home/assets/home_img/coin_ico.svg'
+import coin_ico from '@shared/Home/assets/home_img/coin_ico.webp'
 import {memo, useEffect, useRef} from 'react'
 import CountUp from "react-countup";
 

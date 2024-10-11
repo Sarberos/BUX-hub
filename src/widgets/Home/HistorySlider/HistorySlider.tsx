@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { Autoplay, Pagination } from "swiper/modules";  
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";  
 import { SwiperPagination } from "@widgets/UI/SwiperPagination/SwiperPagination";
+import animationData from "@shared/UIComponents/assets/hisroty_bg.json";
+import Lottie from "react-lottie";
 
 export const HistorySlider = ({ setIsHistory }: { setIsHistory: (v: boolean) => void }) => {  
   const swiperRef = useRef<any>(null);
@@ -51,54 +53,66 @@ export const HistorySlider = ({ setIsHistory }: { setIsHistory: (v: boolean) => 
 const handlePaginationClick = (index: number) => {  
   setCurrentIndex(index);  
   swiperRef.current.swiper.slideTo(index);  
-};  
-
+};
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
   return (
-    <Swiper
-      ref={swiperRef}
-      className={s.swiper}
-      modules={[Pagination, Autoplay]}
-      pagination={false}
-      navigation={{
-        nextEl: ".swiper_btn.next",
-        prevEl: ".swiper_btn.prev",
-      }}
-      onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
-      autoplay={{ delay: 7500 }}
-      slidesPerView={1}
-      speed={400}
-      loop={false}
-    >
-      {historySlidesArray &&
-        historySlidesArray.map((elem, index) => (
-          <SwiperSlide key={index}>
-            <img src={elem} className={s.history_slide} />
-            <button
-              onTouchStart={stopAutoPlay}
-              onTouchEnd={continueAutoPlay}
-              onClick={() => swiperRef.current.swiper.slidePrev()}
-              className={`${s.swiper_btn} ${s.prev}`}
-            ></button>
-            <button className={`${s.swiper_btn} ${s.next}`}></button>
-            <button
-              onTouchStart={stopAutoPlay}
-              onTouchEnd={continueAutoPlay}
-              onClick={
-                index === historySlidesArray.length - 1
-                  ? () => setIsHistory(false)
-                  : () => swiperRef.current.swiper.slideNext()
-              }
-              className={`${s.swiper_btn} ${s.next}`}
-            ></button>
-          </SwiperSlide>
-        ))}
-      <div className={s.custom_pagination}>
-        <SwiperPagination
-          currentIndex={currentIndex}
-          btnEvent={handlePaginationClick}
-          array={historySlidesArray}
-        />
+    <>
+      <div className={s.history_slide_bg}>
+        <Lottie options={defaultOptions} width={'100%'}/>;
       </div>
-    </Swiper>
-  );  
+      <Swiper
+        ref={swiperRef}
+        className={s.swiper}
+        modules={[Pagination, Autoplay]}
+        pagination={false}
+        navigation={{
+          nextEl: ".swiper_btn.next",
+          prevEl: ".swiper_btn.prev",
+        }}
+        onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
+        autoplay={{delay: 7500}}
+        slidesPerView={1}
+        speed={400}
+        loop={false}
+      >
+        {historySlidesArray &&
+          historySlidesArray.map((elem, index) => (
+            <SwiperSlide key={index}>
+              <img src={elem} className={s.history_slide}/>
+              <button
+                onTouchStart={stopAutoPlay}
+                onTouchEnd={continueAutoPlay}
+                onClick={() => swiperRef.current.swiper.slidePrev()}
+                className={`${s.swiper_btn} ${s.prev}`}
+              ></button>
+              <button className={`${s.swiper_btn} ${s.next}`}></button>
+              <button
+                onTouchStart={stopAutoPlay}
+                onTouchEnd={continueAutoPlay}
+                onClick={
+                  index === historySlidesArray.length - 1
+                    ? () => setIsHistory(false)
+                    : () => swiperRef.current.swiper.slideNext()
+                }
+                className={`${s.swiper_btn} ${s.next}`}
+              ></button>
+            </SwiperSlide>
+          ))}
+        <div className={s.custom_pagination}>
+          <SwiperPagination
+            currentIndex={currentIndex}
+            btnEvent={handlePaginationClick}
+            array={historySlidesArray}
+          />
+        </div>
+      </Swiper>
+    </>
+  );
 };

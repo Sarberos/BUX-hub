@@ -1,15 +1,20 @@
+.history_slide_bg{
+    position: absolute;
+    width:100%;
+    height:100vh;
+    z-index: 1;
+}
 .swiper{
-    
     width:100% ;
     height: 100% ;
     position: relative;
-    img{
+    .history_slide{
         position: absolute;
         bottom: 0;
         width:100%; 
         object-fit: contain;
-        z-index: -1;
-    }   
+        z-index: 2;
+    }
 }   
 .swiper_btn{
     content: '';

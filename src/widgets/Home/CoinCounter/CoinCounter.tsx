@@ -1,11 +1,10 @@
 
 import  {useEffect, useState} from 'react';
 import s from './CoinCounter.module.scss';
-import coin_ico from "@shared/Home/assets/home_img/coin_ico.svg";
+import coin_ico from "@shared/Home/assets/home_img/coin_ico.webp";
 import {useAppSelector} from "@shared/utilits/redux/hooks.ts";
 
 const CoinCounter= () => {
-  console.log('CoinCounter')
   const homeState=useAppSelector(state => state.home)
   const prevValue=homeState.farmedCoins + 0.01;
   const [animate, setAnimate] = useState(false);
