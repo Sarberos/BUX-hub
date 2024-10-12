@@ -120,9 +120,8 @@ export type TFarmInfo={
     },[bonusInfo])
     useEffect(()=>{
         if(farmInfo){
-          farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins))
-          dispatch(setFarmStatus(EnumFarmStatus.START));
-          // dispatch(setFarmStatus(farmInfo.status));
+          farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins));
+          dispatch(setFarmStatus(farmInfo.status));
           if(farmInfo.status===EnumFarmStatus.FARMING) {
             setIsAnim(true);
             if (farmInfo.start_time){
