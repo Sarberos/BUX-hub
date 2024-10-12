@@ -3,7 +3,7 @@ import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
 import {createContext, useContext, useEffect,  useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import {setFormattedTaimer, setReduxFarmedCoins} from "@shared/utilits/redux/redux_slice/home_slice";
+import {setFormattedTaimer, setIsDailyReward, setReduxFarmedCoins} from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
@@ -17,6 +17,9 @@ import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 import {useQueryClient} from "@tanstack/react-query";
 import { Transition } from 'react-transition-group';
 import {TTransitionType} from "@shared/UIComponents/types/historySlider.ts";
+import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp.tsx";
+import DailyRewards from "@widgets/Home/DailyRewards/DailyRewards.tsx";
+import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
 
 export interface IOutletContext{
   setIsHistory:(v:boolean)=>void;
@@ -129,7 +132,6 @@ useEffect(()=>{
   currenPageId ===3 && setBackground(raiting_bg)
   currenPageId ===4 && setBackground(frens_bg)
 },[currenPageId])
-
   const transitionStyles:TTransitionType= {
     entering: { opacity: 0, transform:'translateY(20)'},
     entered:  { opacity: 1,transform:'translateY(0)', transition:'.4s'},
@@ -162,6 +164,15 @@ if(!isMobile){
             </div>
           )}
         </Transition>
-      </OutleContext.Provider>
+      <Transition in={state.isDailyReward} timeout={0} mountOnEnter={true} unmountOnExit={true}>
+        <div className={`${s.daily_reward}`}>
+          <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
+            <DailyRewards
+              buttonActive={state.dailyRewardsStatus === EnumBonusStatus.CLAIM}
+            />
+          </BottomPopUp>
+        </div>
+      </Transition>
+    </OutleContext.Provider>
   );
 }

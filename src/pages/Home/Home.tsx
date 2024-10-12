@@ -2,8 +2,6 @@ import s from '@pages/Home/Home.module.scss'
 import MainBtn from '@widgets/UI/MainBtn/MainBtn';
 import {Lang_DayCounter} from '@widgets/Home/Lang_DayCounter/Lang_DayCounter';
 import KoinQuantity from '@widgets/Home/KoinQuantity/KoinQuantity';
-import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp';
-import DailyRewards from '@widgets/Home/DailyRewards/DailyRewards';
 import {useTelegramApi} from '@shared/Home/hooks/useTelegramApi';
 import {useTranslation} from 'react-i18next';
 import {useEffect, useState} from 'react'
@@ -107,21 +105,7 @@ export type TFarmInfo={
       }
 
     }
-  const rewardsPopUp=(bonusStatus:boolean)=>{
-      if(bonusStatus){
-        return (
-          <div className={`${s.daily_reward}`}>
-            <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>
-              <DailyRewards
-                buttonActive={bonusInfo?.status === EnumBonusStatus.CLAIM}
-              />
-            </BottomPopUp>
-          </div>
-        )
-      }else{
-        return<></>
-      }
-  }
+
 
     useEffect(() => {
       if (bonusInfo) {
@@ -204,7 +188,6 @@ export type TFarmInfo={
 
           </div>
         </div>
-        {rewardsPopUp(state.isDailyReward)}
   </>
       );
   }
