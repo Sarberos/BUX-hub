@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const apiUrl:string = "https://roxide-dev.up.railway.app/";
-// export const apiUrl:string = "https://api.bux-hub.pro/";
+// export const apiUrl:string = "https://roxide-dev.up.railway.app/";
+export const apiUrl:string = "https://api.bux-hub.pro/";
 
 const api = axios.create({
   baseURL: apiUrl,
