@@ -20,7 +20,8 @@ import {
   setDailyRewardsStatus,
   setFarmStatus,
   setFormattedTaimer,
-  setIsDailyReward, setReduxFarmedCoins,
+  setIsDailyReward,
+  setReduxFarmedCoins,
   setTotalCoins,
   updateTotalCoins
 } from '@shared/utilits/redux/redux_slice/home_slice';
@@ -69,6 +70,8 @@ export type TFarmInfo={
 
     const [isClaim, setIsClaim] = useState<boolean>(false)
     const [isAnim, setIsAnim] = useState<boolean>(false)
+    const [isBalanceAnim, setisBalanceAnim] = useState<boolean>(false)
+
 
 
   const onStartFarming=()=>{
@@ -78,6 +81,7 @@ export type TFarmInfo={
     dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
   }
   const onClaimFarming=()=>{
+    setisBalanceAnim(true);
     for(let i=1; i<=10;i++){
       hapticFeedBack();
       setTimeout(()=>hapticFeedBack(),10*i)
@@ -86,7 +90,7 @@ export type TFarmInfo={
     dispatch(updateTotalCoins(claimedCoins))
     dispatch(setFarmStatus(EnumFarmStatus.START));
     setIsClaim(true);
-    setTimeout(()=>setIsClaim(false),3000);
+    setTimeout(()=>setIsClaim(false),2700);
   }
   const chooseBtn =(farmStatus: EnumFarmStatus )=>{
       switch (farmStatus) {
@@ -184,7 +188,7 @@ export type TFarmInfo={
             <Lang_DayCounter />
           </div>
           <div className={s.koin_wrap}>
-            <KoinQuantity coinValue={state.totalCoins} />
+            <KoinQuantity coinValue={state.totalCoins} isBalanceAnim={isBalanceAnim} />
           </div>
           <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
             <AnimationMainImg isActive={isAnim} />
@@ -194,6 +198,7 @@ export type TFarmInfo={
               {isClaim && <SuccessClaimAnim/>}
             </div>
             <div className={s.farming_btn}>
+              {/*{chooseBtn(EnumFarmStatus.CLAIM)}*/}
               {chooseBtn(state.farmStatus)}
             </div>
 
