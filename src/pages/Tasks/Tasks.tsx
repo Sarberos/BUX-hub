@@ -16,10 +16,10 @@ export const Tasks=()=>{
   const {t}= useTranslation()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
-  const [isFireCracker, setIsFireCracker] = useState(false)
 
   const {data:tasksInf,isLoading:taskInfoLoading}=useGetTasksInf()
   const {mutate:claimTasksCoins}=useClaimTasksCoins()
+  const [isFireCracker, setIsFireCracker] = useState<boolean>(false)
 
 
 
@@ -39,7 +39,8 @@ if(taskInfoLoading){
           <div className={s.title}>{t("tasks")}</div>
           <div className={s.subtitle}>{t("tasksSub")}</div>
         </div>
-        <div className={isFireCracker ?`${s.task_list_single_anim} ${s.active}` :s.task_list_single_anim}>
+        <div className={s.task_list_bg}></div>
+        <div className={isFireCracker ? `${s.task_list_single_anim} ${s.active}` : s.task_list_single_anim}>
           {isFireCracker && <SuccessClaimAnim/>}
         </div>
         <div className={s.task_list}>
@@ -50,12 +51,12 @@ if(taskInfoLoading){
               key={index}
             />
           )} */}
-          {tasksInf?.content.map((elem, index) =>
+          {tasksInf?.content.map((elem,index) =>
             <TaskItem
-              setIsFireCracker={setIsFireCracker}
               claimTasksCoins={claimTasksCoins}
-              index={index}
               {...elem}
+              setIsFireCracker={setIsFireCracker}
+              index={index}
               key={`task-item-${elem.id}`}
             />
           )}

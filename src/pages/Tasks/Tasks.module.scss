@@ -39,6 +39,35 @@
             text-align: center;
         }
     }
+    .task_list_bg{
+        position: absolute;
+        top:206px;
+        margin: 0 15px 0;
+        width:calc(100% - 30px);
+        min-height: 385px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        z-index: 1;
+        @media screen and (max-height:725px) {
+            min-height: 286px;
+        };
+        @media screen and (max-height: 680px){
+            top: 182px;
+        }
+        @media screen and (max-height: 650px){
+            top: 158px;
+        }
+        @media screen and (max-height:600px) {
+            min-height: 271px;
+        }
+        @media screen  and (max-height:590px) {
+            top: 140px;
+        }
+        @media screen and (max-height:545px) {
+            min-height: 179px;
+            top:156px
+        };
+    }
     .task_list_single_anim{
         position: absolute;
         width:160px;
@@ -56,29 +85,27 @@
         }
     }
     .task_list{
-        margin: 0 15px 0;
-        padding: 0 18px ;
         display: flex;
-        max-height: 385px;
+        max-height: 381px;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
         gap: 20px;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 15px;
+        overflow-x:visible;
         overflow-y: scroll;
         scrollbar-width: none;
+        position: relative;
+        z-index: 2;
         @media screen and (max-height:725px) {
-            max-height: 286px;
+            max-height: 282px;
         };
         @media screen and (max-height:600px) {
             gap:15px;
-            max-height: 271px;
+            max-height: 267px;
         }
         @media screen and (max-height:545px) {
-            max-height: 179px;
+            max-height: 175px;
         };
-
     }
 
     .main_claim_btn{

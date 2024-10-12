@@ -174,6 +174,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
           </div>
 
       </div>
+
     )
 }
 
