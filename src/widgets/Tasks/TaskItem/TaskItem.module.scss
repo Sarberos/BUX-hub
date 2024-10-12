@@ -7,6 +7,9 @@
     justify-content: space-between;
     align-items: center;
     gap:10px;
+    &.mini_tasks{
+        padding: 15px 2px;
+    }
     .info{
         flex: 1;
         display: flex;

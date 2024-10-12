@@ -153,7 +153,7 @@ export default function({icon,title,sub_tasks,coins,id,link,status,main_task_id,
         setCurrentBtn(chooseBtn(status,main_task_id,channel_link,id,sub_tasks))
     },[status,main_task_id,channel_link,id,sub_tasks])
     return (
-      <div className={s.task_item_wrap}>
+      <div className={main_task_id ?`${s.task_item_wrap} ${s.mini_tasks}` :s.task_item_wrap}>
           <div className={s.info}>
               <div className={s.info_img_wrap}>
                   <img src={TASKSIMG[icon]} alt=""
