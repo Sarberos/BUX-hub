@@ -4,5 +4,5 @@ export const calcFarmedCoins=(startDate:string)=>{
   const nowTime=new Date();
 
   const timeDiferens=nowTime.getTime()-startTime.getTime();
-  return Math.ceil(timeDiferens/2700*0.01)
+  return Math.ceil(timeDiferens/2700)*0.01
 }

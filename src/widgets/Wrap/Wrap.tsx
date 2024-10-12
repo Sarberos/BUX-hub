@@ -157,13 +157,13 @@ if(!isMobile){
         </div>
         <img src={background} alt="" className={s.backgroung_img}/>
       </div>
-        <Transition in={isHistory} timeout={600} mountOnEnter={true} unmountOnExit={true}>
-          {(state)=>(
-            <div className={s.history_elem} style={transitionStyles[state]}>
-              <HistorySlider setIsHistory={setIsHistory} />
-            </div>
-          )}
-        </Transition>
+      <Transition in={isHistory} timeout={600} mountOnEnter={true} unmountOnExit={true}>
+        {(state)=>(
+          <div className={s.history_elem} style={transitionStyles[state]}>
+            <HistorySlider setIsHistory={setIsHistory} />
+          </div>
+        )}
+      </Transition>
       <Transition in={state.isDailyReward} timeout={0} mountOnEnter={true} unmountOnExit={true}>
         <div className={`${s.daily_reward}`}>
           <BottomPopUp onClose={() => dispatch(setIsDailyReward(false))}>

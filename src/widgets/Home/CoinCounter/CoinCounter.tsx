@@ -11,14 +11,14 @@ const CoinCounter= () => {
   const [integerPart, decimalPart] = homeState.farmedCoins.toFixed(2).split('.');
   const [prevIntegerPart, prevDecimalPart] = prevValue.toFixed(2).split('.');
   useEffect(() => {
+    setAnimate(false);
     const changeValueTimeOut=setTimeout(() => {
       setAnimate(true);
-      const animTimeout =setTimeout(() => {
-        setAnimate(false);
-      }, 500);
-      return ()=>clearTimeout(animTimeout)
-    }, 2175);
-    return ()=>clearTimeout(changeValueTimeOut)
+    }, 2470);
+    return ()=> {
+      clearTimeout(changeValueTimeOut);
+      setAnimate(false)
+    }
   }, [homeState.farmedCoins]);
 
 
@@ -26,13 +26,13 @@ const CoinCounter= () => {
       <div className={s.counter_wrap}>
         <div className={s.counter}>
           <div className={s.counter_part}>
-            <span className={animate && prevIntegerPart[0]!== integerPart[0] ? `${s.digit} ${s.up}`:`${s.digit}`}>{integerPart[0]}</span>
-            <span className={animate && prevIntegerPart[1]!== integerPart[1] ? `${s.digit} ${s.up}`:`${s.digit}`}>{integerPart[1]}</span>
+            <span className={animate && prevIntegerPart[0]!== integerPart[0] ? `${s.digit}  `:`${s.digit}`}>{integerPart[0]}</span>
+            <span className={animate && prevIntegerPart[1]!== integerPart[1] ? `${s.digit} `:`${s.digit}`}>{integerPart[1]}</span>
           </div>
           <span className={s.dot}>.</span>
           <div className={s.counter_part}>
-            <span className={animate && prevDecimalPart[0]!== decimalPart[0] ? `${s.digit} ${s.up}`:`${s.digit}`}>{decimalPart[0]}</span>
-            <span className={animate ? `${s.digit} ${s.up}`:`${s.digit}`}>{decimalPart[1]}</span>
+            <span className={animate && prevDecimalPart[0]!== decimalPart[0] ? `${s.digit} `:`${s.digit}`}>{decimalPart[0]}</span>
+            <span className={animate && prevDecimalPart[1]!== decimalPart[1] ? `${s.digit} `:`${s.digit}`}>{decimalPart[1]}</span>
           </div>
         </div>
         <div className={animate ? `${s.counter} ${s.new} ${s.up}`:`${s.counter} ${s.new}`}>

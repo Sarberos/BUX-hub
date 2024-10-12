@@ -74,9 +74,10 @@ export type TFarmInfo={
 
   const onStartFarming=()=>{
     setIsAnim(true)
-    startReq();
+    dispatch(setReduxFarmedCoins(0.01))
     dispatch(setFarmStatus(EnumFarmStatus.FARMING));
-    dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}))
+    startReq();
+    dispatch(setFormattedTaimer({formattedHours:'3',formattedMinutes:'00',formattedSec:'00',hours:3,minuts:0,sec:0}));
   }
   const onClaimFarming=()=>{
     setisBalanceAnim(true);
@@ -112,7 +113,7 @@ export type TFarmInfo={
         if (bonusInfo.status === EnumBonusStatus.CLAIM) {
           dispatch(setIsDailyReward(true));
         }
-        dispatch(setDailyRewardsStatus(bonusInfo.status));
+        dispatch(setDailyRewardsStatus(bonusInfo.status) );
         setIsHistory(bonusInfo.welcome_status)
         dispatch(setBonusDay(bonusInfo.day));
       }
@@ -120,7 +121,8 @@ export type TFarmInfo={
     useEffect(()=>{
         if(farmInfo){
           farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins))
-          dispatch(setFarmStatus(farmInfo.status));
+          dispatch(setFarmStatus(EnumFarmStatus.START));
+          // dispatch(setFarmStatus(farmInfo.status));
           if(farmInfo.status===EnumFarmStatus.FARMING) {
             setIsAnim(true);
             if (farmInfo.start_time){
@@ -182,7 +184,6 @@ export type TFarmInfo={
               {isClaim && <SuccessClaimAnim/>}
             </div>
             <div className={s.farming_btn}>
-              {/*{chooseBtn(EnumFarmStatus.CLAIM)}*/}
               {chooseBtn(state.farmStatus)}
             </div>
 
