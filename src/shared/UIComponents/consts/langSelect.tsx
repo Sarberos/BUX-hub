@@ -14,12 +14,12 @@ export const LANGLIST:TLang[]=[
         label:"EN",
         value:"EN",
     },
-    {
-        label:"FR",
-        value:'FR',
-    },
-    {
-        label:'DE',
-        value:'DE',
-    },
+    // {
+    //     label:"FR",
+    //     value:'FR',
+    // },
+    // {
+    //     label:'DE',
+    //     value:'DE',
+    // },
 ]
