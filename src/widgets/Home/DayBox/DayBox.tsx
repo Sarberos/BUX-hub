@@ -3,8 +3,9 @@ import s from './DayBox.module.scss'
 import { useTranslation } from 'react-i18next'
 
 export default function ({currentDay,boxImg,rewardLabel,rewardDay,style}:TDayBoxProps){
-    const {t}=useTranslation()
-   const untouchStyle:React.CSSProperties=currentDay===rewardDay-1 ? {display:'none'}:{}
+    const {t}=useTranslation();
+    currentDay=currentDay<=7 ? currentDay : 6;
+   const untouchStyle:React.CSSProperties=currentDay===rewardDay-1 ? {display:'none'}:currentDay>=7 && rewardDay===7 ?{display:'none'}:{};
    
     return (
         <div  className={s.prize_box_wrap}>

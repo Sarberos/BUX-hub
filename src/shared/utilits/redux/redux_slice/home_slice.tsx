@@ -29,9 +29,9 @@ const initialState: HomeState = {
   totalCoins:0,
   farmedCoins:0,
   timer:{
-    formattedHours:'00',
-    formattedMinutes:'00',
-    formattedSec:'00',
+    formattedHours:'',
+    formattedMinutes:'',
+    formattedSec:'',
     hours:0,
     minuts:0,
     sec:0,

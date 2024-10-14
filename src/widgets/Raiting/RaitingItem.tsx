@@ -3,6 +3,7 @@ import React, { CSSProperties } from 'react'
 import { TRaitngItem } from '@shared/Raiting/hooks/useGetRaitingList';
 import { useTelegramApi } from '@shared/Home/hooks/useTelegramApi';
 import { useTranslation } from 'react-i18next';
+import {changeCoinFormat} from "@shared/Home/helpersFunc/changeCoinFormat.ts";
 
 export type TRaitingItemStyle={
     backgroundColor: CSSProperties,
@@ -17,7 +18,6 @@ export default function ({active_usernames=['Anonim'],coins,place,telegramId}:TR
       ? { backgroundColor: "#CCE1E1", position: "sticky", bottom: 0}
       : {};  
 
-    
     return(
         <div style={meItemStyle} className={ isMy  ? `${s.raiting_item_wrap} ${s.active}`: `${s.raiting_item_wrap}`}>
             <div className={s.raiting_info}>
@@ -27,7 +27,7 @@ export default function ({active_usernames=['Anonim'],coins,place,telegramId}:TR
                     {isMy && <p className={s.raiting_title}>{t('you')}</p>}
                 </div>
             </div>
-            <div className={s.coin_quantity}>{coins}</div>
+            <div className={s.coin_quantity}>{changeCoinFormat(Math.ceil(coins))}</div>
         </div>
     )
 }
