@@ -9,7 +9,7 @@ export default function({photo,active_usernames,coins,day_revenues,first_name,la
     <div className={s.fren_profile_wrap}>
       <div className={s.fren_info}>
           <div className={s.fren_img_wrap}>
-            {generateAva(unknown_ava,{first_name,last_name},photo)}
+            {generateAva(photo,{first_name,last_name},unknown_ava)}
           </div>
           <div className={s.fren_title_wrap}>
               <p className={s.fren_title}>{active_usernames[0]}</p>

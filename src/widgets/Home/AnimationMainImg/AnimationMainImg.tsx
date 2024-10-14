@@ -14,7 +14,7 @@ export const AnimationMainImg = ({isActive}:{isActive:boolean}) => {
 
     return (
       <div className={s.main_anim_wrap}>
-          <Lottie options={defaultOptions} width={'100%'} isStopped={!isActive} />;
+          <Lottie options={defaultOptions} width={'100%'} isStopped={!isActive} />
       </div>
 
 

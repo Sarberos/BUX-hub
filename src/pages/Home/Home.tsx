@@ -156,7 +156,7 @@ export type TFarmInfo={
     };
 
     if(statusLoading ||bonusLoading){
-    return <Preloader ufo={!farmInfo || !bonusInfo ? true:false}/>
+    return <Preloader />
   }else
   return (
     <>
