@@ -1,22 +1,25 @@
 import Lottie from 'react-lottie';
 import s from './Preloader.module.scss'
-import animationData from "@shared/UIComponents/assets/BUX LOADING LOADER.json"; 
 import preloader_bg_img from '@shared/assets/webp_bg/home.webp'
+import animationData from "@shared/UIComponents/assets/BUX LOADING LOADER.json";
+import BUXloader from "@shared/UIComponents/assets/BUX_TXT_Loader.json"
 
-export const Preloader=()=>{
-    const defaultOptions = {  
-        loop: true,  
-        autoplay: true,  
-        animationData: animationData,  
-        rendererSettings: {  
-            preserveAspectRatio: 'xMidYMid slice'  
+
+
+export const Preloader=({ufo}:{ufo?:boolean})=>{
+  const loaderImg =ufo ? animationData : BUXloader
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: loaderImg,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
         } }
     return(
         <div className={s.preloader_wrap}>
             <img src={preloader_bg_img} alt="" className={s.preloader_bg_img} />
-            {/*<img src={preloder_git} alt="" className={s.preloader_img} /> */}
             <div className={s.preloader_img}>
-                <Lottie options={defaultOptions} height={150} width={150} />
+                <Lottie options={defaultOptions} height={ufo? 150 :250} width={ufo? 150 :250} />
             </div>
         </div>
     )
