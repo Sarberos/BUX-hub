@@ -70,12 +70,12 @@ export default function({buttonActive}:{ buttonActive: boolean}){
         <div className={isAnim ? `${s.reward_fireCracker} ${s.active}` :s.reward_fireCracker}>
           {isAnim && <SuccessClaimAnim/>}
         </div>
-          {!buttonActive && (
+          {buttonActive && (
             <MainBtn event={() => onClaimBonus(state.bonusDay)}>
               {t("claim")}
             </MainBtn>
           )}
-          {buttonActive && (
+          {!buttonActive && (
             <MainBtn backColor={"#282828"} disabled={true}>
               <p style={{ color: "#6C6C6C" }}>{t("claim")}</p>
             </MainBtn>

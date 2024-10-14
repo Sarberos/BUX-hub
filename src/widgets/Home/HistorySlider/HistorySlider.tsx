@@ -8,7 +8,7 @@ import { SwiperPagination } from "@widgets/UI/SwiperPagination/SwiperPagination"
 import animationData from "@shared/UIComponents/assets/hisroty_bg.json";
 import Lottie from "react-lottie";
 
-export const HistorySlider = ({ setIsHistory }: { setIsHistory: (v: boolean) => void }) => {  
+export const HistorySlider = ({ closeHistory }: { closeHistory: () => void }) => {
   const swiperRef = useRef<any>(null);
   const { user } = useTelegramApi();  
 
@@ -39,7 +39,7 @@ export const HistorySlider = ({ setIsHistory }: { setIsHistory: (v: boolean) => 
         if (swiper.isEnd) {
           swiper.autoplay.stop();
           setTimeout(() => {
-            setIsHistory(false);
+            closeHistory()
           }, 7000);
         }  
       };
@@ -98,7 +98,7 @@ const handlePaginationClick = (index: number) => {
                 onTouchEnd={continueAutoPlay}
                 onClick={
                   index === historySlidesArray.length - 1
-                    ? () => setIsHistory(false)
+                    ? () => closeHistory()
                     : () => swiperRef.current.swiper.slideNext()
                 }
                 className={`${s.swiper_btn} ${s.next}`}

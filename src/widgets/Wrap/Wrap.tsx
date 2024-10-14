@@ -3,7 +3,12 @@ import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
 import {createContext, useContext, useEffect,  useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
-import {setFormattedTaimer, setIsDailyReward, setReduxFarmedCoins} from "@shared/utilits/redux/redux_slice/home_slice";
+import {
+  setFormattedTaimer,
+  setIsDailyReward,
+  setReduxFarmedCoins,
+  setWelcomeStatus
+} from "@shared/utilits/redux/redux_slice/home_slice";
 import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
@@ -81,14 +86,7 @@ export const  Wrap=() =>{
   const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
-  const [isHistory,setIsHistory]=useState<boolean>(false);
-  const [farmedCoins, setFarmedCoins]=useState<number>(0)
 
-  const outletContext={
-    setIsHistory,
-    setFarmedCoins,
-    farmedCoins
-  }
 useEffect(()=>{
     tg.expand()
     tg.setHeaderColor("#000000");
@@ -144,7 +142,7 @@ if(!isMobile){
   return <QrCode/>
 }
   return (
-    <OutleContext.Provider value={outletContext}>
+    <>
       <div className={s.wrap}>
         <div className={s.child_wrap}>
           <Outlet/>
@@ -157,10 +155,10 @@ if(!isMobile){
         </div>
         <img src={background} alt="" className={s.backgroung_img}/>
       </div>
-      <Transition in={isHistory} timeout={600} mountOnEnter={true} unmountOnExit={true}>
+      <Transition in={state.welcomeStatus} timeout={600} mountOnEnter={true} unmountOnExit={true}>
         {(state)=>(
           <div className={s.history_elem} style={transitionStyles[state]}>
-            <HistorySlider setIsHistory={setIsHistory} />
+            <HistorySlider closeHistory={()=>dispatch(setWelcomeStatus(false))} />
           </div>
         )}
       </Transition>
@@ -173,6 +171,6 @@ if(!isMobile){
           </BottomPopUp>
         </div>
       </Transition>
-    </OutleContext.Provider>
+    </>
   );
 }

@@ -11,25 +11,23 @@ import {EnumFarmStatus} from '@shared/Home/consts/farmStatus.enum';
 import {useClaimFarmCoins} from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import {changeDateFormat} from '@shared/Home/helpersFunc/changeDateFormat.ts';
-import {useGetBonusStatus} from '@shared/Home/hooks/useGetBonusStatus';
 import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
 import {
   setBonusDay,
   setDailyRewardsStatus,
   setFarmStatus,
-  setFormattedTaimer,
-  setIsDailyReward,
+  setFormattedTaimer, setIsDailyReward,
   setReduxFarmedCoins,
-  setTotalCoins,
+  setTotalCoins, setWelcomeStatus,
   updateTotalCoins
 } from '@shared/utilits/redux/redux_slice/home_slice';
-import {EnumBonusStatus} from '@shared/Home/consts/bonusStatus.enum';
 import {Preloader} from '@widgets/UI/Preloader/Preloader';
 import {AnimationMainImg} from '@widgets/Home/AnimationMainImg/AnimationMainImg';
-import {useOutletContext} from '@widgets/Wrap/Wrap';
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import {MainClaimBtn} from "@widgets/UI/MainClaimBtn/MainClaimBtn.tsx";
 import {calcFarmedCoins} from "@shared/Home/helpersFunc/calcFarmedCoins.ts";
+import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
+import {useGetBonusStatus} from "@shared/Home/hooks/useGetBonusStatus.tsx";
 
 export type TFarmInfo={
     coins: number,
@@ -52,19 +50,20 @@ export type TFarmInfo={
   } | null; 
 
 
+
   export function Home(){
     const claimedCoins:number=40;
 
     const {user,hapticFeedBack}=useTelegramApi()
     const {t} = useTranslation()
     const dispatch= useAppDispatch()
-    const state=useAppSelector(state=>state.home)
+    const state=useAppSelector(state=>state.home);
 
-    const {setIsHistory}=useOutletContext()
     const {mutate:startReq}=useStartFarm()
     const {mutate:claimReq}=useClaimFarmCoins()
-    const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo()
+    const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo();
     const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
+
 
     const [isClaim, setIsClaim] = useState<boolean>(false)
     const [isAnim, setIsAnim] = useState<boolean>(false)
@@ -106,16 +105,14 @@ export type TFarmInfo={
       }
 
     }
-
-
     useEffect(() => {
       if (bonusInfo) {
         if (bonusInfo.status === EnumBonusStatus.CLAIM) {
           dispatch(setIsDailyReward(true));
         }
-        dispatch(setDailyRewardsStatus(bonusInfo.status) );
-        setIsHistory(bonusInfo.welcome_status)
+        dispatch(setDailyRewardsStatus(bonusInfo.status));
         dispatch(setBonusDay(bonusInfo.day));
+        dispatch(setWelcomeStatus(bonusInfo.welcome_status));
       }
     },[bonusInfo])
     useEffect(()=>{
@@ -129,7 +126,6 @@ export type TFarmInfo={
               dispatch(setReduxFarmedCoins(calcFarmedCoins(farmInfo.start_time)))
             }
           }
-
         }
       },[farmInfo])
 
@@ -138,7 +134,7 @@ export type TFarmInfo={
       if (clickTimer) {
         clearTimeout(clickTimer);
         clickTimer = null;
-        setIsHistory(true);
+        dispatch(setWelcomeStatus(true))
       } else {
         clickTimer = setTimeout(() => {
           clickTimer = null;
