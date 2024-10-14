@@ -25,6 +25,7 @@ import {TTransitionType} from "@shared/UIComponents/types/historySlider.ts";
 import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp.tsx";
 import DailyRewards from "@widgets/Home/DailyRewards/DailyRewards.tsx";
 import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
+import {getBonusInfo} from "@features/Wrap/getBonusInfo.ts";
 
 export interface IOutletContext{
   setIsHistory:(v:boolean)=>void;
@@ -90,6 +91,7 @@ export const  Wrap=() =>{
 useEffect(()=>{
     tg.expand()
     tg.setHeaderColor("#000000");
+    getBonusInfo(dispatch);
   },[])
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)

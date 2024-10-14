@@ -13,10 +13,8 @@ import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import {changeDateFormat} from '@shared/Home/helpersFunc/changeDateFormat.ts';
 import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
 import {
-  setBonusDay,
-  setDailyRewardsStatus,
   setFarmStatus,
-  setFormattedTaimer, setIsDailyReward,
+  setFormattedTaimer,
   setReduxFarmedCoins,
   setTotalCoins, setWelcomeStatus,
   updateTotalCoins
@@ -26,8 +24,6 @@ import {AnimationMainImg} from '@widgets/Home/AnimationMainImg/AnimationMainImg'
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import {MainClaimBtn} from "@widgets/UI/MainClaimBtn/MainClaimBtn.tsx";
 import {calcFarmedCoins} from "@shared/Home/helpersFunc/calcFarmedCoins.ts";
-import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
-import {useGetBonusStatus} from "@shared/Home/hooks/useGetBonusStatus.tsx";
 
 export type TFarmInfo={
     coins: number,
@@ -51,6 +47,7 @@ export type TFarmInfo={
 
 
 
+
   export function Home(){
     const claimedCoins:number=40;
 
@@ -62,8 +59,6 @@ export type TFarmInfo={
     const {mutate:startReq}=useStartFarm()
     const {mutate:claimReq}=useClaimFarmCoins()
     const {data:farmInfo,isLoading:statusLoading}=useGetFarmInfo();
-    const {data:bonusInfo,isLoading:bonusLoading}=useGetBonusStatus()
-
 
     const [isClaim, setIsClaim] = useState<boolean>(false)
     const [isAnim, setIsAnim] = useState<boolean>(false)
@@ -105,16 +100,6 @@ export type TFarmInfo={
       }
 
     }
-    useEffect(() => {
-      if (bonusInfo) {
-        if (bonusInfo.status === EnumBonusStatus.CLAIM) {
-          dispatch(setIsDailyReward(true));
-        }
-        dispatch(setDailyRewardsStatus(bonusInfo.status));
-        dispatch(setBonusDay(bonusInfo.day));
-        dispatch(setWelcomeStatus(bonusInfo.welcome_status));
-      }
-    },[bonusInfo])
     useEffect(()=>{
         if(farmInfo){
           farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins));
@@ -155,7 +140,7 @@ export type TFarmInfo={
       }
     };
 
-    if(statusLoading ||bonusLoading){
+    if(statusLoading){
     return <Preloader />
   }else
   return (
