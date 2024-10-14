@@ -19,7 +19,7 @@ export const Preloader=({ufo}:{ufo?:boolean})=>{
         <div className={s.preloader_wrap}>
             <img src={preloader_bg_img} alt="" className={s.preloader_bg_img} />
             <div className={s.preloader_img}>
-                <Lottie options={defaultOptions} height={ufo? 150 :250} width={ufo? 150 :250} />
+                <Lottie options={defaultOptions} height={210} width={210} />
             </div>
         </div>
     )
