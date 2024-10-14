@@ -1,16 +1,18 @@
+import unknown_ava from "@shared/Frens/assets/frens_img/unknown_avatar.webp"
 import s from '@widgets/Frens/FrensItem/FrensItem.module.scss'
 
 
-export const generateAva=(photo?:string,user?:{first_name:string,last_name:string},secondPhoto?:string)=>{
+
+export const generateAva=(photo?:string,user?:{first_name:string,last_name?:string})=>{
   if (photo){
     return <img src={photo} alt={''} className={s.fren_img_wrap}/>
-  }else if(user) {
+  }else if(user?.last_name) {
     const {name,color}=generateFrenIco(user.first_name, user.last_name)
     return( <div style={{backgroundColor:color}} className={s.fren_generate_ico}>
       {name}
       </div>)
   } else {
-    return <img alt="" src={secondPhoto} className={s.fren_img_wrap}/>
+    return <img alt="" src={unknown_ava} className={s.fren_img_wrap}/>
   }
 }
 
