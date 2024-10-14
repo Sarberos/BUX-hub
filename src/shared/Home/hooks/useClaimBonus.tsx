@@ -8,7 +8,7 @@ export const useClaimBonus=()=>{
         mutationKey:['claim_bonus'],
         mutationFn: BonusFetching.bonusClaim,
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['farm_info'] })
+          queryClient.invalidateQueries({ queryKey: ['bonus_status'] })
         },
     })
 }
