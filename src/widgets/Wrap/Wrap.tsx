@@ -157,7 +157,7 @@ if(!isMobile){
         </div>
         <img src={background} alt="" className={s.backgroung_img}/>
       </div>
-      <Transition in={state.welcomeStatus} timeout={600} mountOnEnter={true} unmountOnExit={true}>
+      <Transition in={state.welcomeStatus} timeout={600} mountOnEnter={true} unmountOnExit={true} >
         {(state)=>(
           <div className={s.history_elem} style={transitionStyles[state]}>
             <HistorySlider closeHistory={()=>dispatch(setWelcomeStatus(false))} />
