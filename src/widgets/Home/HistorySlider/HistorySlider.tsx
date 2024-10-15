@@ -5,14 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import { Autoplay, Pagination } from "swiper/modules";  
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";  
 import { SwiperPagination } from "@widgets/UI/SwiperPagination/SwiperPagination";
-import animationData from "@shared/UIComponents/assets/hisroty_bg.json";
+import animationData_1 from "@shared/UIComponents/assets/hisroty_bg_1.json";
+import animationData_2 from "@shared/UIComponents/assets/hisroty_bg_2.json";
 import Lottie from "react-lottie";
 
 export const HistorySlider = ({ closeHistory }: { closeHistory: () => void }) => {
   const swiperRef = useRef<any>(null);
   const { user } = useTelegramApi();  
 
-  const [currentIndex, setCurrentIndex] = useState<number>(0);  
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isFirstAnim, setIsFirstAnim] = useState<boolean>(true)
   const cngLanguages: string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];  
   let historySlidesArray = historySlides.slice(0, 5);  
   if (user && user.language_code) {  
@@ -57,7 +59,7 @@ const handlePaginationClick = (index: number) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
+    animationData: isFirstAnim ? animationData_1 : animationData_2,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
     }
@@ -85,11 +87,14 @@ const handlePaginationClick = (index: number) => {
         {historySlidesArray &&
           historySlidesArray.map((elem, index) => (
             <SwiperSlide key={index}>
-              <img src={elem} className={s.history_slide}/>
+              <img src={elem} alt="" className={s.history_slide}/>
               <button
                 onTouchStart={stopAutoPlay}
                 onTouchEnd={continueAutoPlay}
-                onClick={() => swiperRef.current.swiper.slidePrev()}
+                onClick={() => {
+                  swiperRef.current.swiper.slidePrev();
+                  setIsFirstAnim(prevState => !prevState)
+                }}
                 className={`${s.swiper_btn} ${s.prev}`}
               ></button>
               <button className={`${s.swiper_btn} ${s.next}`}></button>
@@ -99,7 +104,10 @@ const handlePaginationClick = (index: number) => {
                 onClick={
                   index === historySlidesArray.length - 1
                     ? () => closeHistory()
-                    : () => swiperRef.current.swiper.slideNext()
+                    : () => {
+                      swiperRef.current.swiper.slideNext();
+                      setIsFirstAnim(prevState => !prevState)
+                    }
                 }
                 className={`${s.swiper_btn} ${s.next}`}
               ></button>

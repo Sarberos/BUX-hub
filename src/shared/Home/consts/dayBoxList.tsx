@@ -1,17 +1,16 @@
 import { TDayBoxProps } from "../types/dayBox";
-import first from '@shared/Home/assets/home_img/сундук1.svg'
-import second from '@shared/Home/assets/home_img/сундук2.svg'
-import third from '@shared/Home/assets/home_img/сундук3.svg'
-import fourth from '@shared/Home/assets/home_img/сундук4.svg'
-import fifth from '@shared/Home/assets/home_img/сундук5.svg'
-import sixth from '@shared/Home/assets/home_img/сундук6.svg'
-import seventh from '@shared/Home/assets/home_img/сундук7.svg'
+import first from '@shared/assets/сундуки webЗ/день 1 новый-2.webp'
+import second from 'shared/assets/сундуки webЗ/день 2 новый.webp'
+import third from 'shared/assets/сундуки webЗ/день 3 новый.webp'
+import fourth from 'shared/assets/сундуки webЗ/день 4 новый-2.webp'
+import fifth from 'shared/assets/сундуки webЗ/день 5 новый.webp'
+import sixth from 'shared/assets/сундуки webЗ/день 6 новый.webp'
+import seventh from "shared/assets/сундуки webЗ/день 7 новый.webp"
 
 
 export type StyleProps = {  
-    width: string;  
-    top:string;
-    left?:string;
+    width: string;
+    top?:string,
 
 }  
 interface DayBoxItem extends Omit<TDayBoxProps, 'currentDay'> {
@@ -24,9 +23,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '20',
         rewardValue: 20,
         style:{
-            width:'86px',
-            top:'21%',
-            left: '4px',
+            width:'57px',
         }
     },
     {
@@ -35,9 +32,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '30',
         rewardValue: 30,
         style:{
-            width:'96px',
-            top:'18%',
-            left: '3px',
+            width:'67px',
+            // top:'18%',
         }
     },
     {
@@ -46,9 +42,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '40',
         rewardValue: 40,
         style:{
-            width:'95px',
-            top:'21%',
-            left: '-1px',
+            width:'78px',
+            // top:'16%',
         }
     },
     {
@@ -57,9 +52,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '60',
         rewardValue: 60,
         style:{
-            width:'120px',
-            top:'14%',
-            left:'-10px',
+            width:'68px',
+            // top:'12%',
         }
     },
     {
@@ -68,9 +62,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '80',
         rewardValue: 80,
         style:{
-            width:'110px',
-            top:'6%',
-            left:'-6px',
+            width:'78px',
+            // top:'17%',
         }
     },
     {
@@ -79,8 +72,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '100',
         rewardValue: 100,
         style:{
-            width:'100px',
-            top:'7%',
+            width:'93px',
+            // top:'15%',
         }
     },
     {
@@ -89,9 +82,8 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '150',
         rewardValue: 150,
         style:{
-            width:'114px',
-            top:'13%',
-            left: '-7px',
+            width:'75px',
+            // top:'6%',
         }
     },
 ]
