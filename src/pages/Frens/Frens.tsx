@@ -44,7 +44,7 @@ export const Frens=()=>{
 
     const onClaimFrensCoins=()=>{
         hapticFeedBack()
-        setRefCoins(0)
+        setRefCoins(0);
         claimCoins();
         dispatch(setFrensFarmStatus(EnumFrensFarmStatus.FARMING))
         dispatch(updateTotalCoins(Math.ceil(refCoins)))

@@ -75,10 +75,7 @@ export type TFarmInfo={
   }
   const onClaimFarming=()=>{
     setisBalanceAnim(true);
-    for(let i=1; i<=10;i++){
-      hapticFeedBack();
-      setTimeout(()=>hapticFeedBack(),10*i)
-    }
+    hapticFeedBack();
     claimReq();
     dispatch(updateTotalCoins(claimedCoins))
     dispatch(setFarmStatus(EnumFarmStatus.START));

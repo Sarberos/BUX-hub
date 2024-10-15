@@ -33,10 +33,7 @@ export default function({buttonActive}:{ buttonActive: boolean}){
       setTimeout(()=> {
         setIsAnim(false);
       },2700);
-      for(let i=1; i<=10;i++){
-        hapticFeedBack();
-        setTimeout(()=>hapticFeedBack(),10*i)
-      }
+      hapticFeedBack();
       dispatch(setBonusDay(state.bonusDay+1));
 
       const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
