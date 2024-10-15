@@ -14,7 +14,7 @@ export const useTelegramApi=()=>{
         tg.HapticFeedback.impactOccurred('rigid')
     }
     const rigidFeedBack=()=>{
-        tg.HapticFeedback.impactOccurred('rigid')
+        tg.HapticFeedback.impactOccurred('heavy')
     }
     return({tg,user,userId,onClose,openLink,hapticFeedBack,rigidFeedBack})
 }
