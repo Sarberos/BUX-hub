@@ -10,11 +10,7 @@ export const useTelegramApi=()=>{
         tg.close();
     }
     const hapticFeedBack=()=>{
-        // tg.HapticFeedback.selectionChanged();
-        tg.HapticFeedback.impactOccurred('rigid')
-    }
-    const rigidFeedBack=()=>{
         tg.HapticFeedback.impactOccurred('heavy')
     }
-    return({tg,user,userId,onClose,openLink,hapticFeedBack,rigidFeedBack})
+    return({tg,user,userId,onClose,openLink,hapticFeedBack})
 }

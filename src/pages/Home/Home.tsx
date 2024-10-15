@@ -51,7 +51,7 @@ export type TFarmInfo={
   export function Home(){
     const claimedCoins:number=40;
 
-    const {user,hapticFeedBack,rigidFeedBack}=useTelegramApi()
+    const {user,hapticFeedBack}=useTelegramApi()
     const {t} = useTranslation()
     const dispatch= useAppDispatch()
     const state=useAppSelector(state=>state.home);
@@ -127,6 +127,18 @@ export type TFarmInfo={
       }
     };
 
+    let tripleClickTimer: ReturnType<typeof setTimeout> | null = null;
+    const hapticDoubleClick = () => {
+      if (tripleClickTimer) {
+        clearTimeout(tripleClickTimer);
+        tripleClickTimer = null;
+        hapticFeedBack();
+      } else {
+        tripleClickTimer = setTimeout(() => {
+          tripleClickTimer = null;
+        }, 300);
+      }
+    };
 
     if(statusLoading){
     return <Preloader />
@@ -135,7 +147,7 @@ export type TFarmInfo={
     <>
         <div className={s.wrapper}>
           <div  className={s.title_wrap}>
-            <p onClick={()=>rigidFeedBack()} className={s.title}>{`${t("hello")},`}</p>
+            <p onClick={hapticDoubleClick} className={s.title}>{`${t("hello")},`}</p>
             <p className={s.title}>{user?.username}</p>
           </div>
           <div className={s.lang_daycounter_wrap}>
