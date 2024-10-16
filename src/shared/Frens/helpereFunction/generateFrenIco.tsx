@@ -3,11 +3,11 @@ import s from '@widgets/Frens/FrensItem/FrensItem.module.scss'
 
 
 
-export const generateAva=(photo?:string,user?:{first_name:string,last_name?:string})=>{
+export const generateAva=(photo?:string,user?:{first_name:string,last_name?:string},color?:string)=>{
   if (photo){
     return <img src={photo} alt={''} className={s.fren_img_wrap}/>
   }else if(user?.last_name) {
-    const {name,color}=generateFrenIco(user.first_name, user.last_name)
+    const {name}=generateFrenIco(user.first_name, user.last_name)
     return( <div style={{backgroundColor:color}} className={s.fren_generate_ico}>
       {name}
       </div>)

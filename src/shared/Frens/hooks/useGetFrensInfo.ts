@@ -7,6 +7,7 @@ export type TFrensItem={
     bio:'',
     coins: number,
     createdAt:string,
+    color:string,
     first_name:string,
     last_name:string,
     id:number,
