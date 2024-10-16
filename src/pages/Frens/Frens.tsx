@@ -30,7 +30,7 @@ export const comprasionNumbers=(revenuosDate:string)=>{
     return revTime <=now
 }
 
-export const Frens=()=>{
+const Frens=()=>{
     const {t} =useTranslation()
     const {hapticFeedBack}=useTelegramApi()
     const dispatch =useAppDispatch()
@@ -84,7 +84,7 @@ export const Frens=()=>{
             <div className={s.subtitle_wrap}>
                 <p className={s.subtitle}>{t("frensSub")}</p>
             </div>
-            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')} (${frensData?.content?.length}/${frensData.referals_limit} ${t('invited')})`}</p>}
+            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')}`}</p>}
             {frensData?.content?.length!=0 && <div className={s.frens_list}>
                 {/* {FRENSLIST?.map((elem,index)=>(
                     <FrensItem key={index} {...elem} /> 
@@ -109,3 +109,4 @@ export const Frens=()=>{
         </>
     )
 }
+export default Frens;

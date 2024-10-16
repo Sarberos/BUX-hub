@@ -2,37 +2,22 @@ import { historySlides } from "@shared/Home/consts/historyArr";
 import s from "./HistorySlider.module.scss";  
 import { SwiperSlide, Swiper } from 'swiper/react';  
 import { useEffect, useRef, useState } from "react";  
-import { Autoplay, Pagination } from "swiper/modules";  
-import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";  
+import { Autoplay, Pagination } from "swiper/modules";
 import { SwiperPagination } from "@widgets/UI/SwiperPagination/SwiperPagination";
 import animationData_1 from "@shared/UIComponents/assets/hisroty_bg_1.json";
 import animationData_2 from "@shared/UIComponents/assets/hisroty_bg_2.json";
 import Lottie from "react-lottie";
+import {useAppSelector} from "@shared/utilits/redux/hooks.ts";
 
 export const HistorySlider = ({ closeHistory }: { closeHistory: () => void }) => {
   const swiperRef = useRef<any>(null);
-  const { user } = useTelegramApi();  
+  const state= useAppSelector(state=>state.home)
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isFirstAnim, setIsFirstAnim] = useState<boolean>(true)
-  const cngLanguages: string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];  
-  let historySlidesArray = historySlides.slice(0, 5);  
-  if (user && user.language_code) {  
-    historySlidesArray = cngLanguages.includes(user.language_code) ? historySlides.slice(0, 5) : historySlides.slice(5, 10);  
-  }  
+  const historySlidesArray:string[] = state.lang.value ==="RU" ? historySlides.slice(0, 5) : historySlides.slice(5, 10);
 
-  const stopAutoPlay = () => {  
-    const swiper = swiperRef.current?.swiper;  
-    if (swiper) {  
-      swiper.autoplay.stop();  
-    }  
-  };
-  const continueAutoPlay = () => {  
-    const swiper = swiperRef.current?.swiper;  
-    if (swiper) {  
-      swiper.autoplay.start();  
-    }  
-  };
+
   useEffect(() => {
     const swiper = swiperRef.current?.swiper;
     if (swiper) {
@@ -51,7 +36,18 @@ export const HistorySlider = ({ closeHistory }: { closeHistory: () => void }) =>
       };
     }
   }, []);
-
+  const stopAutoPlay = () => {
+    const swiper = swiperRef.current?.swiper;
+    if (swiper) {
+      swiper.autoplay.stop();
+    }
+  };
+  const continueAutoPlay = () => {
+    const swiper = swiperRef.current?.swiper;
+    if (swiper) {
+      swiper.autoplay.start();
+    }
+  };
 const handlePaginationClick = (index: number) => {  
   setCurrentIndex(index);  
   swiperRef.current.swiper.slideTo(index);  

@@ -2,8 +2,8 @@ import { TDayBoxProps } from "../types/dayBox";
 import first from '@shared/assets/сундуки webЗ/день 1 новый-2.webp'
 import second from 'shared/assets/сундуки webЗ/день 2 новый.webp'
 import third from 'shared/assets/сундуки webЗ/день 3 новый.webp'
-import fourth from 'shared/assets/сундуки webЗ/день 4 новый-2.webp'
-import fifth from 'shared/assets/сундуки webЗ/день 5 новый.webp'
+import fourth from 'shared/assets/сундуки webЗ/день 5 новый.webp'
+import fifth from 'shared/assets/сундуки webЗ/день 4 новый-2.webp'
 import sixth from 'shared/assets/сундуки webЗ/день 6 новый.webp'
 import seventh from "shared/assets/сундуки webЗ/день 7 новый.webp"
 
@@ -23,7 +23,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '20',
         rewardValue: 20,
         style:{
-            width:'57px',
+            width:'52px',
         }
     },
     {
@@ -32,7 +32,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '30',
         rewardValue: 30,
         style:{
-            width:'67px',
+            width:'64px',
             // top:'18%',
         }
     },
@@ -42,7 +42,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '40',
         rewardValue: 40,
         style:{
-            width:'78px',
+            width:'72px',
             // top:'16%',
         }
     },
@@ -52,7 +52,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '60',
         rewardValue: 60,
         style:{
-            width:'68px',
+            width:'74px',
             // top:'12%',
         }
     },
@@ -62,7 +62,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '80',
         rewardValue: 80,
         style:{
-            width:'78px',
+            width:'67px',
             // top:'17%',
         }
     },
@@ -72,7 +72,7 @@ export const DAYBOXLIST:DayBoxItem[]=[
         rewardLabel: '100',
         rewardValue: 100,
         style:{
-            width:'93px',
+            width:'88px',
             // top:'15%',
         }
     },

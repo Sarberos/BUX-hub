@@ -1,10 +1,7 @@
-import { Frens } from '@pages/Frens/Frens';
-import { Home } from '@pages/Home/Home';
-import { Raiting } from '@pages/Raiting/Raiting';
-import { Tasks } from '@pages/Tasks/Tasks';
 import NotFoundPage from '@widgets/UI/NotFoundPage/NotFoundPage';
 import { Wrap } from '@widgets/Wrap/Wrap';
 import { RouteObject } from 'react-router-dom';
+import {FrernsPage, HomePage, RaitingPage, TasksPage} from "@shared/Entry/routes/lazyIndex.ts";
 
 export const routes: RouteObject[] = [  
     {  
@@ -13,20 +10,20 @@ export const routes: RouteObject[] = [
       errorElement:<NotFoundPage /> ,
       children: [
       { 
-        path: '/',  
-        element: <Home/>,
+        path: '/',
+        element: <HomePage/>,
       },
       { 
         path: 'tasks',  
-      element: <Tasks/>
+      element: <TasksPage/>
       },
       { 
         path: 'raiting',  
-        element: <Raiting />,
+        element: <RaitingPage/>,
       },
       { 
-        path: '/frens',  
-        element:<Frens />, 
+        path: 'frens',
+        element:<FrernsPage/>,
       },
       ]
     },  

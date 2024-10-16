@@ -1,11 +1,11 @@
 import s from "./Wrap.module.scss";
 import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
-import {createContext, useContext, useEffect,  useState} from "react";
+import {createContext, Suspense, useContext, useEffect, useLayoutEffect, useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import {
   setFormattedTaimer,
-  setIsDailyReward,
+  setIsDailyReward, setLanguage,
   setReduxFarmedCoins,
   setWelcomeStatus
 } from "@shared/utilits/redux/redux_slice/home_slice";
@@ -76,7 +76,7 @@ const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any,qu
 
 
 export const  Wrap=() =>{
-  const {tg}=useTelegramApi()
+  const {tg,user}=useTelegramApi()
   const queryClient=useQueryClient()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
@@ -89,10 +89,16 @@ export const  Wrap=() =>{
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
 
 useEffect(()=>{
+    getBonusInfo(dispatch);
+  },[dispatch]);
+  useLayoutEffect(() => {
     tg.expand()
     tg.setHeaderColor("#000000");
-    getBonusInfo(dispatch);
-  },[])
+    const cngLanguages: string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];
+    if (user && user.language_code) {
+      dispatch(setLanguage(cngLanguages.includes(user.language_code) ? {label:'RU',value:'RU'}: {label:'EN',value:'EN'} ))
+    }
+  }, []);
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
 },[state.timer])
@@ -147,7 +153,9 @@ if(!isMobile){
     <>
       <div className={s.wrap}>
         <div className={s.child_wrap}>
-          <Outlet/>
+          <Suspense fallback={<img src={'@shared/assets/webp_bg/home.webp'} alt={""} />}>
+            <Outlet/>
+          </Suspense>
         </div>
         <div className={s.footer_wrap}>
           <Footer

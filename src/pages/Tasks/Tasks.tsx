@@ -12,7 +12,7 @@ import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import {useState} from "react";
 
-export const Tasks=()=>{
+export default function Tasks(){
   const {t}= useTranslation()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)

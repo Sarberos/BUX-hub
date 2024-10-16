@@ -48,7 +48,7 @@ export type TFarmInfo={
 
 
 
-  export function Home(){
+  export default function Home(){
     const claimedCoins:number=40;
 
     const {user,hapticFeedBack}=useTelegramApi()

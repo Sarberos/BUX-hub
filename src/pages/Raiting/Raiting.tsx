@@ -6,7 +6,7 @@ import { Preloader } from "@widgets/UI/Preloader/Preloader";
 import {useEffect,useState} from 'react'
 import { useTranslation } from "react-i18next";
 
-export const Raiting = () => {
+const Raiting = () => {
   const {t} =useTranslation()
   const{data:raitingData,isLoading:raitingReqLoading}=useGetRaitingList()
 
@@ -50,3 +50,5 @@ export const Raiting = () => {
     </div>
   );
 };
+
+export default Raiting
