@@ -93,11 +93,10 @@ const Frens=()=>{
                     <FrensItem key={index} {...elem} /> 
                 ))}
             </div>}
-            { frensData && frensData.content.length <= frensData.referals_limit &&(
-                <div className={s.invite_frens_btn_wrap}>
-                    <button onClick={()=>dispatch(setInviteStatus(true))} className={s.invite_frens_btn}>{t("invite_fren")}</button>
-                </div>
-            ) }
+
+            <div className={s.invite_frens_btn_wrap}>
+                <button onClick={()=>dispatch(setInviteStatus(true))} className={s.invite_frens_btn}>{t("invite_fren")}</button>
+            </div>
         </div>
         {frensState.inviteStatus && (
             <div className={`${s.daily_reward}`}>
