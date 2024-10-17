@@ -12,7 +12,10 @@ export const MainClaimBtn = ({onClick}:IMainClaimBtnProps) => {
   return (
     <MainBtn backColor={"#c3e0fa"}  event={onClick} >
         <div className={s.claim_home_btn}>
-          <p>{t('сlaimFarm')+" "+"40"}</p>
+          <p>
+            <span>{t('сlaimFarm')}</span>
+            <span>{' 40'}</span>
+          </p>
           <img src={coin_ico} alt="coin"/>
         </div>
   </MainBtn>

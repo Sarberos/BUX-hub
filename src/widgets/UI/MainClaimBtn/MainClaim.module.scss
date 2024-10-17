@@ -4,13 +4,20 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  div{
-    font-family: "SFProText";
-    font-size: 17px;
-    font-weight:800;
+  p{
+    display: flex;
+    gap:9px;
+    span{
+      font-family: "SFProText";
+      font-size: 19px;
+      font-weight:800;
+      &:last-child{
+        font-weight: 700;
+      }
+    }
   }
   img{
-    width:17px;
-    height:17px;
+    width:20px;
+    height:20px;
   }
 }

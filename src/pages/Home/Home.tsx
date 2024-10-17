@@ -75,7 +75,10 @@ export type TFarmInfo={
   }
   const onClaimFarming=()=>{
     setisBalanceAnim(true);
-    hapticFeedBack();
+    for(let i=0; i<=5; i++){
+      hapticFeedBack();
+      setTimeout(()=>hapticFeedBack(),10*i)
+    }
     claimReq();
     dispatch(updateTotalCoins(claimedCoins))
     dispatch(setFarmStatus(EnumFarmStatus.START));
@@ -154,6 +157,7 @@ export type TFarmInfo={
             <KoinQuantity coinValue={state.totalCoins} isBalanceAnim={isBalanceAnim} />
           </div>
           <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
+            <div className={s.main_img}></div>
             <AnimationMainImg isActive={isAnim} />
           </div>
           <div className={s.farming_btn_wrap}>

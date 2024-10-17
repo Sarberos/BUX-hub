@@ -95,8 +95,10 @@ useEffect(()=>{
     tg.expand()
     tg.setHeaderColor("#000000");
     const cngLanguages: string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];
+    const englishLanguage:string[]=["en"]
     if (user && user.language_code) {
       dispatch(setLanguage(cngLanguages.includes(user.language_code) ? {label:'RU',value:'RU'}: {label:'EN',value:'EN'} ))
+      dispatch(setLanguage(englishLanguage.includes(user.language_code) ?{label:'EN',value:'EN'}: state.lang))
     }
   }, []);
 useEffect(()=>{

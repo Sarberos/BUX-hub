@@ -86,11 +86,11 @@ const Frens=()=>{
             </div>
             {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')}`}</p>}
             {frensData?.content?.length!=0 && <div className={s.frens_list}>
-                {/* {FRENSLIST?.map((elem,index)=>(
-                    <FrensItem key={index} {...elem} /> 
-                ))} */}
+                {/*{FRENSLIST?.map((elem,index)=>(*/}
+                {/*    <FrensItem key={index} {...elem} />*/}
+                {/*))}*/}
                 {refList?.map((elem,index)=>(
-                    <FrensItem key={index} {...elem} /> 
+                    <FrensItem key={index} {...elem} />
                 ))}
             </div>}
 

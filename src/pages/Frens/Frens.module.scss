@@ -79,10 +79,10 @@
             margin-top: 15px;    
         }
     }
-
     .frens_list{
+        padding-bottom: 69px;
         flex: 1;
-        max-height: calc(100vh - 373px);
+        max-height: calc(100vh - 465px);
         margin: 16px 10px 0;
         display: flex;
         flex-direction: column;
@@ -94,6 +94,9 @@
         position: relative;
         bottom: -6px;   
         z-index: 2;
+        @media screen and (max-height: 690px) {
+            max-height: calc(100vh - 393px);
+        }
     }
     .invite_frens_btn_wrap{
         width: 100%;

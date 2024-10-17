@@ -9,7 +9,8 @@ export const AnimationMainImg = ({isActive}:{isActive:boolean}) => {
         animationData: animationData,
         rendererSettings: {  
             preserveAspectRatio: 'xMidYMid slice'  
-        }  
+        },
+
     };  
 
     return (
