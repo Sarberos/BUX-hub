@@ -67,6 +67,9 @@
             min-height: 179px;
             top:172px
         };
+        @media screen and (max-width:372px) {
+            top:161px
+        };
     }
     .task_list_single_anim{
         position: absolute;
