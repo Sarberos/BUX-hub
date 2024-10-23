@@ -13,7 +13,8 @@ export default function(){
   const {t} = useTranslation()
   const {user,tg}=useTelegramApi()
   const dispatch= useAppDispatch()
-  const currentLink=`https://t.me/anarchy_devmode_bot?start=${user?.id}`;
+  const currentLink=`https://t.me/buxhub_bot?start=${user?.id}`;
+
   
 const copyToClipboard =(textToCopy: string) => {
   navigator.clipboard.writeText(textToCopy)
