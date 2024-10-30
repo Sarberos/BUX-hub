@@ -44,12 +44,12 @@
         top:206px;
         margin: 0 15px 0;
         width:calc(100% - 30px);
-        min-height: 385px;
+        min-height: 351px;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 15px;
         z-index: 1;
         @media screen and (max-height:725px) {
-            min-height: 286px;
+            min-height: 259px;
         };
         @media screen and (max-height: 680px){
             top: 182px;
@@ -58,13 +58,13 @@
             top: 158px;
         }
         @media screen and (max-height:600px) {
-            min-height: 271px;
+            min-height: 249px;
         }
         @media screen  and (max-height:590px) {
-            top: 140px;
+            top: 142px;
         }
         @media screen and (max-height:545px) {
-            min-height: 179px;
+            min-height: 163px;
             top:172px
         };
         @media screen and (max-width:372px) {
@@ -90,7 +90,7 @@
     }
     .task_list{
         display: flex;
-        max-height: 381px;
+        max-height: 349px;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
@@ -101,14 +101,14 @@
         position: relative;
         z-index: 2;
         @media screen and (max-height:725px) {
-            max-height: 282px;
+            max-height: 257px;
         };
         @media screen and (max-height:600px) {
             gap:15px;
-            max-height: 267px;
+            max-height: 247px;
         }
         @media screen and (max-height:545px) {
-            max-height: 175px;
+            max-height: 161px;
         };
     }
 
