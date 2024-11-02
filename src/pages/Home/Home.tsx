@@ -14,7 +14,7 @@ import {changeDateFormat} from '@shared/Home/helpersFunc/changeDateFormat.ts';
 import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
 import {
   setFarmStatus,
-  setFormattedTaimer,
+  setFormattedTaimer, setLanguage,
   setReduxFarmedCoins,
   setTotalCoins, setWelcomeStatus,
   updateTotalCoins
@@ -29,6 +29,7 @@ export type TFarmInfo={
     coins: number,
     start_time: null|string,
     status:EnumFarmStatus,
+    language:'ru'|'en',
   }
   export type TTimerType = {  
     formattedHours: string;  
@@ -100,19 +101,21 @@ export type TFarmInfo={
       }
 
     }
-    useEffect(()=>{
-        if(farmInfo){
-          farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins));
-          dispatch(setFarmStatus(farmInfo.status));
-          if(farmInfo.status===EnumFarmStatus.FARMING) {
-            setIsAnim(true);
-            if (farmInfo.start_time){
-              dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)));
-              dispatch(setReduxFarmedCoins(calcFarmedCoins(farmInfo.start_time)))
-            }
+
+  useEffect(()=>{
+      if(farmInfo){
+        dispatch(setLanguage(farmInfo.language))
+        farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins));
+        dispatch(setFarmStatus(farmInfo.status));
+        if(farmInfo.status===EnumFarmStatus.FARMING) {
+          setIsAnim(true);
+          if (farmInfo.start_time){
+            dispatch(setFormattedTaimer(changeDateFormat(farmInfo.start_time)));
+            dispatch(setReduxFarmedCoins(calcFarmedCoins(farmInfo.start_time)))
           }
         }
-      },[farmInfo])
+      }
+    },[farmInfo])
 
     let clickTimer: ReturnType<typeof setTimeout> | null = null;
     const handleDoubleClick = () => {

@@ -15,7 +15,7 @@ export const HistorySlider = ({ closeHistory }: { closeHistory: () => void }) =>
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isFirstAnim, setIsFirstAnim] = useState<boolean>(true)
-  const historySlidesArray:string[] = state.lang.value ==="RU" ? historySlides.slice(0, 5) : historySlides.slice(5, 10);
+  const historySlidesArray:string[] = state.lang ==="ru" ? historySlides.slice(0, 5) : historySlides.slice(5, 10);
 
 
   useEffect(() => {

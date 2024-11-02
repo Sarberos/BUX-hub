@@ -5,7 +5,7 @@ import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import {
   setFormattedTaimer,
-  setIsDailyReward, setLanguage,
+  setIsDailyReward,
   setReduxFarmedCoins,
   setWelcomeStatus
 } from "@shared/utilits/redux/redux_slice/home_slice";
@@ -76,7 +76,7 @@ const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any,qu
 
 
 export const  Wrap=() =>{
-  const {tg,user}=useTelegramApi()
+  const {tg}=useTelegramApi()
   const queryClient=useQueryClient()
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
@@ -94,12 +94,6 @@ useEffect(()=>{
   useLayoutEffect(() => {
     tg.expand()
     tg.setHeaderColor("#000000");
-    const cngLanguages: string[] = ["ru", "be", "kk", "ky", "tt", "uz", "tg", "mo", "hy", "az"];
-    const englishLanguage:string[]=["en"]
-    if (user && user.language_code) {
-      dispatch(setLanguage(cngLanguages.includes(user.language_code) ? {label:'RU',value:'RU'}: {label:'EN',value:'EN'} ))
-      dispatch(setLanguage(englishLanguage.includes(user.language_code) ?{label:'EN',value:'EN'}: state.lang))
-    }
   }, []);
 useEffect(()=>{
   farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)

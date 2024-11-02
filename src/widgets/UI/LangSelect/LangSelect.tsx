@@ -1,22 +1,23 @@
 import select_img from '@shared/Home/assets/home_img/select_img.svg'
-import {useEffect, useState} from 'react'
+import { useState} from 'react'
 import s from "./LangSelect.module.scss"
 import { LANGLIST } from '@shared/UIComponents/consts/langSelect'
 import i18next from 'i18next'
 import { useAppDispatch, useAppSelector } from '@shared/utilits/redux/hooks'
 import { setLanguage } from '@shared/utilits/redux/redux_slice/home_slice'
+import {useChangeLng} from "@shared/Home/hooks/useChangeLng.ts";
 
 
 export const  LangSelect=()=>{
   const dispatch=useAppDispatch()
+  const {mutate:changeLanguage}=useChangeLng()
   const homeState=useAppSelector(state=>state.home)
     const [langBurg,setLangBurger]=useState(false)
     function changeLng(lng:string) {
       i18next.changeLanguage(lng);
+      changeLanguage(lng.toLowerCase())
+      dispatch(setLanguage(lng))
     }
-    useEffect(()=>{
-      changeLng(homeState.lang.value)
-    },[homeState.lang])
 
     return (
       <div 
@@ -28,7 +29,7 @@ export const  LangSelect=()=>{
           className={langBurg?`${s.language_select} ${s.active}`:`${s.language_select}`}
         >
           <div  className={`${s.language_item} ${s.active}`}>
-            <div className={s.lang_title}>{homeState.lang.label}</div>
+            <div className={s.lang_title}>{homeState.lang.toUpperCase()}</div>
 
             <div className={s.active_language_item}>
               <img src={select_img} alt="" className={s.select_ico} />
@@ -43,10 +44,10 @@ export const  LangSelect=()=>{
           }
         >
             {LANGLIST.map((elem,index)=>{
-                if (elem.value!==homeState.lang.value) {
+                if (elem!==homeState.lang) {
                     return(
-                        <div key={index} onClick={()=>dispatch(setLanguage(elem))} className={`${s.language_item}  ${s.burger}`}>
-                            <div className={s.lang_title}>{elem.label}</div>
+                        <div key={index} onClick={()=>changeLng(elem)} className={`${s.language_item}  ${s.burger}`}>
+                            <div className={s.lang_title}>{elem.toUpperCase()}</div>
                         </div>
                     )
                 }

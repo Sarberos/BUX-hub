@@ -13,5 +13,9 @@ class Fetching {
     const resp= await api.post('farm/claim');
     return resp.data;
 }
+static async changeLang(v:string) {
+    const resp= await api.post('user/language',{lng:v});
+    return resp.data;
+}
 }
 export default Fetching;
