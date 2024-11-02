@@ -11,6 +11,7 @@ import { useClaimTasksCoins } from '@shared/Tasks/hooks/useClaimTasksCoins'
 import { useTranslation } from 'react-i18next'
 import { Preloader } from '@widgets/UI/Preloader/Preloader'
 import { EnumTaskStatus } from '@shared/Tasks/consts/taskStatus'
+import {apiUrl} from "@shared/utilits/axios/axiosSetting.tsx";
 
 
 
@@ -42,14 +43,14 @@ useEffect(()=>{
     queryClient.invalidateQueries({queryKey:['farm_info']})
   }
 
-  
+  const mainImg=(tasksInf && tasksInf.content.find(elem=>elem.id ==state.miniTaskId)?.task_picture) ? `${apiUrl}${tasksInf.content.find(elem=>elem.id ==state.miniTaskId)?.task_picture}` : intro_img
 if (isLoading) {
   <Preloader/>
 }else
 return (
   <div className={s.mini_tasks_wrapper}>
     <div className={s.intro_img_wrap}>
-      <img src={intro_img} className={s.intro_img} />
+      <img src={mainImg} className={s.intro_img} />
     </div>
     <div className={s.mini_tasks_subtitle}>{t("miniTasksTitile")}</div>
     <div className={s.mini_tasks_list}>

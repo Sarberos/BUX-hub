@@ -7,6 +7,7 @@ import { EnumIcons } from "../types/taskImg.enum";
 
 export const TASKLIST:TTaskItem[]=[
     {
+      task_picture:null,
         channel_id:'',
        coins:100,
        createdAt:'',

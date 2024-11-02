@@ -1,11 +1,9 @@
 import TasksFetching from '@shared/utilits/axios/TasksRequest'
 import {useQuery} from '@tanstack/react-query'
 import { EnumIcons } from '../types/taskImg.enum';
-// import { useAppDispatch } from '@shared/utilits/redux/hooks';
-// import { callIsLoading } from '@shared/utilits/redux/redux_slice/home_slice';
-// import { useEffect } from 'react';
 
 export type TTaskItem={
+    task_picture:null|string;
     channel_id: string;
     coins:number,
     createdAt:string;
