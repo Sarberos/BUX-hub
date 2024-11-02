@@ -50,7 +50,7 @@ if (isLoading) {
 return (
   <div className={s.mini_tasks_wrapper}>
     <div className={s.intro_img_wrap}>
-      <img src={mainImg} className={s.intro_img} />
+      <img src={mainImg} className={s.intro_img} alt={''}/>
     </div>
     <div className={s.mini_tasks_subtitle}>{t("miniTasksTitile")}</div>
     <div className={s.mini_tasks_list}>

@@ -9,6 +9,8 @@
         .intro_img{
             width: 100%;
             height: 126px;
+            border-radius: 20px;
+            object-fit: contain;
             @media screen and (max-height: 720px){
             height: 90px;
             }
