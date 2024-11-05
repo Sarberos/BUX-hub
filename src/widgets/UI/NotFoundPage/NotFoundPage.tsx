@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router"
-
-
-export default function(){
+import s from './NotFoundPage.module.scss'
+import {Preloader} from "@widgets/UI/Preloader/Preloader.tsx";
+export default function NotFoundPage(){
     const navigate= useNavigate()
 
     return(
-        <>
-        <div onClick={()=>{navigate('/')}}>Домой</div>
-        <strong>{'404 PAGE NOT FOUND or it`s in production :)'}</strong>
-        </>
+      <>
+        <Preloader backgroundImage={'src/shared/UIComponents/assets/not_found_bg.webp'} />
+          <button onClick={()=>navigate('/')} className={s.not_found_btn}>HOME</button>
+      </>
     )
 }

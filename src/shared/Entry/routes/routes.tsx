@@ -9,22 +9,22 @@ export const routes: RouteObject[] = [
       element: <Wrap />,
       errorElement:<NotFoundPage /> ,
       children: [
-      { 
-        path: '/',
-        element: <HomePage/>,
-      },
-      { 
-        path: 'tasks',  
-      element: <TasksPage/>
-      },
-      { 
-        path: 'raiting',  
-        element: <RaitingPage/>,
-      },
-      { 
-        path: 'frens',
-        element:<FrernsPage/>,
-      },
+        {
+          path: '/',
+          element: <HomePage/>,
+        },
+        {
+          path: 'tasks',
+        element: <TasksPage/>
+        },
+        {
+          path: 'raiting',
+          element: <RaitingPage/>,
+        },
+        {
+          path: 'frens',
+          element:<FrernsPage/>,
+        },
       ]
     },  
     {
