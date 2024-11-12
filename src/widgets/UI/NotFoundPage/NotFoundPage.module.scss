@@ -1,20 +1,34 @@
-.not_found_btn{
-    position: absolute;
-    width:52%;
-    bottom:15%;
-    left:50%;
-    translate: -50% 0;
-    background: #fff;
-    color:#0e181e;
-    font-family: 'SFProText';
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 120%;
-    transition: .2s;
-    border-radius: 10px;
-    padding: 10px 0;
-    &:hover{
-        transform: scale(1.05);
+.notfound_wrap{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-image: url('src/shared/UIComponents/assets/not_found_bg.webp');
+    background-size: 100% 100%;
+    .notfound_anim{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
+    .not_found_btn{
+        position: absolute;
+        width:52%;
+        bottom:15%;
+        left:50%;
+        translate: -50% 0;
+        background: #fff;
+        color:#0e181e;
+        font-family: 'SFProText';
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 120%;
         transition: .2s;
+        border-radius: 10px;
+        padding: 10px 0;
+        &:hover{
+            transform: scale(1.05);
+            transition: .2s;
+        }
     }
 }
