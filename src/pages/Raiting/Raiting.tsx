@@ -11,8 +11,6 @@ const Raiting = () => {
   const{data:raitingData,isLoading:raitingReqLoading}=useGetRaitingList()
 
   const [sortesData, setSortedData]=useState<TRaitngItem[]>()
-
-
   useEffect(()=>{
     if (raitingData) {
       const sortArr=raitingData.raiting.sort(
@@ -41,9 +39,9 @@ const Raiting = () => {
         ))} */}
         {sortesData?.map((elem,index)=>(
           <RaitingItem
-          key={index}
-          place={index+1}
-          {...elem}
+            key={index}
+            place={index+1}
+            {...elem}
         />
         ))}
       </div>
