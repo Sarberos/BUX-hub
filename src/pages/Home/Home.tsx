@@ -24,6 +24,7 @@ import {AnimationMainImg} from '@widgets/Home/AnimationMainImg/AnimationMainImg'
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import {MainClaimBtn} from "@widgets/UI/MainClaimBtn/MainClaimBtn.tsx";
 import {calcFarmedCoins} from "@shared/Home/helpersFunc/calcFarmedCoins.ts";
+import i18next from "i18next";
 
 export type TFarmInfo={
     coins: number,
@@ -105,6 +106,7 @@ export type TFarmInfo={
   useEffect(()=>{
       if(farmInfo){
         dispatch(setLanguage(farmInfo.language))
+        i18next.changeLanguage(farmInfo.language);
         farmInfo.coins > state.totalCoins && dispatch(setTotalCoins(farmInfo.coins));
         dispatch(setFarmStatus(farmInfo.status));
         if(farmInfo.status===EnumFarmStatus.FARMING) {

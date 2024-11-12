@@ -91,7 +91,7 @@ export const  Wrap=() =>{
 useEffect(()=>{
     getBonusInfo(dispatch);
   },[dispatch]);
-  useLayoutEffect(() => {
+useLayoutEffect(() => {
     tg.expand()
     tg.setHeaderColor("#000000");
   }, []);
