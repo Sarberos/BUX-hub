@@ -11,11 +11,11 @@ export default function({photo,active_usernames,coins,day_revenues,first_name,la
             {generateAva(photo,{first_name,last_name},color)}
           </div>
           <div className={s.fren_title_wrap}>
-              <p className={s.fren_title}>{active_usernames[0]}</p>
-              <p className={s.fren_subtitle}>{`+${Math.ceil(day_revenues)}`}</p>
+              <p className={s.fren_title}>{active_usernames[0] ?? 'Аноним'}</p>
+            {day_revenues && <p className={s.fren_subtitle}>{`+${Math.ceil(day_revenues)}`}</p>}
           </div>
       </div>
-      <div className={s.fren_raitig_points}>{coins}</div>
+      {coins && < div className={s.fren_raitig_points}>{coins}</div>}
     </div>
     )
 }

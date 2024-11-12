@@ -18,9 +18,9 @@ export type TFrensItem={
     telegramId:string,
     type:string,
     updatedAt:string,
-    username:string,
+    username:string|null,
     day_revenues: number;
-    birthdate?:{},
+    birthdate?:any,
 }
 export  type TFrensInfoData={
     content: TFrensItem[];
