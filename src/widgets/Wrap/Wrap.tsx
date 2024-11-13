@@ -17,7 +17,7 @@ import home_bg from '@shared/Wrap/assets/img/farm_page.png'
 import tasks_bg from '@shared/Wrap/assets/img/tasks_page.png'
 import raiting_bg from '@shared/Wrap/assets/img/raiting_page.png'
 import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
-import { QrCode } from "@widgets/UI/QrCode/QrCode";
+// import { QrCode } from "@widgets/UI/QrCode/QrCode";
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 import {useQueryClient} from "@tanstack/react-query";
 import { Transition } from 'react-transition-group';
@@ -81,7 +81,7 @@ export const  Wrap=() =>{
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
   const [currenPageId, setCurrentPageId] = useState(1);
   const [background, setBackground] = useState(home_bg);
