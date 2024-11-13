@@ -12,23 +12,27 @@ export const routes: RouteObject[] = [
         {
           path: '',
           element: <HomePage/>,
+          errorElement:<HomePage/>,
         },
         {
           path: 'tasks',
-        element: <TasksPage/>
+          element: <TasksPage/>,
+          errorElement:<HomePage/>,
         },
         {
           path: 'raiting',
           element: <RatingPage/>,
+          errorElement:<HomePage/>,
         },
         {
           path: 'frens',
           element:<FrensPage/>,
+          errorElement:<HomePage/>,
         },
       ]
     },  
     {
-      path: 'not_found',  
+      path: '/not_found',
       element:<NotFoundPage />,  
     }
   ]; 
