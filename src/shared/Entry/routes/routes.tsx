@@ -1,16 +1,16 @@
 import NotFoundPage from '@widgets/UI/NotFoundPage/NotFoundPage';
 import { Wrap } from '@widgets/Wrap/Wrap';
 import { RouteObject } from 'react-router-dom';
-import {FrernsPage, HomePage, RaitingPage, TasksPage} from "@shared/Entry/routes/lazyIndex.ts";
+import {FrensPage, HomePage,  RatingPage, TasksPage} from "@shared/Entry/routes/lazyIndex.ts";
 
 export const routes: RouteObject[] = [  
     {  
-      path: '/',  
+      path: '/',
       element: <Wrap />,
       errorElement:<NotFoundPage /> ,
       children: [
         {
-          path: '/',
+          path: '',
           element: <HomePage/>,
         },
         {
@@ -19,11 +19,11 @@ export const routes: RouteObject[] = [
         },
         {
           path: 'raiting',
-          element: <RaitingPage/>,
+          element: <RatingPage/>,
         },
         {
           path: 'frens',
-          element:<FrernsPage/>,
+          element:<FrensPage/>,
         },
       ]
     },  

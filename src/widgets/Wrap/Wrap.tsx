@@ -142,9 +142,9 @@ useEffect(()=>{
     unmounted: {},
   };
 
-if(!isMobile){
-  return <QrCode/>
-}
+// if(!isMobile){
+//   return <QrCode/>
+// }
   return (
     <>
       <div className={s.wrap}>
