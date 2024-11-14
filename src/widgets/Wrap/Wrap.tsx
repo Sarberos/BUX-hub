@@ -13,10 +13,10 @@ import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
-import home_bg from '@shared/Wrap/assets/img/farm_page.png'
-import tasks_bg from '@shared/Wrap/assets/img/tasks_page.png'
-import raiting_bg from '@shared/Wrap/assets/img/raiting_page.png'
-import frens_bg from '@shared/Wrap/assets/img/frens_page.png'
+import home_bg from '@shared/assets/webp_bg/home.webp'
+import tasks_bg from '@shared/assets/webp_bg/tasks.webp'
+import rating_bg from '@shared/assets/webp_bg/liderboard.webp'
+import frens_bg from '@shared/assets/webp_bg/frens.webp'
 // import { QrCode } from "@widgets/UI/QrCode/QrCode";
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 import {useQueryClient} from "@tanstack/react-query";
@@ -131,7 +131,7 @@ useEffect(() => {
 useEffect(()=>{
   currenPageId ===1 && setBackground(home_bg)
   currenPageId ===2 && setBackground(tasks_bg)
-  currenPageId ===3 && setBackground(raiting_bg)
+  currenPageId ===3 && setBackground(rating_bg)
   currenPageId ===4 && setBackground(frens_bg)
 },[currenPageId])
   const transitionStyles:TTransitionType= {
