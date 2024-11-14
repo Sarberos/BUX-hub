@@ -15,6 +15,8 @@ import BottomPopUp from '@widgets/UI/BottomPopUp/BottomPopUp'
 import InvitePopUp from '@widgets/Frens/InvitePopUp/InvitePopUp'
 import {useTelegramApi} from "@shared/Home/hooks/useTelegramApi.tsx";
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
+import frens_bg from '@shared/assets/webp_bg/frens.webp'
+
 
 export type TFrensProps = {
   timerValue: TTimerType;
@@ -66,40 +68,49 @@ const Frens=()=>{
       }else
      return(
         <>
-        <div className={s.frens_wrap}>
-            <div className={s.title_wrap}>
-                <p className={s.title}>{t("frensTitle")}</p>
-            </div>
-            <div className={s.frens_coins_wrap}>
+            <div className={s.frens_wrap}>
+                <img src={frens_bg} alt="" className={s.background_img}/>
+                <div className={s.title_wrap}>
+                    <p className={s.title}>{t("frensTitle")}</p>
+                </div>
                 <div className={s.frens_coins_wrap}>
-                    <p className={s.frens_coins_value}>{Math.ceil(refCoins)}</p>
-                    <div className={isFireCracer?`${s.frens_coins_anim} ${s.active}`:s.frens_coins_anim}>
-                        {isFireCracer && <SuccessClaimAnim/>}
+                    <div className={s.frens_coins_wrap}>
+                        <p className={s.frens_coins_value}>{Math.ceil(refCoins)}</p>
+                        <div className={isFireCracer ? `${s.frens_coins_anim} ${s.active}` : s.frens_coins_anim}>
+                            {isFireCracer && <SuccessClaimAnim/>}
+                        </div>
+                        {frensData?.content?.length !== 0 && frensState.farmStatus === EnumFrensFarmStatus.FARMING &&
+                          <button disabled={true}
+                                  className={s.frens_coin_claim_btn}>{`${t('claim')} ${frensState.timer?.formattedHours}h ${frensState.timer?.formattedMinutes}m`}</button>}
+                        {frensData?.content?.length !== 0 && frensState.farmStatus === EnumFrensFarmStatus.CLAIM &&
+                          <button onClick={() => onClaimFrensCoins()}
+                                  className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>}
+                        {!frensData || frensData?.content?.length === 0 &&
+                          <button onClick={() => dispatch(setInviteStatus(true))}
+                                  className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('frensTitle')}</button>}
                     </div>
-                    {frensData?.content?.length!==0  && frensState.farmStatus===EnumFrensFarmStatus.FARMING &&  <button disabled={true} className={s.frens_coin_claim_btn}>{`${t('claim')} ${frensState.timer?.formattedHours}h ${frensState.timer?.formattedMinutes}m`}</button>           }
-                    {frensData?.content?.length!==0  && frensState.farmStatus===EnumFrensFarmStatus.CLAIM &&  <button  onClick={()=>onClaimFrensCoins()} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('claim')}</button>}
-                    {!frensData ||frensData?.content?.length===0 && <button  onClick={()=>dispatch(setInviteStatus(true))} className={`${s.frens_coin_claim_btn} ${s.active}`}>{t('frensTitle')}</button> }
+                </div>
+                <div className={s.subtitle_wrap}>
+                    <p className={s.subtitle}>{t("frensSub")}</p>
+                </div>
+                {frensData && frensData?.content?.length !== 0 &&
+                  <p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')}`}</p>}
+                {frensData?.content?.length != 0 && <div className={s.frens_list}>
+                    {/*{FRENSLIST?.map((elem,index)=>(*/}
+                    {/*    <FrensItem key={index} {...elem} />*/}
+                    {/*))}*/}
+                    {refList?.map((elem, index) => (
+                      <FrensItem key={index} {...elem} />
+                    ))}
+                </div>}
+
+                <div className={s.invite_frens_btn_wrap}>
+                    <button onClick={() => dispatch(setInviteStatus(true))}
+                            className={s.invite_frens_btn}>{t("invite_fren")}</button>
                 </div>
             </div>
-            <div className={s.subtitle_wrap}>
-                <p className={s.subtitle}>{t("frensSub")}</p>
-            </div>
-            {frensData &&frensData?.content?.length!==0 &&<p className={s.frens_amount}>{`${frensData?.content?.length} ${t('frens')}`}</p>}
-            {frensData?.content?.length!=0 && <div className={s.frens_list}>
-                {/*{FRENSLIST?.map((elem,index)=>(*/}
-                {/*    <FrensItem key={index} {...elem} />*/}
-                {/*))}*/}
-                {refList?.map((elem,index)=>(
-                    <FrensItem key={index} {...elem} />
-                ))}
-            </div>}
-
-            <div className={s.invite_frens_btn_wrap}>
-                <button onClick={()=>dispatch(setInviteStatus(true))} className={s.invite_frens_btn}>{t("invite_fren")}</button>
-            </div>
-        </div>
-        {frensState.inviteStatus && (
-            <div className={`${s.daily_reward}`}>
+            {frensState.inviteStatus && (
+              <div className={`${s.daily_reward}`}>
                 <BottomPopUp onClose={()=>dispatch(setInviteStatus(false))}>
                     <InvitePopUp  />
                 </BottomPopUp>

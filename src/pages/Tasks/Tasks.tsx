@@ -10,6 +10,8 @@ import PopUp from '@widgets/UI/PopUp/PopUp';
 import { MiniTasks } from '@widgets/Tasks/MiniTasks/MiniTasks';
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import {useState} from "react";
+import tasks_bg from '@shared/assets/webp_bg/tasks.webp'
+
 
 export default function Tasks(){
   const {t}= useTranslation()
@@ -34,6 +36,7 @@ if(taskInfoLoading){
     </PopUp>
   </div> }
       <div className={s.task_wrapper}>
+        <img src={tasks_bg} alt="" className={s.background_img}/>
         <div className={s.title_wrap}>
           <div className={s.title}>{t("tasks")}</div>
           <div className={s.subtitle}>{t("tasksSub")}</div>
@@ -50,7 +53,7 @@ if(taskInfoLoading){
               key={index}
             />
           )} */}
-          {tasksInf?.content.map((elem,index) =>
+          {tasksInf?.content.map((elem, index) =>
             <TaskItem
               claimTasksCoins={claimTasksCoins}
               {...elem}

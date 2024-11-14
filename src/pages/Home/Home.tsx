@@ -12,6 +12,7 @@ import {useClaimFarmCoins} from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import {changeDateFormat} from '@shared/Home/helpersFunc/changeDateFormat.ts';
 import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
+import home_bg from '@shared/assets/webp_bg/home.webp'
 import {
   setFarmStatus,
   setFormattedTaimer, setLanguage,
@@ -150,32 +151,35 @@ export type TFarmInfo={
   }else
   return (
     <>
-        <div className={s.wrapper}>
-          <div  className={s.title_wrap}>
-            <p onClick={hapticDoubleClick} className={s.title}>{`${t("hello")},`}</p>
-            <p className={s.title}>{user?.username}</p>
-          </div>
-          <div className={s.lang_daycounter_wrap}>
-            <Lang_DayCounter />
-          </div>
-          <div className={s.koin_wrap}>
-            <KoinQuantity coinValue={state.totalCoins} isBalanceAnim={isBalanceAnim} />
-          </div>
-          <div className={s.main_img_wrap}  onClick={()=>{handleDoubleClick()}}>
-            <div className={s.main_img}></div>
-            <AnimationMainImg isActive={isAnim} />
-          </div>
-          <div className={s.farming_btn_wrap}>
-            <div className={isClaim ? `${s.farming_btn_anim} ${s.active}`:s.farming_btn_anim}>
-              {isClaim && <SuccessClaimAnim/>}
-            </div>
-            <div className={s.farming_btn}>
-              {chooseBtn(state.farmStatus)}
-            </div>
-
-          </div>
+      <div className={s.wrapper}>
+        <img src={home_bg} alt="" className={s.background_img}/>
+        <div className={s.title_wrap}>
+          <p onClick={hapticDoubleClick} className={s.title}>{`${t("hello")},`}</p>
+          <p className={s.title}>{user?.username}</p>
         </div>
-  </>
-      );
+        <div className={s.lang_daycounter_wrap}>
+          <Lang_DayCounter/>
+        </div>
+        <div className={s.koin_wrap}>
+          <KoinQuantity coinValue={state.totalCoins} isBalanceAnim={isBalanceAnim}/>
+        </div>
+        <div className={s.main_img_wrap} onClick={() => {
+          handleDoubleClick()
+        }}>
+          <div className={s.main_img}></div>
+          <AnimationMainImg isActive={isAnim}/>
+        </div>
+        <div className={s.farming_btn_wrap}>
+          <div className={isClaim ? `${s.farming_btn_anim} ${s.active}` : s.farming_btn_anim}>
+            {isClaim && <SuccessClaimAnim/>}
+          </div>
+          <div className={s.farming_btn}>
+            {chooseBtn(state.farmStatus)}
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
   }
 

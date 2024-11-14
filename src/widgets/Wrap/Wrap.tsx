@@ -1,6 +1,6 @@
 import s from "./Wrap.module.scss";
 import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
-import {createContext, Suspense, useContext, useEffect, useLayoutEffect, useState} from "react";
+import {Suspense, useEffect, useLayoutEffect, useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import {
@@ -13,11 +13,7 @@ import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
-import home_bg from '@shared/assets/webp_bg/home.webp'
-import tasks_bg from '@shared/assets/webp_bg/tasks.webp'
-import rating_bg from '@shared/assets/webp_bg/liderboard.webp'
-import frens_bg from '@shared/assets/webp_bg/frens.webp'
-// import { QrCode } from "@widgets/UI/QrCode/QrCode";
+import { QrCode } from "@widgets/UI/QrCode/QrCode";
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 import {useQueryClient} from "@tanstack/react-query";
 import { Transition } from 'react-transition-group';
@@ -27,18 +23,11 @@ import DailyRewards from "@widgets/Home/DailyRewards/DailyRewards.tsx";
 import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
 import {getBonusInfo} from "@features/Wrap/getBonusInfo.ts";
 
+
 export interface IOutletContext{
   setIsHistory:(v:boolean)=>void;
   farmedCoins:number;
   setFarmedCoins:(v:number)=>void;
-}
-const OutleContext=createContext<IOutletContext|undefined>(undefined)
-export const useOutletContext=()=>{
-  const context=useContext(OutleContext); 
-    if(!context){
-    throw new Error('useOutletContext must be used within an OutletProvider')
-  }
-  return context
 }
 
 const frensHandlingTaimer = (mins: number, hours: number, dispatch: any ) => {
@@ -81,59 +70,52 @@ export const  Wrap=() =>{
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
-  // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
   const [currenPageId, setCurrentPageId] = useState(1);
-  const [background, setBackground] = useState(home_bg);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
 
-useEffect(()=>{
-    getBonusInfo(dispatch);
-  },[dispatch]);
-useLayoutEffect(() => {
-    tg.expand()
-    tg.setHeaderColor("#000000");
-  }, []);
-useEffect(()=>{
-  farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
-},[state.timer])
-useEffect(()=>{
-    const intervalId = setInterval(() => {  
-      if (farmTimerValue) {  
-        handlingTaimer(farmTimerValue.sec || 0 ,farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch,queryClient);  }
-    },1000);  
-  
-    return () => clearInterval(intervalId);  
-  },[farmTimerValue])
-useEffect(()=>{
-  frensTimerValue!==frenState.timer && setFrensTimerValue(frenState.timer)
-},[frenState.timer])
-useEffect(()=>{
-  const frensInterval = setInterval(() => {
-    if (frensTimerValue) {
-      frensHandlingTaimer(frensTimerValue.minuts || 0, frensTimerValue.hours || 0,dispatch);
-    }
-  },60000);
+  useEffect(()=>{
+      getBonusInfo(dispatch);
+    },[dispatch]);
+  useLayoutEffect(() => {
+      tg.expand()
+      tg.setHeaderColor("#000000");
+    }, []);
+  useEffect(()=>{
+    farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
+  },[state.timer])
+  useEffect(()=>{
+      const intervalId = setInterval(() => {
+        if (farmTimerValue) {
+          handlingTaimer(farmTimerValue.sec || 0 ,farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch,queryClient);  }
+      },1000);
 
-  return () => clearInterval(frensInterval);
+      return () => clearInterval(intervalId);
+    },[farmTimerValue])
+  useEffect(()=>{
+    frensTimerValue!==frenState.timer && setFrensTimerValue(frenState.timer)
+  },[frenState.timer])
+  useEffect(()=>{
+    const frensInterval = setInterval(() => {
+      if (frensTimerValue) {
+        frensHandlingTaimer(frensTimerValue.minuts || 0, frensTimerValue.hours || 0,dispatch);
+      }
+    },60000);
 
-},[frensTimerValue])
+    return () => clearInterval(frensInterval);
 
-useEffect(() => {
-  const farmCoinsInterval=setInterval(()=>{
-    dispatch(setReduxFarmedCoins(parseFloat((state.farmedCoins + 0.01).toFixed(2))))
-  },2700)
+  },[frensTimerValue])
+  useEffect(() => {
+    const farmCoinsInterval=setInterval(()=>{
+      dispatch(setReduxFarmedCoins(parseFloat((state.farmedCoins + 0.01).toFixed(2))))
+    },2700)
 
-  return () => clearInterval(farmCoinsInterval);
-}, [state.farmedCoins]);
+    return () => clearInterval(farmCoinsInterval);
+  }, [state.farmedCoins]);
 
-useEffect(()=>{
-  currenPageId ===1 && setBackground(home_bg)
-  currenPageId ===2 && setBackground(tasks_bg)
-  currenPageId ===3 && setBackground(rating_bg)
-  currenPageId ===4 && setBackground(frens_bg)
-},[currenPageId])
+
   const transitionStyles:TTransitionType= {
     entering: { opacity: 0, transform:'translateY(20)'},
     entered:  { opacity: 1,transform:'translateY(0)', transition:'.4s'},
@@ -142,14 +124,14 @@ useEffect(()=>{
     unmounted: {},
   };
 
-// if(!isMobile){
-//   return <QrCode/>
-// }
+if(!isMobile){
+  return <QrCode/>
+}
   return (
     <>
       <div className={s.wrap}>
         <div className={s.child_wrap}>
-          <Suspense fallback={<img src={'@shared/assets/webp_bg/home.webp'} alt={""} />}>
+          <Suspense fallback={<img src={'src/shared/assets/webp_bg/home.webp'} alt={""} />}>
             <Outlet/>
           </Suspense>
         </div>
@@ -159,7 +141,6 @@ useEffect(()=>{
             setCurrentPageId={setCurrentPageId}
           />
         </div>
-        <img src={background} alt="" className={s.backgroung_img}/>
       </div>
       <Transition in={state.welcomeStatus} timeout={600} mountOnEnter={true} unmountOnExit={true} >
         {(state)=>(

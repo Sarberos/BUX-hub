@@ -2,7 +2,17 @@
     display: flex;
     flex-direction: column;
     padding: 0 8px 17px;
-    
+    position: relative;
+    .background_img{
+        top:0;
+        left:0;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+
     .raiting_title_wrap{
         width: 100%;
         align-items: center;
