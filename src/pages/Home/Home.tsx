@@ -12,7 +12,7 @@ import {useClaimFarmCoins} from '@shared/Home/hooks/useClaimFarmCoins';
 import MainTaimerBtn from '@widgets/UI/MainTaimerBtn/MainTaimerBtn';
 import {changeDateFormat} from '@shared/Home/helpersFunc/changeDateFormat.ts';
 import {useAppDispatch, useAppSelector} from '@shared/utilits/redux/hooks';
-import home_bg from '@shared/assets/webp_bg/home.webp'
+import home_bg from '../../../public/home.webp'
 import {
   setFarmStatus,
   setFormattedTaimer, setLanguage,
