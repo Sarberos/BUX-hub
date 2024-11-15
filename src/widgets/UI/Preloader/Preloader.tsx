@@ -5,7 +5,7 @@ import BUXloader from "@shared/UIComponents/assets/BUX_TXT_Loader.json"
 
 
 
-export const Preloader=({ufo,backgroundImage}:{ufo?:boolean,backgroundImage?:string})=>{
+export const Preloader=({ufo}:{ufo?:boolean})=>{
   const loaderImg =ufo ? animationData : BUXloader
     const defaultOptions = {
         loop: true,
