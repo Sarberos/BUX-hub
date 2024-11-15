@@ -15,9 +15,7 @@ export const Preloader=({ufo,backgroundImage}:{ufo?:boolean,backgroundImage?:str
             preserveAspectRatio: 'xMidYMid slice'
         } }
     return(
-        <div style={{
-          backgroundImage:backgroundImage ? `url(${backgroundImage})` : `url(src/shared/assets/webp_bg/home.webp)`
-        }} className={s.preloader_wrap}>
+        <div className={s.preloader_wrap}>
             <div className={s.preloader_img}>
                 <Lottie options={defaultOptions} height={210} width={210} />
             </div>

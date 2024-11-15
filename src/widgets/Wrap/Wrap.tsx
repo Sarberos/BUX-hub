@@ -131,7 +131,7 @@ export const  Wrap=() =>{
     <>
       <div className={s.wrap}>
         <div className={s.child_wrap}>
-          <Suspense fallback={<img src={'src/shared/assets/webp_bg/home.webp'} alt={""} />}>
+          <Suspense fallback={<img src={'src/shared/assets/webp_bg/tasks.webp'} alt={""} />}>
             <Outlet/>
           </Suspense>
         </div>
