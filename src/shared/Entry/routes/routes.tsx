@@ -2,6 +2,10 @@ import NotFoundPage from '@widgets/UI/NotFoundPage/NotFoundPage';
 import { Wrap } from '@widgets/Wrap/Wrap';
 import { RouteObject } from 'react-router-dom';
 import {FrensPage, HomePage,  RatingPage, TasksPage} from "@shared/Entry/routes/lazyIndex.ts";
+import Home from "@pages/Home/Home.tsx";
+import Tasks from "@pages/Tasks/Tasks.tsx";
+import Raiting from "@pages/Raiting/Raiting.tsx";
+import Frens from "@pages/Frens/Frens.tsx";
 
 export const routes: RouteObject[] = [  
     {  
@@ -11,23 +15,19 @@ export const routes: RouteObject[] = [
       children: [
         {
           path: '',
-          element: <HomePage/>,
-          errorElement:<HomePage/>,
+          element: <Home/>,
         },
         {
           path: 'tasks',
-          element: <TasksPage/>,
-          errorElement:<HomePage/>,
+          element: <Tasks/>,
         },
         {
           path: 'raiting',
-          element: <RatingPage/>,
-          errorElement:<HomePage/>,
+          element: <Raiting/>,
         },
         {
           path: 'frens',
-          element:<FrensPage/>,
-          errorElement:<HomePage/>,
+          element:<Frens/>,
         },
       ]
     },  
