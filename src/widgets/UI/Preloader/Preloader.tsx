@@ -16,6 +16,7 @@ export const Preloader=({ufo}:{ufo?:boolean})=>{
         } }
     return(
         <div className={s.preloader_wrap}>
+          <img src="" alt=""/>
             <div className={s.preloader_img}>
                 <Lottie options={defaultOptions} height={210} width={210} />
             </div>
