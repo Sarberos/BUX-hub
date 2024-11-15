@@ -13,7 +13,7 @@ import { EnumFrensFarmStatus } from "@shared/Frens/consts/frensFarmStatus.enum";
 import { setFrensFarmStatus, setTaimerValue } from "@shared/utilits/redux/redux_slice/frens_slice";
 import { Outlet } from "react-router";
 import { useTelegramApi } from "@shared/Home/hooks/useTelegramApi";
-import { QrCode } from "@widgets/UI/QrCode/QrCode";
+// import { QrCode } from "@widgets/UI/QrCode/QrCode";
 import { HistorySlider } from "@widgets/Home/HistorySlider/HistorySlider";
 import {useQueryClient} from "@tanstack/react-query";
 import { Transition } from 'react-transition-group';
@@ -70,7 +70,7 @@ export const  Wrap=() =>{
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
   const [currenPageId, setCurrentPageId] = useState(1);
   const [farmTimerValue, setFarmTimerValue]=useState<TTimerType>(state.timer)
@@ -124,9 +124,9 @@ export const  Wrap=() =>{
     unmounted: {},
   };
 
-if(!isMobile){
-  return <QrCode/>
-}
+// if(!isMobile){
+//   return <QrCode/>
+// }
   return (
     <>
       <div className={s.wrap}>
