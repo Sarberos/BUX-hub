@@ -1,6 +1,6 @@
 import s from "./Wrap.module.scss";
 import { TFrensTimerType, TTimerType } from "@pages/Home/Home";
-import {Suspense, useEffect, useLayoutEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import {
@@ -131,9 +131,7 @@ export const  Wrap=() =>{
     <>
       <div className={s.wrap}>
         <div className={s.child_wrap}>
-          <Suspense fallback={<img src={'src/shared/assets/webp_bg/tasks.webp'} alt={""} />}>
             <Outlet/>
-          </Suspense>
         </div>
         <div className={s.footer_wrap}>
           <Footer
