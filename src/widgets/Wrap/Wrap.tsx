@@ -22,6 +22,7 @@ import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp.tsx";
 import DailyRewards from "@widgets/Home/DailyRewards/DailyRewards.tsx";
 import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
 import {getBonusInfo} from "@features/Wrap/getBonusInfo.ts";
+import {Preloader} from "@widgets/UI/Preloader/Preloader.tsx";
 
 
 export interface IOutletContext{
@@ -127,6 +128,9 @@ export const  Wrap=() =>{
 // if(!isMobile){
 //   return <QrCode/>
 // }
+  if(true){
+    return <Preloader/>
+  }
   return (
     <>
       <div className={s.wrap}>
