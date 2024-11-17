@@ -9,7 +9,7 @@ export default function({photo,active_usernames,coins,day_revenues}:TFrensItem){
     <div className={s.fren_profile_wrap}>
       <div className={s.fren_info}>
         <div className={s.fren_img_wrap}>
-          {false ? <img src={photo} alt={''} className={s.fren_img_wrap}/> :
+          {photo ? <img src={photo} alt={''} className={s.fren_img_wrap}/> :
             <img alt="" src={unknown_ava} className={s.fren_img_wrap}/>}
           {/*{generateAva(photo, {first_name, last_name}, color)}*/}
         </div>
