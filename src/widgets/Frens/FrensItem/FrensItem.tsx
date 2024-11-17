@@ -14,7 +14,7 @@ export default function({photo,active_usernames,coins,day_revenues}:TFrensItem){
           {/*{generateAva(photo, {first_name, last_name}, color)}*/}
         </div>
         <div className={s.fren_title_wrap}>
-        <p className={s.fren_title}>{active_usernames[0] ?? 'Аноним'}</p>
+        <p className={s.fren_title}>{active_usernames?.[0] ??'Аноним'}</p>
             {day_revenues && <p className={s.fren_subtitle}>{`+${Math.ceil(day_revenues)}`}</p>}
           </div>
       </div>

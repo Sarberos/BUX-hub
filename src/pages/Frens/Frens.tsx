@@ -60,9 +60,18 @@ const Frens=()=>{
         if (frensData) {
             refCoins!==frensData.revenues && setRefCoins(frensData.revenues)
             comprasionNumbers(frensData.next_revenues_time) ?  dispatch(setFrensFarmStatus(EnumFrensFarmStatus.CLAIM)) : dispatch(setTaimerValue(calcDateValue(frensData.next_revenues_time)));
-            frensData.content.length !==0 &&  setRefList(frensData.content.sort((a, b) => b.coins-a.coins));
+            frensData.content.length !== 0 &&
+            setRefList(
+              frensData.content.sort((a, b) => {
+                  const aCoins = typeof a.coins === 'number' ? a.coins : 0;
+                  const bCoins = typeof b.coins === 'number' ? b.coins : 0;
+
+                  return bCoins - aCoins;
+              })
+            );
         }
     },[frensData])
+
     if(frensLoading){ 
         return <Preloader />
       }else
