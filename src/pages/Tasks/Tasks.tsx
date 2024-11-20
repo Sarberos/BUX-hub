@@ -38,7 +38,7 @@ if(taskInfoLoading){
       <div className={s.task_wrapper}>
         <img src={tasks_bg} alt="" className={s.background_img}/>
         <div className={s.title_wrap}>
-          <div onClick={()=>alert(`Bearer ${window.Telegram.WebApp.initData}`)} className={s.title}>{t("tasks")}</div>
+          <div className={s.title}>{t("tasks")}</div>
           <div className={s.subtitle}>{t("tasksSub")}</div>
         </div>
         <div className={s.task_list_bg}></div>
