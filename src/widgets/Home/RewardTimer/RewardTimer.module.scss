@@ -4,11 +4,31 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
   position: relative;
   & > div{
-    width: 63px;
+    width: 62px;
+    height: 18px;
     position: relative;
+    &>span{
+      position: absolute;
+      right: 0;
+      &.anim_value{
+        position: absolute;
+        opacity: 0;
+        top: 100%;
+        &.active{
+          top:0;
+          opacity: 1;
+          transition: .5s;
+        }
+        & > span{
+          display: none;
+          &.active{
+            display: inline-block;
+          }
+        }
+      }
+    }
   }
   span{
     color:#fff;
@@ -16,26 +36,6 @@
     font-weight:600;
     line-height: 135%;
     text-align: center;
-
-    &.anim_value{
-      position: absolute;
-      opacity: 0;
-      top: 100%;
-      &.active{
-        top:0;
-        opacity: 1;
-        transition: .5s;
-      }
-      & > span{
-        display: none;
-        &.active{
-          display: inline-block;
-        }
-      }
-    }
-    &.value{
-
-    }
   }
 }
 
