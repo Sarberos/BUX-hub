@@ -44,7 +44,8 @@ export default React.memo(function RewardTimer () {
   return (
     <div className={s.reward_timer}>
       <span>{`${t("nextReward")}:`}</span>
-      <span className={s.value}>
+      <div>
+        <span className={s.value}>
                 <span>{intH}</span>
                 <span>{demH}</span>
                 <span>:</span>
@@ -54,19 +55,22 @@ export default React.memo(function RewardTimer () {
                 <span>{intS}</span>
                 <span>{demS}</span>
       </span>
-      {timeUntilReward<=0 && (
-        <span className={s.anim_value}>00:00:00</span>
-      )}
-      {timeUntilReward >0 && (
-        <span className={animate ? `${s.anim_value} ${s.active}`:s.anim_value}>
-          <span className={(intS=== '0' && demS === '0' && demM==='0' && intM==='0' && demH==='0') ? s.active : ''}>{toNextValue(intH,6)}</span>
-          <span className={(intS=== '0' && demS === '0' && demM==='0' && intM==='0')?  s.active:''}>{toNextValue(demH)}&nbsp;</span>
-          <span className={(intS=== '0' && demS === '0' && demM==='0')? s.active :''}>{toNextValue(intM,6)}</span>
-          <span className={(intS=== '0' && demS === '0')? s.active : ''}>{toNextValue(demM)}&nbsp;</span>
-          <span className={demS === '0' ? s.active:''}>{toNextValue(intS,6)}</span>
-          <span className={s.active}>{toNextValue(demS)}</span>
+        {timeUntilReward<=0 && (
+          <span className={s.anim_value}>00:00:00</span>
+        )}
+        {timeUntilReward >0 && (
+          <span className={animate ? `${s.anim_value} ${s.active}` : s.anim_value}>
+            <span
+              className={(intS === '0' && demS === '0' && demM === '0' && intM === '0' && demH === '0') ? s.active : ''}>{toNextValue(intH, 6)}</span>
+            <span
+              className={(intS === '0' && demS === '0' && demM === '0' && intM === '0') ? s.active : ''}>{toNextValue(demH)}&nbsp;</span>
+            <span className={(intS === '0' && demS === '0' && demM === '0') ? s.active : ''}>{toNextValue(intM, 6)}</span>
+            <span className={(intS === '0' && demS === '0') ? s.active : ''}>{toNextValue(demM)}&nbsp;</span>
+            <span className={demS === '0' ? s.active : ''}>{toNextValue(intS, 6)}</span>
+            <span className={s.active}>{toNextValue(demS)}</span>
         </span>
-      )}
+        )}
+      </div>
     </div>
   );
 })
