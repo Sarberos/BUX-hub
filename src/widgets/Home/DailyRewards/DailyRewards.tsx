@@ -14,6 +14,7 @@ import React, { useEffect, useState } from 'react'
 import {useTelegramApi} from "@shared/Home/hooks/useTelegramApi.tsx";
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
 import RewardTimer from "@widgets/Home/RewardTimer/RewardTimer.tsx";
+import {setNextBonusTime} from "@shared/utilits/redux/redux_slice/reward_slice.ts";
 
 
 export default React.memo(
@@ -39,10 +40,12 @@ export default React.memo(
       hapticFeedBack();
       dispatch(setBonusDay(state.bonusDay+1));
 
+
       const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
         elem.rewardDay===dayNumber+1)
       dispatch(updateTotalCoins(currentObj[0].rewardValue))
       dispatch(setDailyRewardsStatus(EnumBonusStatus.WAIT))
+      dispatch(setNextBonusTime(24*60*60*1000))
     }
 
     return (
