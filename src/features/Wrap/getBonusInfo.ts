@@ -18,4 +18,5 @@ export const getBonusInfo=async (dispatch:any)=>{
     dispatch(setBonusDay(bonusInfo.day));
     dispatch(setWelcomeStatus(bonusInfo.welcome_status));
   }
+  return bonusInfo
 }

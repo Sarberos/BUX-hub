@@ -1,0 +1,39 @@
+.reward_timer{
+  margin: 0 auto;
+  max-width: 234px;
+  width: 100%;
+  display: flex;
+  gap:2px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  span{
+    color:#fff;
+    font-size:14px ;
+    font-weight:600;
+    line-height: 135%;
+    text-align: center;
+    &.anim_value{
+      position: absolute;
+      opacity: 0;
+      right: 0;
+      top: 100%;
+      &.active{
+        top:0;
+        opacity: 1;
+        transition: .6s;
+      }
+      & > span{
+        display: none;
+        &.active{
+          display: inline-block;
+        }
+      }
+    }
+    &.value{
+
+    }
+  }
+}
+

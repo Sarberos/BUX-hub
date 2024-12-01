@@ -22,6 +22,7 @@ import BottomPopUp from "@widgets/UI/BottomPopUp/BottomPopUp.tsx";
 import DailyRewards from "@widgets/Home/DailyRewards/DailyRewards.tsx";
 import {EnumBonusStatus} from "@shared/Home/consts/bonusStatus.enum.ts";
 import {getBonusInfo} from "@features/Wrap/getBonusInfo.ts";
+import {setNextBonusTime} from "@shared/utilits/redux/redux_slice/reward_slice.ts";
 
 
 export interface IOutletContext{
@@ -43,13 +44,13 @@ const frensHandlingTaimer = (mins: number, hours: number, dispatch: any ) => {
   const formattedMinutes = String(mins).padStart(2, '0');  
   dispatch(setTaimerValue({ formattedHours, formattedMinutes, hours, minuts: mins }));  
 }
-const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any,queryClient:any) => {
+const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any,queryClient?:any) => {
   sec > 0 && sec--;  
   if (sec === 0) {  
     mins > 0 && mins--; 
     sec=59;
     if(mins===0){
-      if (hours === 0) {
+      if (hours === 0 ) {
         queryClient.invalidateQueries({queryKey:['farm_info']});
       }  
       hours--;  
@@ -59,10 +60,9 @@ const handlingTaimer = (sec:number,mins: number, hours: number, dispatch: any,qu
   }  
   const formattedHours = String(hours).padStart(2, '0');  
   const formattedMinutes = String(mins).padStart(2, '0');  
-  const formattedSec = String(sec).padStart(2, '0');  
-  dispatch(setFormattedTaimer({ formattedHours, formattedMinutes,formattedSec,sec, hours, minuts: mins }));  
+  const formattedSec = String(sec).padStart(2, '0');
+  dispatch(setFormattedTaimer({ formattedHours, formattedMinutes, formattedSec, sec, hours, minuts: mins }));
 }
-
 
 export const  Wrap=() =>{
   const {tg}=useTelegramApi()
@@ -70,6 +70,7 @@ export const  Wrap=() =>{
   const dispatch = useAppDispatch()
   const state = useAppSelector(state=>state.home)
   const frenState = useAppSelector(state=>state.frens)
+  const untilRewardTime=useAppSelector(state=>state.reward.next_bonus_time)
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
   const [currenPageId, setCurrentPageId] = useState(1);
@@ -77,7 +78,11 @@ export const  Wrap=() =>{
   const [frensTimerValue, setFrensTimerValue]=useState<TFrensTimerType>(frenState.timer)
 
   useEffect(()=>{
-      getBonusInfo(dispatch);
+      getBonusInfo(dispatch).then(resp=>{
+        const now_date=new Date().getTime()
+        const next_date=new Date(resp.next_bonus_time).getTime();
+        dispatch(setNextBonusTime(next_date - now_date))
+      });
     },[dispatch]);
   useLayoutEffect(() => {
       tg.expand()
@@ -87,16 +92,26 @@ export const  Wrap=() =>{
     farmTimerValue!==state.timer &&   setFarmTimerValue(state.timer)
   },[state.timer])
   useEffect(()=>{
+    const interval = setInterval(() => {
+      if (untilRewardTime) {
+        dispatch(setNextBonusTime(untilRewardTime-1000));
+      }
+    },1500);
+    return () => clearInterval(interval);
+
+  },[untilRewardTime])
+  useEffect(()=>{
       const intervalId = setInterval(() => {
         if (farmTimerValue) {
           handlingTaimer(farmTimerValue.sec || 0 ,farmTimerValue.minuts || 0, farmTimerValue.hours || 0,dispatch,queryClient);  }
       },1000);
-
       return () => clearInterval(intervalId);
     },[farmTimerValue])
+
   useEffect(()=>{
     frensTimerValue!==frenState.timer && setFrensTimerValue(frenState.timer)
   },[frenState.timer])
+
   useEffect(()=>{
     const frensInterval = setInterval(() => {
       if (frensTimerValue) {

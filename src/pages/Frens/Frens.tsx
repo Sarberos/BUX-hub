@@ -65,7 +65,6 @@ const Frens=()=>{
               frensData.content.sort((a, b) => {
                   const aCoins = typeof a.coins === 'number' ? a.coins : 0;
                   const bCoins = typeof b.coins === 'number' ? b.coins : 0;
-
                   return bCoins - aCoins;
               })
             );

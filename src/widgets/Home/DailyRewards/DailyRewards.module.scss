@@ -29,10 +29,13 @@
         line-height: 135%;
         text-align: center; 
     }
-
+    .reward_timer{
+        padding: 11px 17px 0;
+        width: 100%;
+    }
     .claim_btn{
         width: calc(100% - 34px);
-        margin: 32px 17px 20px;
+        margin: 14px 17px 20px;
         position: relative;
         .reward_fireCracker{
             position: absolute;

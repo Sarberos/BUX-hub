@@ -10,11 +10,14 @@ import { useTranslation } from 'react-i18next'
 import { EnumBonusStatus } from '@shared/Home/consts/bonusStatus.enum'
 import { SwiperSlide,Swiper } from 'swiper/react'
 import 'swiper/css'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useTelegramApi} from "@shared/Home/hooks/useTelegramApi.tsx";
 import {SuccessClaimAnim} from "@widgets/UI/SuccessClaim/SuccessClaimAnim.tsx";
+import RewardTimer from "@widgets/Home/RewardTimer/RewardTimer.tsx";
 
-export default function({buttonActive}:{ buttonActive: boolean}){
+
+export default React.memo(
+  function({buttonActive}:{ buttonActive: boolean}){
     const [screenWidth, setScreenWidth]=useState(window.innerWidth)
     const [isAnim, setIsAnim] = useState<boolean>(false)
     const {t} =useTranslation()
@@ -23,10 +26,10 @@ export default function({buttonActive}:{ buttonActive: boolean}){
     const state=useAppSelector(state=>state.home)
     const {mutateAsync:claim_bonus}=useClaimBonus()
 
-    useEffect(() => {   
+    useEffect(() => {
       window.innerWidth>=107 ?setScreenWidth(window.innerWidth):1
-      
-  }, [window.innerWidth]); 
+
+    }, [window.innerWidth]);
     const onClaimBonus=(dayNumber:number)=>{
       claim_bonus();
       setIsAnim(true);
@@ -37,10 +40,11 @@ export default function({buttonActive}:{ buttonActive: boolean}){
       dispatch(setBonusDay(state.bonusDay+1));
 
       const currentObj: Omit<TDayBoxProps,'currentDay'>[]=DAYBOXLIST.filter(elem=>
-      elem.rewardDay===dayNumber+1)
+        elem.rewardDay===dayNumber+1)
       dispatch(updateTotalCoins(currentObj[0].rewardValue))
       dispatch(setDailyRewardsStatus(EnumBonusStatus.WAIT))
     }
+
     return (
       <div className={s.daily_reward_wrap}>
         <div className={s.reward_title}>{t("dailyReward")}</div>
@@ -50,9 +54,9 @@ export default function({buttonActive}:{ buttonActive: boolean}){
             slidesPerView={screenWidth/107}
           >
             {DAYBOXLIST.map((elem,index)=>(
-                <SwiperSlide>
-                    <DayBox currentDay={state.bonusDay} {...elem} key={index} />
-                </SwiperSlide>
+              <SwiperSlide key={`reward-slide-${index}-${elem.rewardDay}`}>
+                <DayBox currentDay={state.bonusDay} {...elem}/>
+              </SwiperSlide>
             ))}
           </Swiper>
         </div>
@@ -63,10 +67,13 @@ export default function({buttonActive}:{ buttonActive: boolean}){
               : acc;
           }, 0)}`}
         </div>
-        <div className={s.claim_btn}>
-        <div className={isAnim ? `${s.reward_fireCracker} ${s.active}` :s.reward_fireCracker}>
-          {isAnim && <SuccessClaimAnim/>}
+        <div className={s.reward_timer}>
+          <RewardTimer  />
         </div>
+        <div className={s.claim_btn}>
+          <div className={isAnim ? `${s.reward_fireCracker} ${s.active}` :s.reward_fireCracker}>
+            {isAnim && <SuccessClaimAnim/>}
+          </div>
           {buttonActive && (
             <MainBtn event={() => onClaimBonus(state.bonusDay)}>
               {t("claim")}
@@ -80,4 +87,5 @@ export default function({buttonActive}:{ buttonActive: boolean}){
         </div>
       </div>
     );
-}
+  }
+)

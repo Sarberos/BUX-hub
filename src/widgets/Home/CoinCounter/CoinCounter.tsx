@@ -10,6 +10,7 @@ const CoinCounter= () => {
   const [animate, setAnimate] = useState(false);
   const [integerPart, decimalPart] = homeState.farmedCoins.toFixed(2).split('.');
   const [prevIntegerPart, prevDecimalPart] = prevValue.toFixed(2).split('.');
+
   useEffect(() => {
     setAnimate(false);
     const changeValueTimeOut=setTimeout(() => {
