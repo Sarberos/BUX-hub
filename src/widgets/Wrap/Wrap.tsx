@@ -4,6 +4,8 @@ import {useEffect, useLayoutEffect, useState} from "react";
 import { Footer } from "@widgets/UI/Footer/Footer";
 import { useAppDispatch, useAppSelector } from "@shared/utilits/redux/hooks";
 import {
+  setBonusDay,
+  setDailyRewardsStatus,
   setFormattedTaimer,
   setIsDailyReward,
   setReduxFarmedCoins,
@@ -94,7 +96,12 @@ export const  Wrap=() =>{
   useEffect(()=>{
     const interval = setInterval(() => {
       if (untilRewardTime) {
-        dispatch(setNextBonusTime(untilRewardTime-1000));
+        if(untilRewardTime>0){
+          dispatch(setNextBonusTime(untilRewardTime-1000));
+        }else if(untilRewardTime<=0){
+          dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM));
+          dispatch(setBonusDay(state.bonusDay+1));
+        }
       }
     },1500);
     return () => clearInterval(interval);
