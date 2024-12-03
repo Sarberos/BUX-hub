@@ -83,7 +83,11 @@ export const  Wrap=() =>{
       getBonusInfo(dispatch).then(resp=>{
         const now_date=new Date().getTime()
         const next_date=new Date(resp.next_bonus_time).getTime();
-        dispatch(setNextBonusTime(next_date - now_date))
+        if((next_date - now_date) >= 0){
+          dispatch(setNextBonusTime(next_date - now_date))
+        }else if((next_date - now_date) <= 0){
+          dispatch(setNextBonusTime(0))
+        }
       });
     },[dispatch]);
   useLayoutEffect(() => {
@@ -96,9 +100,9 @@ export const  Wrap=() =>{
   useEffect(()=>{
     const interval = setInterval(() => {
       if (untilRewardTime) {
-        if(untilRewardTime>0){
+        if(untilRewardTime >=1000){
           dispatch(setNextBonusTime(untilRewardTime-1000));
-        }else if(untilRewardTime<=0){
+        }else if(untilRewardTime<1000){
           dispatch(setDailyRewardsStatus(EnumBonusStatus.CLAIM));
           dispatch(setBonusDay(state.bonusDay+1));
         }
